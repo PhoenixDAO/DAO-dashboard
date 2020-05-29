@@ -1,3 +1,7 @@
 export default {
-  root: () => '/'
+  root: () => '/',
+  proposals: () => '/proposals',
+  votes: () => '/votes',
+  activeProjects: () => '/active_projects',
+  rewards: () => '/rewards',
 }
