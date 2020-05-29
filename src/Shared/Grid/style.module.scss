@@ -1,0 +1,25 @@
+.columns {
+  display: flex;
+  height: 100%;
+
+  > * + * {
+    margin-left: 30px;
+  }
+}
+
+.smallColumn, .wideColumn {
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    flex-basis: 100%;
+  }
+}
+
+.smallColumn {
+  flex-basis: 586px;
+}
+
+.wideColumn {
+  flex-basis: 887px;
+}
