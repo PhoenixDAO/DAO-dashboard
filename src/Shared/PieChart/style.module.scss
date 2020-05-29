@@ -1,0 +1,68 @@
+@import 'variables.scss';
+
+.chartWrap {
+  display: flex;
+  padding-bottom: 25px;
+}
+
+.chart {
+  flex-basis: 50%;
+  padding: 0 66px;
+}
+
+.info {
+  flex-basis: 50%;
+  padding: 6px 30px 0 30px;
+}
+
+.item {
+  display: flex;
+  width: 100%;
+
+  & + .item {
+    margin-top: 36px;
+  }
+}
+
+.circleWrap {
+  margin-right: 14px;
+  flex-shrink: 0;
+}
+
+.circle {
+  width: 29px;
+  height: 29px;
+  border-style: solid;
+  border-width: 7px;
+  border-radius: 14px;
+  box-shadow: 0 3px 6px rgba(13, 81, 187, .2), inset 0 3px 6px rgba(13, 81, 187, .2);
+}
+
+.itemMain {
+  flex-grow: 1
+}
+
+.value {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.title {
+  font-size: 18px;
+  line-height: 22px;
+  color: $font-gray;
+  margin: 6px 0 11px;
+}
+
+.progress {
+  height: 10px;
+  width: 100%;
+  border-radius: 5px;
+  background-color: $font-gray;
+
+  .filled {
+    height: 100%;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(18, 23, 164, .2);
+  }
+}

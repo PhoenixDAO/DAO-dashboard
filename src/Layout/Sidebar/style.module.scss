@@ -1,0 +1,65 @@
+@import 'variables.scss';
+
+.sidebar {
+  background: white;
+  width: 317px;
+  flex-shrink: 0;
+  margin: 50px 0 52px;
+  box-shadow: 2px 0 15px $shadow-color;
+  padding-top: 50px;
+
+  .item {
+    height: 85px;
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 36px;
+    position: relative;
+    color: $font-gray;
+
+    .icon {
+      width: 43px;
+      height: 100%;
+      text-align: center;
+      margin-right: 21px;
+      background: $font-gray;
+      mask-position: center;
+      mask-repeat: no-repeat;
+    }
+
+    .text {
+      font-size: 20px;
+    }
+
+    .bell {
+      position: absolute;
+      top: 34px;
+      right: 35px;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 8px;
+      border-radius: 4px;
+      background: $font-accent;
+      opacity: 0;
+      box-shadow: -5px 0 15px rgba(234, 134, 4, 34%);
+    }
+
+    &.active {
+      background: #FEFCF8;
+      color: $font-accent;
+
+      &:after {
+        opacity: 1;
+      }
+
+      .icon {
+        background: $font-accent;
+      }
+    }
+  }
+}
