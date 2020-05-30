@@ -1,9 +1,21 @@
+@font-face {
+  font-family: ProximaNova;
+  src: local('Proxima Nova Regular'), local('ProximaNova-Regular'), url('assets/fonts/ProximaNova-Regular.otf');
+}
+
+@font-face {
+  font-family: ProximaNova;
+  src: local('Proxima Nova Bold'), local('ProximaNova-Bold'), url('assets/fonts/Proxima Nova Bold.otf');
+  font-weight: bold;
+}
+
 html, body, #root {
   height: 100%;
 }
 
 html {
   font-size: 10px;
+  font-family: ProximaNova, sans-serif;
 }
 
 @media (max-width: 1979px) {
@@ -20,9 +32,6 @@ html {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #F8F8FB;
