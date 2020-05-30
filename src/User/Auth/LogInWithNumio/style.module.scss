@@ -1,0 +1,22 @@
+@import 'variables.scss';
+
+.wrap {
+  width: 43.3rem;
+}
+
+.text {
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+  color: $dark-gray;
+}
+
+.qr {
+  display: flex;
+  justify-content: center;
+  margin-top: 7.5rem;
+
+  img {
+    width: 20.8rem;
+    height: 20.8rem;
+  }
+}

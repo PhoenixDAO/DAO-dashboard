@@ -33,7 +33,7 @@ export default ({close}: Props) => {
         <Button className={style.modalButton} light onClick={() => setOpenEmailModal(true)}>
           Change Email
         </Button>
-        <Button className={style.modalButton} light>
+        <Button className={style.modalButton} light component={'label'}>
           <div>Dark Mode</div>
           <Checkbox/>
         </Button>

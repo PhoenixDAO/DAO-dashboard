@@ -2,7 +2,6 @@ import React from 'react'
 import {Router, Switch, Route} from 'react-router-dom'
 import history from './history'
 import routes from 'routes'
-import AuthLayout from 'User/Auth/Layout'
 import LogIn from 'User/Auth/LogIn'
 import LogInWithNumio from 'User/Auth/LogInWithNumio'
 import SignUp from 'User/Auth/SignUp'
@@ -17,13 +16,11 @@ export default () =>
   <Router history={history}>
     <Switch>
       <Route path={routes.auth.root()} render={() =>
-        <AuthLayout>
-          <Switch>
-            <Route path={routes.auth.logIn()} component={LogIn} />
-            <Route path={routes.auth.logInWithNumio()} component={LogInWithNumio} />
-            <Route path={routes.auth.signUp()} component={SignUp} />
-          </Switch>
-        </AuthLayout>
+        <Switch>
+          <Route path={routes.auth.logIn()} component={LogIn} />
+          <Route path={routes.auth.logInWithNumio()} component={LogInWithNumio} />
+          <Route path={routes.auth.signUp()} component={SignUp} />
+        </Switch>
       }/>
       <Route render={() =>
         <Layout>

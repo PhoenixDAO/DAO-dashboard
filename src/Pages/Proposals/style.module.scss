@@ -1,5 +1,9 @@
 @import 'variables.scss';
 
+.modal {
+  width: 67rem;
+}
+
 .modalContent {
   margin: 5rem 0 4rem;
 }
@@ -10,12 +14,12 @@
   margin-bottom: 2.6rem;
 }
 
-.modalContent {
+.modalText {
   padding: 2.5rem;
   border-radius: .5rem;
   font-size: 1.8rem;
   line-height: 2.7rem;
-  color: $font-gray;
+  color: $dark-gray;
   background: #f9f9f9;
   min-height: 26.1rem;
 }
