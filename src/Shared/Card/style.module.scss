@@ -6,6 +6,7 @@
   border-radius: 1rem;
   width: 100%;
   padding: 5.9rem 0 3.5rem;
+  overflow: hidden;
 }
 
 .header {
@@ -36,5 +37,6 @@
 
 .content {
   overflow: auto;
+  height: 100%;
   padding: 2rem 5rem;
 }

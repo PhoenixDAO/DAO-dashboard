@@ -1,5 +1,13 @@
 @import 'variables.scss';
 
+.grid {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 4fr 6fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 3rem;
+}
+
 .modalContent {
   margin: 8.6rem 0 7.7rem;
 }
