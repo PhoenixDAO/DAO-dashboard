@@ -4,6 +4,9 @@ import Card from 'Shared/Card'
 import Table from 'Shared/Table'
 import Font from 'Shared/Font'
 import PieChart from 'Shared/PieChart'
+import Modal from 'Shared/Modal'
+import Button from 'Shared/Button'
+import style from './style.module.scss'
 
 const chartData = [
   {
@@ -28,96 +31,148 @@ const chartData = [
   },
 ]
 
+type Project = {
+  title: string
+  date: string
+  price: string
+}
+
+const latestProposals: Project[] = [
+  {
+    title: 'Build Amazon Marketplace dApp',
+    date: '06/28/20',
+    price: '350,000 PHNX',
+  },
+  {
+    title: 'Build DEX aggregator',
+    date: '07/03/20',
+    price: '350,000 PHNX',
+  },
+  {
+    title: '1,000,000 tokens for exchange listing',
+    date: '07/09/20',
+    price: '350,000 PHNX',
+  },
+  {
+    title: 'Build ZK proof storage contracts',
+    date: '07/15/20',
+    price: '350,000 PHNX',
+  },
+  {
+    title: 'Start unbanked marketing initiative',
+    date: '08/01/20',
+    price: '350,000 PHNX',
+  },
+]
+
 export default () => {
-  return <Columns>
-    <SmallColumn>
-      <Card title='Latest Proposals'>
-        <Table compact>
-          <tr>
-            <td>Build Amazon Marketplace dApp</td>
-            <td>06/28/20</td>
-          </tr>
-          <tr>
-            <td>Build DEX aggregator</td>
-            <td>07/03/20</td>
-          </tr>
-          <tr>
-            <td>1,000,000 tokens for exchange listing</td>
-            <td>07/09/20</td>
-          </tr>
-          <tr>
-            <td>Build ZK proof storage contracts</td>
-            <td>07/15/20</td>
-          </tr>
-          <tr>
-            <td>Start unbanked marketing initiative</td>
-            <td>08/01/20</td>
-          </tr>
-        </Table>
-      </Card>
-      <Card title='Voting Results'>
-        <Table compact>
-          <tr>
-            <td>06/21/20</td>
-            <td>Build messaging dApp</td>
-            <td><Font color='success'>Passed</Font></td>
-          </tr>
-          <tr>
-            <td>06/19/20</td>
-            <td>Fund a checkers dApp</td>
-            <td>Failed</td>
-          </tr>
-          <tr>
-            <td>06/15/20</td>
-            <td>Fund Exchange Listing</td>
-            <td><Font color='success'>Passed</Font></td>
-          </tr>
-          <tr>
-            <td>05/18/20</td>
-            <td>Fund social marketing</td>
-            <td><Font color='success'>Passed</Font></td>
-          </tr>
-          <tr>
-            <td>05/12/20</td>
-            <td>Fund a gambling dApp</td>
-            <td>Failed</td>
-          </tr>
-        </Table>
-      </Card>
-    </SmallColumn>
-    <WideColumn>
-      <PieChart
-        lineWidth={50}
-        data={chartData}
-      />
-      <Card title='Transaction History'>
-        <Table compact columns={['Type', 'Use', 'Amount', 'Date']}>
-          <tr>
-            <td>Foundation</td>
-            <td>DAO Developers</td>
-            <td>1,500,000</td>
-            <td>06/29/20</td>
-          </tr>
-          <tr>
-            <td>DAO Rewards</td>
-            <td>Community Vote</td>
-            <td>345,613</td>
-            <td>06/19/20</td>
-          </tr>
-          <tr>
-            <td>Foundation</td>
-            <td>Storage Protocol</td>
-            <td>745,000</td>
-            <td>06/15/20</td>
-          </tr>
-          <tr>
-            <td>DOA Rewards</td>
-            <td>Community Vote</td>
-            <td>289,477</td>
-            <td>05/18/20</td>
-          </tr>
-        </Table>
-      </Card>
-    </WideColumn>
-  </Columns>
+  const [modalItem, setModalItem] = React.useState<Project | undefined>(undefined)
+  const openModal = (item: Project) => setModalItem(item)
+  const closeModal = () => setModalItem(undefined)
+
+  return <>
+    {modalItem &&
+      <Modal
+        close={closeModal}
+        title={modalItem.title}
+        actions={
+          <>
+            <Button primary onClick={closeModal}>Yes</Button>
+            <Button primary outline onClick={closeModal}>No</Button>
+          </>
+        }
+      >
+        <div className={style.modalContent}>
+          <div className={style.modalInfo}>
+            <div className={style.modalColumn}>
+              <div className={style.modalKey}>Cost</div>
+              <div className={style.modalValue}>{modalItem.price}</div>
+            </div>
+            <div className={style.modalColumn}>
+              <div className={style.modalKey}>Est. Completion</div>
+              <div className={style.modalValue}>{modalItem.date}</div>
+            </div>
+          </div>
+          <div className={style.modalQuestion}>Are you in favor of funding this project?</div>
+        </div>
+      </Modal>
+    }
+    <Columns>
+      <SmallColumn>
+        <Card title='Latest Proposals'>
+          <Table compact clickable>
+            {latestProposals.map((item, i) =>
+              <tr key={i} onClick={() => openModal(item)}>
+                <td>{item.title}</td>
+                <td>{item.date}</td>
+              </tr>
+            )}
+          </Table>
+        </Card>
+        <Card title='Voting Results'>
+          <Table compact>
+            <tr>
+              <td>06/21/20</td>
+              <td>Build messaging dApp</td>
+              <td><Font color='success'>Passed</Font></td>
+            </tr>
+            <tr>
+              <td>06/19/20</td>
+              <td>Fund a checkers dApp</td>
+              <td>Failed</td>
+            </tr>
+            <tr>
+              <td>06/15/20</td>
+              <td>Fund Exchange Listing</td>
+              <td><Font color='success'>Passed</Font></td>
+            </tr>
+            <tr>
+              <td>05/18/20</td>
+              <td>Fund social marketing</td>
+              <td><Font color='success'>Passed</Font></td>
+            </tr>
+            <tr>
+              <td>05/12/20</td>
+              <td>Fund a gambling dApp</td>
+              <td>Failed</td>
+            </tr>
+          </Table>
+        </Card>
+      </SmallColumn>
+      <WideColumn>
+        <PieChart
+          lineWidth={50}
+          data={chartData}
+        />
+        <Card title='Transaction History'>
+          <Table compact columns={['Type', 'Use', 'Amount', 'Date']}>
+            <tr>
+              <td>Foundation</td>
+              <td>DAO Developers</td>
+              <td>1,500,000</td>
+              <td>06/29/20</td>
+            </tr>
+            <tr>
+              <td>DAO Rewards</td>
+              <td>Community Vote</td>
+              <td>345,613</td>
+              <td>06/19/20</td>
+            </tr>
+            <tr>
+              <td>Foundation</td>
+              <td>Storage Protocol</td>
+              <td>745,000</td>
+              <td>06/15/20</td>
+            </tr>
+            <tr>
+              <td>DOA Rewards</td>
+              <td>Community Vote</td>
+              <td>289,477</td>
+              <td>05/18/20</td>
+            </tr>
+          </Table>
+        </Card>
+      </WideColumn>
+    </Columns>
+  </>
 }

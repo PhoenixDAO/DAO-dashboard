@@ -3,6 +3,8 @@ import Card from "Shared/Card"
 import Table from "Shared/Table"
 import Font from 'Shared/Font'
 import Button from 'Shared/Button'
+import Modal from 'Shared/Modal'
+import style from './style.module.scss'
 
 const data = [
   [
@@ -63,21 +65,43 @@ const data = [
   ],
 ]
 
-export default () =>
-  <Card
-    title='Latest Proposals'
-    actions={
-      <Button secondary>Submit Proposal</Button>
+export default () => {
+  const [modalOpen, setModalOpen] = React.useState(false)
+  const closeModal = () => setModalOpen(false)
+
+  return <>
+    {modalOpen &&
+      <Modal
+        title='Submit a Proposal'
+        actions={<Button primary onClick={closeModal}>Yes</Button>}
+        close={closeModal}
+      >
+        <div className={style.modalContent}>
+          <div className={style.modalContentTitle}>
+            Why do you want to build this dApp or smart contract?<br/>Why is it needed?
+          </div>
+          <div className={style.modalContent}>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+          </div>
+        </div>
+      </Modal>
     }
-  >
-    <Table columns={['Proposal', 'Current Upvotes', '# comments', 'Cost (PHNX)', 'Expiration Date']}>
-      {data.map((row, i) =>
-        <tr key={i}>
-          {row.map((value, j) =>
-            <td key={j}>{value}</td>
-          )}
-        </tr>
-      )}
-    </Table>
-  </Card>
+    <Card
+      title='Latest Proposals'
+      actions={
+        <Button secondary onClick={() => setModalOpen(true)}>Submit Proposal</Button>
+      }
+    >
+      <Table columns={['Proposal', 'Current Upvotes', '# comments', 'Cost (PHNX)', 'Expiration Date']}>
+        {data.map((row, i) =>
+          <tr key={i}>
+            {row.map((value, j) =>
+              <td key={j}>{value}</td>
+            )}
+          </tr>
+        )}
+      </Table>
+    </Card>
+  </>
+}
 

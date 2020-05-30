@@ -2,17 +2,17 @@
 
 .chartWrap {
   display: flex;
-  padding-bottom: 25px;
+  padding-bottom: 3.18rem;
 }
 
 .chart {
   flex-basis: 50%;
-  padding: 0 66px;
+  padding: 0 6.6rem;
 }
 
 .info {
   flex-basis: 50%;
-  padding: 6px 30px 0 30px;
+  padding: .6rem 3rem 0 3rem;
 }
 
 .item {
@@ -20,22 +20,22 @@
   width: 100%;
 
   & + .item {
-    margin-top: 36px;
+    margin-top: 3.6rem;
   }
 }
 
 .circleWrap {
-  margin-right: 14px;
+  margin-right: 1.4rem;
   flex-shrink: 0;
 }
 
 .circle {
-  width: 29px;
-  height: 29px;
+  width: 2.9rem;
+  height: 2.9rem;
   border-style: solid;
-  border-width: 7px;
-  border-radius: 14px;
-  box-shadow: 0 3px 6px rgba(13, 81, 187, .2), inset 0 3px 6px rgba(13, 81, 187, .2);
+  border-width: .7rem;
+  border-radius: 1.4rem;
+  box-shadow: 0 .3rem .6rem rgba(13, 81, 187, .2), inset 0 .3rem .6rem rgba(13, 81, 187, .2);
 }
 
 .itemMain {
@@ -44,25 +44,25 @@
 
 .value {
   font-weight: bold;
-  font-size: 22px;
+  font-size: 2.2rem;
 }
 
 .title {
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
   color: $font-gray;
-  margin: 6px 0 11px;
+  margin: .6rem 0 1.1rem;
 }
 
 .progress {
-  height: 10px;
+  height: 1rem;
   width: 100%;
-  border-radius: 5px;
+  border-radius: .5rem;
   background-color: $font-gray;
 
   .filled {
     height: 100%;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(18, 23, 164, .2);
+    border-radius: .5rem;
+    box-shadow: 0 .3rem .6rem rgba(18, 23, 164, .2);
   }
 }

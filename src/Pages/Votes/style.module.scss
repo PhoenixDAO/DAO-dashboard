@@ -1,0 +1,55 @@
+@import 'variables.scss';
+
+.modalContent {
+  margin: 4.8rem 0 5.7rem;
+}
+
+.modalBrief {
+  display: flex;
+  justify-content: space-between;
+  font-size: 2.2rem;
+  line-height: 2.6rem;
+  font-weight: bold;
+  color: #434343;
+  margin-bottom: 4.2rem;
+}
+
+.modalText {
+  color: $dark-gray;
+  font-size: 1.8rem;
+  line-height: 2.7rem;
+  margin-bottom: 4rem;
+}
+
+.modalSteps {
+}
+
+.modalStep {
+  display: flex;
+  align-items: center;
+
+  & + .modalStep {
+    margin-top: 2.9rem;
+  }
+}
+
+.modalStepNumber {
+  width: 5.4rem;
+  height: 5.4rem;
+  border: 1.3rem solid #D9DDF7;
+  border-radius: 50%;
+  background: #172DCE;
+  font-size: 1.8rem;
+  color: white;
+  line-height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 2.8rem;
+}
+
+.modalStepText {
+  color: #434343;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
+}
