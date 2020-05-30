@@ -2,7 +2,7 @@
   display: flex;
 
   > * + * {
-    margin-left: 30px;
+    margin-left: 3rem;
   }
 }
 
@@ -14,15 +14,15 @@
     flex-basis: 100%;
 
     &:not(:first-child) {
-      margin-top: 30px;
+      margin-top: 3rem;
     }
   }
 }
 
 .smallColumn {
-  flex-basis: 586px;
+  flex-basis: 40%;
 }
 
 .wideColumn {
-  flex-basis: 887px;
+  flex-basis: 60%;
 }

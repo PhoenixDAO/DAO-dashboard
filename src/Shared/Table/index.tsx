@@ -6,25 +6,34 @@ type Props = {
   children: React.ReactNode
   columns?: string[]
   compact?: boolean
+  clickable?: boolean
 }
 
-export default ({children, columns, compact}: Props) => {
+export default ({children, columns, compact, clickable}: Props) => {
   const hoverRef = React.useRef(null)
 
-  const hoverRow = (e: React.MouseEvent) => {
-    const tr = (e.target as HTMLElement).closest('tr')
-    const hover = (hoverRef.current as any as HTMLDivElement)
-    if (!tr || (tr.parentNode as HTMLElement).tagName !== 'TBODY') return
+  let hoverRow, unhoverRow
+  if (clickable) {
+    hoverRow = (e: React.MouseEvent) => {
+      const tr = (e.target as HTMLElement).closest('tr')
+      const hover = (hoverRef.current as any as HTMLDivElement)
+      if (!tr) return
+      if ((tr.parentNode as HTMLElement).tagName === 'THEAD') return hover.hidden = true
 
-    hover.hidden = false
-    hover.style.top = `${tr.offsetTop}px`
+      hover.hidden = false
+      hover.style.top = `${tr.offsetTop}px`
+    }
+
+    unhoverRow = () => {
+      (hoverRef.current as any as HTMLDivElement).hidden = true
+    }
   }
 
-  const unhoverRow = (e: React.MouseEvent) => {
-    (hoverRef.current as any as HTMLDivElement).hidden = true
-  }
-
-  return <div className={cn(style.wrap, compact && style.compact)} onMouseMove={hoverRow} onMouseLeave={unhoverRow}>
+  return <div
+    className={cn(style.wrap, compact && style.compact, clickable && style.clickable)}
+    onMouseMove={hoverRow}
+    onMouseLeave={unhoverRow}
+  >
     <table className={style.table}>
       {columns &&
         <thead>

@@ -13,7 +13,11 @@ type Props = {
 
 export default ({data, lineWidth}: Props) =>
   <div className={style.chartWrap}>
-    <PieChart className={style.chart} data={data} lineWidth={lineWidth} />
+    <div className={style.chartHalf}>
+      <div className={style.radial}>
+        <PieChart className={style.chart} data={data} lineWidth={lineWidth} startAngle={-90} />
+      </div>
+    </div>
     <div className={style.info}>
       {data.map(({title, value, color}, i) =>
         <div key={i} className={style.item}>

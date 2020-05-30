@@ -1,0 +1,52 @@
+@import 'variables.scss';
+
+.wrap {
+  display: block;
+  margin-bottom: 2.3rem;
+}
+
+.label {
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+  margin-bottom: 1.1rem;
+  color: $dark-gray;
+}
+
+.inputWrap {
+  position: relative;
+}
+
+.input {
+  background: #f9f9f9;
+  border: 1px solid #f9f9f9;
+  height: 4.2rem;
+  line-height: 4.2rem;
+  border-radius: .5rem;
+  transition: .2s;
+  width: 100%;
+  padding: 0 1.5rem;
+
+  &.hasError {
+    border-color: red;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.icon {
+  position: absolute;
+  top: 1rem;
+  right: 1.1rem;
+  width: 2.754rem;
+  height: 2.203rem;
+  cursor: pointer;
+}
+
+.error {
+  margin: 1rem 0 0;
+  height: 1.9rem;
+  font-size: 1.4rem;
+  color: red;
+}

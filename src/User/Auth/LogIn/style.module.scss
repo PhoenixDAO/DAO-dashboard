@@ -1,0 +1,24 @@
+@import 'variables.scss';
+
+.forgot {
+  color: $font-gray;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+  text-align: right;
+  cursor: pointer;
+}
+
+.buttons {
+  margin-top: 4rem;
+}
+
+.button {
+  & + .button {
+    margin-top: 3rem;
+  }
+}
+
+.create {
+  font-size: 1.8rem;
+  height: 5rem;
+}

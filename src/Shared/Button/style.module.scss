@@ -1,21 +1,61 @@
+@import 'variables.scss';
+
 .button {
-  height: 56px;
-  padding: 0 20px;
-  border-radius: 5px;
+  position: relative;
+  height: 5.6rem;
+  padding: 0 2rem;
+  border-radius: .5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  font-weight: bold;
+  font-size: 2rem;
+  transition: .2s;
+  min-width: 20rem;
+  border: 1px solid;
+}
+
+.primary {
+  background: $font-accent;
+  border-color: $font-accent;
+  color: white;
+  transition: .2s;
+
+  &:hover {
+    box-shadow: 0 .4rem .6rem rgba(234, 134, 4, .25);
+  }
+
+  &.outline {
+    color: $font-accent;
+  }
 }
 
 .secondary {
   border: 1px solid #E3E5F9;
   color: #172DCE;
-  font-weight: bold;
-  font-size: 20px;
-  transition: .2s;
 
   &:hover {
     border-color: #172DCE;
   }
+}
+
+.outline {
+  background: transparent;
+}
+
+.light {
+  border-radius: 1rem;
+  box-shadow: 0 3px 6px $shadow-color;
+  transition: .2s;
+  border: 1px solid rgba(189, 196, 208, .4);
+
+  &:hover {
+    box-shadow: 0 5px 15px rgba(8, 15, 22, 0.16);
+  }
+}
+
+.icon {
+  position: absolute;
+  right: 1rem;
 }

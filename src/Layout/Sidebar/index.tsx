@@ -35,7 +35,9 @@ export default () =>
   <div className={style.sidebar}>
     {menu.map(({to, icon, text}, i) =>
       <NavLink key={i} className={style.item} activeClassName={style.active} to={to}>
-        <div className={style.icon} style={{maskImage: `url(${icon})`, WebkitMaskImage: `url(${icon})`}}/>
+        <div className={style.iconWrap}>
+          <div className={style.icon} style={{maskImage: `url(${icon})`, WebkitMaskImage: `url(${icon})`}}/>
+        </div>
         <div className={style.text}>{text}</div>
         {to === routes.votes() &&
           <div className={style.bell}>
