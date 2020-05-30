@@ -8,13 +8,22 @@ type Props = {
   secondary?: boolean
   outline?: boolean
   light?: boolean
+  shadow?: boolean
   icon?: string
   [key: string]: any
 }
 
 export default ({
-  children, className, secondary, primary, outline, light, icon, ...props}: Props
-) =>
+  children,
+  className,
+  secondary,
+  primary,
+  outline,
+  light,
+  shadow,
+  icon,
+  ...props
+}: Props) =>
   <div {...props} className={cn(
     style.button,
     className,
@@ -22,6 +31,7 @@ export default ({
     secondary && style.secondary,
     outline && style.outline,
     light && style.light,
+    shadow && style.shadow,
   )}>
     {children}
     {icon && <img className={style.icon} src={icon}/>}

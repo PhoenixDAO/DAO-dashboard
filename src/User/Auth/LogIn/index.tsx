@@ -11,8 +11,10 @@ export default () =>
     <Field label='Password' type='password' />
     <div className={style.forgot}>Forgot passport?</div>
     <div className={style.buttons}>
-      <Button className={style.button} primary>Login</Button>
-      <Button className={style.button} primary outline>Login with Numio</Button>
-      <div className={style.create}>Create account</div>
+      <Button className={style.button} primary shadow>Login</Button>
+      <Button className={style.button} primary outline shadow>Login with Numio</Button>
+      <div className={style.center}>
+        <div className={style.create}>Create account</div>
+      </div>
     </div>
   </>

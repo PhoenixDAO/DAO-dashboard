@@ -26,8 +26,16 @@
     box-shadow: 0 .4rem .6rem rgba(234, 134, 4, .25);
   }
 
+  &.shadow {
+    box-shadow: 0 4px 6px rgba(234, 134, 4, .25);
+  }
+
   &.outline {
     color: $font-accent;
+
+    &.shadow {
+      box-shadow: 0 4px 6px rgba(234, 134, 4, .1);
+    }
   }
 }
 
