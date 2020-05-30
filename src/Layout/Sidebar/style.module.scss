@@ -10,7 +10,7 @@
   box-shadow: .2rem 0 1.5rem $shadow-color;
   padding-top: 5rem;
   z-index: 10;
-  left: -23rem;
+  left: 0;
   transition: .2s;
 
   .item {
@@ -23,7 +23,7 @@
 
     .iconWrap {
       position: fixed;
-      left: -1.5rem;
+      left: 0;
       padding-left: 3.6rem;
       background: white;
       z-index: 1;
@@ -51,7 +51,7 @@
       width: 3.4rem;
       height: 3.2rem;
       z-index: 2;
-      transform: translate(3rem, -2rem);
+      transform: translate(0, 0);
       transition: .2s;
 
       img {
@@ -87,16 +87,19 @@
     }
   }
 
-  &:hover {
-    left: 0;
 
-    .item {
-      .iconWrap {
-        left: 0;
-      }
+  @media (max-width: 1000px) {
+    &:not(:hover) {
+      left: -23rem;
 
-      .bell {
-        transform: translate(0, 0);
+      .item {
+        .iconWrap {
+          left: -1.5rem;
+        }
+
+        .bell {
+          transform: translate(3rem, -2rem);
+        }
       }
     }
   }

@@ -15,5 +15,9 @@
 .content {
   flex-grow: 1;
   overflow: auto;
-  padding: 5rem 5rem 5.2rem 13.7rem;
+  padding: 5rem 5rem 5.2rem 36.7rem;
+
+  @media (max-width: 1000px) {
+    padding-left: 13.7rem;
+  }
 }

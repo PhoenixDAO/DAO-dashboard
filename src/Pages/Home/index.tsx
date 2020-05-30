@@ -12,22 +12,22 @@ const chartData = [
   {
     title: 'Community Airdrop, HYDRO Holders',
     value: 40,
-    color: '#5F64EC',
+    color: '#172DCE',
   },
   {
     title: 'Phoenix DAO Foundation',
     value: 30,
-    color: '#E39D42',
+    color: '#EA8604',
   },
   {
     title: 'DAO rewards',
     value: 15,
-    color: '#B09CFF',
+    color: '#A278FF',
   },
   {
     title: 'DAO Fund',
     value: 15,
-    color: '#52C92F',
+    color: '#29B700',
   },
 ]
 

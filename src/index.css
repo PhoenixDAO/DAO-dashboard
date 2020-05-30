@@ -8,13 +8,13 @@ html {
 
 @media (max-width: 1979px) {
   html {
-    font-size: 8.5px;
+    font-size: 8px;
   }
 }
 
 @media (max-width: 1400px) {
   html {
-    font-size: 7px;
+    font-size: 6px;
   }
 }
 
