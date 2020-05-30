@@ -15,7 +15,7 @@ export default ({label, error, type = 'text'}: Props) => {
 
   return <label className={style.wrap}>
     {label && <div className={style.label}>{label}</div>}
-    <div className={cn(style.inputWrap, error && style.hasError)}>
+    <div className={style.inputWrap}>
       {
         type === 'password' &&
         <img
@@ -24,7 +24,7 @@ export default ({label, error, type = 'text'}: Props) => {
           onClick={() => setLocalType(localType === 'password' ? 'text' : 'password')}
         />
       }
-      <input type={localType} className={style.input}/>
+      <input type={localType} className={cn(style.input, error && style.hasError)}/>
     </div>
     {error && <div className={style.error}>{error}</div>}
   </label>

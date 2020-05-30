@@ -22,6 +22,7 @@ export default ({children, columns, compact, clickable}: Props) => {
 
       hover.hidden = false
       hover.style.top = `${tr.offsetTop}px`
+      hover.style.height = `${tr.offsetHeight}px`
     }
 
     unhoverRow = () => {

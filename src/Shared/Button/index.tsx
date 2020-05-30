@@ -4,6 +4,7 @@ import style from './style.module.scss'
 
 type Props = {
   children: React.ReactNode
+  component?: any,
   primary?: boolean
   secondary?: boolean
   outline?: boolean
@@ -14,6 +15,7 @@ type Props = {
 }
 
 export default ({
+  component: Component = 'div',
   children,
   className,
   secondary,
@@ -24,7 +26,7 @@ export default ({
   icon,
   ...props
 }: Props) =>
-  <div {...props} className={cn(
+  <Component {...props} className={cn(
     style.button,
     className,
     primary && style.primary,
@@ -35,4 +37,4 @@ export default ({
   )}>
     {children}
     {icon && <img className={style.icon} src={icon}/>}
-  </div>
+  </Component>
