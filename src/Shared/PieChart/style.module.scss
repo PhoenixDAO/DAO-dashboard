@@ -2,7 +2,6 @@
 
 .chartWrap {
   display: flex;
-  padding-bottom: 31.8rem;
 }
 
 .chartHalf {
@@ -33,6 +32,9 @@
 .info {
   flex-basis: 50%;
   padding: 6rem 30rem 0 30rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .item {
@@ -50,6 +52,7 @@
 }
 
 .circle {
+  margin-top: 10rem;
   width: 29rem;
   height: 29rem;
   border-style: solid;
@@ -65,11 +68,12 @@
 .value {
   font-weight: bold;
   font-size: 22rem;
+  line-height: 22rem;
 }
 
 .title {
   font-size: 18rem;
-  line-height: 22rem;
+  line-height: 18rem;
   color: $dark-gray;
   margin: 6rem 0 11rem;
 }
@@ -84,5 +88,19 @@
     height: 100%;
     border-radius: 5rem;
     box-shadow: 0 3rem 6rem rgba(18, 23, 164, .2);
+  }
+}
+
+@media (max-height: 680px) {
+  .itemMain {
+    display: block;
+  }
+
+  .value, .title {
+    display: inline-block;
+  }
+
+  .title {
+    margin-left: 20rem;
   }
 }

@@ -40,3 +40,13 @@
   height: 100%;
   padding: 20rem 50rem;
 }
+
+@media (max-height: 700px) {
+  .card {
+    padding: 30rem 0 20rem;
+  }
+
+  .content {
+    padding: 15px 50rem;
+  }
+}
