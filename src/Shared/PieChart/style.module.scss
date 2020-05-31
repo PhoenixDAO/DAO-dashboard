@@ -91,7 +91,7 @@
   }
 }
 
-@media (max-height: 680px) {
+@media (max-height: 680px), (min-aspect-ratio: 15/9) {
   .itemMain {
     display: block;
   }
@@ -100,7 +100,7 @@
     display: inline-block;
   }
 
-  .title {
-    margin-left: 20rem;
+  .value {
+    margin-right: 20rem;
   }
 }

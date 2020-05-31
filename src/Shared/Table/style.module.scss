@@ -52,3 +52,11 @@
 .clickable tr td {
   cursor: pointer;
 }
+
+@media (max-height: 680px), (min-aspect-ratio: 15/9) {
+  .compact {
+    th, td, .hoverRow {
+      height: 45rem;
+    }
+  }
+}

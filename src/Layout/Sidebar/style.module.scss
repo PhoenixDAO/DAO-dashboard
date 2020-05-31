@@ -87,6 +87,9 @@
     }
   }
 
+  @media (min-aspect-ratio: 15/9) {
+    top: 140rem;
+  }
 
   @media (max-width: 1000px) {
     &:not(:hover) {

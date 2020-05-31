@@ -7,6 +7,8 @@
   width: 100%;
   padding: 59rem 0 35rem;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
@@ -37,16 +39,20 @@
 
 .content {
   overflow: auto;
-  height: 100%;
+  flex-grow: 1;
   padding: 20rem 50rem;
 }
 
-@media (max-height: 700px) {
+@media (max-height: 700px), (min-aspect-ratio: 15/9) {
   .card {
-    padding: 30rem 0 20rem;
+    padding: 30rem 0 0;
   }
 
   .content {
-    padding: 15px 50rem;
+    padding: 15rem 50rem 15rem;
+  }
+
+  .title {
+    font-size: 26rem;
   }
 }

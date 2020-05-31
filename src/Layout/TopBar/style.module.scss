@@ -50,3 +50,9 @@
     }
   }
 }
+
+@media (min-aspect-ratio: 15/9) {
+  .topBar {
+    height: 90rem;
+  }
+}
