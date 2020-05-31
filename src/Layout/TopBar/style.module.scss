@@ -1,14 +1,14 @@
 @import 'variables.scss';
 
 .topBar {
-  height: 11.6rem;
+  height: 116rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 5rem 0 2.5rem;
+  padding: 0 50rem 0 25rem;
   flex-shrink: 0;
   background: white;
-  box-shadow: 0 1rem 1rem $shadow-color;
+  box-shadow: 0 10rem 10rem $shadow-color;
   position: relative;
   z-index: 1;
 
@@ -27,26 +27,26 @@
     cursor: pointer;
 
     .name {
-      font-size: 1.8rem;
-      line-height: 2.2rem;
+      font-size: 18rem;
+      line-height: 22rem;
     }
 
     .email {
-      font-size: 1.6rem;
-      line-height: 1.9rem;
+      font-size: 16rem;
+      line-height: 19rem;
       color: $font-gray;
     }
 
     .avatar {
-      margin-left: 1.2rem;
-      width: 5rem;
-      height: 5rem;
+      margin-left: 12rem;
+      width: 50rem;
+      height: 50rem;
       border: 1px solid #EA8604;
       border-radius: 50%;
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
-      box-shadow: 0 .2rem .6rem rgba(0, 0, 0, .16);
+      box-shadow: 0 2rem 6rem rgba(0, 0, 0, .16);
     }
   }
 }

@@ -5,17 +5,17 @@
   min-height: 100%;
   grid-template-columns: 4fr 6fr;
   grid-template-rows: 1fr 1fr;
-  grid-gap: 3rem;
+  grid-gap: 30rem;
 }
 
 .modalContent {
-  margin: 8.6rem 0 7.7rem;
+  margin: 86rem 0 77rem;
 }
 
 .modalInfo {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 8.3rem;
+  margin-bottom: 83rem;
 }
 
 .modalColumn {
@@ -23,20 +23,20 @@
 }
 
 .modalKey {
-  margin-bottom: .9rem;
-  font-size: 1.8rem;
-  line-height: 2.2rem;
+  margin-bottom: 9rem;
+  font-size: 18rem;
+  line-height: 22rem;
 }
 
 .modalValue {
   font-weight: bold;
-  font-size: 2.2rem;
-  line-height: 2.6rem;
+  font-size: 22rem;
+  line-height: 26rem;
   color: #434343;
 }
 
 .modalQuestion {
   color: $dark-gray;
-  font-size: 1.8rem;
-  line-height: 2.2rem;
+  font-size: 18rem;
+  line-height: 22rem;
 }

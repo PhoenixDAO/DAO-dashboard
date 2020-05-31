@@ -2,23 +2,23 @@
 
 .card {
   background: white;
-  box-shadow: 0 .4rem .6rem $shadow-color;
-  border-radius: 1rem;
+  box-shadow: 0 4rem 6rem $shadow-color;
+  border-radius: 10rem;
   width: 100%;
-  padding: 5.9rem 0 3.5rem;
+  padding: 59rem 0 35rem;
   overflow: hidden;
 }
 
 .header {
-  padding: 0 5rem;
-  margin-bottom: .3rem;
+  padding: 0 50rem;
+  margin-bottom: 3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .title {
-  font-size: 3.2rem;
+  font-size: 32rem;
   line-height: 1;
 }
 
@@ -38,5 +38,5 @@
 .content {
   overflow: auto;
   height: 100%;
-  padding: 2rem 5rem;
+  padding: 20rem 50rem;
 }

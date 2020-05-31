@@ -2,37 +2,37 @@
 
 .sidebar {
   position: fixed;
-  top: 16.6rem;
-  bottom: 5.2rem;
+  top: 166rem;
+  bottom: 52rem;
   background: white;
-  width: 31.7rem;
+  width: 317rem;
   flex-shrink: 0;
-  box-shadow: .2rem 0 1.5rem $shadow-color;
-  padding-top: 5rem;
+  box-shadow: 2rem 0 15rem $shadow-color;
+  padding-top: 50rem;
   z-index: 10;
   left: 0;
   transition: .2s;
 
   .item {
-    height: 8.5rem;
+    height: 85rem;
     display: flex;
     align-items: center;
-    padding-left: 3.6rem;
+    padding-left: 36rem;
     position: relative;
     color: $font-gray;
 
     .iconWrap {
       position: fixed;
       left: 0;
-      padding-left: 3.6rem;
+      padding-left: 36rem;
       background: white;
       z-index: 1;
       transition: .2s;
     }
 
     .icon {
-      width: 4.3rem;
-      height: 8.5rem;
+      width: 43rem;
+      height: 85rem;
       background: $font-gray;
       mask-position: center;
       mask-size: contain;
@@ -40,16 +40,16 @@
     }
 
     .text {
-      font-size: 2rem;
-      margin-left: 6.4rem;
+      font-size: 20rem;
+      margin-left: 64rem;
     }
 
     .bell {
       position: absolute;
-      top: 3.4rem;
-      right: 3.5rem;
-      width: 3.4rem;
-      height: 3.2rem;
+      top: 34rem;
+      right: 35rem;
+      width: 34rem;
+      height: 32rem;
       z-index: 2;
       transform: translate(0, 0);
       transition: .2s;
@@ -66,11 +66,11 @@
       top: 0;
       right: 0;
       bottom: 0;
-      width: .8rem;
-      border-radius: .4rem;
+      width: 8rem;
+      border-radius: 4rem;
       background: $font-accent;
       opacity: 0;
-      box-shadow: -.5rem 0 1.5rem rgba(234, 134, 4, 34%);
+      box-shadow: -5rem 0 15rem rgba(234, 134, 4, 34%);
     }
 
     &.active, &:hover {
@@ -90,15 +90,15 @@
 
   @media (max-width: 1000px) {
     &:not(:hover) {
-      left: -23rem;
+      left: -230rem;
 
       .item {
         .iconWrap {
-          left: -1.5rem;
+          left: -15rem;
         }
 
         .bell {
-          transform: translate(3rem, -2rem);
+          transform: translate(30rem, -20rem);
         }
       }
     }

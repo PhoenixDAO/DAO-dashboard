@@ -15,14 +15,14 @@
   }
 
   th, td {
-    height: 6.9rem;
+    height: 69rem;
 
     &:first-child, & + * {
-      padding-left: 2.3rem;
+      padding-left: 23rem;
     }
 
     &:last-child {
-      padding-right: 2.3rem;
+      padding-right: 23rem;
     }
   }
 
@@ -35,17 +35,17 @@
 
 .hoverRow {
   position: absolute;
-  height: 6.9rem;
+  height: 69rem;
   width: 100%;
   border: 1px solid rgba(189, 196, 208, .4);
-  box-shadow: 0 .5rem 1.5rem rgba(8, 15, 22, .16);
-  border-radius: .8rem;
+  box-shadow: 0 5rem 15rem rgba(8, 15, 22, .16);
+  border-radius: 8rem;
   pointer-events: none;
 }
 
 .compact {
   th, td, .hoverRow {
-    height: 5.1rem;
+    height: 51rem;
   }
 }
 

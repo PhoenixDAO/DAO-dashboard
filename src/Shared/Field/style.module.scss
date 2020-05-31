@@ -2,13 +2,13 @@
 
 .wrap {
   display: block;
-  margin-bottom: 2.3rem;
+  margin-bottom: 23rem;
 }
 
 .label {
-  font-size: 1.6rem;
-  line-height: 1.9rem;
-  margin-bottom: 1.1rem;
+  font-size: 16rem;
+  line-height: 19rem;
+  margin-bottom: 11rem;
   color: $dark-gray;
 }
 
@@ -19,12 +19,12 @@
 .input {
   background: #f9f9f9;
   border: 1px solid #f9f9f9;
-  height: 4.2rem;
-  line-height: 4.2rem;
-  border-radius: .5rem;
+  height: 42rem;
+  line-height: 42rem;
+  border-radius: 5rem;
   transition: .2s;
   width: 100%;
-  padding: 0 1.5rem;
+  padding: 0 15rem;
 
   &.hasError {
     border-color: red;
@@ -37,16 +37,16 @@
 
 .icon {
   position: absolute;
-  top: 1rem;
-  right: 1.1rem;
-  width: 2.754rem;
-  height: 2.203rem;
+  top: 10rem;
+  right: 11rem;
+  width: 27.54rem;
+  height: 22.03rem;
   cursor: pointer;
 }
 
 .error {
-  margin: 1rem 0 0;
-  height: 1.9rem;
-  font-size: 1.4rem;
+  margin: 10rem 0 0;
+  height: 19rem;
+  font-size: 14rem;
   color: red;
 }
