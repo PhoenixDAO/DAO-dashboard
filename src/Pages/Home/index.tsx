@@ -3,8 +3,6 @@ import Card from 'Shared/Card'
 import Table from 'Shared/Table'
 import Font from 'Shared/Font'
 import PieChart from 'Shared/PieChart'
-import Modal from 'Shared/Modal'
-import Button from 'Shared/Button'
 import ProposalModal from 'Pages/Proposals/Modal'
 import style from './style.module.scss'
 

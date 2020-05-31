@@ -10,7 +10,7 @@ import style from './style.module.scss'
 const data = [
   {
     title: 'Build Amazon Marketplace dApp',
-    upvotes: <>88 / <Font color='success'>100</Font></>,
+    upvotes: <>Vote on 10/30/2020</>,
     comments: 104,
     cost: '350,000',
     date: <Font color='accent'>06/30/2020</Font>,

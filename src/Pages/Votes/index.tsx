@@ -5,7 +5,6 @@ import Table from "Shared/Table"
 import {Columns} from 'Shared/Grid'
 import Modal from 'Shared/Modal'
 import Button from 'Shared/Button'
-import iconLike from 'assets/images/icons/like.svg'
 import style from './style.module.scss'
 
 type Project = {
