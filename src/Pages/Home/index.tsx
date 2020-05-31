@@ -1,11 +1,11 @@
 import React from 'react'
-// import {Columns, SmallColumn, WideColumn} from 'Shared/Grid'
 import Card from 'Shared/Card'
 import Table from 'Shared/Table'
 import Font from 'Shared/Font'
 import PieChart from 'Shared/PieChart'
 import Modal from 'Shared/Modal'
 import Button from 'Shared/Button'
+import ProposalModal from 'Pages/Proposals/Modal'
 import style from './style.module.scss'
 
 const chartData = [
@@ -72,30 +72,7 @@ export default () => {
 
   return <>
     {modalItem &&
-    <Modal
-      close={closeModal}
-      title={modalItem.title}
-      actions={
-        <>
-          <Button primary onClick={closeModal}>Yes</Button>
-          <Button primary outline onClick={closeModal}>No</Button>
-        </>
-      }
-    >
-      <div className={style.modalContent}>
-        <div className={style.modalInfo}>
-          <div className={style.modalColumn}>
-            <div className={style.modalKey}>Cost</div>
-            <div className={style.modalValue}>{modalItem.price}</div>
-          </div>
-          <div className={style.modalColumn}>
-            <div className={style.modalKey}>Est. Completion</div>
-            <div className={style.modalValue}>{modalItem.date}</div>
-          </div>
-        </div>
-        <div className={style.modalQuestion}>Are you in favor of funding this project?</div>
-      </div>
-    </Modal>
+      <ProposalModal title={modalItem.title} close={closeModal} />
     }
     <div className={style.grid}>
       <Card title='Latest Proposals'>

@@ -98,38 +98,27 @@ export default () => {
     {
       modalItem &&
       <Modal
-        title={modalItem.title}
         close={closeModal}
+        title={modalItem.title}
         actions={
           <>
-            <Button primary onClick={closeModal}>Ok</Button>
-            <Button primary outline onClick={closeModal} icon={iconLike}>Upvote</Button>
+            <Button primary onClick={closeModal}>Yes</Button>
+            <Button primary outline onClick={closeModal}>No</Button>
           </>
         }
       >
         <div className={style.modalContent}>
-          <div className={style.modalBrief}>
-            <span>350,000 PHNX</span>
-            <span>5 milestone</span>
-            <span>10/30/2020</span>
-          </div>
-          <div className={style.modalText}>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-          </div>
-          <div className={style.modalSteps}>
-            <div className={style.modalStep}>
-              <div className={style.modalStepNumber}>1</div>
-              <div className={style.modalStepText}>Architecture Document</div>
+          <div className={style.modalInfo}>
+            <div className={style.modalColumn}>
+              <div className={style.modalKey}>Cost</div>
+              <div className={style.modalValue}>350,000 PHNX</div>
             </div>
-            <div className={style.modalStep}>
-              <div className={style.modalStepNumber}>2</div>
-              <div className={style.modalStepText}>Backend server and database connected with registration</div>
-            </div>
-            <div className={style.modalStep}>
-              <div className={style.modalStepNumber}>3</div>
-              <div className={style.modalStepText}>Buy and sell one product functionality</div>
+            <div className={style.modalColumn}>
+              <div className={style.modalKey}>Est. Completion</div>
+              <div className={style.modalValue}>{modalItem.date}</div>
             </div>
           </div>
+          <div className={style.modalQuestion}>Are you in favor of funding this project?</div>
         </div>
       </Modal>
     }
