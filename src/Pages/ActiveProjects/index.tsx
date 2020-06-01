@@ -100,7 +100,7 @@ export default () => {
         </div>
       </Modal>
     }
-    <Table columns={['Active Project', 'Status', 'Est. Completion Date']} clickable>
+    <Table columns={['Active Project', 'Status', 'Est. Completion Date']}>
       {data.map((item, i) =>
         <tr key={i} onClick={() => setModalItem(item)}>
           <td>{item.title}</td>

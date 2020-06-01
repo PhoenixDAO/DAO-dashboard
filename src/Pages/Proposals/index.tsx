@@ -99,7 +99,7 @@ export default () => {
         <Button secondary onClick={() => setModalOpen(true)}>Submit Proposal</Button>
       }
     >
-      <Table columns={['Proposal', 'Current Upvotes', '# comments', 'Cost (PHNX)', 'Expiration Date']} clickable>
+      <Table columns={['Proposal', 'Current Upvotes', '# comments', 'Cost (PHNX)', 'Expiration Date']}>
         {data.map(({title, upvotes, comments, cost, date}, i) =>
           <tr key={i} onClick={() => setProjectModalItem({title})}>
             <td>{title}</td>

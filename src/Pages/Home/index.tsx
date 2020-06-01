@@ -74,7 +74,7 @@ export default () => {
     }
     <div className={style.grid}>
       <Card title='Latest Proposals'>
-        <Table compact clickable>
+        <Table compact>
           {latestProposals.map((item, i) =>
             <tr key={i} onClick={() => openModal(item)}>
               <td>{item.title}</td>
