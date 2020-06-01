@@ -47,7 +47,7 @@ export default () =>
         <div className={style.text}>{text}</div>
         {to === routes.votes() &&
           <div className={style.bell}>
-            <img src={iconBell}/>
+            <img src={iconBell} alt=''/>
           </div>
         }
       </NavLink>

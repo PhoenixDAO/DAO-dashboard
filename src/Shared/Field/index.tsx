@@ -22,6 +22,7 @@ export default ({label, error, type = 'text'}: Props) => {
           className={style.icon}
           src={localType === 'password' ? iconNoEye : iconEye}
           onClick={() => setLocalType(localType === 'password' ? 'text' : 'password')}
+          alt=''
         />
       }
       <input type={localType} className={cn(style.input, error && style.hasError)}/>
