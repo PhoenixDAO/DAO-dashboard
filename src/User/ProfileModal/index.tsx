@@ -4,7 +4,9 @@ import Button from 'Shared/Button'
 import Checkbox from 'Shared/Checkbox'
 import EmailModal from 'User/EmailModal'
 import PasswordModal from 'User/PasswordModal'
+import {Link} from 'react-router-dom'
 import avatar from "assets/images/avatar.png"
+import routes from 'routes'
 import style from './style.module.scss'
 
 type Props = {
@@ -36,6 +38,9 @@ export default ({close}: Props) => {
         <Button className={style.modalButton} light component={'label'}>
           <div>Dark Mode</div>
           <Checkbox/>
+        </Button>
+        <Button component={Link} to={routes.auth.logIn()} className={style.modalButton} light>
+          Log out
         </Button>
       </Modal>
     }
