@@ -76,7 +76,7 @@ export default () => {
       <Modal
         title='Submit a Proposal'
         className={style.modal}
-        actions={<Button primary onClick={closeModal}>Yes</Button>}
+        actions={<Button primary onClick={closeModal}>Next</Button>}
         close={closeModal}
       >
         <div className={style.modalContent}>
