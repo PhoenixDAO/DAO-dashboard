@@ -91,7 +91,9 @@ export default () => {
           <div className={style.modalSection}>
             <div className={style.modalTitle}>Notes</div>
             <div className={style.modalNotes}>
-              Developers have been selected and designs have been completed.
+              <textarea className={style.modalTextarea}>
+                Developers have been selected and designs have been completed.
+              </textarea>
               <div className={style.modalNotesDate}>07/12/2020</div>
             </div>
           </div>

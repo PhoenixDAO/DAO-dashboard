@@ -57,14 +57,24 @@
 
 .modalNotes {
   border-radius: 5rem;
-  background: #f9f9f9;
-  padding: 25rem;
-  font-size: 18rem;
   line-height: 22rem;
+  position: relative;
+  font-size: 0;
+  display: flex;
+}
+
+.modalTextarea {
+  padding: 25rem 25rem 63rem;
+  font-size: 18rem;
+  background: #f9f9f9;
   color: $dark-gray;
 }
 
 .modalNotesDate {
   margin-top: 16rem;
   color: $font-gray;
+  position: absolute;
+  left: 25rem;
+  bottom: 25rem;
+  font-size: 18rem;
 }
