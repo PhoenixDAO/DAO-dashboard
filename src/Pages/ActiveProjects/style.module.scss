@@ -1,19 +1,19 @@
 @import 'variables.scss';
 
 .modalContent {
-  margin: 4.8rem 0 3.8rem;
+  margin: 48rem 0 38rem;
 }
 
 .modalSection {
   & + .modalSection {
-    margin-top: 5.4rem;
+    margin-top: 54rem;
   }
 }
 
 .modalInfo {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 8.3rem;
+  margin-bottom: 83rem;
 }
 
 .modalColumn {
@@ -21,50 +21,50 @@
 }
 
 .modalKey {
-  margin-bottom: .9rem;
+  margin-bottom: 9rem;
   color: $font-gray;
-  font-size: 1.8rem;
-  line-height: 2.2rem;
+  font-size: 18rem;
+  line-height: 22rem;
 }
 
 .modalValue {
   font-weight: bold;
-  font-size: 2.2rem;
-  line-height: 2.6rem;
+  font-size: 22rem;
+  line-height: 26rem;
 }
 
 .modalTitle {
   color: $font-gray;
-  font-size: 1.8rem;
-  line-height: 2.2rem;
-  margin-bottom: 2.1rem;
+  font-size: 18rem;
+  line-height: 22rem;
+  margin-bottom: 21rem;
 }
 
 .modalImages {
   display: flex;
 
   > * {
-    border-radius: .5rem;
+    border-radius: 5rem;
     background: $font-gray;
     flex-basis: 100%;
-    height: 12.3rem;
+    height: 123rem;
 
     & + * {
-      margin-left: 5rem;
+      margin-left: 50rem;
     }
   }
 }
 
 .modalNotes {
-  border-radius: .5rem;
+  border-radius: 5rem;
   background: #f9f9f9;
-  padding: 2.5rem;
-  font-size: 1.8rem;
-  line-height: 2.2rem;
+  padding: 25rem;
+  font-size: 18rem;
+  line-height: 22rem;
   color: $dark-gray;
 }
 
 .modalNotesDate {
-  margin-top: 1.6rem;
+  margin-top: 16rem;
   color: $font-gray;
 }

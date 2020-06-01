@@ -1,22 +1,22 @@
 @import 'variables.scss';
 
 .wrap {
-  width: 43.3rem;
+  width: 433rem;
 }
 
 .text {
-  font-size: 1.6rem;
-  line-height: 1.9rem;
+  font-size: 16rem;
+  line-height: 19rem;
   color: $dark-gray;
 }
 
 .qr {
   display: flex;
   justify-content: center;
-  margin-top: 7.5rem;
+  margin-top: 75rem;
 
   img {
-    width: 20.8rem;
-    height: 20.8rem;
+    width: 208rem;
+    height: 208rem;
   }
 }

@@ -2,7 +2,7 @@
   display: flex;
 
   > * + * {
-    margin-left: 3rem;
+    margin-left: 30rem;
   }
 }
 
@@ -14,7 +14,7 @@
     flex-basis: 100%;
 
     &:not(:first-child) {
-      margin-top: 3rem;
+      margin-top: 30rem;
     }
   }
 }

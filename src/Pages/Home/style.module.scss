@@ -5,38 +5,9 @@
   min-height: 100%;
   grid-template-columns: 4fr 6fr;
   grid-template-rows: 1fr 1fr;
-  grid-gap: 3rem;
-}
+  grid-gap: 30rem;
 
-.modalContent {
-  margin: 8.6rem 0 7.7rem;
-}
-
-.modalInfo {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8.3rem;
-}
-
-.modalColumn {
-  flex-basis: 50%;
-}
-
-.modalKey {
-  margin-bottom: .9rem;
-  font-size: 1.8rem;
-  line-height: 2.2rem;
-}
-
-.modalValue {
-  font-weight: bold;
-  font-size: 2.2rem;
-  line-height: 2.6rem;
-  color: #434343;
-}
-
-.modalQuestion {
-  color: $dark-gray;
-  font-size: 1.8rem;
-  line-height: 2.2rem;
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
 }

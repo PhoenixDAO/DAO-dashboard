@@ -2,17 +2,17 @@
 
 .button {
   position: relative;
-  height: 5.6rem;
-  padding: 0 2rem;
-  border-radius: .5rem;
+  height: 56rem;
+  padding: 0 20rem;
+  border-radius: 5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 20rem;
   transition: .2s;
-  min-width: 20rem;
+  min-width: 200rem;
   border: 1px solid;
   user-select: none;
 }
@@ -24,7 +24,7 @@
   transition: .2s;
 
   &:hover {
-    box-shadow: 0 .4rem .6rem rgba(234, 134, 4, .25);
+    box-shadow: 0 4rem 6rem rgba(234, 134, 4, .25);
   }
 
   &.shadow {
@@ -54,7 +54,7 @@
 }
 
 .light {
-  border-radius: 1rem;
+  border-radius: 10rem;
   box-shadow: 0 3px 6px $shadow-color;
   transition: .2s;
   border: 1px solid rgba(189, 196, 208, .4);
@@ -66,5 +66,5 @@
 
 .icon {
   position: absolute;
-  right: 1rem;
+  right: 10rem;
 }

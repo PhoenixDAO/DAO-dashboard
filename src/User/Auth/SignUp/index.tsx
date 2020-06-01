@@ -17,7 +17,7 @@ const ThanksPage = () =>
   </Layout>
 
 export default () => {
-  const [registered, setRegistered] = React.useState(true)
+  const [registered, setRegistered] = React.useState(false)
 
   if (registered)
     return <ThanksPage />

@@ -1,14 +1,14 @@
 @import 'variables.scss';
 
 .modal {
-  width: 44.1rem;
+  width: 441rem;
 }
 
 .modalHeader {
   display: flex;
   align-items: center;
-  padding-bottom: 4rem;
-  margin-bottom: 4rem;
+  padding-bottom: 40rem;
+  margin-bottom: 40rem;
   position: relative;
 
   &:after {
@@ -23,8 +23,8 @@
 }
 
 .modalAvatar {
-  width: 10.3rem;
-  height: 10.3rem;
+  width: 103rem;
+  height: 103rem;
   border: 1px solid $font-accent;
   border-radius: 50%;
   background-repeat: no-repeat;
@@ -33,36 +33,36 @@
 }
 
 .modalUserInfo {
-  margin-left: 4.5rem;
+  margin-left: 45rem;
 }
 
 .modalName {
   font-weight: bold;
   color: #434343;
-  font-size: 2.2rem;
-  line-height: 2.6rem;
-  margin-bottom: 2.2rem;
+  font-size: 22rem;
+  line-height: 26rem;
+  margin-bottom: 22rem;
 }
 
 .modalEmail {
-  font-size: 1.6rem;
-  line-height: 1.9rem;
+  font-size: 16rem;
+  line-height: 19rem;
   color: $dark-gray;
-  margin-bottom: 1.2rem;
+  margin-bottom: 12rem;
 }
 
 .modalDate {
-  font-size: 1.6rem;
-  line-height: 1.9rem;
+  font-size: 16rem;
+  line-height: 19rem;
   color: $font-gray;
 }
 
 .modalButton {
   font-weight: normal;
   justify-content: space-between;
-  padding: 0 1.5rem;
+  padding: 0 15rem;
 
   & + .modalButton {
-    margin-top: 1.5rem;
+    margin-top: 15rem;
   }
 }
