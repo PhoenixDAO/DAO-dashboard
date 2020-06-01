@@ -91,14 +91,16 @@ export default () => {
           <div className={style.modalSection}>
             <div className={style.modalTitle}>Notes</div>
             <div className={style.modalNotes}>
-              Developers have been selected and designs have been completed.
+              <textarea className={style.modalTextarea}>
+                Developers have been selected and designs have been completed.
+              </textarea>
               <div className={style.modalNotesDate}>07/12/2020</div>
             </div>
           </div>
         </div>
       </Modal>
     }
-    <Table columns={['Active Project', 'Status', 'Est. Completion Date']} clickable>
+    <Table columns={['Active Project', 'Status', 'Est. Completion Date']}>
       {data.map((item, i) =>
         <tr key={i} onClick={() => setModalItem(item)}>
           <td>{item.title}</td>

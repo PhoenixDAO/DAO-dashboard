@@ -1,5 +1,6 @@
 import React from 'react'
 import {NavLink} from "react-router-dom"
+import iconHome from "assets/images/icons/home.svg"
 import iconAddProposal from "assets/images/icons/add-proposal.svg"
 import iconUsers from "assets/images/icons/users.svg"
 import iconBell from "assets/images/icons/bell.svg"
@@ -9,6 +10,11 @@ import routes from 'routes'
 import style from './style.module.scss'
 
 const menu = [
+  {
+    to: routes.root(),
+    icon: iconHome,
+    text: 'Dashboard'
+  },
   {
     to: routes.proposals(),
     icon: iconAddProposal,

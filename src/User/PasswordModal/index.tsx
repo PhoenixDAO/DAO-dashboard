@@ -18,7 +18,7 @@ export default ({close}: Props) =>
     }
   >
     <div className={style.modalContent}>
-      <Field label='Password' type='password'/>
+      <Field label='Current Password' type='password'/>
       <Field label='New password' type='password'/>
       <Field label='Confirm new password' type='password'/>
     </div>

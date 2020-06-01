@@ -51,3 +51,9 @@ a {
 a:focus {
   outline: none;
 }
+
+textarea {
+  width: 100%;
+  border: 0;
+  font-family: inherit;
+}

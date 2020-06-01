@@ -16,7 +16,7 @@ export default ({close, title}: Props) =>
     actions={
       <>
         <Button primary onClick={close}>Ok</Button>
-        <Button primary outline onClick={close} icon={iconLike}>Upvote</Button>
+        <Button primary outline icon={iconLike}>Upvote</Button>
       </>
     }
   >
