@@ -36,5 +36,5 @@ export default ({
     shadow && style.shadow,
   )}>
     {children}
-    {icon && <img className={style.icon} src={icon}/>}
+    {icon && <img className={style.icon} src={icon} alt=''/>}
   </Component>
