@@ -1,0 +1,139 @@
+.wrap {
+  display: flex;
+  height: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.item {
+  position: relative;
+  border-radius: 10rem;
+  background: white;
+  width: calc(33.333% - 22rem);
+  height: calc(50% - 16rem);
+  margin-bottom: 32rem;
+  padding: 35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  color: #EA8604;
+  font-size: 24rem;
+  line-height: 32rem;
+  margin-bottom: 10rem;
+}
+
+.keyValues {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rem;
+}
+
+.key {
+  font-size: 16rem;
+  color: #BDC4D0;
+  margin-bottom: 1rem;
+}
+
+.value {
+  font-size: 20rem;
+  color: #434343;
+  line-height: 27rem;
+  font-weight: bold;
+}
+
+.text {
+  font-size: 16rem;
+  color: #838383;
+  line-height: 24rem;
+  margin-bottom: 10rem;
+  overflow: hidden;
+}
+
+.menu {
+  position: absolute;
+  top: 26rem;
+  right: 16rem;
+
+  .menuButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 43rem;
+    height: 43rem;
+    border-radius: 50%;
+    color: #BDC4D0;
+    text-align: center;
+    transition: .3s;
+    cursor: pointer;
+
+    div:before {
+      content: '.';
+      display: block;
+      font-size: 45rem;
+      line-height: 9rem;
+      position: relative;
+      top: -2rem;
+    }
+  }
+
+  .menuItems {
+    position: absolute;
+    top: 35rem;
+    height: 0;
+    overflow: hidden;
+    transition: top .3s;
+    right: 0;
+    width: 188rem;
+    background: white;
+  }
+
+  .menuItem {
+    display: flex;
+    height: 43rem;
+    align-items: center;
+    font-size: 14rem;
+    color: #434343;
+    padding-left: 30rem;
+    position: relative;
+    cursor: pointer;
+    transition: .3s;
+
+    &:hover {
+      color: #EA8604;
+    }
+
+    & + .menuItem {
+      border-top: 1px solid rgba(189, 196, 208, .11);
+    }
+
+    .icon {
+      position: absolute;
+      left: 0;
+    }
+
+    &.edit .icon {
+      width: 16rem;
+    }
+
+    &.delete .icon {
+      width: 13rem;
+    }
+  }
+
+  &:focus {
+    .menuButton {
+      background: #FCEBD4;
+      color: #EA8604;
+    }
+
+    .menuItems {
+      top: 43rem;
+      height: auto;
+      padding: 10rem 24rem;
+      box-shadow: 0 4rem 15rem rgba(8, 15, 22, .1);
+    }
+  }
+}
