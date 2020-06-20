@@ -3,9 +3,8 @@ import Card from "Shared/Card"
 import Table from "Shared/Table"
 import Font from 'Shared/Font'
 import Button from 'Shared/Button'
-import Modal from 'Shared/Modal'
-import ProposalModal from 'Pages/Proposals/Modal'
-import style from './style.module.scss'
+import EditModal from './EditModal'
+import ProposalModal from 'Proposals/Modal'
 
 const data = [
   {
@@ -72,23 +71,7 @@ export default () => {
   const [projectModalItem, setProjectModalItem] = React.useState<{title: string} | undefined>(undefined)
 
   return <>
-    {modalOpen &&
-      <Modal
-        title='Submit a Proposal'
-        className={style.modal}
-        actions={<Button primary onClick={closeModal}>Next</Button>}
-        close={closeModal}
-      >
-        <div className={style.modalContent}>
-          <div className={style.modalContentTitle}>
-            Why do you want to build this dApp or smart contract? Why is it needed?
-          </div>
-          <textarea className={style.modalText}>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-          </textarea>
-        </div>
-      </Modal>
-    }
+    {modalOpen && <EditModal close={closeModal} />}
     {
       projectModalItem &&
       <ProposalModal title={projectModalItem.title} close={() => setProjectModalItem(undefined)} />

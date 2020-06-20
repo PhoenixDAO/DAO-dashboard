@@ -3,7 +3,7 @@ import Card from 'Shared/Card'
 import Table from 'Shared/Table'
 import Font from 'Shared/Font'
 import PieChart from 'Shared/PieChart'
-import ProposalModal from 'Pages/Proposals/Modal'
+import ProposalModal from 'Proposals/Modal'
 import style from './style.module.scss'
 
 const chartData = [

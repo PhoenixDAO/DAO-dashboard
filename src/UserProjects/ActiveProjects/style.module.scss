@@ -1,0 +1,141 @@
+.wrap {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  height: 100%;
+  flex-basis: calc(50% - 15rem);
+  background: white;
+  margin-bottom: 10rem;
+  padding: 50rem;
+  border-radius: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4rem 6rem rgba(8, 15, 22, .05);
+
+  &:nth-child(even) {
+    margin-left: 30rem;
+  }
+}
+
+.title {
+  color: #EA8604;
+  font-size: 24rem;
+  line-height: 32rem;
+  margin-bottom: 10rem;
+}
+
+.formControl {
+  display: block;
+  margin-bottom: 10rem;
+
+  .label {
+    font-size: 16rem;
+    line-height: 21rem;
+    color: #838383;
+    margin-bottom: 7rem;
+  }
+
+  .input {
+    width: calc(100% - 150rem);
+    height: 42rem;
+    line-height: 42rem;
+    background: #F9F9F9;
+    border-radius: 5rem;
+    padding: 0 9rem;
+    font-size: 18rem;
+    color: #434343;
+    border: 1px solid #f9f9f9;
+
+    &.date {
+      width: 200rem;
+    }
+
+    &:focus {
+      outline: none;
+      border: 1px solid #EA8604;
+    }
+  }
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rem;
+
+  .num {
+    height: 32rem;
+    width: 32rem;
+    line-height: 20rem;
+    color: white;
+    background: #434343;
+    border: 7rem solid #E0E0E0;
+    font-size: 12rem;
+    font-weight: bold;
+    border-radius: 50%;
+    text-align: center;
+    transition: .3s;
+  }
+
+  .name {
+    font-size: 16rem;
+    color: #434343;
+    flex-grow: 1;
+    margin-left: 24rem;
+  }
+
+  .toggleButton {
+    width: 150rem;
+    height: 32rem;
+    line-height: 34rem;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16rem;
+    border-radius: 5rem;
+    color: #BDC4D0;
+    background: #F4F6F7;
+    cursor: pointer;
+    user-select: none;
+    transition: .3s;
+  }
+
+  &.checked {
+    .num {
+      background: #172DCE;
+      border-color: #D9DDF7;
+    }
+
+    .toggleButton {
+      color: #172DCE;
+      background: #DBDFF7;
+    }
+  }
+}
+
+.submitWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .submit {
+    width: 205rem;
+    height: 56rem;
+    line-height: 56rem;
+    text-align: center;
+    font-size: 20rem;
+    font-weight: bold;
+    border-radius: 5rem;
+    border: 1px solid;
+    color: #EA8604;
+    cursor: pointer;
+    padding: 0;
+    background: white;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

@@ -6,11 +6,12 @@ import LogIn from 'User/Auth/LogIn'
 import LogInWithNumio from 'User/Auth/LogInWithNumio'
 import SignUp from 'User/Auth/SignUp'
 import Layout from 'Layout'
-import Home from 'Pages/Home'
-import Proposals from 'Pages/Proposals'
-import Votes from 'Pages/Votes'
-import ActiveProjects from 'Pages/ActiveProjects'
-import Rewards from 'Pages/Rewards'
+import Home from 'Home'
+import Proposals from 'Proposals'
+import Votes from 'Votes'
+import ActiveProjects from 'ActiveProjects'
+import Rewards from 'Rewards'
+import MyProjects from 'UserProjects'
 
 export default () =>
   <Router history={history}>
@@ -30,6 +31,7 @@ export default () =>
             <Route path={routes.votes()} exact component={Votes}/>
             <Route path={routes.activeProjects()} exact component={ActiveProjects}/>
             <Route path={routes.rewards()} exact component={Rewards}/>
+            <Route path={routes.myProjects.root()} component={MyProjects}/>
           </Switch>
         </Layout>
       }/>

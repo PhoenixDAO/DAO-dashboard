@@ -6,6 +6,7 @@ import iconUsers from "assets/images/icons/users.svg"
 import iconBell from "assets/images/icons/bell.svg"
 import iconPenNPaper from "assets/images/icons/pen-n-paper.svg"
 import iconReward from "assets/images/icons/reward.svg"
+import iconActiveProjects from 'assets/images/icons/my-projects.svg'
 import routes from 'routes'
 import style from './style.module.scss'
 
@@ -35,6 +36,11 @@ const menu = [
     icon: iconReward,
     text: 'Rewards'
   },
+  {
+    to: routes.myProjects.active(),
+    icon: iconActiveProjects,
+    text: 'My projects'
+  }
 ]
 
 export default () =>
