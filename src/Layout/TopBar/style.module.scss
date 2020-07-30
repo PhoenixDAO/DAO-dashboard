@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@import "variables.scss";
 
 .topBar {
   height: 116rem;
@@ -13,11 +13,18 @@
   z-index: 1;
 
   .logo {
-    display: block;
+    display: flex;
     height: 53%;
+    align-items: center;
 
     img {
       height: 100%;
+    }
+
+    span {
+      font-size: 20px;
+      color: black;
+      margin-left: 10px;
     }
   }
 
@@ -41,12 +48,23 @@
       margin-left: 12rem;
       width: 50rem;
       height: 50rem;
-      border: 1px solid #EA8604;
+      border: 1px solid #ea8604;
       border-radius: 50%;
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
-      box-shadow: 0 2rem 6rem rgba(0, 0, 0, .16);
+      box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.16);
+    }
+  }
+
+  .balance_detail {
+    display: flex;
+    flex-direction: column;
+
+    span:last-child {
+      color: black;
+      margin-top: 5px;
+      font-weight: bold;
     }
   }
 }
