@@ -169,7 +169,7 @@ export default () => {
         </Table>
       </Card>
       <Card title='Proposals Ready for Vote'>
-        <Table compact columns={['Proposal', 'Select Date']}>
+        <Table compact columns={['Proposal', 'Voting Day']}>
           {proposalsForVote.map((item, i) =>
             <tr key={i}>
               <td>{item.proposal}</td>
@@ -179,7 +179,7 @@ export default () => {
         </Table>
       </Card>
       <Card title='Voting Results'>
-        <Table compact columns={['Proposal', 'Proposal', '%', 'Approve']}>
+        <Table compact columns={['Cost', 'Proposal', '%', 'Approve']}>
             {vote.map((item, i) =>
               <tr key={i}>
                 <td>{item.proposal}</td>
