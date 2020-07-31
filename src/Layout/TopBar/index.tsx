@@ -17,10 +17,16 @@ export default ({ isAdmin }: Props) => {
     <>
       {modalOpen && <ProfileModal close={() => setModalOpen(false)} />}
       <div className={style.topBar}>
-        <Link className={style.logo} to={routes.root}>
-          <img src={logo} alt="logo" />
-          {isAdmin && <span>Admin</span>}
-        </Link>
+        <div className={style.topleft}>
+          <Link className={style.logo} to={routes.root}>
+            <img src={logo} alt="logo" />
+          </Link>
+          {isAdmin && 
+            <ul className={style.customlist}>
+              <li>Admin</li>
+            </ul>
+          }
+        </div>
         {isAdmin ? (
           <div className={style.balance_detail}>
             <span>DAO contract balance</span>
