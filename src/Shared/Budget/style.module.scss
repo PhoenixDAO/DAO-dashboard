@@ -1,0 +1,14 @@
+@import "variables.scss";
+
+.budget {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 50rem 68rem 0rem 53rem;
+  background-color: white;
+  padding: 35rem 35rem 10rem;
+}
+
+.inputs {
+  display: flex;
+}

@@ -1,0 +1,67 @@
+@import "variables.scss";
+
+.grid {
+  display: grid;
+  min-height: 100%;
+  grid-template-columns: 5fr 5fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 30rem;
+
+  .listItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10rem;
+
+    .num {
+      height: 32rem;
+      width: 32rem;
+      line-height: 20rem;
+      color: white;
+      background: #434343;
+      border: 7rem solid #e0e0e0;
+      font-size: 12rem;
+      font-weight: bold;
+      border-radius: 50%;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .name {
+      font-size: 16rem;
+      color: #434343;
+      flex-grow: 1;
+      margin-left: 24rem;
+    }
+
+    .toggleButton {
+      width: 150rem;
+      height: 32rem;
+      line-height: 34rem;
+      text-align: center;
+      font-weight: bold;
+      font-size: 16rem;
+      border-radius: 5rem;
+      color: #bdc4d0;
+      background: #f4f6f7;
+      cursor: pointer;
+      user-select: none;
+      transition: 0.3s;
+    }
+
+    &.checked {
+      .num {
+        background: #172dce;
+        border-color: #d9ddf7;
+      }
+
+      .toggleButton {
+        color: #172dce;
+        background: #dbdff7;
+      }
+    }
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}

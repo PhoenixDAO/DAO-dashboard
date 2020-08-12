@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@import "variables.scss";
 
 .page {
   height: 100%;
@@ -15,9 +15,16 @@
 .content {
   flex-grow: 1;
   overflow: auto;
-  padding: 50rem 50rem 52rem 367rem;
 
   @media (max-width: 1000px) {
     padding-left: 137rem;
   }
+}
+
+.main_layout_padding {
+  padding: 50rem 50rem 52rem 367rem;
+}
+
+.admin_layout_padding {
+  padding: 50rem 50rem 52rem 52rem;
 }

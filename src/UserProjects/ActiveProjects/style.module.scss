@@ -40,6 +40,7 @@
   }
 
   .input {
+    box-shadow: none; // for ff
     width: calc(100% - 150rem);
     height: 42rem;
     line-height: 42rem;

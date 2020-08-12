@@ -1,5 +1,6 @@
 export default {
   root: () => '/',
+  admin: () => '/admin',
   proposals: () => '/proposals',
   votes: () => '/votes',
   activeProjects: () => '/active_projects',

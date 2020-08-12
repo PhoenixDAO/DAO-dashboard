@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@import "variables.scss";
 
 .topBar {
   height: 116rem;
@@ -13,12 +13,47 @@
   z-index: 1;
 
   .logo {
-    display: block;
+    display: flex;
     height: 53%;
+    align-items: center;
+    margin-left: 20rem;
 
     img {
       height: 100%;
     }
+  }
+  .topleft {
+    height: 90rem;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    background: white;
+    position: relative;
+    z-index: 1;
+  }
+
+  .customlist {
+    list-style: none;
+    padding-left: 0;
+    font-size: 25rem;
+    color: black;
+    margin-left: 5rem;
+  }
+  .customlist li {
+      position: relative;
+      padding-left: 25rem;
+  }
+  .customlist li:before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      position: absolute;
+      background-image: url('../../assets/images/bullet.png');
+      background-size: cover;
+      background-position: center;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
   }
 
   .user {
@@ -41,12 +76,25 @@
       margin-left: 12rem;
       width: 50rem;
       height: 50rem;
-      border: 1px solid #EA8604;
+      border: 1px solid #ea8604;
       border-radius: 50%;
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
-      box-shadow: 0 2rem 6rem rgba(0, 0, 0, .16);
+      box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.16);
+    }
+  }
+
+  .balance_detail {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20rem;
+    text-align: right;
+
+    span:last-child {
+      color: black;
+      margin-top: 5px;
+      font-weight: bold;
     }
   }
 }

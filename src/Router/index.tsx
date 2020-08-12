@@ -7,6 +7,7 @@ import LogInWithNumio from 'User/Auth/LogInWithNumio'
 import SignUp from 'User/Auth/SignUp'
 import Layout from 'Layout'
 import Home from 'Home'
+import Admin from 'Admin'
 import Proposals from 'Proposals'
 import Votes from 'Votes'
 import ActiveProjects from 'ActiveProjects'
@@ -27,6 +28,7 @@ export default () =>
         <Layout>
           <Switch>
             <Route path={routes.root()} exact component={Home}/>
+            <Route path={routes.admin()} exact component={Admin}/>
             <Route path={routes.proposals()} exact component={Proposals}/>
             <Route path={routes.votes()} exact component={Votes}/>
             <Route path={routes.activeProjects()} exact component={ActiveProjects}/>
