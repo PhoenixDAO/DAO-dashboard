@@ -1,0 +1,139 @@
+@import "variables.scss";
+
+.topBar {
+  height: 116rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50rem 0 25rem;
+  flex-shrink: 0;
+  background: white;
+  box-shadow: 0 10rem 10rem $shadow-color;
+  position: relative;
+  z-index: 1;
+  padding-left: 33px;
+  padding-right: 41px;
+  .logo {
+    display: flex;
+    height: 53%;
+    align-items: center;
+    margin-left: -5px;
+    img {
+      height: 100%;
+    }
+  }
+  .topleft {
+    height: 90rem;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    background: white;
+    position: relative;
+    z-index: 1;
+  }
+
+  .customlist {
+    list-style: none;
+    padding-left: 0;
+    font-size: 25rem;
+    color: black;
+    margin-left: 5rem;
+  }
+  .customlist li {
+    position: relative;
+    padding-left: 25rem;
+  }
+  .customlist li:before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    position: absolute;
+    background-image: url("../../assets/images/bullet.png");
+    background-size: cover;
+    background-position: center;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .user {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .name {
+      font-size: 18rem;
+      line-height: 22rem;
+    }
+
+    .email {
+      font-size: 16rem;
+      line-height: 19rem;
+      color: $font-gray;
+    }
+
+    .avatar {
+      margin-left: 12rem;
+      width: 50rem;
+      height: 50rem;
+      border: 1px solid #ea8604;
+      border-radius: 50%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.16);
+      background-image: url("../../assets/images/avatar.png");
+    }
+  }
+
+  .balance_detail {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20rem;
+    text-align: center;
+
+    span:last-child {
+      color: black;
+      margin-top: 5px;
+      font-weight: bold;
+    }
+  }
+}
+@media screen and (max-width: 450px) {
+.topBar{
+  .logo{
+    margin-left: 7px;
+  }
+}
+}
+@media screen and (max-width: 599px) {
+  .balance_detail span {
+    display: none;
+    // flex-direction: column;
+    // margin-right: 20rem;
+    // text-align: right;
+  }
+  .email{
+    display: none;
+  }
+
+}
+
+
+@media screen and (min-width: 1000px) {
+  .content__2b3x5 {
+    padding-left: 0px;
+  }
+}
+
+@media (min-aspect-ratio: 15/9) {
+  .topBar {
+    height: 90rem;
+  }
+}
+.topBar{
+  @media screen and (max-width:442px){
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}

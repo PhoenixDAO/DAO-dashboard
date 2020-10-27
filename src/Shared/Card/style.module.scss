@@ -1,0 +1,202 @@
+@import "variables";
+
+.card {
+  background: white;
+  box-shadow: 0 4rem 6rem $shadow-color;
+  border-radius: 10rem;
+  width: 100%;
+  padding: 59rem 0 35rem;
+  overflow: hidden;
+  height: 370px;
+  //overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+
+  ::-webkit-scrollbar-thumb {
+    background: #999999;
+    border-radius: 8px;
+    background: #ea8604;
+  }
+}
+
+.card2 {
+  background: white;
+  box-shadow: 0 4rem 6rem $shadow-color;
+  border-radius: 10rem;
+  width: 100%;
+  padding: 59rem 0 35rem;
+  overflow: hidden;
+  height: 780px;
+  //overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+
+  ::-webkit-scrollbar-thumb {
+    background: #999999;
+    border-radius: 8px;
+    background: #ea8604;
+  }
+}
+.card3 {
+  background: white;
+  box-shadow: 0 4rem 6rem $shadow-color;
+  border-radius: 10rem;
+  width: 100%;
+  padding: 59rem 0 35rem;
+  overflow: hidden;
+  height: 780px;
+  //overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+
+  ::-webkit-scrollbar-thumb {
+    background: #999999;
+    border-radius: 8px;
+    background: #ea8604;
+  }
+}
+.card4 {
+  background: white;
+  box-shadow: 0 4rem 6rem $shadow-color;
+  border-radius: 10rem;
+  width: 100%;
+  padding: 59rem 0 35rem;
+  overflow: hidden;
+  height: 780px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+
+  ::-webkit-scrollbar-thumb {
+    background: #999999;
+    border-radius: 8px;
+    background: #ea8604;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .card3 {
+    background: white;
+    box-shadow: 0 4rem 6rem $shadow-color;
+    border-radius: 10rem;
+    width: 100%;
+    padding: 59rem 0 35rem;
+    overflow: hidden;
+    height: 780px;
+    //overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+
+    ::-webkit-scrollbar-thumb {
+      background: #999999;
+      border-radius: 8px;
+      background: #ea8604;
+    }
+  }
+  .card4 {
+    background: white;
+    box-shadow: 0 4rem 6rem $shadow-color;
+    border-radius: 10rem;
+    width: 100%;
+    padding: 59rem 0 35rem;
+    overflow: hidden;
+    height: 780px;
+    //overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+
+    ::-webkit-scrollbar-thumb {
+      background: #999999;
+      border-radius: 8px;
+      background: #ea8604;
+    }
+  }
+}
+.header {
+  padding: 0 50rem;
+  margin-bottom: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 32rem;
+  line-height: 1;
+}
+.header3 {
+  padding: 0 50rem;
+  margin-bottom: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title3 {
+  font-size: 32rem;
+  line-height: 1;
+}
+.word {
+  color: $font-accent;
+
+  &:first-child {
+    color: $font-dark;
+  }
+
+  & + .word:before {
+    content: " ";
+    display: inline;
+  }
+}
+
+.content {
+  overflow: auto;
+  flex-grow: 1;
+  padding-top: 0rem !important;
+  padding: 20rem 30rem;
+}
+
+@media (max-height: 700px), (min-aspect-ratio: 15/9) {
+  .card {
+    padding: 30rem 0 0;
+  }
+
+  .content {
+    padding-top: 0rem;
+    padding:15rem 30rem 15rem;
+  }
+
+  .title {
+    font-size: 26rem;
+  }
+}
+
+@media screen and (min-width: 999px) {
+
+  .card4 {
+    margin-left: 18px;
+  }
+}
+@media screen and (max-width: 999px ) and (min-width: 801px) {
+  
+  .card4 {
+    margin-left: 6px;
+  }
+}
+
+.card2{
+  .title3{
+    @media screen and (max-width:381px){
+      font-size: 14px;
+    }
+  }
+  .header3{
+    @media screen and (max-width:372px)
+  {
+  
+    padding:0px;
+    justify-content: space-around;
+  }
+  }
+}

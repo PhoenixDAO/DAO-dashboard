@@ -1,0 +1,38 @@
+.columns {
+  display: flex;
+  // flex-direction: column;
+  @media only screen and (max-width: 800px) {
+    flex-direction: column;
+    margin-left: 0;
+  }
+
+  > * + * {
+    margin-left: 30rem;
+    @media only screen and (max-width: 800px) {
+      margin-left: 0;
+      margin-top: 20px;
+    }
+  }
+}
+
+.smallColumn,
+.wideColumn {
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    flex-basis: 100%;
+
+    &:not(:first-child) {
+      margin-top: 30rem;
+    }
+  }
+}
+
+.smallColumn {
+  flex-basis: 40%;
+}
+
+.wideColumn {
+  flex-basis: 60%;
+}

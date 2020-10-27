@@ -1,0 +1,162 @@
+@import "variables.scss";
+
+.forgot {
+  color: $font-gray;
+  font-size: 16rem;
+  line-height: 19rem;
+  text-align: right;
+  cursor: pointer;
+}
+
+.buttons {
+  margin-top: 40rem;
+}
+
+.button {
+  & + .button {
+    margin-top: 30rem;
+  }
+  margin-top: 8px;
+  // height:70rem
+}
+
+.center {
+  text-align: center;
+}
+
+.textButton {
+  font-size: 18rem;
+  margin-top: 36rem;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+.loginImage{
+ height: 360px;
+ width: 295px;
+}
+.welcomeImage{
+  height: 100px;
+  width: 250px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.scanQRText{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 27px;
+  text-align: center;
+  margin-bottom: 20px;
+  
+  color: #616161;
+  }
+.numioLogo{
+    width: 127px;
+    height: 25px;
+    margin-left: 3px;
+  }
+
+.image{
+  width: 127px;
+  height: 25px;
+}
+.QRCode{
+  background-color: #F9F9F9;
+  padding: 20px;
+ 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+}
+.qr{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+
+@media screen and (max-width:600px )
+{
+  .loginImage{
+    height: 115px;
+  }
+  .layout{
+    height: auto !important ;
+    width: 84% !important;
+  }
+  .welcomeImage{
+    width:150px !important;
+    height: 50px;
+  }
+  .scanQRText{
+    margin-bottom: 7px;
+  }
+  
+  .QRimage{
+    width: 100px !important;
+    height: 100px !important;
+  }
+ .QRCode{
+   padding: 18px;
+ }
+}
+.layout{
+  height: auto;
+  width: 56%;
+}
+@media screen and (max-width:1186px ) and (min-width:770px)
+{
+  .loginImage{
+    height: 312px;
+    width: 280px;
+
+  }
+  .layout{
+    height: auto !important ;
+    width: 80% !important;
+  }
+}
+@media screen and  (max-width:769px) and (min-width:600px)
+{
+  .loginImage{
+    height: 286px;
+    width: 235px;
+
+  }
+  .layout{
+    height: auto !important ;
+    width: 90% !important;
+  }
+  .welcomeImage{
+    width:200px !important;
+    margin-bottom: 14px !important;
+  }
+  .QRCode{
+    padding:14px;
+  }
+  
+}
+@media screen and (max-width:383px )
+{
+  .image{
+    width: 100px;
+    height: 100%;
+}
+.QRCode{
+  margin-top: 0px;
+}
+.scanQRText{
+  margin-bottom: 7px;
+  font-size: 13px;
+}
+.QRCode
+  {
+    margin-top: 0px;
+  }
+}

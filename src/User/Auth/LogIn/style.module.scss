@@ -1,0 +1,95 @@
+@import "variables.scss";
+
+.forgot {
+  color: $font-gray;
+  font-size: 16rem;
+  line-height: 19rem;
+  text-align: right;
+  cursor: pointer;
+}
+
+.buttons {
+  margin-top: 40rem;
+}
+
+.button {
+  & + .button {
+    margin-top: 30rem;
+  }
+  margin-top: 8px;
+  // height:70rem
+}
+
+.center {
+  text-align: center;
+}
+
+.textButton {
+  font-size: 18rem;
+  margin-top: 36rem;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+.loginImage{
+ height: 360px;
+ width: 250px;
+}
+.welcomeImage{
+  height: 100px;
+  width: 250px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+@media screen and (max-width:600px )
+{
+  .loginImage{
+    height: 137px;
+  }
+  .layout{
+    height: auto !important ;
+    width: 84% !important;
+  }
+  .welcomeImage{
+    width:150px !important;
+    height: 50px;
+  }
+}
+.layout{
+  height: auto;
+  width: 56%;
+}
+@media screen and (max-width:1186px ) and (min-width:770px)
+{
+  .loginImage{
+   
+    width: 273px;
+    height: 312px;
+  
+  }
+  .layout{
+    height: auto !important ;
+    width: 80% !important;
+  }
+}
+@media screen and  (max-width:769px) and (min-width:600px)
+{
+  .loginImage{
+    height: 286px;
+    width: 185px;
+
+  }
+  .layout{
+    height: auto !important ;
+    width: 90% !important;
+  }
+  .welcomeImage{
+    width:200px !important;
+    margin-bottom: 14px !important;
+  }
+  
+}
