@@ -14,7 +14,6 @@ import {
 export default class ContractInit {
   static init = async (loginClicked = true) => {
     try {
-      console.log("s");
       if (typeof window.ethereum !== "undefined") {
         console.log("MetaMask is installed!");
         if (!loginClicked) {
