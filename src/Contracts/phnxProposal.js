@@ -1,494 +1,566 @@
 export const PHNX_PROPOSAL_ADDRESS =
-  "0xc76Cec03222Fd8C6C2c713fE9aEa95Ac530D61f2";
-export const PHNX_PROPOSAL_ABI = [
+  "0x2c1A4C3c1bcb1eE2CCFF5eB53348CA0D028AEb6d";
+export const PHNX_PROPOSAL_ABI = 
+[
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: false,
-        internalType: "string",
-        name: "_proposalId",
-        type: "string",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "_collateralAmount",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "_proposer",
-        type: "address",
-      },
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
     ],
-    name: "CollateralDeposited",
-    type: "event",
+    "name": "AddedSubOwner",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: false,
-        internalType: "string",
-        name: "_proposalId",
-        type: "string",
+        "indexed": false,
+        "internalType": "string",
+        "name": "_proposalId",
+        "type": "string"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "_collateralAmount",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_collateralAmount",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "address",
-        name: "_proposer",
-        type: "address",
-      },
+        "indexed": false,
+        "internalType": "address",
+        "name": "_proposer",
+        "type": "address"
+      }
     ],
-    name: "ColleteralWithdrawn",
-    type: "event",
+    "name": "CollateralDeposited",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: false,
-        internalType: "string",
-        name: "_proposalId",
-        type: "string",
+        "indexed": false,
+        "internalType": "string",
+        "name": "_proposalId",
+        "type": "string"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "_completedMilestones",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_collateralAmount",
+        "type": "uint256"
       },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_proposer",
+        "type": "address"
+      }
     ],
-    name: "CompletedMilestone",
-    type: "event",
+    "name": "ColleteralWithdrawn",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: false,
-        internalType: "string",
-        name: "_proposalId",
-        type: "string",
+        "indexed": false,
+        "internalType": "string",
+        "name": "_proposalId",
+        "type": "string"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "_amountReleased",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "_admin",
-        type: "address",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_completedMilestones",
+        "type": "uint256"
+      }
     ],
-    name: "FundsReleased",
-    type: "event",
+    "name": "CompletedMilestone",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "address",
-        name: "previousOwner",
-        type: "address",
+        "indexed": false,
+        "internalType": "string",
+        "name": "_proposalId",
+        "type": "string"
       },
       {
-        indexed: true,
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_amountReleased",
+        "type": "uint256"
       },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_admin",
+        "type": "address"
+      }
     ],
-    name: "OwnershipTransferred",
-    type: "event",
+    "name": "FundsReleased",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: false,
-        internalType: "address",
-        name: "account",
-        type: "address",
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
       },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
     ],
-    name: "Paused",
-    type: "event",
+    "name": "OwnershipTransferred",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: false,
-        internalType: "string",
-        name: "_proposalId",
-        type: "string",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "_previousStatus",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "_newStatus",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
     ],
-    name: "ProposalStatusUpdated",
-    type: "event",
+    "name": "Paused",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "fundsRequested",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "string",
+        "name": "_proposalId",
+        "type": "string"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "initiationTimestamp",
-        type: "uint256",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_previousStatus",
+        "type": "uint256"
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "completionTimestamp",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "colletralAmount",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "totalMilestones",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "status",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "totalVotes",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "proposer",
-        type: "address",
-      },
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_newStatus",
+        "type": "uint256"
+      }
     ],
-    name: "ProposalSubmitted",
-    type: "event",
+    "name": "ProposalStatusUpdated",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: false,
-        internalType: "address",
-        name: "account",
-        type: "address",
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "fundsRequested",
+        "type": "uint256"
       },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "initiationTimestamp",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "completionTimestamp",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "colletralAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "totalMilestones",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "status",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "totalVotes",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "proposer",
+        "type": "address"
+      }
     ],
-    name: "Unpaused",
-    type: "event",
+    "name": "ProposalSubmitted",
+    "type": "event"
   },
   {
-    inputs: [],
-    name: "collateralAmount",
-    outputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "name": "RemovedSubOwner",
+    "type": "event"
   },
   {
-    inputs: [],
-    name: "getBaseInterest",
-    outputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "name": "Unpaused",
+    "type": "event"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "_phoenixContractAddress",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_phnxStakingContractAddress",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
     ],
-    name: "initialize",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "addOwner",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [],
+    "name": "collateralAmount",
+    "outputs": [
       {
-        internalType: "string",
-        name: "_proposalId",
-        type: "string",
-      },
-      {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    name: "issueFunds",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "owner",
-    outputs: [
+    "inputs": [],
+    "name": "getBaseInterest",
+    "outputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "pause",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "paused",
-    outputs: [
+    "inputs": [
       {
-        internalType: "bool",
-        name: "",
-        type: "bool",
+        "internalType": "address",
+        "name": "_phoenixContractAddress",
+        "type": "address"
       },
+      {
+        "internalType": "address",
+        "name": "_phnxStakingContractAddress",
+        "type": "address"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "phnxContractAddress",
-    outputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "phnxStakingContractAddress",
-    outputs: [
+    "name": "isOwner",
+    "outputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "string",
-        name: "",
-        type: "string",
+        "internalType": "string",
+        "name": "_proposalId",
+        "type": "string"
       },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
     ],
-    name: "proposalList",
-    outputs: [
+    "name": "issueFunds",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "fundsRequested",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "initiationTimestamp",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "completionTimestamp",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "colletralAmount",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "totalMilestones",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "completedMilestones",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "status",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "totalVotes",
-        type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "proposer",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "renounceOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "inputs": [],
+    "name": "pause",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [],
+    "name": "paused",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "fundsRequested",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "endTimestamp",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "colletralAmount",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "totalMilestones",
-        type: "uint256",
-      },
-      {
-        internalType: "string",
-        name: "_proposalId",
-        type: "string",
-      },
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
     ],
-    name: "submitProposal",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [],
+    "name": "phnxContractAddress",
+    "outputs": [
       {
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    name: "transferOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "unPause",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
+    "inputs": [],
+    "name": "phnxStakingContractAddress",
+    "outputs": [
       {
-        internalType: "string",
-        name: "_proposalId",
-        type: "string",
-      },
-      {
-        internalType: "uint256",
-        name: "_status",
-        type: "uint256",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    name: "updateProposalStatus",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "string",
-        name: "_proposalId",
-        type: "string",
-      },
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
     ],
-    name: "withdrawCollateral",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "proposalList",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "fundsRequested",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "initiationTimestamp",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "completionTimestamp",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "colletralAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalMilestones",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "completedMilestones",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "status",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalVotes",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "proposer",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
-];
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_subOwner",
+        "type": "address"
+      }
+    ],
+    "name": "removeOwner",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "fundsRequested",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "endTimestamp",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "colletralAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalMilestones",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_proposalId",
+        "type": "string"
+      }
+    ],
+    "name": "submitProposal",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "unPause",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_proposalId",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_status",
+        "type": "uint256"
+      }
+    ],
+    "name": "updateProposalStatus",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_proposalId",
+        "type": "string"
+      }
+    ],
+    "name": "withdrawCollateral",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

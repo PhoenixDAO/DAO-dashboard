@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) =>
       },
       "& .MuiDialogContentText-root": {
         fontSize: "12px",
-        color: "black"
+        color: "black",
       },
       "& .MuiDialogTitle-root": {
         flex: "0 0 auto",
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) =>
       minWidth: "100px",
     },
     description: {
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down("sm")]: {
         width: "220px",
         "& .MuiInputBase-root": {
           fontSize: "15px",
@@ -79,13 +79,12 @@ const useStyles = makeStyles((theme) =>
           fontSize: "15px",
           color: "#EA8604",
           width: "max-content",
-
         },
         "& .MuiFormHelperText-root": {
           fontSize: "5px",
         },
       },
-      [theme.breakpoints.up('sm')]: {
+      [theme.breakpoints.up("sm")]: {
         width: "420px",
 
         "& .MuiInputBase-root": {
@@ -96,7 +95,6 @@ const useStyles = makeStyles((theme) =>
         "& .MuiFormLabel-root": {
           fontSize: "15px",
           color: "#EA8604",
-
         },
         "& .MuiFormHelperText-root": {
           fontSize: "5px",
@@ -106,18 +104,16 @@ const useStyles = makeStyles((theme) =>
         fontSize: "16px",
 
         marginBottom: "10px",
-
       },
       "& .MuiFormLabel-root": {
         fontSize: "16px",
         color: "#EA8604",
         width: "max-content",
-
       },
       "& .MuiFormHelperText-root": {
         fontSize: "10px",
       },
-    }
+    },
   })
 );
 
@@ -144,14 +140,25 @@ const LightTooltip = withStyles((theme: Theme) => ({
 
 const changeFormat = (date: any) => {
   date = new Date(date);
-  return `${new Date(date.getTime()).getDate()}/${new Date(date.getTime()).getMonth() + 1
-    }/${new Date(date.getTime()).getFullYear()} `;
+  return `${new Date(date.getTime()).getDate()}/${
+    new Date(date.getTime()).getMonth() + 1
+  }/${new Date(date.getTime()).getFullYear()} `;
 };
 const ProposalModal = (props: any) => {
   const [myLoading1, setMyLoading1] = useState(false);
   const [myLoading2, setMyLoading2] = useState(false);
   const [disable, setDisable] = useState(false);
   const [metaMaskRejectError, setMetaMaskRejectError] = useState(false);
+  const [checkNetwork, setCheckNetwork] = useState(false);
+
+  const checkAdmin = async (address: any) => {
+    let value = await (await ContractInit.phoenixProposalContract()).methods
+      .isOwner(address)
+      .call();
+    console.log("network in checkAdmin");
+    return value;
+  };
+
   const changeStatusOfProposal = async (
     id: any,
     index: any,
@@ -160,57 +167,87 @@ const ProposalModal = (props: any) => {
     close: any
   ) => {
     try {
-      console.log("Checking ", props.proposalUserNumioAddress);
-      if (status == "UpVote") {
-        setMyLoading1(true);
+      let network = await ContractInit.init();
+      console.log("network  ", network);
+      if (network.network != "rinkeby") {
+        // setCheckNetwork(true);
+        console.log("IN IF 1");
+        //checkVar = true;
+        props.openSnackbar("Netowrk must be Rinkbey", "error");
       } else {
-        setMyLoading2(true);
-      }
-      setDisable(true);
-      let temp: any = await ContractInit.init();
-      console.log("temp 2", temp);
-      // blockChainFunction(props._id, 1, temp.address);
-      if (status == "UpVote") {
-        // await blockChainFunction(props._id, 1, temp.address);
-        const get = await axios.put(
-          `${URL}${Proposal}${id}`,
-          {
-            status: status,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${props.user.token}`,
-            },
-          }
-        );
-        props.openSnackbar("Proposal successfully approved !", "success");
-      } else {
-        // await blockChainFunction(props._id, 5, temp.address);
-        if (metaMaskRejectError == false) {
-          const get = await axios.put(
-            `${URL}${Proposal}${id}`,
-            {
-              status: status,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${props.user.token}`,
-              },
-            }
-          );
+        const checkingAdmin = await checkAdmin(network.address);
+        console.log("network admin", checkingAdmin);
+        console.log("network", network.network);
+
+        if (checkingAdmin == false) {
+          console.log("IN IF 2 ADMIN");
+          props.openSnackbar("User is not the admin", "error");
         }
 
+        // console.log("Checking ", props.proposalUserNumioAddress);
+        //props.openSnackbar("hello", "success");
+        else {
+          console.log("IN ELSE");
+          if (status == "UpVote") {
+            setMyLoading1(true);
+          } else {
+            setMyLoading2(true);
+          }
+          setDisable(true);
+          let temp: any = await ContractInit.init();
+          console.log("temp 2", temp);
+
+          if (status == "UpVote") {
+            await blockChainFunction(props._id, 1, temp.address);
+            const get = await axios.put(
+              `${URL}${Proposal}${id}`,
+              {
+                status: status,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${props.user.token}`,
+                },
+              }
+            );
+            props.openSnackbar("Proposal successfully accepted !", "success");
+          } else {
+            await blockChainFunction(props._id, 5, temp.address);
+            if (metaMaskRejectError == false) {
+              const get = await axios.put(
+                `${URL}${Proposal}${id}`,
+                {
+                  status: status,
+                },
+                {
+                  headers: {
+                    Authorization: `Bearer ${props.user.token}`,
+                  },
+                }
+              );
+            }
+
+            setMyLoading1(false);
+            setMyLoading2(false);
+            props.openSnackbar("Proposal successfully rejected !", "success");
+          }
+          resetData();
+          props.close();
+        }
+      }
+    } catch (err) {
+      console.log("IN IF CATCH");
+      if (checkNetwork) {
+        console.log("Network 2 ///", checkNetwork);
+        console.log("error");
+        props.openSnackbar("Network must be Rinkbey", "error");
+      } else {
+        props.openSnackbar("Request failed", "error");
+        console.log("Error", err);
         setMyLoading1(false);
         setMyLoading2(false);
-        props.openSnackbar("Proposal successfully rejected !", "success");
+        props.close();
       }
-      resetData();
-      props.close();
-    } catch (err) {
-      props.openSnackbar("An error occured", "error")
-      setMyLoading1(false);
-      setMyLoading2(false);
-      props.close();
     }
   };
   const blockChainFunction = async (id: any, status: any, fromAccount: any) => {
@@ -266,7 +303,7 @@ const ProposalModal = (props: any) => {
           });
           setMilestones(result);
         });
-    } catch (err) { }
+    } catch (err) {}
   };
   const [testState, setTestState]: any = useState([]);
   let statusUpVote = "UpVote";
@@ -432,20 +469,18 @@ const ProposalModal = (props: any) => {
               <span>{changeFormat(props.createdAt)}</span>
             </div>
             <form className={classes.description} noValidate autoComplete="off">
-
-          <TextField
-            id="outlined-multiline-static"
-            label="Project Description"
-            multiline
-            rows={3}
-            defaultValue={props.description}
-            InputProps={{
-              readOnly: true,
-            }}
-            variant="outlined"
-          />
-
-        </form>
+              <TextField
+                id="outlined-multiline-static"
+                label="Project Description"
+                multiline
+                rows={3}
+                defaultValue={props.description}
+                InputProps={{
+                  readOnly: true,
+                }}
+                variant="outlined"
+              />
+            </form>
             <div className={style.modalSteps}>
               <div
                 style={{

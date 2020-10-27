@@ -7,7 +7,7 @@ import AddIcon from "@material-ui/icons/AddCircleOutline";
 import axios from "axios";
 import { connect } from "react-redux";
 import Web3 from "web3";
-import { URL, Proposal, DeleteProposal,createTransaction } from "../../const";
+import { URL, Proposal, DeleteProposal, createTransaction } from "../../const";
 import ContractInit from "../../config/contractsInit";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
@@ -27,18 +27,18 @@ import {
 import TextField from "@material-ui/core/TextField";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
-import { TransitionProps } from '@material-ui/core/transitions';
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
+import { TransitionProps } from "@material-ui/core/transitions";
 // import ContractInit from "../config/contractsInit"
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
-  ref: React.Ref<unknown>,
+  ref: React.Ref<unknown>
 ) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -206,11 +206,11 @@ const useStyles = makeStyles((theme) =>
       padding: "0px",
       textAlign: "right",
     },
-    dialogueText:{
-      "& .MuiTypography-h6":{
+    dialogueText: {
+      "& .MuiTypography-h6": {
         fontSize: "16px",
       },
-      "& .MuiDialogContentText-root" : {
+      "& .MuiDialogContentText-root": {
         fontSize: "12px",
       },
       "& .MuiDialogTitle-root": {
@@ -219,32 +219,31 @@ const useStyles = makeStyles((theme) =>
         padding: "12px 24px 8px 24px",
         backgroundColor: "#EA8604",
         color: "#FFFFFF",
-    },
-    "& .MuiDialogActions-root": {
-      flex: "0 0 auto",
-    display: "flex",
-    padding:"8px 0 14px 0",
-    alignItems: "center",
-    justifyContent: "space-around",
-  }
-    },
-    dialogueButton:{
-        border: "1px solid",
-        cursor: "pointer",
-        height: "32px",
+      },
+      "& .MuiDialogActions-root": {
+        flex: "0 0 auto",
         display: "flex",
-        padding: "0 20rem",
-        position: "relative",
-        fontSize: "12px",
-        transition: "0.2s",
+        padding: "8px 0 14px 0",
         alignItems: "center",
-        fontWeight: "bold",
-        userWelect: "none",
-        borderRadius: "5rem",
-        justifyContent: "center",
-        minWidth:"100px"
-  }
-
+        justifyContent: "space-around",
+      },
+    },
+    dialogueButton: {
+      border: "1px solid",
+      cursor: "pointer",
+      height: "32px",
+      display: "flex",
+      padding: "0 20rem",
+      position: "relative",
+      fontSize: "12px",
+      transition: "0.2s",
+      alignItems: "center",
+      fontWeight: "bold",
+      userWelect: "none",
+      borderRadius: "5rem",
+      justifyContent: "center",
+      minWidth: "100px",
+    },
   })
 );
 
@@ -301,26 +300,25 @@ const EditModal = (props: any) => {
   const [disableInputs, setDisableInputs] = useState(false);
   const [valueSmaller, setValueSmaller] = useState(false);
   const [ethereumNetworkError, setEthereumNetworkError] = useState(false);
-  const [deleteProposalId,setDeleteProposalId]=useState("");
-  
-  const [openDialogueState,setOpenDialogueState]=useState(false);
+  const [deleteProposalId, setDeleteProposalId] = useState("");
 
-const openDialogue = (e:any) =>{
-  e.preventDefault();
-  setOpenDialogueState(true)
-}
-  const handleDialogue = (result:boolean)=>{
+  const [openDialogueState, setOpenDialogueState] = useState(false);
 
+  const openDialogue = (e: any) => {
+    e.preventDefault();
+    setOpenDialogueState(true);
+  };
+  const handleDialogue = (result: boolean) => {
     setOpenDialogueState(false);
-    if(result){
+    if (result) {
       handleSubmit();
     }
-    
-  }
+  };
 
   function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="standard" {...props} />;
   }
+
   const [j, setJ] = useState(0);
 
   const classes = useStyles();
@@ -500,17 +498,22 @@ const openDialogue = (e:any) =>{
         // hash of tx
         console.log("tranasction hash", hash);
       })
-      .on("confirmation", async function (confirmationNumber: any, receipt: any) {
+      .on("confirmation", async function (
+        confirmationNumber: any,
+        receipt: any
+      ) {
         if (confirmationNumber === 1) {
-          console.log("confirmed now, console receipt",receipt.transactionHash);
-          let body={
-            TxHash:receipt.transactionHash,
+          console.log(
+            "confirmed now, console receipt",
+            receipt.transactionHash
+          );
+          let body = {
+            TxHash: receipt.transactionHash,
             type: "Proposal",
             numioAddress: props.user.numioAddress,
-            Id: id
-          }
-          const get = await axios.post(`${URL}${createTransaction}`, body,
-          {
+            Id: id,
+          };
+          const get = await axios.post(`${URL}${createTransaction}`, body, {
             headers: {
               Authorization: `Bearer ${props.user.token}`,
             },
@@ -518,7 +521,7 @@ const openDialogue = (e:any) =>{
         }
       })
       .on("error", async function (error: any) {
-        console.log("in error block")
+        console.log("in error block", error);
         const get = await axios.delete(`${URL}${DeleteProposal}${id}`, {
           data: { numioAddress: props.user.numioAddress },
           headers: {
@@ -527,10 +530,7 @@ const openDialogue = (e:any) =>{
         });
         setDeleteProposalId("");
         setShowLoader(false);
-        props.openSnackbar(
-          "Ops! Something went wrong",
-          "error"
-        );
+        props.openSnackbar("Ops! Something went wrong", "error");
       });
   };
 
@@ -543,7 +543,7 @@ const openDialogue = (e:any) =>{
         setFieldRequired(false);
       }
       let temp: any = await ContractInit.init();
-    console.log("123", temp.network);
+      console.log("123", temp.network);
       // const networkResult: any = props.network;
       // console.log("111111111111111 ", networkResult);
       if (temp.network != "rinkeby") {
@@ -618,7 +618,7 @@ const openDialogue = (e:any) =>{
       //     Authorization: `Bearer ${props.user.token}`,
       //   },
       // });
-      setDeleteProposalId("")
+      setDeleteProposalId("");
       if (e.response && e.response.data && e.response.data.result) {
         console.log("Failed", e.response.data.result);
         props.openSnackbar(e.response.data.result.message, "error");
@@ -630,12 +630,16 @@ const openDialogue = (e:any) =>{
   };
 
   const _onChange = (value: any, name: any) => {
+    console.log("check now", value);
     if (
       name == "experiencedYear" ||
       name == "duration" ||
       name == "collateral" ||
       name == "budget"
     ) {
+      var reg = new RegExp("^[0-9]+$");
+      let test = reg.test(value);
+      if (!test) return;
       if (value < 0 || value.toString().length > 6) {
         return;
       }
@@ -662,12 +666,16 @@ const openDialogue = (e:any) =>{
   };
 
   const _onChangeMilestoneValue = (value: any, name: any) => {
+    console.log("check value now", value);
     if (
       name == "milestoneCost" ||
       name == "estimatedDays" ||
       name == "numberOfDevelopers"
     ) {
-      if (value < 0 || value.toString().length > 6) {
+      var reg = new RegExp("^[0-9]+$");
+      let test = reg.test(value);
+      if (!test) return;
+      if (value < -1 || value.toString().length > 6) {
         return;
       }
     }
@@ -704,7 +712,7 @@ const openDialogue = (e:any) =>{
             margin: "10px 0px",
             display: "flex",
             flexDirection: "row",
-            justifyContent: "space-between",  
+            justifyContent: "space-between",
           }}
         >
           <LightTooltip title="First name" placement="bottom" arrow>
@@ -832,7 +840,11 @@ const openDialogue = (e:any) =>{
             className={classes.margin}
             variant="outlined"
           >
-            <LightTooltip title="Github repository link for the project" placement="bottom" arrow>
+            <LightTooltip
+              title="Github repository link for the project"
+              placement="bottom"
+              arrow
+            >
               <TextField
                 error={
                   (state.githubLink.length == 0 && fieldRequired) ||
@@ -876,7 +888,11 @@ const openDialogue = (e:any) =>{
             className={classes.margin}
             variant="outlined"
           >
-            <LightTooltip title="Why do you propose to use DAO funds" placement="bottom" arrow>
+            <LightTooltip
+              title="Why do you propose to use DAO funds"
+              placement="bottom"
+              arrow
+            >
               <TextField
                 error={state.purpose.length == 0 && fieldRequired}
                 label="Purpose to use Phoenix-Dao funds"
@@ -908,7 +924,11 @@ const openDialogue = (e:any) =>{
             className={classes.margin}
             variant="outlined"
           >
-            <LightTooltip title="Describe in detail what the funds will be used for" placement="bottom" arrow>
+            <LightTooltip
+              title="Describe in detail what the funds will be used for"
+              placement="bottom"
+              arrow
+            >
               <TextField
                 multiline
                 rows={1}
@@ -942,7 +962,11 @@ const openDialogue = (e:any) =>{
             className={classes.margin}
             variant="outlined"
           >
-            <LightTooltip title="Why is your proposal important for the PhoenixDAO ecosystem?" placement="bottom" arrow>
+            <LightTooltip
+              title="Why is your proposal important for the PhoenixDAO ecosystem?"
+              placement="bottom"
+              arrow
+            >
               <TextField
                 multiline
                 rows={1}
@@ -970,7 +994,11 @@ const openDialogue = (e:any) =>{
             justifyContent: "space-between",
           }}
         >
-          <LightTooltip title="How many years of experience do you have in this field?" placement="bottom" arrow>
+          <LightTooltip
+            title="How many years of experience do you have in this field?"
+            placement="bottom"
+            arrow
+          >
             <TextField
               error={
                 (state.experiencedYear.length == 0 && fieldRequired) ||
@@ -1000,7 +1028,11 @@ const openDialogue = (e:any) =>{
             />
           </LightTooltip>
 
-          <LightTooltip title="Budget required for your proposal" placement="bottom" arrow>
+          <LightTooltip
+            title="Budget required for your proposal"
+            placement="bottom"
+            arrow
+          >
             <TextField
               error={
                 (state.budget.length == 0 && fieldRequired) ||
@@ -1037,7 +1069,11 @@ const openDialogue = (e:any) =>{
             justifyContent: "space-between",
           }}
         >
-          <LightTooltip title="The amount of PHEONIX required to submit the proposal" placement="bottom" arrow>
+          <LightTooltip
+            title="The amount of PHEONIX required to submit the proposal"
+            placement="bottom"
+            arrow
+          >
             <TextField
               error={
                 (state.collateral.length == 0 && fieldRequired) ||
@@ -1049,7 +1085,7 @@ const openDialogue = (e:any) =>{
                   ? false
                   : "Collateral"
               }
-              style={{width:"100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => _onChange(e.target.value, "collateral")}
               className={classes.submitText}
               type="number"
@@ -1108,7 +1144,11 @@ const openDialogue = (e:any) =>{
             className={classes.margin}
             variant="outlined"
           >
-            <LightTooltip title="Briefly describe your proposal" placement="bottom" arrow>
+            <LightTooltip
+              title="Briefly describe your proposal"
+              placement="bottom"
+              arrow
+            >
               <TextField
                 multiline
                 rows={2}
@@ -1142,7 +1182,11 @@ const openDialogue = (e:any) =>{
             className={classes.margin}
             variant="outlined"
           >
-            <LightTooltip title="Describe your experience and why you are the best candidate to submit this proposal" placement="bottom" arrow>
+            <LightTooltip
+              title="Describe your experience and why you are the best candidate to submit this proposal"
+              placement="bottom"
+              arrow
+            >
               <TextField
                 multiline
                 rows={2}
@@ -1200,7 +1244,11 @@ const openDialogue = (e:any) =>{
             />
           </LightTooltip>
 
-          <LightTooltip title="Estimated days required for completion of milestone" placement="bottom" arrow>
+          <LightTooltip
+            title="Estimated days required for completion of milestone"
+            placement="bottom"
+            arrow
+          >
             <TextField
               id="outlined-basic"
               style={{ width: "200px" }}
@@ -1239,7 +1287,11 @@ const openDialogue = (e:any) =>{
             justifyContent: "space-between",
           }}
         >
-          <LightTooltip title="Number of developers working on milestone" placement="bottom" arrow>
+          <LightTooltip
+            title="Number of developers working on milestone"
+            placement="bottom"
+            arrow
+          >
             <TextField
               id="outlined-basic"
               style={{ width: "200px" }}
@@ -1314,7 +1366,11 @@ const openDialogue = (e:any) =>{
             className={classes.margin}
             variant="outlined"
           >
-            <LightTooltip title="Briefly describe the milestone" placement="bottom" arrow>
+            <LightTooltip
+              title="Briefly describe the milestone"
+              placement="bottom"
+              arrow
+            >
               <TextField
                 multiline
                 rows={4}
@@ -1392,116 +1448,127 @@ const openDialogue = (e:any) =>{
 
   return (
     <>
-    <Dialog
+      <Dialog
         open={openDialogueState}
         TransitionComponent={Transition}
         keepMounted
-        onClose={()=>handleDialogue(false)}
+        onClose={() => handleDialogue(false)}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
         className={classes.dialogueText}
       >
-        <DialogTitle className={classes.dialogueText}id="alert-dialog-slide-title">{"Are you sure?"}</DialogTitle>
+        <DialogTitle
+          className={classes.dialogueText}
+          id="alert-dialog-slide-title"
+        >
+          {"Are you sure?"}
+        </DialogTitle>
         <DialogContent className={classes.dialogueText}>
-          <DialogContentText className={classes.dialogueText} id="alert-dialog-slide-description">
+          <DialogContentText
+            className={classes.dialogueText}
+            id="alert-dialog-slide-description"
+          >
             Submitting the proposal will sent the approval request to admin
           </DialogContentText>
         </DialogContent>
         <DialogActions className={classes.dialogueText}>
-        
-          <Button className={classes.dialogueButton} onClick={()=>handleDialogue(false)} color="primary">
+          <Button
+            className={classes.dialogueButton}
+            onClick={() => handleDialogue(false)}
+            color="primary"
+          >
             Disagree
           </Button>
-          <Button className={classes.dialogueButton} onClick={()=>handleDialogue(true)} color="primary">
+          <Button
+            className={classes.dialogueButton}
+            onClick={() => handleDialogue(true)}
+            color="primary"
+          >
             Agree
           </Button>
         </DialogActions>
       </Dialog>
-    <div>
-
       <div>
-        
-        <Modal
-          title="Submit a Proposal"
-          className={style.modal}
-          activeSteps={stepperStep}
-          showStepper={true}
-          actions={
-            <div>
-              
-              <div style={{ display: "block" }}>
-                {j == 2 ? (
-                  <>
-                    <Button
-                      disabled={disableInputs}
-                      primary
-                      style={{ marginTop: "10px" }}
-                      onClick={AddMilestone}
-                    >
-                      Add Milestone
-                    </Button>
-                    <Button
-                      disabled={disableInputs}
-                      style={{ marginTop: "10px" }}
-                      onClick={handleMilestoneBack}
-                    >
-                      Back
-                    </Button>
-                  </>
-                ) : (
-                  <>
-                    {j < 2 ? (
+        <div>
+          <Modal
+            title="Submit a Proposal"
+            className={style.modal}
+            activeSteps={stepperStep}
+            showStepper={true}
+            actions={
+              <div>
+                <div style={{ display: "block" }}>
+                  {j == 2 ? (
+                    <>
                       <Button
                         disabled={disableInputs}
                         primary
-                        onClick={(e: any) => handleClickNext(e)}
+                        style={{ marginTop: "10px" }}
+                        onClick={AddMilestone}
                       >
-                        Next
+                        Add Milestone
                       </Button>
-                    ) : (
                       <Button
-                        primary
-                        // disabled={showLoader}
-                        onClick={(e:any)=> 
-                          !showLoader?openDialogue(e):null
-                          // handleSubmit()
-                        }
+                        disabled={disableInputs}
+                        style={{ marginTop: "10px" }}
+                        onClick={handleMilestoneBack}
                       >
-                        {showLoader ? (
-                          <CircularProgress size={12} />
-                        ) : (
-                          <p>Submit</p>
-                        )}
+                        Back
                       </Button>
-                    )}
-                    <Button
-                      disabled={disableInputs}
-                      style={{ marginTop: "10px" }}
-                      onClick={(e: any) => handleClickBack(e)}
-                    >
-                      Back
-                    </Button>
-                    
-                  </>
-                )}
+                    </>
+                  ) : (
+                    <>
+                      {j < 2 ? (
+                        <Button
+                          disabled={disableInputs}
+                          primary
+                          onClick={(e: any) => handleClickNext(e)}
+                        >
+                          Next
+                        </Button>
+                      ) : (
+                        <Button
+                          primary
+                          // disabled={showLoader}
+                          onClick={
+                            (e: any) => (!showLoader ? openDialogue(e) : null)
+                            // handleSubmit()
+                          }
+                        >
+                          {showLoader ? (
+                            <CircularProgress size={12} />
+                          ) : (
+                            <p>Submit</p>
+                          )}
+                        </Button>
+                      )}
+                      <Button
+                        disabled={disableInputs}
+                        style={{ marginTop: "10px" }}
+                        onClick={(e: any) => handleClickBack(e)}
+                      >
+                        Back
+                      </Button>
+                    </>
+                  )}
+                </div>
               </div>
-            </div>
-          }
-          close={props.close}
-        >
-          {addMilestones ? (
-            MilestonesDescription()
-          ) : (
-            <>
-              {j == 0 && ProjectName()}
-              {j == 1 && ProjectDetails()}
-              {j == 2 && MilestonesDescription()}
-              {j == 3 && projectMilestones()}
-            </>
-          )}
-        </Modal>
+            }
+            close={props.close}
+          >
+            {addMilestones ? (
+              MilestonesDescription()
+            ) : (
+              <>
+                {j == 0 && ProjectName()}
+                {j == 1 && ProjectDetails()}
+                {j == 2 && MilestonesDescription()}
+                {j == 3 && projectMilestones()}
+              </>
+            )}
+          </Modal>
+        </div>
       </div>
-    </div>
     </>
   );
 };
