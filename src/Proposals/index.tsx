@@ -898,7 +898,6 @@ const Proposals = (props: any) => {
       });
     // setApprovalGranted(true);
     setMyLoader(false);
-    // return result;
   };
 
   const checkApproval = async () => {
