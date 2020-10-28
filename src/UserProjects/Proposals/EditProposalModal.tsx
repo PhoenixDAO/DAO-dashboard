@@ -494,7 +494,10 @@ const EditModal = (props: any) => {
       name == "collateral" ||
       name == "budget"
     ) {
-      if (value < 0 || value.toString().length > 6) {
+      var reg = new RegExp("^[0-9]+$");
+      let test = reg.test(value);
+      if (!test && value.length != 0) return;
+      if (value < -1 || value.toString().length > 6) {
         return;
       }
     }
@@ -525,7 +528,10 @@ const EditModal = (props: any) => {
       name == "estimatedDays" ||
       name == "numberOfDevelopers"
     ) {
-      if (value < 0 || value.toString().length > 6) {
+      var reg = new RegExp("^[0-9]+$");
+      let test = reg.test(value);
+      if (!test && value.length != 0) return;
+      if (value < -1 || value.toString().length > 6) {
         return;
       }
     }
@@ -561,7 +567,7 @@ const EditModal = (props: any) => {
             margin: "10px 0px",
             display: "flex",
             flexDirection: "row",
-            justifyContent: "space-between",  
+            justifyContent: "space-between",
           }}
         >
           <LightTooltip title="First name" placement="bottom" arrow>
@@ -689,7 +695,11 @@ const EditModal = (props: any) => {
             className={classes.margin}
             variant="outlined"
           >
-            <LightTooltip title="Github repository link for the project" placement="bottom" arrow>
+            <LightTooltip
+              title="Github repository link for the project"
+              placement="bottom"
+              arrow
+            >
               <TextField
                 error={
                   (state.githubLink.length == 0 && fieldRequired) ||
@@ -733,7 +743,11 @@ const EditModal = (props: any) => {
             className={classes.margin}
             variant="outlined"
           >
-            <LightTooltip title="Why do you propose to use DAO funds" placement="bottom" arrow>
+            <LightTooltip
+              title="Why do you propose to use DAO funds"
+              placement="bottom"
+              arrow
+            >
               <TextField
                 error={state.purpose.length == 0 && fieldRequired}
                 label="Purpose to use Phoenix-Dao funds"
@@ -765,7 +779,11 @@ const EditModal = (props: any) => {
             className={classes.margin}
             variant="outlined"
           >
-            <LightTooltip title="Describe in detail what the funds will be used for" placement="bottom" arrow>
+            <LightTooltip
+              title="Describe in detail what the funds will be used for"
+              placement="bottom"
+              arrow
+            >
               <TextField
                 multiline
                 rows={1}
@@ -799,7 +817,11 @@ const EditModal = (props: any) => {
             className={classes.margin}
             variant="outlined"
           >
-            <LightTooltip title="Why is your proposal important for the PhoenixDAO ecosystem?" placement="bottom" arrow>
+            <LightTooltip
+              title="Why is your proposal important for the PhoenixDAO ecosystem?"
+              placement="bottom"
+              arrow
+            >
               <TextField
                 multiline
                 rows={1}
@@ -827,7 +849,11 @@ const EditModal = (props: any) => {
             justifyContent: "space-between",
           }}
         >
-          <LightTooltip title="How many years of experience do you have in this field?" placement="bottom" arrow>
+          <LightTooltip
+            title="How many years of experience do you have in this field?"
+            placement="bottom"
+            arrow
+          >
             <TextField
               error={
                 (state.experiencedYear.length == 0 && fieldRequired) ||
@@ -842,7 +868,6 @@ const EditModal = (props: any) => {
               }
               onChange={(e) => _onChange(e.target.value, "experiencedYear")}
               className={classes.submitText}
-              type="number"
               id="outlined-error-helper-text"
               style={{ width: "200px" }}
               value={state.experiencedYear}
@@ -857,7 +882,11 @@ const EditModal = (props: any) => {
             />
           </LightTooltip>
 
-          <LightTooltip title="Budget required for your proposal" placement="bottom" arrow>
+          <LightTooltip
+            title="Budget required for your proposal"
+            placement="bottom"
+            arrow
+          >
             <TextField
               error={
                 (state.budget.length == 0 && fieldRequired) ||
@@ -872,7 +901,6 @@ const EditModal = (props: any) => {
               onChange={(e) => _onChange(e.target.value, "budget")}
               className={classes.submitText}
               style={{ width: "200px" }}
-              type="number"
               id="outlined-error-helper-text"
               value={state.budget}
               variant="outlined"
@@ -894,7 +922,11 @@ const EditModal = (props: any) => {
             justifyContent: "space-between",
           }}
         >
-          <LightTooltip title="The amount of PHEONIX required to submit the proposal" placement="bottom" arrow>
+          <LightTooltip
+            title="The amount of PHEONIX required to submit the proposal"
+            placement="bottom"
+            arrow
+          >
             <TextField
               error={
                 (state.collateral.length == 0 && fieldRequired) ||
@@ -906,10 +938,9 @@ const EditModal = (props: any) => {
                   ? false
                   : "Collateral"
               }
-              style={{width:"100%"}}
+              style={{ width: "100%" }}
               onChange={(e) => _onChange(e.target.value, "collateral")}
               className={classes.submitText}
-              type="number"
               id="outlined-error-helper-text"
               value={state.collateral}
               variant="outlined"
@@ -965,7 +996,11 @@ const EditModal = (props: any) => {
             className={classes.margin}
             variant="outlined"
           >
-            <LightTooltip title="Briefly describe your proposal" placement="bottom" arrow>
+            <LightTooltip
+              title="Briefly describe your proposal"
+              placement="bottom"
+              arrow
+            >
               <TextField
                 multiline
                 rows={2}
@@ -999,7 +1034,11 @@ const EditModal = (props: any) => {
             className={classes.margin}
             variant="outlined"
           >
-            <LightTooltip title="Describe your experience and why you are the best candidate to submit this proposal" placement="bottom" arrow>
+            <LightTooltip
+              title="Describe your experience and why you are the best candidate to submit this proposal"
+              placement="bottom"
+              arrow
+            >
               <TextField
                 multiline
                 rows={2}
@@ -1057,7 +1096,11 @@ const EditModal = (props: any) => {
             />
           </LightTooltip>
 
-          <LightTooltip title="Estimated days required for completion of milestone" placement="bottom" arrow>
+          <LightTooltip
+            title="Estimated days required for completion of milestone"
+            placement="bottom"
+            arrow
+          >
             <TextField
               id="outlined-basic"
               style={{ width: "200px" }}
@@ -1071,7 +1114,6 @@ const EditModal = (props: any) => {
                   ? false
                   : "Estimated Days"
               }
-              type="number"
               onChange={(e) =>
                 _onChangeMilestoneValue(e.target.value, "estimatedDays")
               }
@@ -1096,7 +1138,11 @@ const EditModal = (props: any) => {
             justifyContent: "space-between",
           }}
         >
-          <LightTooltip title="Number of developers working on milestone" placement="bottom" arrow>
+          <LightTooltip
+            title="Number of developers working on milestone"
+            placement="bottom"
+            arrow
+          >
             <TextField
               id="outlined-basic"
               style={{ width: "200px" }}
@@ -1112,7 +1158,6 @@ const EditModal = (props: any) => {
                   ? false
                   : "Developers Working"
               }
-              type="number"
               onChange={(e) =>
                 _onChangeMilestoneValue(e.target.value, "numberOfDevelopers")
               }
@@ -1142,7 +1187,6 @@ const EditModal = (props: any) => {
                   : "Milestone Cost"
               }
               value={milestoneDetails.milestoneCost}
-              type="number"
               onChange={(e) =>
                 _onChangeMilestoneValue(e.target.value, "milestoneCost")
               }
@@ -1171,7 +1215,11 @@ const EditModal = (props: any) => {
             className={classes.margin}
             variant="outlined"
           >
-            <LightTooltip title="Briefly describe the milestone" placement="bottom" arrow>
+            <LightTooltip
+              title="Briefly describe the milestone"
+              placement="bottom"
+              arrow
+            >
               <TextField
                 multiline
                 rows={4}
@@ -1208,10 +1256,12 @@ const EditModal = (props: any) => {
   const projectMilestones = () => {
     return (
       <>
-        {props.proposal.status=="Pending" && <div onClick={OnAddMilestone} className={classes.milestone}>
-          <AddIcon className={classes.icon} />
-          <p className={classes.txt}>Add Milestones</p>
-        </div>}
+        {props.proposal.status == "Pending" && (
+          <div onClick={OnAddMilestone} className={classes.milestone}>
+            <AddIcon className={classes.icon} />
+            <p className={classes.txt}>Add Milestones</p>
+          </div>
+        )}
         {state.milestone.length != 0 &&
           state.milestone.map((item: any, index: number) => {
             return (
@@ -1224,16 +1274,21 @@ const EditModal = (props: any) => {
                     <Typography className={classes.txt1}>
                       {item.estimatedDays} (days)
                     </Typography>
-                    {props.proposal.status=="Pending" && <> <Typography
-                      onClick={(e) => onSelectMilestone(index)}
-                      className={classes.updateTxt}
-                    >
-                      Update
-                    </Typography>
-                    <HighlightOffSharpIcon
-                      onClick={(e) => deleteMilestone(index)}
-                      className={classes.deleteTxt}
-                    /></>}
+                    {props.proposal.status == "Pending" && (
+                      <>
+                        {" "}
+                        <Typography
+                          onClick={(e) => onSelectMilestone(index)}
+                          className={classes.updateTxt}
+                        >
+                          Update
+                        </Typography>
+                        <HighlightOffSharpIcon
+                          onClick={(e) => deleteMilestone(index)}
+                          className={classes.deleteTxt}
+                        />
+                      </>
+                    )}
                   </div>
                   <div className={classes.flexRow}>
                     <Typography className={classes.descriptionTxt}>
@@ -1284,7 +1339,6 @@ const EditModal = (props: any) => {
                 : "Estimated Days"
             }
             value={milestoneDetails.estimatedDays}
-            type="number"
             onChange={(e) =>
               _onChangeMilestoneValue(e.target.value, "estimatedDays")
             }
@@ -1314,7 +1368,6 @@ const EditModal = (props: any) => {
                 : "Developers Working"
             }
             value={milestoneDetails.numberOfDevelopers}
-            type="number"
             onChange={(e) =>
               _onChangeMilestoneValue(e.target.value, "numberOfDevelopers")
             }
@@ -1332,7 +1385,6 @@ const EditModal = (props: any) => {
           <TextField
             id="outlined-basic"
             error={milestoneDetails.milestoneCost.length == 0 && fieldRequired}
-            type="number"
             label={
               fieldRequired && milestoneDetails.milestoneCost.length == 0
                 ? false
@@ -1390,7 +1442,7 @@ const EditModal = (props: any) => {
     );
   };
 
-  return ( 
+  return (
     <div>
       <div>
         <Modal
@@ -1437,19 +1489,21 @@ const EditModal = (props: any) => {
                       >
                         Update Milestone
                       </Button>
-                    ) : props.proposal.status=="Pending" && (
-                      <Button
-                        primary
-                        onClick={() => {
-                          handleSubmit();
-                        }}
-                      >
-                        {showLoader ? (
-                          <CircularProgress size={12} />
-                        ) : (
-                          <p>Update</p>
-                        )}
-                      </Button>
+                    ) : (
+                      props.proposal.status == "Pending" && (
+                        <Button
+                          primary
+                          onClick={() => {
+                            handleSubmit();
+                          }}
+                        >
+                          {showLoader ? (
+                            <CircularProgress size={12} />
+                          ) : (
+                            <p>Update</p>
+                          )}
+                        </Button>
+                      )
                     )}
                     <Button
                       disabled={disableInputs}

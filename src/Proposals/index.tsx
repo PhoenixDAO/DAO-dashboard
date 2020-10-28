@@ -797,7 +797,6 @@ const Proposals = (props: any) => {
   const [ethereumNetworkError, setEthereumNetworkError] = useState(false);
   const [metaMaskApproval, setMetaMaskApproval] = useState(false);
 
-
   const [projectModalItem, setProjectModalItem] = React.useState<
     | {
       title: string;
@@ -831,8 +830,6 @@ const Proposals = (props: any) => {
           }
         )
         .then((value) => {
-
-
           let tempDate = new Date();
           let temp: any[] = [];
           console.log("before splice", temp)
@@ -914,7 +911,7 @@ const Proposals = (props: any) => {
           // tx confirmed
           // checkApproval();
           console.log("Approval transaction sent");
-          openSnackbar('Approval granted', 'success')
+          openSnackbar("Approval granted", "success");
           setMetaMaskApproval(true);
         }
         setMetaMaskApproval(true);
@@ -948,8 +945,6 @@ const Proposals = (props: any) => {
     // return result;
   };
 
-
-
   const changeFormat = (date: any) => {
     date = new Date(date);
     return `${new Date(date.getTime()).getDate()}/${new Date(date.getTime()).getMonth() + 1
@@ -960,11 +955,23 @@ const Proposals = (props: any) => {
   };
 
   useEffect(() => {
-    getData()
-    checking()
+    getData();
+    checking();
     //checkWeb3();
     // getData();
   }, []);
+
+  const checkNetwork = async () => {
+    let temp: any = await ContractInit.init();
+    if (temp.network != "rinkeby") {
+      console.log("Network 11 false");
+      //openSnackbar('Network must br Rinkeby',)
+      return false;
+    } else {
+      console.log("Network 11 true");
+      return true;
+    }
+  };
 
   const checking = async () => {
     await checkWeb3();
@@ -976,7 +983,6 @@ const Proposals = (props: any) => {
     let temp: any = await ContractInit.init();
     console.log("123", temp.network);
 
-
     if (temp.network != "rinkeby") {
       setEthereumNetworkError(true);
       throw "Ethereum Network invalid !";
@@ -985,10 +991,10 @@ const Proposals = (props: any) => {
     }
   };
 
-  const doubleMethods = async () => {
-    await sendApproval();
-    await sendProposal();
-  };
+  // const doubleMethods = async () => {
+  //   await sendApproval();
+  //   await sendProposal();
+  // };
 
   let date = new Date();
   let styleFlag = false;
@@ -1039,18 +1045,23 @@ const Proposals = (props: any) => {
               className={classes.submitbutton}
               secondary
               //onClick={() => (metaMaskApproval ? openModal() : checkApproval())}
-              onClick={() =>
-                metaMaskApproval
+              onClick={async () =>
+                !(await checkNetwork())
+                  ? openSnackbar("Network must be Rinkbey", "error")
+                  : metaMaskApproval
                   ? openModal()
                   : openSnackbar("Metamask not approved", "error")
               }
             >
               Submit Proposal
             </Button>
+
             <Button
               secondary
-              onClick={() =>
-                metaMaskApproval
+              onClick={async () =>
+                !(await checkNetwork())
+                  ? openSnackbar("Network must be Rinkeby", "error")
+                  : metaMaskApproval
                   ? openSnackbar("Approval already granted", "success")
                   : myLoader
                     ? null
