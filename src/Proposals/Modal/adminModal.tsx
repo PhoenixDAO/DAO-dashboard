@@ -25,6 +25,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import { TransitionProps } from "@material-ui/core/transitions";
+import Web3 from "web3";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -152,11 +153,26 @@ const ProposalModal = (props: any) => {
   const [checkNetwork, setCheckNetwork] = useState(false);
 
   const checkAdmin = async (address: any) => {
-    let value = await (await ContractInit.phoenixProposalContract()).methods
+    let value = await (await ContractInit.phoenixProposalContract())?.methods
       .isOwner(address)
       .call();
     console.log("network in checkAdmin");
     return value;
+  };
+
+  const checkBalance = async (address: any) => {
+    let value = await (await ContractInit.initPhnxTokenContract())?.methods
+      .balanceOf(address)
+      .call();
+    value = Web3.utils.fromWei(value);
+    console.log("balance", value);
+    console.log("balance collateral", props.collateral);
+    //return value;
+    if (value > props.collateral) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   const changeStatusOfProposal = async (
@@ -169,6 +185,14 @@ const ProposalModal = (props: any) => {
     try {
       let network = await ContractInit.init();
       console.log("network  ", network);
+      let test = await checkBalance(props.proposalUSerNumioAddress);
+
+      console.log("Testing", test);
+      if (!test) {
+        props.openSnackbar("Insufficient amount", "error");
+        return null;
+      }
+
       if (network.network != "rinkeby") {
         // setCheckNetwork(true);
         console.log("IN IF 1");
@@ -366,6 +390,7 @@ const ProposalModal = (props: any) => {
   useEffect(() => {
     console.log("123 Address", props);
     checkAccounts();
+    checkBalance(props.proposalUSerNumioAddress);
   });
   return (
     <>

@@ -769,7 +769,6 @@ const Proposals = (props: any) => {
   const [ethereumNetworkError, setEthereumNetworkError] = useState(false);
   const [metaMaskApproval, setMetaMaskApproval] = useState(false);
 
-
   const [projectModalItem, setProjectModalItem] = React.useState<
     | {
         title: string;
@@ -803,18 +802,16 @@ const Proposals = (props: any) => {
           }
         )
         .then((value) => {
-          
-          
-          let tempDate=new Date();
-          let temp:any[]=[];
-          console.log("before splice",temp)
-          value.data.result.map((proposal:any,i:number)=>{
-            if(proposal.expirationDate > tempDate.toISOString()){
-              temp.push(value.data.result[i]);
-            }
-          })
-          console.log("after splice",temp)
-          setValue(temp);
+          let tempDate = new Date();
+          let temp: any[] = [];
+          //console.log("before splice", temp);
+          // value.data.result.map((proposal:any,i:number)=>{
+          //   if(proposal.expirationDate > tempDate.toISOString()){
+          //     temp.push(value.data.result[i]);
+          //   }
+          // })
+          console.log("after splice", value.data.result);
+          setValue(value.data.result);
           setLoading1(false);
         })
         .catch((err) => {
@@ -886,7 +883,7 @@ const Proposals = (props: any) => {
           // tx confirmed
           // checkApproval();
           console.log("Approval transaction sent");
-          openSnackbar('Approval granted', 'success')
+          openSnackbar("Approval granted", "success");
           setMetaMaskApproval(true);
         }
         setMetaMaskApproval(true);
@@ -920,8 +917,6 @@ const Proposals = (props: any) => {
     // return result;
   };
 
-
-
   const changeFormat = (date: any) => {
     date = new Date(date);
     return `${new Date(date.getTime()).getDate()}/${
@@ -933,11 +928,23 @@ const Proposals = (props: any) => {
   };
 
   useEffect(() => {
-    getData()
-    checking()
+    getData();
+    checking();
     //checkWeb3();
     // getData();
   }, []);
+
+  const checkNetwork = async () => {
+    let temp: any = await ContractInit.init();
+    if (temp.network != "rinkeby") {
+      console.log("Network 11 false");
+      //openSnackbar('Network must br Rinkeby',)
+      return false;
+    } else {
+      console.log("Network 11 true");
+      return true;
+    }
+  };
 
   const checking = async () => {
     await checkWeb3();
@@ -949,7 +956,6 @@ const Proposals = (props: any) => {
     let temp: any = await ContractInit.init();
     console.log("123", temp.network);
 
-
     if (temp.network != "rinkeby") {
       setEthereumNetworkError(true);
       throw "Ethereum Network invalid !";
@@ -958,10 +964,10 @@ const Proposals = (props: any) => {
     }
   };
 
-  const doubleMethods = async () => {
-    await sendApproval();
-    await sendProposal();
-  };
+  // const doubleMethods = async () => {
+  //   await sendApproval();
+  //   await sendProposal();
+  // };
 
   let date = new Date();
   let styleFlag = false;
@@ -1009,18 +1015,23 @@ const Proposals = (props: any) => {
             <Button
               secondary
               //onClick={() => (metaMaskApproval ? openModal() : checkApproval())}
-              onClick={() =>
-                metaMaskApproval
+              onClick={async () =>
+                !(await checkNetwork())
+                  ? openSnackbar("Network must be Rinkbey", "error")
+                  : metaMaskApproval
                   ? openModal()
                   : openSnackbar("Metamask not approved", "error")
               }
             >
               Submit Proposal
             </Button>
+
             <Button
               secondary
-              onClick={() =>
-                metaMaskApproval
+              onClick={async () =>
+                !(await checkNetwork())
+                  ? openSnackbar("Network must be Rinkeby", "error")
+                  : metaMaskApproval
                   ? openSnackbar("Approval already granted", "success")
                   : myLoader
                   ? null
@@ -1060,21 +1071,21 @@ const Proposals = (props: any) => {
                     votes: proposal.votes,
                     expirationDate: proposal.expirationDate,
                     _id: proposal._id,
-                    styleFlag:"UpvoteModal",
+                    styleFlag: "UpvoteModal",
                     button1: "UpVote",
                     button2: "Ok",
                     renderAgain: renderAgain,
                   })
                 }
               >
-                {value.length==0? (
-              <>
-                {" "}
-                <tr>
-                  <td>{loading1 ? "Loading..." : "No proposals found"}</td>
-                </tr>{" "}
-              </>
-            ) : proposal.expirationDate < date.toISOString() ? (
+                {value.length == 0 ? (
+                  <>
+                    {" "}
+                    <tr>
+                      <td>{loading1 ? "Loading..." : "No proposals found"}</td>
+                    </tr>{" "}
+                  </>
+                ) : proposal.expirationDate < date.toISOString() ? (
                   ""
                 ) : (
                   <>
@@ -1114,7 +1125,7 @@ const Proposals = (props: any) => {
           <Alert style={{ fontSize: "12px" }} severity={message.severity}>
             {message.message}
           </Alert>
-        </Snackbar> 
+        </Snackbar>
       </Card>
     </>
   );
