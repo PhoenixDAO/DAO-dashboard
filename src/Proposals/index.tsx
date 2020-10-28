@@ -14,9 +14,37 @@ import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import ContractInit from "../config/contractsInit";
 import { PHNX_PROPOSAL_ADDRESS } from "../Contracts/phnxProposal";
 import { CircularProgress } from "@material-ui/core";
+import { createStyles } from "@material-ui/core/styles";
+import { withStyles,Theme, makeStyles } from "@material-ui/core/styles";
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="standard" {...props} />;
 }
+
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    buttonsdiv: {
+      
+      [theme.breakpoints.up('xs')]: {
+        display: "flex",
+        justifyContent: "space-between",
+      },
+      [theme.breakpoints.down('xs')]: {
+        display: "block",
+        
+      }
+    },
+    submitbutton: {
+      [theme.breakpoints.up('xs')]:
+      {
+        marginRight: "6px",
+      },
+      [theme.breakpoints.down('xs')]:
+      {
+        marginBottom:"5px",
+      }
+    }
+  })
+);
 
 let web3js: any;
 
@@ -772,18 +800,18 @@ const Proposals = (props: any) => {
 
   const [projectModalItem, setProjectModalItem] = React.useState<
     | {
-        title: string;
-        votes: [];
-        reward: any;
-        milestoness: any;
-        description: any;
-        expirationDate: any;
-        _id: any;
-        renderAgain: any;
-        button1: any;
-        button2: any;
-        styleFlag: string;
-      }
+      title: string;
+      votes: [];
+      reward: any;
+      milestoness: any;
+      description: any;
+      expirationDate: any;
+      _id: any;
+      renderAgain: any;
+      button1: any;
+      button2: any;
+      styleFlag: string;
+    }
     | undefined
   >(undefined);
   const [myLoader, setMyLoader] = useState(false);
@@ -803,17 +831,17 @@ const Proposals = (props: any) => {
           }
         )
         .then((value) => {
-          
-          
-          let tempDate=new Date();
-          let temp:any[]=[];
-          console.log("before splice",temp)
-          value.data.result.map((proposal:any,i:number)=>{
-            if(proposal.expirationDate > tempDate.toISOString()){
+
+
+          let tempDate = new Date();
+          let temp: any[] = [];
+          console.log("before splice", temp)
+          value.data.result.map((proposal: any, i: number) => {
+            if (proposal.expirationDate > tempDate.toISOString()) {
               temp.push(value.data.result[i]);
             }
           })
-          console.log("after splice",temp)
+          console.log("after splice", temp)
           setValue(temp);
           setLoading1(false);
         })
@@ -924,9 +952,8 @@ const Proposals = (props: any) => {
 
   const changeFormat = (date: any) => {
     date = new Date(date);
-    return `${new Date(date.getTime()).getDate()}/${
-      new Date(date.getTime()).getMonth() + 1
-    }/${new Date(date.getTime()).getFullYear()} `;
+    return `${new Date(date.getTime()).getDate()}/${new Date(date.getTime()).getMonth() + 1
+      }/${new Date(date.getTime()).getFullYear()} `;
   };
   const renderAgain = async () => {
     await getData();
@@ -978,6 +1005,7 @@ const Proposals = (props: any) => {
     setMessage({ message, severity });
     setShowSnackBar(true);
   };
+  const classes = useStyles();
   return (
     <>
       {modalOpen && (
@@ -998,15 +1026,17 @@ const Proposals = (props: any) => {
           button1="UpVote"
           button2="Ok"
           close={() => setProjectModalItem(undefined)}
-          // setSnackBar={() => setSnackBar}
+        // setSnackBar={() => setSnackBar}
         />
       )}
       <Card
         styleFlag="UpvoteProposals"
         title="Upvote Proposals"
         actions={
-          <div style={{ display: "flex" }}>
+          <div className={classes.buttonsdiv}>
             <Button
+              //style={{marginRight:"8px"}}
+              className={classes.submitbutton}
               secondary
               //onClick={() => (metaMaskApproval ? openModal() : checkApproval())}
               onClick={() =>
@@ -1023,8 +1053,8 @@ const Proposals = (props: any) => {
                 metaMaskApproval
                   ? openSnackbar("Approval already granted", "success")
                   : myLoader
-                  ? null
-                  : sendApproval()
+                    ? null
+                    : sendApproval()
               }
             >
               {myLoader ? <CircularProgress size={12} /> : " Send Approval"}
@@ -1048,52 +1078,52 @@ const Proposals = (props: any) => {
               </tr>
             </>
           ) : (
-            value.map((proposal: any, i) => (
-              <tr
-                key={i}
-                onClick={() =>
-                  setProjectModalItem({
-                    title: proposal.name,
-                    reward: proposal.reward,
-                    milestoness: proposal.milestone,
-                    description: proposal.description,
-                    votes: proposal.votes,
-                    expirationDate: proposal.expirationDate,
-                    _id: proposal._id,
-                    styleFlag:"UpvoteModal",
-                    button1: "UpVote",
-                    button2: "Ok",
-                    renderAgain: renderAgain,
-                  })
-                }
-              >
-                {value.length==0? (
-              <>
-                {" "}
-                <tr>
-                  <td>{loading1 ? "Loading..." : "No proposals found"}</td>
-                </tr>{" "}
-              </>
-            ) : proposal.expirationDate < date.toISOString() ? (
-                  ""
-                ) : (
-                  <>
-                    <td>{proposal.name}</td>
-                    <td>
-                      {proposal.votes.length}/
+              value.map((proposal: any, i) => (
+                <tr
+                  key={i}
+                  onClick={() =>
+                    setProjectModalItem({
+                      title: proposal.name,
+                      reward: proposal.reward,
+                      milestoness: proposal.milestone,
+                      description: proposal.description,
+                      votes: proposal.votes,
+                      expirationDate: proposal.expirationDate,
+                      _id: proposal._id,
+                      styleFlag: "UpvoteModal",
+                      button1: "UpVote",
+                      button2: "Ok",
+                      renderAgain: renderAgain,
+                    })
+                  }
+                >
+                  {value.length == 0 ? (
+                    <>
+                      {" "}
+                      <tr>
+                        <td>{loading1 ? "Loading..." : "No proposals found"}</td>
+                      </tr>{" "}
+                    </>
+                  ) : proposal.expirationDate < date.toISOString() ? (
+                    ""
+                  ) : (
+                        <>
+                          <td>{proposal.name}</td>
+                          <td>
+                            {proposal.votes.length}/
                       <Font color="success">{proposal.minimumUpvotes}</Font>
-                    </td>
+                          </td>
 
-                    <td>{proposal.reward}</td>
+                          <td>{proposal.reward}</td>
 
-                    <td style={{ color: "#EA8604" }}>
-                      {changeFormat(proposal.expirationDate)}
-                    </td>
-                  </>
-                )}
-              </tr>
-            ))
-          )}
+                          <td style={{ color: "#EA8604" }}>
+                            {changeFormat(proposal.expirationDate)}
+                          </td>
+                        </>
+                      )}
+                </tr>
+              ))
+            )}
         </Table>{" "}
         <Snackbar
           open={ethereumNetworkError}
@@ -1114,7 +1144,7 @@ const Proposals = (props: any) => {
           <Alert style={{ fontSize: "12px" }} severity={message.severity}>
             {message.message}
           </Alert>
-        </Snackbar> 
+        </Snackbar>
       </Card>
     </>
   );
