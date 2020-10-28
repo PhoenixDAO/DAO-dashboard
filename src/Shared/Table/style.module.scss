@@ -37,6 +37,42 @@
     top: 0; 
   }
 }
+.latestProposal {
+  width: 100%;
+
+  tr:nth-child(even),
+  th {
+      background: #fbfbfc;
+  }
+
+  th,
+  td {
+    height: 69rem;
+
+   &:first-child,
+    & + * {
+     padding-left: 23rem;
+    }
+
+    &:last-child {
+      padding-right: 23rem;
+    }
+    
+  }
+
+  th {
+    font-weight: bold;
+    color: $font-gray;
+    text-align: left;
+    position: sticky;
+    top: 0; 
+  }
+  
+  tr{
+    display: flex;
+    justify-content: space-between;
+  }
+}
 
 .tableUpcomingVotes {
   width: 100%;
