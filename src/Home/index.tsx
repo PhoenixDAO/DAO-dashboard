@@ -114,12 +114,8 @@ const Home = (props: any) => {
   return (
     <>
       <div className={style.grid}>
-        <Card
-          styleFlag={styleFlag}
-          title="Latest Proposals"
-          tooltipMessage="This shows all the proposals submitted"
-        >
-          <Table compact>
+        <Card styleFlag={styleFlag} title="Latest Proposals" tooltipMessage="This shows all the proposals submitted">
+          <Table compact styleFlag="LatestProposals">
             {value.length === 0 ? (
               <>
                 {" "}

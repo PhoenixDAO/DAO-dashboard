@@ -71,16 +71,28 @@
   height: 25rem;
 }
   .secondary{
-     @media screen and (max-width:380px){
+     @media screen and (max-width:510px){
       min-width:107px;
-  
+
      text-align: center;
      max-width:130rem;
      padding: 0 5rem;
       }
  }
-//  .button{
-//   @media screen and (max-width:372px){
-// padding: 0  10rem;
-//  }
-// }
+ .secondary{
+  @media screen and (max-width:380px){
+   min-width:106px;
+
+  text-align: center;
+  padding: 0 5rem;
+   }
+}
+ .secondary{
+  @media screen and (max-width:550px){
+   min-width:102px;
+
+  text-align: center;
+  max-width:130rem;
+  padding: 0 5rem;
+   }
+}

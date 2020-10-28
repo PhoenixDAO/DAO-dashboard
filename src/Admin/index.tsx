@@ -751,7 +751,6 @@ const Admin = (props: any) => {
           tooltipMessage="All milestones that user marked complete and are pending for approval"
         >
           <Table compact columns={["Proposal", "Milestone", "Approve"]}>
-            {console.log("length", Object.keys(milestones))}
             {loading3 ? (
               <td>Loading...</td>
             ) : noData ? (
