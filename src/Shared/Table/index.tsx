@@ -66,7 +66,23 @@ export default ({ styleFlag, children, columns, compact }: Props) => {
           <tbody>{children}</tbody>
           {(styleFlag = undefined)}
         </table>
-      ) : (
+      ) :styleFlag =="LatestProposals" ? (<table className={style.latestProposal}>
+      {columns && (
+        <thead>
+          <tr>
+            {columns.map((column, i) => (
+              <th key={i}>
+                <p>{column}</p>
+              </th>
+            ))}
+          </tr>
+        </thead>
+      )}
+      <tbody>{children}</tbody>
+      {(styleFlag = undefined)}
+    </table>
+    ):
+      (
         <table className={style.table}>
           {columns && (
             <thead>
@@ -87,4 +103,3 @@ export default ({ styleFlag, children, columns, compact }: Props) => {
     </div>
   );
 };
-//    column == "Expiration Date" ? (<th key={i} style={{fontSize:"3px"}} className={style.date}><p>{column}</p></th>):(<th key={i}><p>{column}</p></th>)
