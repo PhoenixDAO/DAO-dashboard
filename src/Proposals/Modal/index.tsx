@@ -190,6 +190,7 @@ const ProposalModal = (props: any) => {
               />
             </form>
         <div className={style.modalSteps}>
+          <h3 style={{ fontSize: "16px", marginBottom: "10px", color: "#ea8604", fontWeight: "normal"}}>Milestones</h3>
           <div
             style={{
               height: "200px",
