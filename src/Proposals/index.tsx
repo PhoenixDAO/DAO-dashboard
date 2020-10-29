@@ -36,8 +36,15 @@ const useStyles = makeStyles((theme) =>
     submitbutton: {
       [theme.breakpoints.up('xs')]:
       {
-        marginRight: "6px",
+        marginLeft: "6px",
+        
       },
+      [theme.breakpoints.down('xs')]:
+      {
+        marginLeft: "0px",
+      }
+    },
+    approvalbutton:{
       [theme.breakpoints.down('xs')]:
       {
         marginBottom:"5px",
@@ -1042,11 +1049,11 @@ const Proposals = (props: any) => {
         title="Upvote Proposals"
         actions={
           <div className={classes.buttonsdiv}>
+           
             <Button
-              //style={{marginRight:"8px"}}
-              className={classes.submitbutton}
               secondary
               //onClick={() => (metaMaskApproval ? openModal() : checkApproval())}
+              className={classes.approvalbutton}
               onClick={async () =>
                 !(await checkNetwork())
                   ? openSnackbar("Network must be Rinkbey", "error")
@@ -1055,10 +1062,12 @@ const Proposals = (props: any) => {
                   : openSnackbar("Metamask not approved", "error")
               }
             >
-              Submit Proposal
+              {myLoader ? <CircularProgress size={12} /> : " Send Approval"}
             </Button>
 
             <Button
+              //style={{marginRight:"8px"}}
+              className={classes.submitbutton}
               secondary
               onClick={async () =>
                 !(await checkNetwork())
@@ -1070,7 +1079,7 @@ const Proposals = (props: any) => {
                     : sendApproval()
               }
             >
-              {myLoader ? <CircularProgress size={12} /> : " Send Approval"}
+              Submit Proposal
             </Button>
           </div>
         }
