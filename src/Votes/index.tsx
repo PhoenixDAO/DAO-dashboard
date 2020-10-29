@@ -231,6 +231,7 @@ const Votes = (props: any) => {
           md={6}
           alignItems="center"
           justify="center"
+          spacing={2}
         >
           <Card styleFlag={styleFlagUpcomingVotes} title="Upcoming Votes"  tooltipMessage="All proposals passing the upvote stage and ready for voting">
             <Table
@@ -284,6 +285,7 @@ const Votes = (props: any) => {
           md={6}
           alignItems="center"
           justify="center"
+          spacing={2}
         >
           <div className={style.cardStyle}>
             <Card styleFlag={styleFlagPassVotes} title="Past Votes"  tooltipMessage="Recent voting results">

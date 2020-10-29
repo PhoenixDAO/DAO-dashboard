@@ -36,8 +36,15 @@ const useStyles = makeStyles((theme) =>
     submitbutton: {
       [theme.breakpoints.up('xs')]:
       {
-        marginRight: "6px",
+        marginLeft: "6px",
+        
       },
+      [theme.breakpoints.down('xs')]:
+      {
+        marginLeft: "0px",
+      }
+    },
+    approvalbutton:{
       [theme.breakpoints.down('xs')]:
       {
         marginBottom:"5px",
@@ -1034,6 +1041,21 @@ const Proposals = (props: any) => {
         title="Upvote Proposals"
         actions={
           <div className={classes.buttonsdiv}>
+           
+            <Button
+              secondary
+              className={classes.approvalbutton}
+
+              onClick={() =>
+                metaMaskApproval
+                  ? openSnackbar("Approval already granted", "success")
+                  : myLoader
+                    ? null
+                    : sendApproval()
+              }
+            >
+              {myLoader ? <CircularProgress size={12} /> : " Send Approval"}
+            </Button>
             <Button
               //style={{marginRight:"8px"}}
               className={classes.submitbutton}
@@ -1046,18 +1068,6 @@ const Proposals = (props: any) => {
               }
             >
               Submit Proposal
-            </Button>
-            <Button
-              secondary
-              onClick={() =>
-                metaMaskApproval
-                  ? openSnackbar("Approval already granted", "success")
-                  : myLoader
-                    ? null
-                    : sendApproval()
-              }
-            >
-              {myLoader ? <CircularProgress size={12} /> : " Send Approval"}
             </Button>
           </div>
         }

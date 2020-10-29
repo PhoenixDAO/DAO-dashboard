@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import { useLocation } from "react-router";
+import {Container} from '@material-ui/core'
 
 /** Components */
 import TopBar from "./TopBar";
@@ -27,7 +28,9 @@ export default ({ children }: Props) => {
       <TopBar isAdmin={isAdmin}/>
       <div className={style.columns}>
         {!isAdmin && <Sidebar />}
-        <div className={`${style.content} ${contentClassName}`}>{children}</div>
+        <Container style={{ overflow:"auto"}} maxWidth="xl"> 
+         <div className={`${style.content} ${contentClassName}`}>{children}</div>
+         </Container>
       </div>
     </div>
   );

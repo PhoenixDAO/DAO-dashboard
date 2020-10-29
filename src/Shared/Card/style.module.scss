@@ -67,7 +67,7 @@
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-
+margin-left:12px;
   ::-webkit-scrollbar-thumb {
     background: #999999;
     border-radius: 8px;
@@ -167,7 +167,14 @@
     padding:15rem 30rem 15rem;
   }
 
-  .title {
+  .title,.title3 {
     font-size: 26rem;
   }
+}
+
+.card4{
+@media screen and (max-width:800px)
+{
+  margin-left: 0px !important;
+}
 }
