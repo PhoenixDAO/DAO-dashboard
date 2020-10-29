@@ -36,15 +36,8 @@ const useStyles = makeStyles((theme) =>
     submitbutton: {
       [theme.breakpoints.up('xs')]:
       {
-        marginLeft: "6px",
-        
+        marginRight: "6px",
       },
-      [theme.breakpoints.down('xs')]:
-      {
-        marginLeft: "0px",
-      }
-    },
-    approvalbutton:{
       [theme.breakpoints.down('xs')]:
       {
         marginBottom:"5px",
@@ -1050,24 +1043,8 @@ const Proposals = (props: any) => {
         actions={
           <div className={classes.buttonsdiv}>
            
-            <Button
-              secondary
-              //onClick={() => (metaMaskApproval ? openModal() : checkApproval())}
-              className={classes.approvalbutton}
-              onClick={async () =>
-                !(await checkNetwork())
-                  ? openSnackbar("Network must be Rinkbey", "error")
-                  : metaMaskApproval
-                  ? openModal()
-                  : openSnackbar("Metamask not approved", "error")
-              }
-            >
-              {myLoader ? <CircularProgress size={12} /> : " Send Approval"}
-            </Button>
 
             <Button
-              //style={{marginRight:"8px"}}
-              className={classes.submitbutton}
               secondary
               onClick={async () =>
                 !(await checkNetwork())
@@ -1079,8 +1056,24 @@ const Proposals = (props: any) => {
                     : sendApproval()
               }
             >
-              Submit Proposal
+              {myLoader ? <CircularProgress size={12} /> : " Send Approval"}
             </Button>
+
+            <Button
+              //style={{marginRight:"8px"}}
+              className={classes.submitbutton}
+              secondary
+              //onClick={() => (metaMaskApproval ? openModal() : checkApproval())}
+              onClick={async () =>
+                !(await checkNetwork())
+                  ? openSnackbar("Network must be Rinkbey", "error")
+                  : metaMaskApproval
+                  ? openModal()
+                  : openSnackbar("Metamask not approved", "error")
+              }
+            >
+              Submit Proposal
+            </Button> 
           </div>
         }
         tooltipMessage="Proposals approved by admin and ready for upvote"

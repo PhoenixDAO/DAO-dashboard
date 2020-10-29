@@ -357,6 +357,7 @@ const EditModal = (props: any) => {
       let checkLink: any = githubLink.match(
         /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
       );
+      // let checkLink:any = githubLink.match(/(http(s)?:\/\/)?(www.)?(github.com\/)([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)
       if (emailValid == null) {
         setEmailValid(true);
         return;
@@ -547,7 +548,7 @@ const EditModal = (props: any) => {
         });
         setDeleteProposalId("");
         setShowLoader(false);
-        props.openSnackbar("Oops! Something went wrong", "error");
+        props.openSnackbar("Oops! Something went wrong 1", "error");
       });
   };
 
@@ -620,7 +621,8 @@ const EditModal = (props: any) => {
             console.log("Failed", err.response.data.result);
             props.openSnackbar(err.response.data.result.message, "error");
           } else {
-            props.openSnackbar("Oops! Something went wrong", "error");
+
+            props.openSnackbar("Oops! Something went wrong 2", "error");
           }
           console.log(err.status);
           console.log(err.message);
@@ -644,7 +646,15 @@ const EditModal = (props: any) => {
         console.log("Failed", e.response.data.result);
         props.openSnackbar(e.response.data.result.message, "error");
       } else {
-        props.openSnackbar("Oops! Something went wrong", "error");
+        const get = await axios.delete(`${URL}${DeleteProposal}${deleteProposalId}`, {
+          data: { numioAddress: props.user.numioAddress },
+          headers: {
+            Authorization: `Bearer ${props.user.token}`,
+          },
+        });
+        setDeleteProposalId("");
+        setShowLoader(false);
+        props.openSnackbar("Oops! Something went wrong 3", "error");
       }
       console.log("======e", e);
     }
