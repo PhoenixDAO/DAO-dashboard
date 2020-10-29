@@ -12,7 +12,7 @@ import { Input } from "@material-ui/core";
 
 const chartData = [
   {
-    title: "Community Airdrop, NUMIO Holders",
+    title: "Community Airdrop",
     value: 40,
     color: "#172DCE",
   },
