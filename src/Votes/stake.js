@@ -48,7 +48,7 @@ import { createTrue } from "typescript";
 
 let web3js, accounts, contractDAO, contractPHNX, hasVoted;
 function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} variant="standard" {...props} />;
 }
 
 const Stake = (props) => {
