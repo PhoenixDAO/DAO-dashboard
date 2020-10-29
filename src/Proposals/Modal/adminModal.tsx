@@ -489,7 +489,7 @@ const ProposalModal = (props: any) => {
             {console.log("MetaMask address", props.proposalUserNumioAddress)}
             {console.log("Admin address", props.user.numioAddress)}
             <div className={style.modalBrief}>
-              <span>{props.reward} PHNX</span>
+              <span>{props.budget} PHNX</span>
               <span>{props.milestones.length} milestone</span>
               <span>{changeFormat(props.createdAt)}</span>
             </div>

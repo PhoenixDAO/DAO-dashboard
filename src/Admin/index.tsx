@@ -261,6 +261,7 @@ const Admin = (props: any) => {
         title: string;
         votes: [];
         reward: any;
+        budget:any;
         milestoness: any;
         description: any;
         expirationDate: any;
@@ -552,6 +553,7 @@ const Admin = (props: any) => {
           resetData={renderAgain}
           title={projectModalItem.title}
           reward={projectModalItem.reward}
+          budget={projectModalItem.budget}
           milestones={projectModalItem.milestoness}
           description={projectModalItem.description}
           createdAt={projectModalItem.createdAt}
@@ -608,6 +610,7 @@ const Admin = (props: any) => {
                       setProjectModalItem({
                         title: item.name,
                         reward: item.reward,
+                        budget:item.budget,
                         milestoness: item.milestone,
                         description: item.description,
                         votes: item.votes,

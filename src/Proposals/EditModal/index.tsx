@@ -910,13 +910,13 @@ const EditModal = (props: any) => {
             variant="outlined"
           >
             <LightTooltip
-              title="Why do you propose to use DAO funds"
+              title="Why do you propose to use PhoenixDAO funds"
               placement="bottom"
               arrow
             >
               <TextField
                 error={state.purpose.length == 0 && fieldRequired}
-                label="Purpose to use Phoenix-Dao funds"
+                label="Purpose to use PhoenixDAO funds"
                 value={state.purpose}
                 onChange={(e) => _onChange(e.target.value, "purpose")}
                 id="outlined-error-helper-text"
@@ -1089,7 +1089,7 @@ const EditModal = (props: any) => {
           }}
         >
           <LightTooltip
-            title="The amount of PHEONIX required to submit the proposal"
+            title="The amount of PHNX required to submit the proposal"
             placement="bottom"
             arrow
           >
@@ -1483,7 +1483,7 @@ const EditModal = (props: any) => {
             className={classes.dialogueText}
             id="alert-dialog-slide-description"
           >
-            Submitting the proposal will sent the approval request to admin
+            Submitting the proposal will send the approval request to the admin.
           </DialogContentText>
         </DialogContent>
         <DialogActions className={classes.dialogueText}>
