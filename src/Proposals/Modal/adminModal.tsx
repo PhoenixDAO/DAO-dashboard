@@ -266,7 +266,8 @@ const ProposalModal = (props: any) => {
         console.log("error");
         props.openSnackbar("Network must be Rinkbey", "error");
       } else {
-        props.openSnackbar("Request failed", "error");
+        props.openSnackbar("Network must be Rinkbey", "error");
+        // props.openSnackbar("Request failed", "error");
         console.log("Error", err);
         setMyLoading1(false);
         setMyLoading2(false);
