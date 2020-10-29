@@ -266,7 +266,8 @@ const ProposalModal = (props: any) => {
         console.log("error");
         props.openSnackbar("Network must be Rinkbey", "error");
       } else {
-        props.openSnackbar("Request failed", "error");
+        props.openSnackbar("Network must be Rinkbey", "error");
+        // props.openSnackbar("Request failed", "error");
         console.log("Error", err);
         setMyLoading1(false);
         setMyLoading2(false);
@@ -489,7 +490,7 @@ const ProposalModal = (props: any) => {
             {console.log("MetaMask address", props.proposalUserNumioAddress)}
             {console.log("Admin address", props.user.numioAddress)}
             <div className={style.modalBrief}>
-              <span>{props.reward} PHNX</span>
+              <span>{props.budget} PHNX</span>
               <span>{props.milestones.length} milestone</span>
               <span>{changeFormat(props.createdAt)}</span>
             </div>

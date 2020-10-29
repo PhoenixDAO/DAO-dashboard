@@ -802,6 +802,7 @@ const Proposals = (props: any) => {
       title: string;
       votes: [];
       reward: any;
+      budget:any;
       milestoness: any;
       description: any;
       expirationDate: any;
@@ -1023,14 +1024,15 @@ const Proposals = (props: any) => {
           openSnackbar={openSnackbar}
           title={projectModalItem.title}
           reward={projectModalItem.reward}
+          budget={projectModalItem.budget}
           milestones={projectModalItem.milestoness}
           description={projectModalItem.description}
           expirationDate={projectModalItem.expirationDate}
           votes={projectModalItem.votes}
           _id={projectModalItem._id}
           styleFlag={projectModalItem.styleFlag}
-          button1="UpVote"
-          button2="Ok"
+          button1="Upvote"
+          button2="Back"
           close={() => setProjectModalItem(undefined)}
         // setSnackBar={() => setSnackBar}
         />
@@ -1096,6 +1098,7 @@ const Proposals = (props: any) => {
                     setProjectModalItem({
                       title: proposal.name,
                       reward: proposal.reward,
+                      budget:proposal.budget,
                       milestoness: proposal.milestone,
                       description: proposal.description,
                       votes: proposal.votes,

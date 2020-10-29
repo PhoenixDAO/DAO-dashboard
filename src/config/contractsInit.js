@@ -24,7 +24,8 @@ export default class ContractInit {
         console.log("web3", this.web3js);
         this.accounts = await this.web3js.eth.getAccounts();
         this.getNetwork = await this.web3js.eth.net.getNetworkType();
-        console.log("asdasmdkasnkdjasd as", this.getNetwork, this.accounts);
+        console.log("asdasmdkasnkdjasd as", this.accounts);
+        console.log('987', this.accounts)
         return {
           web3js: this.web3js,
           address: this.accounts[0],
