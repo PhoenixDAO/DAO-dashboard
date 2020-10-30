@@ -82,8 +82,10 @@ console.log("id isss",_id)
        
           console.log("UPDATED DAO ATTRIBUTES ---> ", props.DAOAttributes);
           // setDAOAttributes(props.DAOAttributes);
+          props.openSnackbar("Successfully updated !", "success");
           setShowLoader(false);
     } catch (err) {
+      props.openSnackbar("Ops! something went wrong.", "error");
       console.log(err);
     }
   };

@@ -21,31 +21,7 @@ type Props = {
 const _window = window as any;
 
 const Layout = ({ children, className,logout,checkWeb3BeforeLogin }: Props) => {
-  useEffect(() => {
-    // checkWeb3BeforeLogin();
-    async function listenMMAccount() {
-      if (typeof _window.ethereum !== "undefined") {
-        console.log("in here")
-        _window.ethereum.on("connect", (accounts:any)=> {
-          //  logout();
-          console.log("fired connect")
-          //  checkWeb3BeforeLogin();
-        })
-      _window.ethereum.on("accountsChanged", (accounts:any)=> {
-        // await logout();
-        console.log("fired accountsChanged")
-         checkWeb3BeforeLogin();
-      })
-      _window.ethereum.on("disconnect", (accounts:any)=> {
-        //  logout();
-        console.log("fired disconnect")
-        //  checkWeb3BeforeLogin();
-      })
-    }
-  }
-  
-    listenMMAccount();
-  }, []);
+
   return (
     <div
       style={{

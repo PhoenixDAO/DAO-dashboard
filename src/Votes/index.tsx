@@ -236,7 +236,7 @@ const Votes = (props: any) => {
           <Card styleFlag={styleFlagUpcomingVotes} title="Upcoming Votes"  tooltipMessage="All proposals passing the upvote stage and ready for voting">
             <Table
               styleFlag={styleFlagUpcomingVotes}
-              columns={["Proposal", "Voting Day"]}
+              columns={["Proposal", "Voting Day (dd/mm/yyyy)"]}
             >
               {value.length === 0 ? (
                 <>
@@ -291,7 +291,7 @@ const Votes = (props: any) => {
             <Card styleFlag={styleFlagPassVotes} title="Past Votes"  tooltipMessage="Recent voting results">
               <Table
                 styleFlag={styleFlagPassVotes}
-                columns={["Proposal", "Voting Day", "Pass/Fail"]}
+                columns={["Proposal", "Voting Day (dd/mm/yyyy)", "Pass/Fail"]}
               >
                 {proposals.length === 0 ? (
                  <>

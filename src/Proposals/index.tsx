@@ -1083,7 +1083,7 @@ const Proposals = (props: any) => {
             "Proposal",
             "Current Upvotes",
             "Cost (PHNX)",
-            "Expiration Date",
+            "Expiration Date (dd/mm/yyyy)",
           ]}
         >
           {value.length == 0 ? (

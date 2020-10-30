@@ -546,7 +546,7 @@ const Admin = (props: any) => {
       </Button>
     </DialogActions>
   </Dialog>
-      <Budget />
+      <Budget openSnackbar={openSnackbar}/>
       {modalOpen && <EditModal close={closeModal} />}
       {projectModalItem && (
         <AdminModal
@@ -599,7 +599,7 @@ const Admin = (props: any) => {
           title="Proposal Requests"
           tooltipMessage="This shows all the proposals pending for approval"
         >
-          <Table compact columns={["Proposal", "Submission Date"]}>
+          <Table compact columns={["Proposal", "Submission Date (dd/mm/yyyy)"]}>
             {proposalsOfStatusPending.length == 0 ? (
               <td>{loading1 ? "Loading..." : "No proposal found"}</td>
             ) : (
@@ -654,7 +654,7 @@ const Admin = (props: any) => {
           title="Proposals Ready for Vote"
           tooltipMessage="All the proposals ready for voting"
         >
-          <Table compact columns={["Proposal", "Voting Day"]}>
+          <Table compact columns={["Proposal", "Voting Day (dd/mm/yyyy)"]}>
             {proposalsOfStatusVoting.length == 0 ? (
               <td>
                 {loading2 ? "Loading..." : "No proposal ready for voting"}
