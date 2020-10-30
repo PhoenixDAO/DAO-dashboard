@@ -443,6 +443,7 @@ const EditModal = (props: any) => {
       setValueSmaller(false);
     }
     let totalMilestonesDays: any = 0;
+    let totalMilestoneCost: any = 0;
     let array: any = state.milestone;
     array.push(milestoneDetails);
     console.log("check array nowasdasdasdas", array);
@@ -451,10 +452,12 @@ const EditModal = (props: any) => {
     array.map((item: any) => {
       console.log(item.estimatedDays);
       let temp = parseInt(item.estimatedDays);
-
+      let tempCost = parseFloat(item.milestoneCost);
+      totalMilestoneCost = totalMilestoneCost + tempCost;
       totalMilestonesDays = totalMilestonesDays + temp;
     });
     console.log("Check array", totalMilestonesDays);
+    console.log("check array cost", totalMilestoneCost);
     setMilestoneDaysTotal(totalMilestonesDays);
     setState({ ...state, ["milestone"]: array });
     setMilestoneDetails({
@@ -621,7 +624,6 @@ const EditModal = (props: any) => {
             console.log("Failed", err.response.data.result);
             props.openSnackbar(err.response.data.result.message, "error");
           } else {
-
             props.openSnackbar("Oops! Something went wrong 2", "error");
           }
           console.log(err.status);
@@ -646,12 +648,15 @@ const EditModal = (props: any) => {
         console.log("Failed", e.response.data.result);
         props.openSnackbar(e.response.data.result.message, "error");
       } else {
-        const get = await axios.delete(`${URL}${DeleteProposal}${deleteProposalId}`, {
-          data: { numioAddress: props.user.numioAddress },
-          headers: {
-            Authorization: `Bearer ${props.user.token}`,
-          },
-        });
+        const get = await axios.delete(
+          `${URL}${DeleteProposal}${deleteProposalId}`,
+          {
+            data: { numioAddress: props.user.numioAddress },
+            headers: {
+              Authorization: `Bearer ${props.user.token}`,
+            },
+          }
+        );
         setDeleteProposalId("");
         setShowLoader(false);
         props.openSnackbar("Oops! Something went wrong 3", "error");
