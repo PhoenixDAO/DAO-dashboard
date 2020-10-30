@@ -18,11 +18,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     heading: {
       // fontSize: theme.typography.pxToRem(15),
-      fontSize: "15px",
+      fontSize: "13px",
       fontWeight: theme.typography.fontWeightRegular,
     },
     text: {
-      fontSize: "14px",
+      fontSize: "12px",
 
     },
     

@@ -72,12 +72,13 @@ const useStyles = makeStyles((theme) =>
       [theme.breakpoints.down("sm")]: {
         width: "220px",
         "& .MuiInputBase-root": {
-          fontSize: "15px",
+          fontSize: "18px",
           marginBottom: "10px",
           width: "220px",
         },
         "& .MuiFormLabel-root": {
-          fontSize: "15px",
+          fontSize: "18px",
+          fontWeight:"normal",
           color: "#EA8604",
           width: "max-content",
         },
@@ -89,12 +90,13 @@ const useStyles = makeStyles((theme) =>
         width: "420px",
 
         "& .MuiInputBase-root": {
-          fontSize: "12px",
+          fontSize: "18px",
           marginBottom: "10px",
           width: "420px",
         },
         "& .MuiFormLabel-root": {
-          fontSize: "15px",
+          fontSize: "18px",
+          fontWeight:"normal",
           color: "#EA8604",
         },
         "& .MuiFormHelperText-root": {
@@ -102,18 +104,23 @@ const useStyles = makeStyles((theme) =>
         },
       },
       "& .MuiInputBase-root": {
-        fontSize: "16px",
+        fontSize: "18px",
 
         marginBottom: "10px",
       },
       "& .MuiFormLabel-root": {
-        fontSize: "16px",
+        fontSize: "18px",
+        fontWeight:"normal",
         color: "#EA8604",
         width: "max-content",
       },
       "& .MuiFormHelperText-root": {
         fontSize: "10px",
       },
+      "& .MuiOutlinedInput-inputMultiline": {
+        padding: "0",
+    fontSize: "13px"
+      }
     },
   })
 );
@@ -141,9 +148,7 @@ const LightTooltip = withStyles((theme: Theme) => ({
 
 const changeFormat = (date: any) => {
   date = new Date(date);
-  return `${new Date(date.getTime()).getDate()}/${
-    new Date(date.getTime()).getMonth() + 1
-  }/${new Date(date.getTime()).getFullYear()} `;
+  return `${new Date(date.getTime()).getDate()}/${new Date(date.getTime()).getMonth() + 1}/${new Date(date.getTime()).getFullYear()}`;
 };
 const ProposalModal = (props: any) => {
   const [myLoading1, setMyLoading1] = useState(false);
@@ -490,9 +495,9 @@ const ProposalModal = (props: any) => {
             {console.log("MetaMask address", props.proposalUserNumioAddress)}
             {console.log("Admin address", props.user.numioAddress)}
             <div className={style.modalBrief}>
-              <span>{props.budget} PHNX</span>
-              <span>{props.milestones.length} milestone</span>
-              <span>{changeFormat(props.createdAt)}</span>
+            <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Budget</span></div><div style={{marginTop:"5px"}}><span>{props.budget}</span> <span>PHNX</span></div></div>
+          <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Milestones</span></div><div style={{marginTop:"5px"}}><span>{props.milestones.length}</span></div></div>
+          <div style={{width:"80px",textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Submitted on</span></div><span>(dd/mm/yyyy)</span><div>{changeFormat(props.createdAt)}</div></div>
             </div>
             <form className={classes.description} noValidate autoComplete="off">
               <TextField

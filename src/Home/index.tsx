@@ -177,7 +177,7 @@ const Home = (props: any) => {
           title="Transaction History"
           tooltipMessage="This shows all your transactions"
         >
-          <Table compact columns={["Type", "Use", "Amount", "Date"]}>
+          <Table compact columns={["Type", "Use", "Amount", "Date (dd/mm/yyyy)"]}>
             {transactions.length === 0 ? (
               <>
                 <tr>

@@ -29,12 +29,13 @@ const useStyles = makeStyles((theme) =>
       [theme.breakpoints.down("sm")]: {
         width: "220px",
         "& .MuiInputBase-root": {
-          fontSize: "15px",
+          fontSize: "18px",
           marginBottom: "10px",
           width: "220px",
         },
         "& .MuiFormLabel-root": {
-          fontSize: "15px",
+          fontSize: "18px",
+          fontWeight:"normal",
           color: "#EA8604",
           width: "max-content",
         },
@@ -46,12 +47,13 @@ const useStyles = makeStyles((theme) =>
         width: "420px",
 
         "& .MuiInputBase-root": {
-          fontSize: "12px",
+          fontSize: "18px",
           marginBottom: "10px",
           width: "420px",
         },
         "& .MuiFormLabel-root": {
-          fontSize: "15px",
+          fontSize: "18px",
+          fontWeight:"normal",
           color: "#EA8604",
         },
         "& .MuiFormHelperText-root": {
@@ -59,18 +61,23 @@ const useStyles = makeStyles((theme) =>
         },
       },
       "& .MuiInputBase-root": {
-        fontSize: "16px",
+        fontSize: "18px",
 
         marginBottom: "10px",
       },
       "& .MuiFormLabel-root": {
-        fontSize: "16px",
+        fontSize: "18px",
+        fontWeight:"normal",
         color: "#EA8604",
         width: "max-content",
       },
       "& .MuiFormHelperText-root": {
         fontSize: "10px",
       },
+      "& .MuiOutlinedInput-inputMultiline": {
+        padding: "0",
+    fontSize: "13px"
+      }
     },
   })
 );
@@ -168,11 +175,20 @@ const ProposalModal = (props: any) => {
       }
     >
       <div className={style.modalContent}>
+      {/* <div className={style.modalBrief}>
+          {console.log(props.milestones)}
+          <span>Budget</span>
+          <span>Milestones</span>
+          <span>Expiration Date</span>
+        </div> */}
         <div className={style.modalBrief}>
           {console.log(props.milestones)}
-          <span>{props.budget} PHNX</span>
-          <span>{props.milestones.length} milestone</span>
-          <span>{changeFormat(props.expirationDate)}</span>
+          <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Budget</span></div><div style={{marginTop:"5px"}}><span>{props.budget}</span> <span>PHNX</span></div></div>
+          <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Milestones</span></div><div style={{marginTop:"5px"}}><span>{props.milestones.length}</span></div></div>
+          <div style={{width:"80px",textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Exp. Date</span></div><span>(dd/mm/yyyy)</span><div><span>{changeFormat(props.expirationDate)}</span></div></div>
+          {/* <div><span>{props.milestones.length}</span></div>
+          <div><span>{changeFormat(props.expirationDate)}</span></div> */}
+          
         </div>
         {/* <div className={style.modalText}>{props.description}</div> */}
         

@@ -22,6 +22,8 @@ import numioLogo from "assets/images/numioLogo.svg";
 import Login_with from "assets/images/Login_with.svg";
 import LoginImage from "assets/images/Group 230.svg";
 import welcomeBackImage from "assets/images/Welcome Back.svg";
+import { checkWeb3BeforeLogin } from "redux/layoutActions";
+
 type message = {
   message: undefined | string;
   severity: "error" | "success" | "warning" | "info" | undefined;
@@ -127,6 +129,48 @@ const Login = (props: any) => {
       // };
     }
   }, [props.address, loginClicked]);
+
+  const _window = window as any;
+
+  useEffect(() => {
+    // checkWeb3BeforeLogin();
+    async function listenMMAccount() {
+      if (typeof _window.ethereum !== "undefined") {
+        console.log("in here");
+        _window.ethereum.on("connect", async (accounts: any) => {
+          //  logout();
+          setDisable(true);
+          setMyLoading(true);
+          await props.checkWeb3BeforeLogin();
+          setDisable(false);
+          setMyLoading(false);
+          console.log("fired connect");
+          //  checkWeb3BeforeLogin();
+        });
+        _window.ethereum.on("accountsChanged", async (accounts: any) => {
+          // await logout();
+          console.log("fired accountsChanged");
+          setDisable(true);
+          setMyLoading(true);
+          await props.checkWeb3BeforeLogin();
+          setDisable(false);
+          setMyLoading(false);
+        });
+        _window.ethereum.on("disconnect", async (accounts: any) => {
+          //  logout();
+          console.log("fired disconnect");
+          setDisable(true);
+          setMyLoading(true);
+          await props.checkWeb3BeforeLogin();
+          setDisable(false);
+          setMyLoading(false);
+          //  checkWeb3BeforeLogin();
+        });
+      }
+    }
+
+    listenMMAccount();
+  }, []);
   const LoginAPI = async () => {
     try {
       setMyLoading(true);
@@ -231,7 +275,7 @@ const Login = (props: any) => {
               justifyContent: "center",
             }}
           >
-            <img src={LoginImage} className={style.loginImage}/>
+            <img src={LoginImage} className={style.loginImage} />
           </Grid>
           <Grid
             item
@@ -243,20 +287,18 @@ const Login = (props: any) => {
               display: " flex",
               flexDirection: "column",
               justifyContent: "center",
-              alignItems:"center",
+              alignItems: "center",
             }}
           >
-            <div 
-             style={{
-              display: " flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems:"center",
-            }}>
-              <img
-                src={welcomeBackImage}
-               className={style.welcomeImage}
-              />
+            <div
+              style={{
+                display: " flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img src={welcomeBackImage} className={style.welcomeImage} />
               <h4
                 style={{
                   fontSize: "16px",
@@ -334,6 +376,7 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     checkWeb3: (param: boolean) => dispatch(checkWeb3(param)),
     loginWithMetaMask: (body: any) => dispatch(loginWithMetaMask(body)),
+    checkWeb3BeforeLogin: () => dispatch(checkWeb3BeforeLogin()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
