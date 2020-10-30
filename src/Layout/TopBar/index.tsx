@@ -107,8 +107,8 @@ const TopBar = (props: any) => {
 
   const matchAddressWithAccount = async() =>{
     let temp = await ContractInit.init();
-    console.log("address is",temp.address , " and numioAddress is " , props.user.numioAddress)
-    if(temp.address.toLowerCase() != props.user.numioAddress.toLowerCase()){
+    console.log("address is",temp.address , " and numioAddress is " , props.user?.numioAddress)
+    if(!temp.address || props.user && temp.address.toLowerCase() != props.user.numioAddress.toLowerCase()){
       console.log("logging out")
       await props.logout();
     }
