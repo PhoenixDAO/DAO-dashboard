@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Redirect} from "react-router-dom";
 import { connect } from "react-redux";
+import routes from "routes";
 
 const PrivateRoute = (props, { component: Component, ...rest }) => {
  
@@ -10,7 +11,15 @@ const PrivateRoute = (props, { component: Component, ...rest }) => {
       prop={props}
       render={(prop) =>
         props.LoggedIn ? (
-          <C {...prop} />
+          props.path==routes.myProjects.root()?(
+            <Redirect
+              to={{
+                pathname: routes.myProjects.active(),
+                state: { from: props.location },
+              }}
+            />
+          ):
+          (<C {...prop} />)
         ) : (
           <Redirect
             to={{

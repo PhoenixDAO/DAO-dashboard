@@ -36,25 +36,43 @@ const menu = [
     text: "Rewards",
   },
   {
-    to: routes.myProjects.active(),
+    to: routes.myProjects.root(),
     icon: iconActiveProjects,
     text: "My projects",
-  },
-  {
-    to: routes.myProjects.proposals(),
-    icon: iconActiveProjects,
-    text: "Proposals",
   },
 ];
 export default () => (
   <div className={style.sidebar}>
     {console.log("routes", routes)}
     {menu.map(({ to, icon, text }, i) => {
-      if (i === menu.length - 1) {
+      if (i === menu.length) {
         return null;
       }
       {
-        return (
+        return i==5? (
+          <NavLink
+            key={i}
+            className={style.item}
+            activeClassName={style.active}
+            to={to}
+          >
+            <div className={style.iconWrap}>
+              <div
+                className={style.icon}
+                style={{
+                  maskImage: `url(${icon})`,
+                  WebkitMaskImage: `url(${icon})`,
+                }}
+              />
+            </div>
+            <div className={style.text}>{text}</div>
+            {to === routes.votes() && (
+              <div className={style.bell}>
+                <img src={iconBell} alt="" />
+              </div>
+            )}
+          </NavLink>
+         ): (
           <NavLink
             key={i}
             exact
