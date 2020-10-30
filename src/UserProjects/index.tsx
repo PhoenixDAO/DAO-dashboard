@@ -23,7 +23,7 @@ export default () => (
       {navLinks.map(({ to, text }, i) => (
         <NavLink
           key={i}
-          exact
+          // exact
           className={style.navLink}
           activeClassName={style.active}
           to={to}

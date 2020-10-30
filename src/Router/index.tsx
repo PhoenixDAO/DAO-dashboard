@@ -60,6 +60,16 @@ const inh = ({ store }: any) => {
                   />
                   <PrivateRoute
                     path={routes.myProjects.root()}
+                    exact
+                    // link={routes.myProjects.active()}
+                    component={MyProjects}
+                  />
+                  <PrivateRoute
+                    path={routes.myProjects.active()}
+                    component={MyProjects}
+                  />
+                  <PrivateRoute
+                    path={routes.myProjects.proposals()}
                     component={MyProjects}
                   />
                 </Switch>
