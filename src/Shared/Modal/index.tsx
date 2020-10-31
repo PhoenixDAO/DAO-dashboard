@@ -181,6 +181,36 @@ export default ({
           {actions && <div className={style.actions}>{actions}</div>}
         </div>
       </Grid>
+      ):styleFlag=="proposalModal"?
+      (
+        <Grid
+          lg={12}
+          sm={12}
+          xs={12}
+          md={12}
+          className={style.modalWrap}
+          onClick={handleClick}
+        >
+          <div className={cn(style.modal, className)}>
+            <div className={style.closeButton} onClick={close} />
+            {title && <div className={style.title5}>{title}</div>}
+            {showStepper && (
+              <Stepper
+                className={classes.text}
+                activeStep={activeSteps}
+                alternativeLabel
+              >
+                {steps.map((label) => (
+                  <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+            )}
+            <div>{children}</div>
+            {actions && <div className={style.actions}>{actions}</div>}
+          </div>
+        </Grid>
       ):
       (
         <Grid

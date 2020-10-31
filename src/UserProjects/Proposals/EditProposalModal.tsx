@@ -1448,6 +1448,7 @@ const EditModal = (props: any) => {
         <Modal
           title="Update Proposal"
           className={style.modal}
+          styleFlag="proposalModal"
           activeSteps={stepperStep}
           showStepper={true}
           actions={
