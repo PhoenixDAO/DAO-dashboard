@@ -1514,7 +1514,6 @@ const EditModal = (props: any) => {
                 </Accordion>
 
                 {/* <Typography className={classes.descriptionTxt}>
-
                       {item.description}
                     </Typography> */}
               </div>
@@ -1570,6 +1569,7 @@ const EditModal = (props: any) => {
         <div>
           <Modal
             title="Submit a Proposal"
+            styleFlag="proposalModal"
             className={style.modal}
             activeSteps={stepperStep}
             showStepper={true}
