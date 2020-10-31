@@ -39,6 +39,7 @@
 }
 .latestProposal {
   width: 100%;
+  line-height: 2;
 
   tr:nth-child(even),
   th {
@@ -48,10 +49,14 @@
   th,
   td {
     height: 69rem;
-
+  
    &:first-child,
     & + * {
      padding-left: 23rem;
+     align-items: center;
+    display: flex;
+    align-content: center;
+    justify-content: center;
     }
 
     &:last-child {
@@ -109,7 +114,6 @@
 
 .tablePassVotes {
   width: 100%;
-
   tr:nth-child(even) td,
   th {
     background: #fbfbfc;
@@ -145,7 +149,7 @@
 }
 
 @media screen and (max-width:600px){
-  .tablePassVotes {
+  .tablePassVotes{
     td {
       height: 69rem;
       width: 10%;
@@ -191,7 +195,7 @@
 }
 
 @media (max-height: 680px), (min-aspect-ratio: 15/9) {
-  .compact {
+  .compact{
     th,
     td,
     .hoverRow {

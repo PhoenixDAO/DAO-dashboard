@@ -262,7 +262,7 @@ const EditModal = (props: any) => {
     fundsUsage: "",
     personalExperience: "",
     experiencedYear: "",
-    duration: "1",
+    duration: "",
     collateral: "",
     reward: "1",
     numioAddress: props.user.numioAddress,
@@ -321,7 +321,7 @@ const EditModal = (props: any) => {
     return <MuiAlert elevation={6} variant="standard" {...props} />;
   }
 
-  const [j, setJ] = useState(2);
+  const [j, setJ] = useState(0);
 
   const classes = useStyles();
 
@@ -375,9 +375,9 @@ const EditModal = (props: any) => {
       j == 1 &&
       (!purpose ||
         !importance ||
-        !fundsUsage ||
-        !personalExperience ||
-        !budget ||
+        // !fundsUsage ||
+        // !personalExperience ||
+        // !budget ||
         !description ||
         !experiencedYear ||
         !collateral)
@@ -452,21 +452,31 @@ const EditModal = (props: any) => {
     console.log("check state", state);
     array.map((item: any) => {
       console.log(item.estimatedDays);
-      let tempDays = parseInt(item.estimatedDays);
-      let tempCost = parseFloat(item.milestoneCost);
+      let tempDays = Number(item.estimatedDays);
+      let tempCost = Number(item.milestoneCost);
       totalMilestoneCost = totalMilestoneCost + tempCost;
       totalMilestonesDays = totalMilestonesDays + tempDays;
     });
 
-    setState({ ...state, ["budget"]: totalMilestoneCost });
     // setState({ ...state, ["duration"]: totalMilestonesDays });
 
     console.log("working");
     console.log("Check array", totalMilestonesDays);
     console.log("check array cost", totalMilestoneCost);
+
+    totalMilestonesDays = totalMilestonesDays.toString();
+    totalMilestoneCost = totalMilestoneCost.toString();
+
+    setState({
+      ...state,
+      ["budget"]: totalMilestoneCost,
+      ["milestone"]: array,
+      ["duration"]: totalMilestonesDays,
+    });
+
     console.log("check state", state);
+
     setMilestoneDaysTotal(totalMilestonesDays);
-    setState({ ...state, ["milestone"]: array });
     setMilestoneDetails({
       task: "",
       description: "",
@@ -523,34 +533,24 @@ const EditModal = (props: any) => {
         // from: props.user.numioAddress,
         from: temp.address,
       })
-      .on("transactionHash", (hash: any) => {
-        // hash of tx
-        console.log("tranasction hash", hash);
+      .then(async (receipt: any) => {
+        console.log("recepet", receipt);
+        let body = {
+          TxHash: receipt.transactionHash,
+          type: "Proposal",
+          numioAddress: props.user.numioAddress,
+          Id: id,
+        };
+
+        const get = await axios.post(`${URL}${createTransaction}`, body, {
+          headers: {
+            Authorization: `Bearer ${props.user.token}`,
+          },
+        });
       })
-      .on("confirmation", async function (
-        confirmationNumber: any,
-        receipt: any
-      ) {
-        if (confirmationNumber === 1) {
-          console.log(
-            "confirmed now, console receipt",
-            receipt.transactionHash
-          );
-          let body = {
-            TxHash: receipt.transactionHash,
-            type: "Proposal",
-            numioAddress: props.user.numioAddress,
-            Id: id,
-          };
-          const get = await axios.post(`${URL}${createTransaction}`, body, {
-            headers: {
-              Authorization: `Bearer ${props.user.token}`,
-            },
-          });
-        }
-      })
-      .on("error", async function (error: any) {
-        console.log("in error block", error);
+      .catch(async (err: any) => {
+        console.log("err", err);
+        console.log("in error block", err);
         const get = await axios.delete(`${URL}${DeleteProposal}${id}`, {
           data: { numioAddress: props.user.numioAddress },
           headers: {
@@ -559,8 +559,47 @@ const EditModal = (props: any) => {
         });
         setDeleteProposalId("");
         setShowLoader(false);
+        throw err;
         props.openSnackbar("Oops! Something went wrong 1", "error");
       });
+    // .on("transactionHash", (hash: any) => {
+    //   // hash of tx
+    //   console.log("tranasction hash", hash);
+    // })
+    // .on("confirmation", async function (
+    //   confirmationNumber: any,
+    //   receipt: any
+    // ) {
+    //   if (confirmationNumber === 1) {
+    //     console.log(
+    //       "confirmed now, console receipt",
+    //       receipt.transactionHash
+    //     );
+    //     let body = {
+    //       TxHash: receipt.transactionHash,
+    //       type: "Proposal",
+    //       numioAddress: props.user.numioAddress,
+    //       Id: id,
+    //     };
+    //     const get = await axios.post(`${URL}${createTransaction}`, body, {
+    //       headers: {
+    //         Authorization: `Bearer ${props.user.token}`,
+    //       },
+    //     });
+    //   }
+    // })
+    // .on("error", async function (error: any) {
+    //   console.log("in error block", error);
+    //   const get = await axios.delete(`${URL}${DeleteProposal}${id}`, {
+    //     data: { numioAddress: props.user.numioAddress },
+    //     headers: {
+    //       Authorization: `Bearer ${props.user.token}`,
+    //     },
+    //   });
+    // setDeleteProposalId("");
+    // setShowLoader(false);
+    // props.openSnackbar("Oops! Something went wrong 1", "error");
+    // });
   };
 
   const handleSubmit = async () => {
@@ -630,6 +669,7 @@ const EditModal = (props: any) => {
           setApiFailFlag(true);
           if (err.response && err.response.data && err.response.data.result) {
             console.log("Failed", err.response.data.result);
+
             props.openSnackbar(err.response.data.result.message, "error");
           } else {
             props.openSnackbar("Oops! Something went wrong 2", "error");
@@ -954,7 +994,7 @@ const EditModal = (props: any) => {
             </LightTooltip>
           </FormControl>
         </div>
-        <div
+        {/* <div
           style={{
             margin: "10px 0px",
             display: "flex",
@@ -991,7 +1031,7 @@ const EditModal = (props: any) => {
               />
             </LightTooltip>
           </FormControl>
-        </div>
+        </div> */}
         <div
           style={{
             margin: "10px 0px",
@@ -1070,8 +1110,38 @@ const EditModal = (props: any) => {
               }
             />
           </LightTooltip>
-
           <LightTooltip
+            title="The amount of PHNX required to submit the proposal"
+            placement="bottom"
+            arrow
+          >
+            <TextField
+              error={
+                (state.collateral.length == 0 && fieldRequired) ||
+                (valueSmaller && state.collateral == "0")
+              }
+              label={
+                (fieldRequired && state.collateral.length == 0) ||
+                (valueSmaller && state.collateral == "0")
+                  ? false
+                  : "Collateral"
+              }
+              style={{ width: "200px" }}
+              onChange={(e) => _onChange(e.target.value, "collateral")}
+              className={classes.submitText}
+              id="outlined-error-helper-text"
+              value={state.collateral}
+              variant="outlined"
+              helperText={
+                state.collateral.length == 0 && fieldRequired
+                  ? `Collateral is required.`
+                  : valueSmaller && state.collateral == "0"
+                  ? "Value must be greater than 0"
+                  : false
+              }
+            />
+          </LightTooltip>
+          {/* <LightTooltip
             title="Budget required for your proposal"
             placement="bottom"
             arrow
@@ -1101,9 +1171,9 @@ const EditModal = (props: any) => {
                   : false
               }
             />
-          </LightTooltip>
+          </LightTooltip> */}
         </div>
-        <div
+        {/* <div
           style={{
             margin: "10px 0px",
             display: "flex",
@@ -1111,38 +1181,8 @@ const EditModal = (props: any) => {
             justifyContent: "space-between",
           }}
         >
-          <LightTooltip
-            title="The amount of PHNX required to submit the proposal"
-            placement="bottom"
-            arrow
-          >
-            <TextField
-              error={
-                (state.collateral.length == 0 && fieldRequired) ||
-                (valueSmaller && state.collateral == "0")
-              }
-              label={
-                (fieldRequired && state.collateral.length == 0) ||
-                (valueSmaller && state.collateral == "0")
-                  ? false
-                  : "Collateral"
-              }
-              style={{ width: "100%" }}
-              onChange={(e) => _onChange(e.target.value, "collateral")}
-              className={classes.submitText}
-              id="outlined-error-helper-text"
-              value={state.collateral}
-              variant="outlined"
-              helperText={
-                state.collateral.length == 0 && fieldRequired
-                  ? `Collateral is required.`
-                  : valueSmaller && state.collateral == "0"
-                  ? "Value must be greater than 0"
-                  : false
-              }
-            />
-          </LightTooltip>
-          {/* <LightTooltip title="tooltip" placement="bottom" arrow>
+          
+          <LightTooltip title="tooltip" placement="bottom" arrow>
             <TextField
               error={
                 (state.reward.length == 0 && fieldRequired) ||
@@ -1169,8 +1209,8 @@ const EditModal = (props: any) => {
                   : false
               }
             />
-          </LightTooltip> */}
-        </div>
+          </LightTooltip>
+        </div> */}
         <div
           style={{
             margin: "10px 0px",
@@ -1223,34 +1263,34 @@ const EditModal = (props: any) => {
             className={classes.margin}
             variant="outlined"
           >
-            <LightTooltip
-              title="Describe your experience and why you are the best candidate to submit this proposal"
-              placement="bottom"
-              arrow
-            >
-              <TextField
-                multiline
-                rows={2}
-                error={state.personalExperience.length == 0 && fieldRequired}
-                label={
-                  fieldRequired && state.personalExperience.length == 0
-                    ? false
-                    : "Personal Experience"
-                }
-                value={state.personalExperience}
-                onChange={(e) =>
-                  _onChange(e.target.value, "personalExperience")
-                }
-                id="outlined-error-helper-text"
-                helperText={
-                  state.personalExperience.length == 0 && fieldRequired
-                    ? `Peronsal Experience is required.`
-                    : "maximum upto 300 characters"
-                }
-                className={classes.submitText}
-                variant="outlined"
-              />
-            </LightTooltip>
+              {/* <LightTooltip
+                title="Describe your experience and why you are the best candidate to submit this proposal"
+                placement="bottom"
+                arrow
+              >
+                <TextField
+                  multiline
+                  rows={2}
+                  error={state.personalExperience.length == 0 && fieldRequired}
+                  label={
+                    fieldRequired && state.personalExperience.length == 0
+                      ? false
+                      : "Personal Experience"
+                  }
+                  value={state.personalExperience}
+                  onChange={(e) =>
+                    _onChange(e.target.value, "personalExperience")
+                  }
+                  id="outlined-error-helper-text"
+                  helperText={
+                    state.personalExperience.length == 0 && fieldRequired
+                      ? `Peronsal Experience is required.`
+                      : "maximum upto 300 characters"
+                  }
+                  className={classes.submitText}
+                  variant="outlined"
+                />
+              </LightTooltip> */}
           </FormControl>
         </div>
       </>

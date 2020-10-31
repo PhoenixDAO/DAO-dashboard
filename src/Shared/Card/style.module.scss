@@ -132,7 +132,11 @@ margin-left:12px;
   align-items: center;
   justify-content: space-between;
 }
-
+@media screen and (max-width:400px){
+  .header3{
+    padding: 0 25rem;
+  }
+}
 .title3 {
   font-size: 32rem;
   line-height: 1;

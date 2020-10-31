@@ -32,13 +32,22 @@ const useStyles = makeStyles((theme) =>
       },
     },
     submitbutton: {
-      [theme.breakpoints.up("xs")]: {
-        marginRight: "6px",
+      [theme.breakpoints.up('xs')]:
+      {
+        marginLeft: "6px",
+        
       },
-      [theme.breakpoints.down("xs")]: {
-        marginBottom: "5px",
-      },
+      [theme.breakpoints.down('xs')]:
+      {
+        marginLeft: "0px",
+      }
     },
+    approvalButton:{
+      [theme.breakpoints.down('xs')]:
+      {
+        marginBottom:"5px",
+      }
+    }
   })
 );
 
@@ -1054,7 +1063,7 @@ const Proposals = (props: any) => {
         title="Upvote Proposals"
         actions={
           <div className={classes.buttonsdiv}>
-            <Button
+            <Button className={classes.approvalButton}
               secondary
               onClick={async () =>
                 checkingLoading
