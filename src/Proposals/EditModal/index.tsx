@@ -300,6 +300,8 @@ const EditModal = (props: any) => {
   const [disableInputs, setDisableInputs] = useState(false);
   const [valueSmaller, setValueSmaller] = useState(false);
   const [ethereumNetworkError, setEthereumNetworkError] = useState(false);
+  const [milestoneDaysTotal, setMilestoneDaysTotal] = useState(0);
+
   const [deleteProposalId, setDeleteProposalId] = useState("");
 
   const [openDialogueState, setOpenDialogueState] = useState(false);
@@ -355,6 +357,7 @@ const EditModal = (props: any) => {
       let checkLink: any = githubLink.match(
         /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
       );
+      // let checkLink:any = githubLink.match(/(http(s)?:\/\/)?(www.)?(github.com\/)([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)
       if (emailValid == null) {
         setEmailValid(true);
         return;
@@ -439,9 +442,23 @@ const EditModal = (props: any) => {
     } else {
       setValueSmaller(false);
     }
+    let totalMilestonesDays: any = 0;
+    let totalMilestoneCost: any = 0;
     let array: any = state.milestone;
     array.push(milestoneDetails);
     console.log("check array nowasdasdasdas", array);
+
+    //console.log("Check array milestoneCost", array.milestoneCost);
+    array.map((item: any) => {
+      console.log(item.estimatedDays);
+      let temp = parseInt(item.estimatedDays);
+      let tempCost = parseFloat(item.milestoneCost);
+      totalMilestoneCost = totalMilestoneCost + tempCost;
+      totalMilestonesDays = totalMilestonesDays + temp;
+    });
+    console.log("Check array", totalMilestonesDays);
+    console.log("check array cost", totalMilestoneCost);
+    setMilestoneDaysTotal(totalMilestonesDays);
     setState({ ...state, ["milestone"]: array });
     setMilestoneDetails({
       task: "",
@@ -481,18 +498,22 @@ const EditModal = (props: any) => {
 
   const submitProposalOnBlockchain = async (id: any) => {
     console.log("000000000000000000000000000000000000", id);
+    let temp: any = await ContractInit.init();
+    console.log("address sd", props.user.numioAddress);
     const onSubmit = await (
       await ContractInit.phoenixProposalContract()
     )?.methods
       .submitProposal(
-        Web3.utils.toWei(state.reward),
-        36000,
+        Web3.utils.toWei(state.budget),
+        milestoneDaysTotal * 86400,
+        //36000,
         Web3.utils.toWei(state.collateral),
         state.milestone.length,
         id
       )
       .send({
-        from: props.user.numioAddress,
+        // from: props.user.numioAddress,
+        from: temp.address,
       })
       .on("transactionHash", (hash: any) => {
         // hash of tx
@@ -530,7 +551,7 @@ const EditModal = (props: any) => {
         });
         setDeleteProposalId("");
         setShowLoader(false);
-        props.openSnackbar("Ops! Something went wrong", "error");
+        props.openSnackbar("Oops! Something went wrong 1", "error");
       });
   };
 
@@ -594,6 +615,8 @@ const EditModal = (props: any) => {
             "success"
           );
         } catch (err) {
+          let temp: any = await ContractInit.init();
+          console.log("network", temp);
           console.log("check error nowsdasdsdasdasdasdsda", err);
           setShowLoader(false);
           setApiFailFlag(true);
@@ -601,13 +624,15 @@ const EditModal = (props: any) => {
             console.log("Failed", err.response.data.result);
             props.openSnackbar(err.response.data.result.message, "error");
           } else {
-            props.openSnackbar("Ops something went wrong", "error");
+            props.openSnackbar("Oops! Something went wrong 2", "error");
           }
           console.log(err.status);
           console.log(err.message);
         }
       }
     } catch (e) {
+      let temp: any = await ContractInit.init();
+      console.log("network", temp);
       console.log("check error nowsdasdsdasdasdasdsda", e);
       setShowLoader(false);
       setApiFailFlag(true);
@@ -623,7 +648,18 @@ const EditModal = (props: any) => {
         console.log("Failed", e.response.data.result);
         props.openSnackbar(e.response.data.result.message, "error");
       } else {
-        props.openSnackbar("Oops something went wrong", "error");
+        const get = await axios.delete(
+          `${URL}${DeleteProposal}${deleteProposalId}`,
+          {
+            data: { numioAddress: props.user.numioAddress },
+            headers: {
+              Authorization: `Bearer ${props.user.token}`,
+            },
+          }
+        );
+        setDeleteProposalId("");
+        setShowLoader(false);
+        props.openSnackbar("Oops! Something went wrong 3", "error");
       }
       console.log("======e", e);
     }
@@ -639,8 +675,8 @@ const EditModal = (props: any) => {
     ) {
       var reg = new RegExp("^[0-9]+$");
       let test = reg.test(value);
-      if (!test) return;
-      if (value < 0 || value.toString().length > 6) {
+      if (!test && value.length != 0) return;
+      if (value < -1 || value.toString().length > 6) {
         return;
       }
     }
@@ -674,7 +710,7 @@ const EditModal = (props: any) => {
     ) {
       var reg = new RegExp("^[0-9]+$");
       let test = reg.test(value);
-      if (!test) return;
+      if (!test && value.length != 0) return;
       if (value < -1 || value.toString().length > 6) {
         return;
       }
@@ -889,13 +925,13 @@ const EditModal = (props: any) => {
             variant="outlined"
           >
             <LightTooltip
-              title="Why do you propose to use DAO funds"
+              title="Why do you propose to use PhoenixDAO funds"
               placement="bottom"
               arrow
             >
               <TextField
                 error={state.purpose.length == 0 && fieldRequired}
-                label="Purpose to use Phoenix-Dao funds"
+                label="Purpose to use PhoenixDAO funds"
                 value={state.purpose}
                 onChange={(e) => _onChange(e.target.value, "purpose")}
                 id="outlined-error-helper-text"
@@ -1013,7 +1049,6 @@ const EditModal = (props: any) => {
               }
               onChange={(e) => _onChange(e.target.value, "experiencedYear")}
               className={classes.submitText}
-              type="number"
               id="outlined-error-helper-text"
               style={{ width: "200px" }}
               value={state.experiencedYear}
@@ -1047,7 +1082,6 @@ const EditModal = (props: any) => {
               onChange={(e) => _onChange(e.target.value, "budget")}
               className={classes.submitText}
               style={{ width: "200px" }}
-              type="number"
               id="outlined-error-helper-text"
               value={state.budget}
               variant="outlined"
@@ -1070,7 +1104,7 @@ const EditModal = (props: any) => {
           }}
         >
           <LightTooltip
-            title="The amount of PHEONIX required to submit the proposal"
+            title="The amount of PHNX required to submit the proposal"
             placement="bottom"
             arrow
           >
@@ -1088,7 +1122,6 @@ const EditModal = (props: any) => {
               style={{ width: "100%" }}
               onChange={(e) => _onChange(e.target.value, "collateral")}
               className={classes.submitText}
-              type="number"
               id="outlined-error-helper-text"
               value={state.collateral}
               variant="outlined"
@@ -1262,7 +1295,6 @@ const EditModal = (props: any) => {
                   ? false
                   : "Estimated Days"
               }
-              type="number"
               onChange={(e) =>
                 _onChangeMilestoneValue(e.target.value, "estimatedDays")
               }
@@ -1307,7 +1339,6 @@ const EditModal = (props: any) => {
                   ? false
                   : "Developers Working"
               }
-              type="number"
               onChange={(e) =>
                 _onChangeMilestoneValue(e.target.value, "numberOfDevelopers")
               }
@@ -1337,7 +1368,6 @@ const EditModal = (props: any) => {
                   : "Milestone Cost"
               }
               value={milestoneDetails.milestoneCost}
-              type="number"
               onChange={(e) =>
                 _onChangeMilestoneValue(e.target.value, "milestoneCost")
               }
@@ -1468,7 +1498,7 @@ const EditModal = (props: any) => {
             className={classes.dialogueText}
             id="alert-dialog-slide-description"
           >
-            Submitting the proposal will sent the approval request to admin
+            Submitting the proposal will send the approval request to the admin.
           </DialogContentText>
         </DialogContent>
         <DialogActions className={classes.dialogueText}>

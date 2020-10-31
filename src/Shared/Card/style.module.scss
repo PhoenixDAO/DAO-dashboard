@@ -67,7 +67,7 @@
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-
+margin-left:12px;
   ::-webkit-scrollbar-thumb {
     background: #999999;
     border-radius: 8px;
@@ -167,36 +167,14 @@
     padding:15rem 30rem 15rem;
   }
 
-  .title {
+  .title,.title3 {
     font-size: 26rem;
   }
 }
 
-@media screen and (min-width: 999px) {
-
-  .card4 {
-    margin-left: 18px;
-  }
+.card4{
+@media screen and (max-width:800px)
+{
+  margin-left: 0px !important;
 }
-@media screen and (max-width: 999px ) and (min-width: 801px) {
-  
-  .card4 {
-    margin-left: 6px;
-  }
-}
-
-.card2{
-  .title3{
-    @media screen and (max-width:381px){
-      font-size: 14px;
-    }
-  }
-  .header3{
-    @media screen and (max-width:372px)
-  {
-  
-    padding:0px;
-    justify-content: space-around;
-  }
-  }
 }

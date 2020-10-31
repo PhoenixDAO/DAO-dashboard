@@ -44,11 +44,12 @@ import MuiAlert from "@material-ui/lab/Alert";
 import { URL, stakes } from "../const";
 import { createTrue } from "typescript";
 
+import { CircularProgress } from "@material-ui/core";
 
 
 let web3js, accounts, contractDAO, contractPHNX, hasVoted;
 function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} variant="standard" {...props} />;
 }
 
 const Stake = (props) => {
@@ -94,6 +95,7 @@ const Stake = (props) => {
   const [connectMetaMask, setConnectMetaMask] = useState(false)
   const [installMetaMaskError, setInstallMetaMaskError] = useState(false)
   const [interestRatio, setInterestRatio] = useState(0)
+  const [approvalLoader, setApprovalLoader] = useState(false)
 
   console.log("1 Duration Days: ",durationDaysInput)
   console.log("1 Amount phnx : ",amountPhnxInput)
@@ -331,6 +333,7 @@ const Stake = (props) => {
     }
   }, [props.address, props.balance]);
   const sendApproval = async () => {
+    setApprovalLoader(true)
     //  if(!durationDaysInput || !amountPhnxInput){setAllInputFields(true)}
 
     let balance = await contractPHNX.methods.totalSupply().call();
@@ -342,9 +345,13 @@ const Stake = (props) => {
       })
       .on("confirmation", function (confirmationNumber, receipt) {
         if (confirmationNumber === 1) {
-      
+          setApprovalLoader(false)
         }
-      });
+      })
+      .on('error', function(err){
+        props.close()
+        
+      })
       
   };
   const checkApproval = async () => {
@@ -713,7 +720,7 @@ console.log('onSubmit', onSubmit)
             >
               {(props.stakeLoading || myLoading) && <img src={spinner} />}
               <span style={{ textTransform: "none" }}>
-                {approval ? "Confirm Stake" : "Approve PHNX"}
+                { approvalLoader ? <img src={spinner}/>  : approval ? "Confirm Stake" : "Approve PHNX"}
               </span>
             </Button>
           )}

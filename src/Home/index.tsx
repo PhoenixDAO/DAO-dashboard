@@ -12,7 +12,7 @@ import { Input } from "@material-ui/core";
 
 const chartData = [
   {
-    title: "Community Airdrop, NUMIO Holders",
+    title: "Community Airdrop",
     value: 40,
     color: "#172DCE",
   },
@@ -58,7 +58,9 @@ const Home = (props: any) => {
         setLoading1(false);
       })
 
-      .catch((err) => {});
+      .catch((err) => {
+        setLoading1(false);
+      });
   };
 
   const getAllProposals = async () => {
@@ -69,18 +71,15 @@ const Home = (props: any) => {
         },
       })
       .then((value) => {
-        console.log("value ss",value)
-       let temp=value.data.result;
+        console.log("value ss", value);
+        let temp = value.data.result;
         for (let i = 0; i < temp.length; i++) {
-          if (
-           temp[i].status != "Accepted" &&
-            temp[i].status != "Fail"
-          ) {
+          if (temp[i].status != "Accepted" && temp[i].status != "Fail") {
             temp.splice(i, 1);
             i--;
           }
         }
-        console.log(" setProposals ",temp)
+        console.log(" setProposals ", temp);
         setProposals(temp);
         setLoading2(false);
       })
@@ -116,7 +115,7 @@ const Home = (props: any) => {
     <>
       <div className={style.grid}>
         <Card styleFlag={styleFlag} title="Latest Proposals" tooltipMessage="This shows all the proposals submitted">
-          <Table compact>
+          <Table compact styleFlag="LatestProposals">
             {value.length === 0 ? (
               <>
                 {" "}
@@ -136,7 +135,11 @@ const Home = (props: any) => {
           </Table>
         </Card>
         <PieChart lineWidth={50} data={chartData} />
-        <Card styleFlag={styleFlag} title="Voting Results" tooltipMessage="Recent voting results">
+        <Card
+          styleFlag={styleFlag}
+          title="Voting Results"
+          tooltipMessage="Recent voting results"
+        >
           <Table compact>
             {proposals.length === 0 ? (
               <>
@@ -169,8 +172,12 @@ const Home = (props: any) => {
             )}
           </Table>
         </Card>
-        <Card styleFlag={styleFlag} title="Transaction History" tooltipMessage="This shows all your transactions">
-          <Table compact columns={["Type", "Use", "Amount", "Date"]}>
+        <Card
+          styleFlag={styleFlag}
+          title="Transaction History"
+          tooltipMessage="This shows all your transactions"
+        >
+          <Table compact columns={["Type", "Use", "Amount", "Date (dd/mm/yyyy)"]}>
             {transactions.length === 0 ? (
               <>
                 <tr>

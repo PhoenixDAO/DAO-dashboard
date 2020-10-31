@@ -261,6 +261,7 @@ const Admin = (props: any) => {
         title: string;
         votes: [];
         reward: any;
+        budget:any;
         milestoness: any;
         description: any;
         expirationDate: any;
@@ -545,13 +546,14 @@ const Admin = (props: any) => {
       </Button>
     </DialogActions>
   </Dialog>
-      <Budget />
+      <Budget openSnackbar={openSnackbar}/>
       {modalOpen && <EditModal close={closeModal} />}
       {projectModalItem && (
         <AdminModal
           resetData={renderAgain}
           title={projectModalItem.title}
           reward={projectModalItem.reward}
+          budget={projectModalItem.budget}
           milestones={projectModalItem.milestoness}
           description={projectModalItem.description}
           createdAt={projectModalItem.createdAt}
@@ -597,7 +599,7 @@ const Admin = (props: any) => {
           title="Proposal Requests"
           tooltipMessage="This shows all the proposals pending for approval"
         >
-          <Table compact columns={["Proposal", "Submission Date"]}>
+          <Table compact columns={["Proposal", "Submission Date (dd/mm/yyyy)"]}>
             {proposalsOfStatusPending.length == 0 ? (
               <td>{loading1 ? "Loading..." : "No proposal found"}</td>
             ) : (
@@ -608,6 +610,7 @@ const Admin = (props: any) => {
                       setProjectModalItem({
                         title: item.name,
                         reward: item.reward,
+                        budget:item.budget,
                         milestoness: item.milestone,
                         description: item.description,
                         votes: item.votes,
@@ -651,7 +654,7 @@ const Admin = (props: any) => {
           title="Proposals Ready for Vote"
           tooltipMessage="All the proposals ready for voting"
         >
-          <Table compact columns={["Proposal", "Voting Day"]}>
+          <Table compact columns={["Proposal", "Voting Day (dd/mm/yyyy)"]}>
             {proposalsOfStatusVoting.length == 0 ? (
               <td>
                 {loading2 ? "Loading..." : "No proposal ready for voting"}

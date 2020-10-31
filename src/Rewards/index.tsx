@@ -44,7 +44,7 @@ const Rewards = (props: any) => {
   return (
     <Card title="Rewards" tooltipMessage="All your rewards on proposals">
       <Table
-        columns={["Votes Participated", "Your Vote", "Reward Earned", "Date"]}
+        columns={["Votes Participated", "Your Vote", "Reward Earned", "Date (dd/mm/yyyy)"]}
       >
         {numio.length === 0 ? (
           <>

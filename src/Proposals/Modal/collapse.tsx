@@ -12,16 +12,21 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       width: "100%",
       border: "1px solid #E0E0E0",
+      "& .MuiAccordionSummary-content": {
+        alignItems:"center"
+      }
     },
     heading: {
       // fontSize: theme.typography.pxToRem(15),
-      fontSize: "15px",
+      fontSize: "13px",
       fontWeight: theme.typography.fontWeightRegular,
     },
     text: {
-      fontSize: "14px",
+      fontSize: "12px",
 
     },
+    
+    
   })
 );
 

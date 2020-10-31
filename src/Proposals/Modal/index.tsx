@@ -10,8 +10,8 @@ import { CircularProgress } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { URL, VoteOnProposal } from "../../const";
 import Tooltip from "@material-ui/core/Tooltip";
-import { withStyles, Theme, makeStyles } from "@material-ui/core/styles";
-
+import { withStyles,createStyles, Theme, makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 type Props = {
   close: () => any;
   title: string;
@@ -23,9 +23,68 @@ const LightTooltip = withStyles((theme: Theme) => ({
   },
 }))(Tooltip);
 
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    description: {
+      [theme.breakpoints.down("sm")]: {
+        width: "220px",
+        "& .MuiInputBase-root": {
+          fontSize: "18px",
+          marginBottom: "10px",
+          width: "220px",
+        },
+        "& .MuiFormLabel-root": {
+          fontSize: "18px",
+          fontWeight:"normal",
+          color: "#EA8604",
+          width: "max-content",
+        },
+        "& .MuiFormHelperText-root": {
+          fontSize: "5px",
+        },
+      },
+      [theme.breakpoints.up("sm")]: {
+        width: "420px",
+
+        "& .MuiInputBase-root": {
+          fontSize: "18px",
+          marginBottom: "10px",
+          width: "420px",
+        },
+        "& .MuiFormLabel-root": {
+          fontSize: "18px",
+          fontWeight:"normal",
+          color: "#EA8604",
+        },
+        "& .MuiFormHelperText-root": {
+          fontSize: "5px",
+        },
+      },
+      "& .MuiInputBase-root": {
+        fontSize: "18px",
+
+        marginBottom: "10px",
+      },
+      "& .MuiFormLabel-root": {
+        fontSize: "18px",
+        fontWeight:"normal",
+        color: "#EA8604",
+        width: "max-content",
+      },
+      "& .MuiFormHelperText-root": {
+        fontSize: "10px",
+      },
+      "& .MuiOutlinedInput-inputMultiline": {
+        padding: "0",
+    fontSize: "13px"
+      }
+    },
+  })
+);
+
 const changeFormat = (date: any) => {
   date = new Date(date);
-
+  
   return (
     <td>
       {new Date(date.getTime()).getDate()}/
@@ -37,6 +96,7 @@ const changeFormat = (date: any) => {
 
 const ProposalModal = (props: any) => {
   const [myLoading, setMyLoading] = useState(false);
+  const classes = useStyles();
 
   const handleClick = async (_id: any, resetData: any, props: any) => {
     try {
@@ -115,14 +175,38 @@ const ProposalModal = (props: any) => {
       }
     >
       <div className={style.modalContent}>
+      {/* <div className={style.modalBrief}>
+          {console.log(props.milestones)}
+          <span>Budget</span>
+          <span>Milestones</span>
+          <span>Expiration Date</span>
+        </div> */}
         <div className={style.modalBrief}>
           {console.log(props.milestones)}
-          <span>{props.reward} PHNX</span>
-          <span>{props.milestones.length} milestone</span>
-          <span>{changeFormat(props.expirationDate)}</span>
+          <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Budget</span></div><div style={{marginTop:"5px"}}><span>{props.budget}</span> <span>PHNX</span></div></div>
+          <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Milestones</span></div><div style={{marginTop:"5px"}}><span>{props.milestones.length}</span></div></div>
+          <div style={{width:"80px",textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Exp. Date</span></div><span>(dd/mm/yyyy)</span><div><span>{changeFormat(props.expirationDate)}</span></div></div>
+          {/* <div><span>{props.milestones.length}</span></div>
+          <div><span>{changeFormat(props.expirationDate)}</span></div> */}
+          
         </div>
         {/* <div className={style.modalText}>{props.description}</div> */}
+        
+        <form className={classes.description} noValidate autoComplete="off">
+              <TextField
+                id="outlined-multiline-static"
+                label="Project Description"
+                multiline
+                rows={3}
+                defaultValue={props.description}
+                InputProps={{
+                  readOnly: true,
+                }}
+                variant="outlined"
+              />
+            </form>
         <div className={style.modalSteps}>
+          <h3 style={{ fontSize: "16px", marginBottom: "10px", color: "#ea8604", fontWeight: "normal"}}>Milestones</h3>
           <div
             style={{
               height: "200px",

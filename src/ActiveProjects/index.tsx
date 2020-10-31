@@ -6,7 +6,7 @@ import axios from "axios";
 import { connect } from "react-redux";
 import "./mystyles.css";
 import { URL, ProposalByStatus } from "../const";
-import {Container }from '@material-ui/core'
+import { Container } from "@material-ui/core";
 type Proposal = {
   budget: any;
   collateral: any;
@@ -51,7 +51,9 @@ const ActiveProjects = (props: any) => {
         setValue(value.data.result);
         setLoading1(false);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        setLoading1(false);
+      });
   };
   const closeModal = () => setModalItem(undefined);
   let count = 0;
@@ -64,16 +66,20 @@ const ActiveProjects = (props: any) => {
   };
 
   return (
-  //  <Container max-width='xl'>
-    <Card  title="Active Projects" tooltipMessage="All proposals accepted after passing voting stage">
+    //  <Container max-width='xl'>
+    <Card
+      title="Active Projects"
+      tooltipMessage="All proposals accepted after passing voting stage"
+    >
       {modalItem && (
-        <Modal  styleFlag="ActiveProjects"
+        <Modal
+          styleFlag="ActiveProjects"
           close={closeModal}
           estDate={changeFormat(modalItem.estCompletionDate)}
           proposal={modalItem}
         />
       )}
-      <Table columns={["Active Project", "Status", "Est. Completion Date"]}>
+      <Table columns={["Active Project", "Status", "Est. Completion Date (dd/mm/yyyy)"]}>
         {value.length === 0 ? (
           <>
             {" "}
@@ -101,7 +107,7 @@ const ActiveProjects = (props: any) => {
         )}
       </Table>
     </Card>
-   // </Container>
+    // </Container>
   );
 };
 const mapStateToProps = (state: any) => ({

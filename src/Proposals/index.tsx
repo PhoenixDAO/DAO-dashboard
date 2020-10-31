@@ -14,9 +14,42 @@ import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import ContractInit from "../config/contractsInit";
 import { PHNX_PROPOSAL_ADDRESS } from "../Contracts/phnxProposal";
 import { CircularProgress } from "@material-ui/core";
+import { createStyles } from "@material-ui/core/styles";
+import { withStyles, Theme, makeStyles } from "@material-ui/core/styles";
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="standard" {...props} />;
 }
+
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    buttonsdiv: {
+      [theme.breakpoints.up("xs")]: {
+        display: "flex",
+        justifyContent: "space-between",
+      },
+      [theme.breakpoints.down("xs")]: {
+        display: "block",
+      },
+    },
+    submitbutton: {
+      [theme.breakpoints.up('xs')]:
+      {
+        marginLeft: "6px",
+        
+      },
+      [theme.breakpoints.down('xs')]:
+      {
+        marginLeft: "0px",
+      }
+    },
+    approvalButton:{
+      [theme.breakpoints.down('xs')]:
+      {
+        marginBottom:"5px",
+      }
+    }
+  })
+);
 
 let web3js: any;
 
@@ -768,13 +801,14 @@ const Proposals = (props: any) => {
   const [showSnackBar, setShowSnackBar] = useState(false);
   const [ethereumNetworkError, setEthereumNetworkError] = useState(false);
   const [metaMaskApproval, setMetaMaskApproval] = useState(false);
-
+  const [checkingLoading, setCheckingLoading] = useState(true);
 
   const [projectModalItem, setProjectModalItem] = React.useState<
     | {
         title: string;
         votes: [];
         reward: any;
+        budget: any;
         milestoness: any;
         description: any;
         expirationDate: any;
@@ -803,17 +837,15 @@ const Proposals = (props: any) => {
           }
         )
         .then((value) => {
-          
-          
-          let tempDate=new Date();
-          let temp:any[]=[];
-          console.log("before splice",temp)
-          value.data.result.map((proposal:any,i:number)=>{
-            if(proposal.expirationDate > tempDate.toISOString()){
+          let tempDate = new Date();
+          let temp: any[] = [];
+          console.log("before splice", temp);
+          value.data.result.map((proposal: any, i: number) => {
+            if (proposal.expirationDate > tempDate.toISOString()) {
               temp.push(value.data.result[i]);
             }
-          })
-          console.log("after splice",temp)
+          });
+          console.log("after splice", temp);
           setValue(temp);
           setLoading1(false);
         })
@@ -886,7 +918,7 @@ const Proposals = (props: any) => {
           // tx confirmed
           // checkApproval();
           console.log("Approval transaction sent");
-          openSnackbar('Approval granted', 'success')
+          openSnackbar("Approval granted", "success");
           setMetaMaskApproval(true);
         }
         setMetaMaskApproval(true);
@@ -909,18 +941,19 @@ const Proposals = (props: any) => {
     if (result == "0") {
       console.log("-----", false, accounts[0]);
       // await sendApproval();
+      setCheckingLoading(false);
       setMetaMaskApproval(false);
       return false;
     } else {
       console.log("-------", true, accounts[0]);
       // sendApproval();
+      setCheckingLoading(false);
       setMetaMaskApproval(true);
       return true;
     }
+
     // return result;
   };
-
-
 
   const changeFormat = (date: any) => {
     date = new Date(date);
@@ -933,11 +966,23 @@ const Proposals = (props: any) => {
   };
 
   useEffect(() => {
-    getData()
-    checking()
+    getData();
+    checking();
     //checkWeb3();
     // getData();
   }, []);
+
+  const checkNetwork = async () => {
+    let temp: any = await ContractInit.init();
+    if (temp.network != "rinkeby") {
+      console.log("Network 11 false");
+      //openSnackbar('Network must br Rinkeby',)
+      return false;
+    } else {
+      console.log("Network 11 true");
+      return true;
+    }
+  };
 
   const checking = async () => {
     await checkWeb3();
@@ -949,7 +994,6 @@ const Proposals = (props: any) => {
     let temp: any = await ContractInit.init();
     console.log("123", temp.network);
 
-
     if (temp.network != "rinkeby") {
       setEthereumNetworkError(true);
       throw "Ethereum Network invalid !";
@@ -958,10 +1002,10 @@ const Proposals = (props: any) => {
     }
   };
 
-  const doubleMethods = async () => {
-    await sendApproval();
-    await sendProposal();
-  };
+  // const doubleMethods = async () => {
+  //   await sendApproval();
+  //   await sendProposal();
+  // };
 
   let date = new Date();
   let styleFlag = false;
@@ -978,6 +1022,8 @@ const Proposals = (props: any) => {
     setMessage({ message, severity });
     setShowSnackBar(true);
   };
+  const classes = useStyles();
+  let test = true;
   return (
     <>
       {modalOpen && (
@@ -989,45 +1035,68 @@ const Proposals = (props: any) => {
           openSnackbar={openSnackbar}
           title={projectModalItem.title}
           reward={projectModalItem.reward}
+          budget={projectModalItem.budget}
           milestones={projectModalItem.milestoness}
           description={projectModalItem.description}
           expirationDate={projectModalItem.expirationDate}
           votes={projectModalItem.votes}
           _id={projectModalItem._id}
           styleFlag={projectModalItem.styleFlag}
-          button1="UpVote"
-          button2="Ok"
+          button1="Upvote"
+          button2="Back"
           close={() => setProjectModalItem(undefined)}
           // setSnackBar={() => setSnackBar}
         />
       )}
+
       <Card
         styleFlag="UpvoteProposals"
         title="Upvote Proposals"
         actions={
-          <div style={{ display: "flex" }}>
-            <Button
+          <div className={classes.buttonsdiv}>
+            <Button className={classes.approvalButton}
               secondary
-              //onClick={() => (metaMaskApproval ? openModal() : checkApproval())}
-              onClick={() =>
-                metaMaskApproval
-                  ? openModal()
-                  : openSnackbar("Metamask not approved", "error")
-              }
-            >
-              Submit Proposal
-            </Button>
-            <Button
-              secondary
-              onClick={() =>
-                metaMaskApproval
+              onClick={async () =>
+                checkingLoading
+                  ? null
+                  : !(await checkNetwork())
+                  ? openSnackbar("Network must be Rinkeby", "error")
+                  : metaMaskApproval
                   ? openSnackbar("Approval already granted", "success")
                   : myLoader
                   ? null
                   : sendApproval()
               }
             >
-              {myLoader ? <CircularProgress size={12} /> : " Send Approval"}
+              {checkingLoading ? (
+                <CircularProgress size={12} />
+              ) : myLoader ? (
+                <CircularProgress size={12} />
+              ) : (
+                " Send Approval"
+              )}
+            </Button>
+
+            <Button
+              //style={{marginRight:"8px"}}
+              className={classes.submitbutton}
+              secondary
+              //onClick={() => (metaMaskApproval ? openModal() : checkApproval())}
+              onClick={async () =>
+                checkingLoading
+                  ? null
+                  : !(await checkNetwork())
+                  ? openSnackbar("Network must be Rinkbey", "error")
+                  : metaMaskApproval
+                  ? openModal()
+                  : openSnackbar("Metamask not approved", "error")
+              }
+            >
+              {checkingLoading ? (
+                <CircularProgress size={12} />
+              ) : (
+                "Submit Proposal"
+              )}
             </Button>
           </div>
         }
@@ -1038,7 +1107,7 @@ const Proposals = (props: any) => {
             "Proposal",
             "Current Upvotes",
             "Cost (PHNX)",
-            "Expiration Date",
+            "Expiration Date (dd/mm/yyyy)",
           ]}
         >
           {value.length == 0 ? (
@@ -1055,26 +1124,27 @@ const Proposals = (props: any) => {
                   setProjectModalItem({
                     title: proposal.name,
                     reward: proposal.reward,
+                    budget: proposal.budget,
                     milestoness: proposal.milestone,
                     description: proposal.description,
                     votes: proposal.votes,
                     expirationDate: proposal.expirationDate,
                     _id: proposal._id,
-                    styleFlag:"UpvoteModal",
+                    styleFlag: "UpvoteModal",
                     button1: "UpVote",
                     button2: "Ok",
                     renderAgain: renderAgain,
                   })
                 }
               >
-                {value.length==0? (
-              <>
-                {" "}
-                <tr>
-                  <td>{loading1 ? "Loading..." : "No proposals found"}</td>
-                </tr>{" "}
-              </>
-            ) : proposal.expirationDate < date.toISOString() ? (
+                {value.length == 0 ? (
+                  <>
+                    {" "}
+                    <tr>
+                      <td>{loading1 ? "Loading..." : "No proposals found"}</td>
+                    </tr>{" "}
+                  </>
+                ) : proposal.expirationDate < date.toISOString() ? (
                   ""
                 ) : (
                   <>
@@ -1114,7 +1184,7 @@ const Proposals = (props: any) => {
           <Alert style={{ fontSize: "12px" }} severity={message.severity}>
             {message.message}
           </Alert>
-        </Snackbar> 
+        </Snackbar>
       </Card>
     </>
   );

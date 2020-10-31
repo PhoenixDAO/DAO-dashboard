@@ -18,6 +18,8 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import { URL, Admin } from "../../const";
 import axios from "axios";
 import { getDAOAttributes } from "../../redux/DAOAttributesActions";
+import ContractInit from "../../config/contractsInit";
+
 
 import { logout } from "redux/authActions";
 
@@ -103,6 +105,15 @@ const TopBar = (props: any) => {
   // },[])
   const _window = window as any;
 
+  const matchAddressWithAccount = async() =>{
+    let temp = await ContractInit.init();
+    console.log("address is",temp.address , " and numioAddress is " , props.user?.numioAddress)
+    if(!temp.address || props.user && temp.address.toLowerCase() != props.user.numioAddress.toLowerCase()){
+      console.log("logging out")
+      await props.logout();
+    }
+  }
+
   useEffect(() => {
     async function listenMMAccount() {
       if (typeof _window.ethereum !== "undefined") {
@@ -118,7 +129,7 @@ const TopBar = (props: any) => {
         });
       }
     }
-
+    matchAddressWithAccount();
     listenMMAccount();
   }, []);
 

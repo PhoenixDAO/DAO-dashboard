@@ -25,6 +25,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import { TransitionProps } from "@material-ui/core/transitions";
+import Web3 from "web3";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -71,12 +72,13 @@ const useStyles = makeStyles((theme) =>
       [theme.breakpoints.down("sm")]: {
         width: "220px",
         "& .MuiInputBase-root": {
-          fontSize: "15px",
+          fontSize: "18px",
           marginBottom: "10px",
           width: "220px",
         },
         "& .MuiFormLabel-root": {
-          fontSize: "15px",
+          fontSize: "18px",
+          fontWeight:"normal",
           color: "#EA8604",
           width: "max-content",
         },
@@ -88,12 +90,13 @@ const useStyles = makeStyles((theme) =>
         width: "420px",
 
         "& .MuiInputBase-root": {
-          fontSize: "12px",
+          fontSize: "18px",
           marginBottom: "10px",
           width: "420px",
         },
         "& .MuiFormLabel-root": {
-          fontSize: "15px",
+          fontSize: "18px",
+          fontWeight:"normal",
           color: "#EA8604",
         },
         "& .MuiFormHelperText-root": {
@@ -101,18 +104,23 @@ const useStyles = makeStyles((theme) =>
         },
       },
       "& .MuiInputBase-root": {
-        fontSize: "16px",
+        fontSize: "18px",
 
         marginBottom: "10px",
       },
       "& .MuiFormLabel-root": {
-        fontSize: "16px",
+        fontSize: "18px",
+        fontWeight:"normal",
         color: "#EA8604",
         width: "max-content",
       },
       "& .MuiFormHelperText-root": {
         fontSize: "10px",
       },
+      "& .MuiOutlinedInput-inputMultiline": {
+        padding: "0",
+    fontSize: "13px"
+      }
     },
   })
 );
@@ -140,9 +148,7 @@ const LightTooltip = withStyles((theme: Theme) => ({
 
 const changeFormat = (date: any) => {
   date = new Date(date);
-  return `${new Date(date.getTime()).getDate()}/${
-    new Date(date.getTime()).getMonth() + 1
-  }/${new Date(date.getTime()).getFullYear()} `;
+  return `${new Date(date.getTime()).getDate()}/${new Date(date.getTime()).getMonth() + 1}/${new Date(date.getTime()).getFullYear()}`;
 };
 const ProposalModal = (props: any) => {
   const [myLoading1, setMyLoading1] = useState(false);
@@ -152,11 +158,26 @@ const ProposalModal = (props: any) => {
   const [checkNetwork, setCheckNetwork] = useState(false);
 
   const checkAdmin = async (address: any) => {
-    let value = await (await ContractInit.phoenixProposalContract()).methods
+    let value = await (await ContractInit.phoenixProposalContract())?.methods
       .isOwner(address)
       .call();
     console.log("network in checkAdmin");
     return value;
+  };
+
+  const checkBalance = async (address: any) => {
+    let value = await (await ContractInit.initPhnxTokenContract())?.methods
+      .balanceOf(address)
+      .call();
+    value = Web3.utils.fromWei(value);
+    console.log("balance", value);
+    console.log("balance collateral", props.collateral);
+    //return value;
+    if (value > props.collateral) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   const changeStatusOfProposal = async (
@@ -169,6 +190,14 @@ const ProposalModal = (props: any) => {
     try {
       let network = await ContractInit.init();
       console.log("network  ", network);
+      let test = await checkBalance(props.proposalUSerNumioAddress);
+
+      console.log("Testing", test);
+      if (!test) {
+        props.openSnackbar("Insufficient amount", "error");
+        return null;
+      }
+
       if (network.network != "rinkeby") {
         // setCheckNetwork(true);
         console.log("IN IF 1");
@@ -242,7 +271,8 @@ const ProposalModal = (props: any) => {
         console.log("error");
         props.openSnackbar("Network must be Rinkbey", "error");
       } else {
-        props.openSnackbar("Request failed", "error");
+        props.openSnackbar("Network must be Rinkbey", "error");
+        // props.openSnackbar("Request failed", "error");
         console.log("Error", err);
         setMyLoading1(false);
         setMyLoading2(false);
@@ -366,6 +396,7 @@ const ProposalModal = (props: any) => {
   useEffect(() => {
     console.log("123 Address", props);
     checkAccounts();
+    checkBalance(props.proposalUSerNumioAddress);
   });
   return (
     <>
@@ -464,9 +495,9 @@ const ProposalModal = (props: any) => {
             {console.log("MetaMask address", props.proposalUserNumioAddress)}
             {console.log("Admin address", props.user.numioAddress)}
             <div className={style.modalBrief}>
-              <span>{props.reward} PHNX</span>
-              <span>{props.milestones.length} milestone</span>
-              <span>{changeFormat(props.createdAt)}</span>
+            <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Budget</span></div><div style={{marginTop:"5px"}}><span>{props.budget}</span> <span>PHNX</span></div></div>
+          <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Milestones</span></div><div style={{marginTop:"5px"}}><span>{props.milestones.length}</span></div></div>
+          <div style={{width:"80px",textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Submitted on</span></div><span>(dd/mm/yyyy)</span><div>{changeFormat(props.createdAt)}</div></div>
             </div>
             <form className={classes.description} noValidate autoComplete="off">
               <TextField
@@ -482,6 +513,7 @@ const ProposalModal = (props: any) => {
               />
             </form>
             <div className={style.modalSteps}>
+            <h3 style={{ fontSize: "16px", marginBottom: "10px", color: "#ea8604", fontWeight: "normal"}}>Milestones</h3>
               <div
                 style={{
                   height: "200px",
