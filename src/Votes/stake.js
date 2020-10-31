@@ -345,7 +345,9 @@ const Stake = (props) => {
       })
       .on("confirmation", function (confirmationNumber, receipt) {
         if (confirmationNumber === 1) {
+          setApproval(true)
           setApprovalLoader(false)
+          props.openSnackbar('You have successfully approved.', 'success')
         }
       })
       .on('error', function(err){

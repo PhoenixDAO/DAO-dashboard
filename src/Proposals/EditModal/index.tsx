@@ -321,7 +321,7 @@ const EditModal = (props: any) => {
     return <MuiAlert elevation={6} variant="standard" {...props} />;
   }
 
-  const [j, setJ] = useState(0);
+  const [j, setJ] = useState(2);
 
   const classes = useStyles();
 
@@ -449,15 +449,22 @@ const EditModal = (props: any) => {
     console.log("check array nowasdasdasdas", array);
 
     //console.log("Check array milestoneCost", array.milestoneCost);
+    console.log("check state", state);
     array.map((item: any) => {
       console.log(item.estimatedDays);
-      let temp = parseInt(item.estimatedDays);
+      let tempDays = parseInt(item.estimatedDays);
       let tempCost = parseFloat(item.milestoneCost);
       totalMilestoneCost = totalMilestoneCost + tempCost;
-      totalMilestonesDays = totalMilestonesDays + temp;
+      totalMilestonesDays = totalMilestonesDays + tempDays;
     });
+
+    setState({ ...state, ["budget"]: totalMilestoneCost });
+    // setState({ ...state, ["duration"]: totalMilestonesDays });
+
+    console.log("working");
     console.log("Check array", totalMilestonesDays);
     console.log("check array cost", totalMilestoneCost);
+    console.log("check state", state);
     setMilestoneDaysTotal(totalMilestonesDays);
     setState({ ...state, ["milestone"]: array });
     setMilestoneDetails({
@@ -470,6 +477,7 @@ const EditModal = (props: any) => {
     setAddMilestones(false);
     setJ(3);
   };
+  console.log("check state", state);
 
   const handleMilestoneBack = () => {
     if (state.milestone.length != 0) {
