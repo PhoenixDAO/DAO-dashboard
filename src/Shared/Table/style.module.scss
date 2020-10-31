@@ -48,10 +48,14 @@
   th,
   td {
     height: 69rem;
-line-height: 2;
+  
    &:first-child,
     & + * {
      padding-left: 23rem;
+     align-items: center;
+    display: flex;
+    align-content: center;
+    justify-content: center;
     }
 
     &:last-child {
@@ -144,7 +148,7 @@ line-height: 2;
 }
 
 @media screen and (max-width:600px){
-  .tablePassVotes {
+  .tablePassVotes{
     td {
       height: 69rem;
       width: 10%;
@@ -190,7 +194,7 @@ line-height: 2;
 }
 
 @media (max-height: 680px), (min-aspect-ratio: 15/9) {
-  .compact {
+  .compact{
     th,
     td,
     .hoverRow {
