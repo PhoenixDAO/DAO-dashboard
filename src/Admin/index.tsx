@@ -5,7 +5,7 @@ import Table from "Shared/AdminTable";
 import style from "./style.module.scss";
 import axios from "axios";
 import { connect } from "react-redux";
-import EditModal from "../Proposals/EditModal";
+import EditModal from "../Proposals/EditModal/index";
 import AdminModal from "../Proposals/Modal/adminModal";
 import { URL } from "../const";
 import { Proposal, ByAdmin, ProposalByStatus } from "../const";
