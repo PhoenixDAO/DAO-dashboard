@@ -869,8 +869,9 @@ const Proposals = (props: any) => {
 
       //get network which metamask is connected too
       let network = await web3js.eth.net.getNetworkType();
-
+      console.log("checking network", network);
       await initContract();
+      return network;
     } else {
       /*** meta mask is not installed ***/
     }
@@ -928,6 +929,7 @@ const Proposals = (props: any) => {
           setMyLoader(false);
         }
       });
+
     // setApprovalGranted(true);
     setMyLoader(false);
     // return result;
@@ -985,8 +987,15 @@ const Proposals = (props: any) => {
   };
 
   const checking = async () => {
-    await checkWeb3();
-    await checkApproval();
+    let value = await checkWeb3();
+    //  console.log('')
+    if (value == "rinkeby") {
+      let isApproved = await checkApproval();
+      console.log("isApproved", isApproved);
+    } else {
+      console.log("Network error");
+      setCheckingLoading(false);
+    }
   };
 
   const openModal = async () => {
