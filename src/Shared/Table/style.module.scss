@@ -48,7 +48,7 @@
   th,
   td {
     height: 69rem;
-
+line-height: 2;
    &:first-child,
     & + * {
      padding-left: 23rem;
@@ -109,7 +109,6 @@
 
 .tablePassVotes {
   width: 100%;
-
   tr:nth-child(even) td,
   th {
     background: #fbfbfc;
