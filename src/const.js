@@ -1,7 +1,7 @@
 //export const URL = "https://phoenix-dao-backend.herokuapp.com/";
 //export const URL = "http://localhost:4000/";
-export const URL ='https://phoenix-dao-dev-server.herokuapp.com/'
-//export const URL = 'http://192.168.18.155:4000/'
+// export const URL ='https://phoenix-dao-dev-server.herokuapp.com/'
+export const URL = 'http://192.168.18.155:4000/'
 export const Proposal = "proposal/";
 export const ByAdmin = "proposal/changeStatusOfMilestoneByAdmin/";
 export const ByUser = "proposal/changeStatusOfMilestoneByUser/";

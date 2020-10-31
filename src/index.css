@@ -26,7 +26,7 @@ html {
   font-family: ProximaNova, sans-serif;
 }
 
-@media screen and (max-width: 1979px) {
+/* @media screen and (max-width: 1979px) {
   html {
     font-size: 0.8px;
   }
@@ -37,7 +37,7 @@ html {
   html {
     font-size: 0.6px;
   }
-}
+} */
 /* 
 @media (max-width: 1450px) {
   html {
