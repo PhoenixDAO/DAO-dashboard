@@ -191,10 +191,13 @@ const ProposalModal = (props: any) => {
   ) => {
     try {
       let network = await ContractInit.init();
-      console.log("network  ", network);
+
+      console.log("network  Working", network);
+
       let test = await checkBalance(props.proposalUSerNumioAddress);
 
       console.log("Testing", test);
+
       if (!test && status == "UpVote") {
         props.openSnackbar("Insufficient amount", "error");
         return null;
