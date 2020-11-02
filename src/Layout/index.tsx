@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
-import {Container} from '@material-ui/core'
-
+import { Container } from "@material-ui/core";
+import { ethereumNetwork } from "../const";
 /** Components */
 import TopBar from "./TopBar";
 import Sidebar from "./Sidebar";
@@ -21,7 +21,7 @@ export default ({ children }: Props) => {
   const checkNetwork = async () => {
     let temp = await ContractInit.init();
     console.log("123", temp.network);
-    if (temp.network != "rinkeby") {
+    if (temp.network != ethereumNetwork) {
       alert("Please Switch to rinkeby network ....");
     }
   };
@@ -38,9 +38,11 @@ export default ({ children }: Props) => {
       <TopBar isAdmin={isAdmin} />
       <div className={style.columns}>
         {!isAdmin && <Sidebar />}
-        <Container style={{ overflow:"auto"}} maxWidth="xl"> 
-         <div className={`${style.content} ${contentClassName}`}>{children}</div>
-         </Container>
+        <Container style={{ overflow: "auto" }} maxWidth="xl">
+          <div className={`${style.content} ${contentClassName}`}>
+            {children}
+          </div>
+        </Container>
       </div>
     </div>
   );

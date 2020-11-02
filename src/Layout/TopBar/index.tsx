@@ -20,7 +20,6 @@ import axios from "axios";
 import { getDAOAttributes } from "../../redux/DAOAttributesActions";
 import ContractInit from "../../config/contractsInit";
 
-
 import { logout } from "redux/authActions";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -105,23 +104,33 @@ const TopBar = (props: any) => {
   // },[])
   const _window = window as any;
 
-  const matchAddressWithAccount = async() =>{
+  const matchAddressWithAccount = async () => {
     let temp = await ContractInit.init();
-    console.log("address is",temp.address , " and numioAddress is " , props.user?.numioAddress)
-    if(!temp.address || props.user && temp.address.toLowerCase() != props.user.numioAddress.toLowerCase()){
-      console.log("logging out")
+    console.log(
+      "address is",
+      temp.address,
+      " and numioAddress is ",
+      props.user?.numioAddress
+    );
+    if (
+      !temp.address ||
+      (props.user &&
+        temp.address.toLowerCase() != props.user.numioAddress.toLowerCase())
+    ) {
+      console.log("logging out");
       await props.logout();
     }
-  }
+  };
 
   useEffect(() => {
     async function listenMMAccount() {
       if (typeof _window.ethereum !== "undefined") {
         _window.ethereum.on("accountsChanged", async function (accounts: any) {
-          if(!accounts[0]){
+          console.log("Xord", accounts);
+          if (!accounts[0]) {
             await props.logout();
-          }
-          else if (props.user && 
+          } else if (
+            props.user &&
             props.user.numioAddress.toLowerCase() != accounts[0].toLowerCase()
           ) {
             await props.logout();

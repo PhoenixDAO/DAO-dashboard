@@ -17,7 +17,7 @@ import contractsInit from "../config/contractsInit";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import { Snackbar, Grid } from "@material-ui/core";
 import ContractInit from "../config/contractsInit";
-
+import { ethereumNetwork } from "../const";
 let noDataFound = "No data found";
 
 function Alert(props: any) {
@@ -81,8 +81,8 @@ const Votes = (props: any) => {
   const [stakedSnackBar, setStakedSnackBar] = useState(false);
   const [allowModalOpen, setAllowModalOpen]: any = useState({});
   const [transactionRejected, setTransactionRejected] = useState(false);
-  const [loading1,setLoading1]=useState(true);
-  const [loading2,setLoading2]=useState(true)
+  const [loading1, setLoading1] = useState(true);
+  const [loading2, setLoading2] = useState(true);
 
   useEffect(() => {
     getData();
@@ -113,11 +113,11 @@ const Votes = (props: any) => {
             ? setAllowModalOpen((val: any) => ({ ...val, [`${i}`]: true }))
             : null
         );
-        setLoading1(false)
+        setLoading1(false);
       })
       .catch((err) => {
         setLoading(false);
-        setLoading1(false)
+        setLoading1(false);
       });
   };
   // Get All the Proposals Here and set it to the State
@@ -129,18 +129,15 @@ const Votes = (props: any) => {
         },
       })
       .then((value) => {
-        console.log("value ss",value)
-       let temp=value.data.result;
+        console.log("value ss", value);
+        let temp = value.data.result;
         for (let i = 0; i < temp.length; i++) {
-          if (
-           temp[i].status != "Accepted" &&
-            temp[i].status != "Fail"
-          ) {
+          if (temp[i].status != "Accepted" && temp[i].status != "Fail") {
             temp.splice(i, 1);
             i--;
           }
         }
-        console.log(" setProposals ",temp)
+        console.log(" setProposals ", temp);
         setProposals(temp);
         setLoading2(false);
       })
@@ -172,13 +169,13 @@ const Votes = (props: any) => {
   const handleStakedSnackBar = (state: boolean = true) => {
     setStakedSnackBar(state);
   };
-  
+
   const openModal = async (item: any) => {
     let temp: any = await ContractInit.init();
     console.log("123", temp.network);
 
-  //  const networkResult: any = props.network;
-    if (temp.network != "rinkeby") {
+    //  const networkResult: any = props.network;
+    if (temp.network != ethereumNetwork) {
       setEthereumNetworkError(true);
       throw "Ethereum Network invalid !";
     } else {
@@ -233,18 +230,22 @@ const Votes = (props: any) => {
           justify="center"
           spacing={2}
         >
-          <Card styleFlag={styleFlagUpcomingVotes} title="Upcoming Votes"  tooltipMessage="All proposals passing the upvote stage and ready for voting">
+          <Card
+            styleFlag={styleFlagUpcomingVotes}
+            title="Upcoming Votes"
+            tooltipMessage="All proposals passing the upvote stage and ready for voting"
+          >
             <Table
               styleFlag={styleFlagUpcomingVotes}
               columns={["Proposal", "Voting Day (dd/mm/yyyy)"]}
             >
               {value.length === 0 ? (
                 <>
-                {" "}
-                <tr>
-                  <td>{loading1 ? "Loading..." : "No proposals found"}</td>
-                </tr>{" "}
-              </>
+                  {" "}
+                  <tr>
+                    <td>{loading1 ? "Loading..." : "No proposals found"}</td>
+                  </tr>{" "}
+                </>
               ) : (
                 value.map((item: any, i) => (
                   <tr
@@ -288,18 +289,22 @@ const Votes = (props: any) => {
           spacing={2}
         >
           <div className={style.cardStyle}>
-            <Card styleFlag={styleFlagPassVotes} title="Past Votes"  tooltipMessage="Recent voting results">
+            <Card
+              styleFlag={styleFlagPassVotes}
+              title="Past Votes"
+              tooltipMessage="Recent voting results"
+            >
               <Table
                 styleFlag={styleFlagPassVotes}
                 columns={["Proposal", "Voting Day (dd/mm/yyyy)", "Pass/Fail"]}
               >
                 {proposals.length === 0 ? (
-                 <>
-                 {" "}
-                 <tr>
-                   <td>{loading2 ? "Loading..." : "No results found"}</td>
-                 </tr>{" "}
-               </>
+                  <>
+                    {" "}
+                    <tr>
+                      <td>{loading2 ? "Loading..." : "No results found"}</td>
+                    </tr>{" "}
+                  </>
                 ) : (
                   proposals.map((proposal: any, i: any) => (
                     <>

@@ -24,6 +24,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import { TransitionProps } from "@material-ui/core/transitions";
 
+import { ethereumNetwork } from "../const";
+
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="standard" {...props} />;
 }
@@ -85,7 +87,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       "& .MuiDialogContentText-root": {
         fontSize: "12px",
-        color: "black"
+        color: "black",
       },
       "& .MuiDialogTitle-root": {
         flex: "0 0 auto",
@@ -134,13 +136,13 @@ type approvalStateForDraw = {
 };
 
 type approvalStateForMilestone = {
-  id: any,
-  k: any,
-  i: any,
-  j: any,
-  index: any,
-  milestoneStatus: any,
-  str: any
+  id: any;
+  k: any;
+  i: any;
+  j: any;
+  index: any;
+  milestoneStatus: any;
+  str: any;
 };
 const Admin = (props: any) => {
   const classes = useStyles();
@@ -165,24 +167,30 @@ const Admin = (props: any) => {
   const [modalOpen, setModalOpen] = React.useState(false);
 
   const [openDialogueState, setOpenDialogueState] = useState(false);
-  const [approvalStateForDraw, setApprovalStateForDraw] = useState<approvalStateForDraw>({
+  const [approvalStateForDraw, setApprovalStateForDraw] = useState<
+    approvalStateForDraw
+  >({
     i: undefined,
     j: undefined,
     status: undefined,
     id: undefined,
     str: undefined,
   });
-  const [approvalStateForMilestone, setApprovalStateForMilestone] = useState<approvalStateForMilestone>({
+  const [approvalStateForMilestone, setApprovalStateForMilestone] = useState<
+    approvalStateForMilestone
+  >({
     id: undefined,
     k: undefined,
     i: undefined,
     j: undefined,
     index: undefined,
     milestoneStatus: undefined,
-    str: undefined
+    str: undefined,
   });
   const [dialogueMessage, setDialogueMessage] = useState("");
-  const [dialogueNumber,setDialogueNumber]=useState<number|undefined>(undefined);
+  const [dialogueNumber, setDialogueNumber] = useState<number | undefined>(
+    undefined
+  );
 
   const openDialogueForDraw = (
     i: number,
@@ -202,15 +210,15 @@ const Admin = (props: any) => {
         "On approving this you agree to reject this proposal and it will be marked as failed proposal."
       );
     }
-    setApprovalStateForDraw({ i,j,status,id,str });
+    setApprovalStateForDraw({ i, j, status, id, str });
     setOpenDialogueState(true);
   };
-  const handleDialogue = async (i:any,result: boolean) => {
+  const handleDialogue = async (i: any, result: boolean) => {
     setOpenDialogueState(false);
-    setDialogueNumber(undefined)
+    setDialogueNumber(undefined);
     setDialogueMessage("");
     if (result) {
-      if(i==0){
+      if (i == 0) {
         await changeProposalStatusForDraw(
           approvalStateForDraw.i,
           approvalStateForDraw.j,
@@ -218,7 +226,7 @@ const Admin = (props: any) => {
           approvalStateForDraw.id,
           approvalStateForDraw.str
         );
-      }else{
+      } else {
         await changeMilestoneByAdmin(
           approvalStateForMilestone.id,
           approvalStateForMilestone.k,
@@ -251,7 +259,7 @@ const Admin = (props: any) => {
         "On approving this you agree that you verified the project progress and this milestone is not completed."
       );
     }
-    setApprovalStateForMilestone({ id, k, i, j, index,milestoneStatus,str  });
+    setApprovalStateForMilestone({ id, k, i, j, index, milestoneStatus, str });
     setOpenDialogueState(true);
   };
 
@@ -261,7 +269,7 @@ const Admin = (props: any) => {
         title: string;
         votes: [];
         reward: any;
-        budget:any;
+        budget: any;
         milestoness: any;
         description: any;
         expirationDate: any;
@@ -324,9 +332,15 @@ const Admin = (props: any) => {
             [`${k}${id}${index}${str}`]: false,
           }));
           if (milestoneStatus == "Completed") {
-            openSnackbar("Milestone successfully marked completed !", "success");
+            openSnackbar(
+              "Milestone successfully marked completed !",
+              "success"
+            );
           } else {
-            openSnackbar("Milestone successfully marked incomplete !", "success");
+            openSnackbar(
+              "Milestone successfully marked incomplete !",
+              "success"
+            );
           }
 
           await getProposalOfStatusAccepted();
@@ -506,47 +520,47 @@ const Admin = (props: any) => {
 
   return (
     <>
-    <Dialog
-    open={openDialogueState}
-    TransitionComponent={Transition}
-    keepMounted
-    onClose={() => handleDialogue(dialogueNumber,false)}
-    aria-labelledby="alert-dialog-slide-title"
-    aria-describedby="alert-dialog-slide-description"
-    className={classes.dialogueText}
-  >
-    <DialogTitle
-      className={classes.dialogueText}
-      id="alert-dialog-slide-title"
-    >
-      {"Are you sure?"}
-    </DialogTitle>
-    <DialogContent className={classes.dialogueText}>
-      <DialogContentText
+      <Dialog
+        open={openDialogueState}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={() => handleDialogue(dialogueNumber, false)}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
         className={classes.dialogueText}
-        id="alert-dialog-slide-description"
       >
-        {dialogueMessage}
-      </DialogContentText>
-    </DialogContent>
-    <DialogActions className={classes.dialogueText}>
-      <Button
-        className={classes.dialogueButton}
-        onClick={() => handleDialogue(dialogueNumber,false)}
-        color="primary"
-      >
-        Disagree
-      </Button>
-      <Button
-        className={classes.dialogueButton}
-        onClick={() => handleDialogue(dialogueNumber,true)}
-        color="primary"
-      >
-        Agree
-      </Button>
-    </DialogActions>
-  </Dialog>
-      <Budget openSnackbar={openSnackbar}/>
+        <DialogTitle
+          className={classes.dialogueText}
+          id="alert-dialog-slide-title"
+        >
+          {"Are you sure?"}
+        </DialogTitle>
+        <DialogContent className={classes.dialogueText}>
+          <DialogContentText
+            className={classes.dialogueText}
+            id="alert-dialog-slide-description"
+          >
+            {dialogueMessage}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions className={classes.dialogueText}>
+          <Button
+            className={classes.dialogueButton}
+            onClick={() => handleDialogue(dialogueNumber, false)}
+            color="primary"
+          >
+            Disagree
+          </Button>
+          <Button
+            className={classes.dialogueButton}
+            onClick={() => handleDialogue(dialogueNumber, true)}
+            color="primary"
+          >
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Budget openSnackbar={openSnackbar} />
       {modalOpen && <EditModal close={closeModal} />}
       {projectModalItem && (
         <AdminModal
@@ -610,7 +624,7 @@ const Admin = (props: any) => {
                       setProjectModalItem({
                         title: item.name,
                         reward: item.reward,
-                        budget:item.budget,
+                        budget: item.budget,
                         milestoness: item.milestone,
                         description: item.description,
                         votes: item.votes,
@@ -697,12 +711,7 @@ const Admin = (props: any) => {
                     <div
                       className={style.toggleButton}
                       onClick={() => {
-                        openDialogueForDraw(
-                          0,
-                          j,
-                          "Accepted",
-                          item._id,
-                          "Yes");
+                        openDialogueForDraw(0, j, "Accepted", item._id, "Yes");
                         // changeProposalStatusForDraw(
                         //   0,
                         //   j,
@@ -721,12 +730,7 @@ const Admin = (props: any) => {
                     <div
                       className={style.toggleButton}
                       onClick={() => {
-                        openDialogueForDraw(
-                          0,
-                          j,
-                          "Rejected",
-                          item._id,
-                          "No");
+                        openDialogueForDraw(0, j, "Rejected", item._id, "No");
                         // changeProposalStatusForDraw(
                         //   0,
                         //   j,
@@ -773,24 +777,26 @@ const Admin = (props: any) => {
                     >
                       <div
                         className={style.toggleButton}
-                        onClick={() =>
-                          openDialogueForMilestone(   
-                            id,
-                            1,
-                            i,
-                            j,
-                            item.index,
-                            (milestoneStatus = "Completed"),
-                            "Yes")
+                        onClick={
+                          () =>
+                            openDialogueForMilestone(
+                              id,
+                              1,
+                              i,
+                              j,
+                              item.index,
+                              (milestoneStatus = "Completed"),
+                              "Yes"
+                            )
 
                           // changeMilestoneByAdmin(
-                            // id,
-                            // 1,
-                            // i,
-                            // j,
-                            // item.index,
-                            // (milestoneStatus = "Completed"),
-                            // "Yes"
+                          // id,
+                          // 1,
+                          // i,
+                          // j,
+                          // item.index,
+                          // (milestoneStatus = "Completed"),
+                          // "Yes"
                           // )
                         }
                       >
@@ -802,15 +808,17 @@ const Admin = (props: any) => {
                       </div>
                       <div
                         className={style.toggleButton}
-                        onClick={() =>
-                          openDialogueForMilestone(   
-                            id,
-                            1,
-                            i,
-                            j,
-                            item.index,
-                            (milestoneStatus = "Incomplete"),
-                            "No")
+                        onClick={
+                          () =>
+                            openDialogueForMilestone(
+                              id,
+                              1,
+                              i,
+                              j,
+                              item.index,
+                              (milestoneStatus = "Incomplete"),
+                              "No"
+                            )
                           // changeMilestoneByAdmin(
                           //   id,
                           //   1,
