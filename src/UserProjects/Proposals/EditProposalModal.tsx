@@ -26,6 +26,11 @@ import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import HighlightOffSharpIcon from "@material-ui/icons/HighlightOffSharp";
 import Tooltip from "@material-ui/core/Tooltip";
 import { withStyles, Theme } from "@material-ui/core/styles";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import DeleteOutline from "@material-ui/icons/DeleteOutline";
 
 const LightTooltip = withStyles((theme: Theme) => ({
   tooltip: {
@@ -115,6 +120,13 @@ const useStyles = makeStyles((theme) =>
     txt1: {
       fontSize: "12px",
       fontWeight: "bold",
+      width:"151px",
+      [theme.breakpoints.up("xs")]: {
+      width:"138px",
+      },
+      [theme.breakpoints.down("xs")]: {
+      width:"50px",
+      },
     },
     descriptionTxt: {
       marginTop: "5px",
@@ -154,15 +166,57 @@ const useStyles = makeStyles((theme) =>
     },
     deleteTxt: {
       cursor: "pointer",
-      color: "#D43737",
-      marginLeft: "5px",
-      fontSize: "20px",
+      fontSize: "12px",
+      display: "inline",
+      height: "30%",
     },
     updateTxt: {
       cursor: "pointer",
       color: "#32CD32",
       marginLeft: "5px",
       fontSize: "12px",
+      display:"inline",
+      paddingRight:"7px",
+    },
+    txt2: {
+      fontSize: "12px",
+      fontWeight: "bold",
+      display: "inline",
+      paddingRight: "7px",
+    },
+    heading: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      // fontSize: theme.typography.pxToRem(15),
+      fontSize: "10px",
+      fontWeight: theme.typography.fontWeightRegular,
+    },
+    root1: {
+      width: "100%",
+      border: "1px solid #E0E0E0",
+      boxShadow: "0 0 6px #888888",
+      "& .MuiSvgIcon-root": {
+        fontSize: "20px",
+        padding: "0px",
+      },
+      "& .MuiIconButton-root": {
+        padding: "0px",
+      },
+      "& .MuiAccordionSummary-content": {
+        justifyContent: "space-between",
+        display: "flow-root",
+      },
+      justifyContent: "space-between",
+      marginBottom: "7px",
+    },
+
+    delete: {
+      fontSize: "23px",
+      color: "lightgray",
+      padding: "0px",
+      textAlign: "right",
+      display:"inline",
     },
   })
 );
@@ -220,7 +274,7 @@ const EditModal = (props: any) => {
 
   const classes = useStyles();
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   const handleClickNext = (e: any) => {
     let {
@@ -482,7 +536,7 @@ const EditModal = (props: any) => {
           }
         }
       }
-    } catch (e) {}
+    } catch (e) { }
   };
 
   const _onChange = (value: any, name: any) => {
@@ -673,8 +727,8 @@ const EditModal = (props: any) => {
                   state.email.length == 0 && fieldRequired
                     ? `Email is required.`
                     : emailValid
-                    ? "Email is not valid"
-                    : false
+                      ? "Email is not valid"
+                      : false
                 }
                 className={classes.submitText}
                 variant="outlined"
@@ -714,8 +768,8 @@ const EditModal = (props: any) => {
                   state.githubLink.length == 0 && fieldRequired
                     ? `Github Link is required.`
                     : linkValidation
-                    ? "Github Link is not valid"
-                    : false
+                      ? "Github Link is not valid"
+                      : false
                 }
                 className={classes.submitText}
                 variant="outlined"
@@ -863,7 +917,7 @@ const EditModal = (props: any) => {
               inputProps={{ inputmode: "numeric", pattern: "[0-9]*" }}
               label={
                 (fieldRequired && state.experiencedYear.length == 0) ||
-                (valueSmaller && state.experiencedYear == "0")
+                  (valueSmaller && state.experiencedYear == "0")
                   ? false
                   : "Experience"
               }
@@ -877,8 +931,8 @@ const EditModal = (props: any) => {
                 state.experiencedYear.length == 0 && fieldRequired
                   ? `Experienced is required.`
                   : valueSmaller && state.experiencedYear == "0"
-                  ? "Value must be greater than 0"
-                  : false
+                    ? "Value must be greater than 0"
+                    : false
               }
             />
           </LightTooltip>
@@ -895,7 +949,7 @@ const EditModal = (props: any) => {
               }
               label={
                 (fieldRequired && state.collateral.length == 0) ||
-                (valueSmaller && state.collateral == "0")
+                  (valueSmaller && state.collateral == "0")
                   ? false
                   : "Collateral"
               }
@@ -909,8 +963,8 @@ const EditModal = (props: any) => {
                 state.collateral.length == 0 && fieldRequired
                   ? `Collateral is required.`
                   : valueSmaller && state.collateral == "0"
-                  ? "Value must be greater than 0"
-                  : false
+                    ? "Value must be greater than 0"
+                    : false
               }
             />
           </LightTooltip>
@@ -955,8 +1009,8 @@ const EditModal = (props: any) => {
             justifyContent: "space-between",
           }}
         > */}
-          
-          {/* <LightTooltip title="tooltip" placement="bottom" arrow>
+
+        {/* <LightTooltip title="tooltip" placement="bottom" arrow>
             <TextField
               error={
                 (state.reward.length == 0 && fieldRequired) ||
@@ -1113,7 +1167,7 @@ const EditModal = (props: any) => {
               }
               label={
                 (fieldRequired && milestoneDetails.estimatedDays.length == 0) ||
-                (valueSmaller && milestoneDetails.estimatedDays == "0")
+                  (valueSmaller && milestoneDetails.estimatedDays == "0")
                   ? false
                   : "Estimated Days"
               }
@@ -1127,8 +1181,8 @@ const EditModal = (props: any) => {
                 milestoneDetails.estimatedDays.length == 0 && fieldRequired
                   ? `EstimatedDays are required.`
                   : valueSmaller && milestoneDetails.estimatedDays == "0"
-                  ? "Value must be greater than 0"
-                  : false
+                    ? "Value must be greater than 0"
+                    : false
               }
             />
           </LightTooltip>
@@ -1157,7 +1211,7 @@ const EditModal = (props: any) => {
               label={
                 (fieldRequired &&
                   milestoneDetails.numberOfDevelopers.length == 0) ||
-                (valueSmaller && milestoneDetails.numberOfDevelopers == "0")
+                  (valueSmaller && milestoneDetails.numberOfDevelopers == "0")
                   ? false
                   : "Developers Working"
               }
@@ -1170,8 +1224,8 @@ const EditModal = (props: any) => {
                 milestoneDetails.numberOfDevelopers.length == 0 && fieldRequired
                   ? `Developers working are required.`
                   : valueSmaller && milestoneDetails.numberOfDevelopers == "0"
-                  ? "Value must be greater than 0"
-                  : false
+                    ? "Value must be greater than 0"
+                    : false
               }
               variant="outlined"
             />
@@ -1185,7 +1239,7 @@ const EditModal = (props: any) => {
               }
               label={
                 (fieldRequired && milestoneDetails.milestoneCost.length == 0) ||
-                (valueSmaller && milestoneDetails.milestoneCost == "0")
+                  (valueSmaller && milestoneDetails.milestoneCost == "0")
                   ? false
                   : "Milestone Cost"
               }
@@ -1265,45 +1319,53 @@ const EditModal = (props: any) => {
             <p className={classes.txt}>Add Milestones</p>
           </div>
         )}
-        <div style={{overflowY:"auto", height:"200px" , marginBottom:"5px"}}>
-        {state.milestone.length != 0 &&
-          state.milestone.map((item: any, index: number) => {
-            return (
-              <div className={classes.cardGap}>
-                <Card className={classes.card}>
-                  <div className={classes.flexRow}>
-                    <Typography className={classes.txt1}>
-                      {item.task}
-                    </Typography>
-                    <Typography className={classes.txt1}>
-                      {item.estimatedDays} (days)
-                    </Typography>
-                    {props.proposal.status == "Pending" && (
-                      <>
-                        {" "}
-                        <Typography
-                          onClick={(e) => onSelectMilestone(index)}
-                          className={classes.updateTxt}
-                        >
-                          Update
-                        </Typography>
-                        <HighlightOffSharpIcon
-                          onClick={(e) => deleteMilestone(index)}
-                          className={classes.deleteTxt}
-                        />
-                      </>
-                    )}
-                  </div>
-                  <div className={classes.flexRow}>
-                    <Typography className={classes.descriptionTxt}>
-                      {item.description}
-                    </Typography>
-                  </div>
-                </Card>
-              </div>
-            );
-          })}
-          </div>
+        <div style={{ overflowY: "auto", height: "200px", marginBottom: "5px" }}>
+          {state.milestone.length != 0 &&
+            state.milestone.map((item: any, index: number) => {
+              return (
+                <div className={classes.root1}>
+                  <Accordion>
+                    <AccordionSummary
+                      // expandIcon={<ExpandMoreIcon/>}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                    >
+                      <div className={classes.heading}>
+                        <div className={classes.txt1}>{item.task}</div>
+                        <div style={{display:"inline"}}>
+                          <div className={classes.txt2}>
+                            {item.estimatedDays} (days)
+                          </div>
+                          {props.proposal.status == "Pending" && (
+                            <>
+                              {" "}
+                              <Typography
+                                onClick={(e) => onSelectMilestone(index)}
+                                className={classes.updateTxt}
+                              >
+                                Update
+                              </Typography>
+                              <div
+                                onClick={(e) => deleteMilestone(index)}
+                             className={classes.deleteTxt}
+                              >
+                                <DeleteOutline className={classes.delete} />
+                              </div>
+                            </>
+                              )}
+                           </div>
+                      </div>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography className={classes.descriptionTxt}>
+                        {item.description}
+                      </Typography>
+                    </AccordionDetails>
+                  </Accordion>
+                </div>
+              );
+            })}
+        </div>
       </>
     );
   };
@@ -1478,48 +1540,48 @@ const EditModal = (props: any) => {
                     </Button>
                   </>
                 ) : (
-                  <>
-                    {j < 2 ? (
-                      <Button
-                        disabled={disableInputs}
-                        primary
-                        onClick={(e: any) => handleClickNext(e)}
-                      >
-                        Next
-                      </Button>
-                    ) : j == 4 ? (
-                      <Button
-                        disabled={disableInputs}
-                        primary
-                        onClick={(e: any) => handleClickUpdateMilestone(e)}
-                      >
-                        Update Milestone
-                      </Button>
-                    ) : (
-                      props.proposal.status == "Pending" && (
+                    <>
+                      {j < 2 ? (
                         <Button
+                          disabled={disableInputs}
                           primary
-                          onClick={() => {
-                            handleSubmit();
-                          }}
+                          onClick={(e: any) => handleClickNext(e)}
                         >
-                          {showLoader ? (
-                            <CircularProgress size={12} />
-                          ) : (
-                            <p>Update</p>
-                          )}
+                          Next
                         </Button>
-                      )
-                    )}
-                    <Button
-                      disabled={disableInputs}
-                      style={{ marginTop: "10px" }}
-                      onClick={(e: any) => handleClickBack(e)}
-                    >
-                      Back
+                      ) : j == 4 ? (
+                        <Button
+                          disabled={disableInputs}
+                          primary
+                          onClick={(e: any) => handleClickUpdateMilestone(e)}
+                        >
+                          Update Milestone
+                        </Button>
+                      ) : (
+                            props.proposal.status == "Pending" && (
+                              <Button
+                                primary
+                                onClick={() => {
+                                  handleSubmit();
+                                }}
+                              >
+                                {showLoader ? (
+                                  <CircularProgress size={12} />
+                                ) : (
+                                    <p>Update</p>
+                                  )}
+                              </Button>
+                            )
+                          )}
+                      <Button
+                        disabled={disableInputs}
+                        style={{ marginTop: "10px" }}
+                        onClick={(e: any) => handleClickBack(e)}
+                      >
+                        Back
                     </Button>
-                  </>
-                )}
+                    </>
+                  )}
               </div>
             </div>
           }
@@ -1528,14 +1590,14 @@ const EditModal = (props: any) => {
           {addMilestones ? (
             MilestonesDescription()
           ) : (
-            <>
-              {j == 0 && ProjectName()}
-              {j == 1 && ProjectDetails()}
-              {j == 2 && MilestonesDescription()}
-              {j == 3 && projectMilestones()}
-              {j == 4 && updateMilestone()}
-            </>
-          )}
+              <>
+                {j == 0 && ProjectName()}
+                {j == 1 && ProjectDetails()}
+                {j == 2 && MilestonesDescription()}
+                {j == 3 && projectMilestones()}
+                {j == 4 && updateMilestone()}
+              </>
+            )}
         </Modal>
       </div>
     </div>
