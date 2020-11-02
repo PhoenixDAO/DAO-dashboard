@@ -120,9 +120,9 @@ const useStyles = makeStyles((theme) =>
     txt1: {
       fontSize: "12px",
       fontWeight: "bold",
-      width:"151px",
+    
       [theme.breakpoints.up("xs")]: {
-      width:"138px",
+      width:"127px",
       },
       [theme.breakpoints.down("xs")]: {
       width:"50px",
@@ -176,13 +176,13 @@ const useStyles = makeStyles((theme) =>
       marginLeft: "5px",
       fontSize: "12px",
       display:"inline",
-      paddingRight:"7px",
+      paddingRight:"10px",
     },
     txt2: {
       fontSize: "12px",
       fontWeight: "bold",
       display: "inline",
-      paddingRight: "7px",
+      paddingRight: "10px",
     },
     heading: {
       display: "flex",
@@ -197,7 +197,7 @@ const useStyles = makeStyles((theme) =>
       border: "1px solid #E0E0E0",
       boxShadow: "0 0 6px #888888",
       "& .MuiSvgIcon-root": {
-        fontSize: "20px",
+        fontSize: "19px",
         padding: "0px",
       },
       "& .MuiIconButton-root": {
@@ -1326,9 +1326,10 @@ const EditModal = (props: any) => {
                 <div className={classes.root1}>
                   <Accordion>
                     <AccordionSummary
-                      // expandIcon={<ExpandMoreIcon/>}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
+                      expandIcon={<ExpandMoreIcon/>}
+                      aria-controls="additional-actions3-content"
+                      id="additional-actions3-header"
+                      aria-label="summary"
                     >
                       <div className={classes.heading}>
                         <div className={classes.txt1}>{item.task}</div>
@@ -1339,14 +1340,15 @@ const EditModal = (props: any) => {
                           {props.proposal.status == "Pending" && (
                             <>
                               {" "}
-                              <Typography
-                                onClick={(e) => onSelectMilestone(index)}
+                              <Typography aria-label="update"
+
+                                onClick={(e) => {e.stopPropagation(); onSelectMilestone(index); }}
                                 className={classes.updateTxt}
                               >
                                 Update
                               </Typography>
-                              <div
-                                onClick={(e) => deleteMilestone(index)}
+                              <div aria-label="delete"
+                                onClick={(e) =>{ e.stopPropagation(); deleteMilestone(index);}}
                              className={classes.deleteTxt}
                               >
                                 <DeleteOutline className={classes.delete} />

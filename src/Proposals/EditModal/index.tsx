@@ -1495,6 +1495,7 @@ const EditModal = (props: any) => {
               <div className={classes.root1}>
                 <Accordion>
                   <AccordionSummary
+                    aria-label="summary"
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
@@ -1505,8 +1506,8 @@ const EditModal = (props: any) => {
                         <div className={classes.txt2}>
                           {item.estimatedDays} (days)
                         </div>
-                        <div
-                          onClick={(e) => deleteMilestone(index)}
+                        <div aria-label="delete"
+                          onClick={(e) =>{e.stopPropagation(); deleteMilestone(index)}}
                           className={classes.deleteTxt}
                         >
                           <DeleteOutline className={classes.delete} />
@@ -1520,10 +1521,6 @@ const EditModal = (props: any) => {
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
-
-                {/* <Typography className={classes.descriptionTxt}>
-                      {item.description}
-                    </Typography> */}
               </div>
             );
           })}
