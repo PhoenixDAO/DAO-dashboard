@@ -263,7 +263,7 @@ const Votes = (props: any) => {
                     <td>{item.name}</td>
 
                     <td>
-                      {item.votingDate < date.toISOString() ? (
+                      {item.votingStatus ? (
                         <Font color="accent" pointer>
                           Vote Now
                         </Font>
