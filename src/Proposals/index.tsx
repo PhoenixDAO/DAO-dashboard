@@ -837,13 +837,13 @@ const Proposals = (props: any) => {
           let tempDate = new Date();
           let temp: any[] = [];
           console.log("before splice", temp);
-          value.data.result.map((proposal: any, i: number) => {
-            if (proposal.expirationDate > tempDate.toISOString()) {
-              temp.push(value.data.result[i]);
-            }
-          });
+          // value.data.result.map((proposal: any, i: number) => {
+          //   if (proposal.expirationDate > tempDate.toISOString()) {
+          //     temp.push(value.data.result[i]);
+          //   }
+          // });
           console.log("after splice", temp);
-          setValue(temp);
+          setValue(value.data.result);
           setLoading1(false);
         })
         .catch((err) => {
