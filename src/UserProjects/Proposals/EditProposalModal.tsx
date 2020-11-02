@@ -1265,6 +1265,7 @@ const EditModal = (props: any) => {
             <p className={classes.txt}>Add Milestones</p>
           </div>
         )}
+        <div style={{overflowY:"auto", height:"200px" , marginBottom:"5px"}}>
         {state.milestone.length != 0 &&
           state.milestone.map((item: any, index: number) => {
             return (
@@ -1302,6 +1303,7 @@ const EditModal = (props: any) => {
               </div>
             );
           })}
+          </div>
       </>
     );
   };
