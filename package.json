@@ -20,6 +20,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.2",
     "classnames": "^2.2.6",
+    "is-git-url": "^1.0.0",
     "materialize-css": "^1.0.0-rc.2",
     "moment": "^2.27.0",
     "numio-cdn": "^1.0.6",

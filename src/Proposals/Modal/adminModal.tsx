@@ -26,6 +26,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import { TransitionProps } from "@material-ui/core/transitions";
 import Web3 from "web3";
+import { ethereumNetwork } from "../../const";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -192,19 +193,21 @@ const ProposalModal = (props: any) => {
     try {
       let network = await ContractInit.init();
       console.log("network  ", network);
+
       let test = await checkBalance(props.proposalUSerNumioAddress);
 
       console.log("Testing", test);
+
       if (!test && status == "UpVote") {
         props.openSnackbar("Insufficient amount", "error");
         return null;
       }
 
-      if (network.network != "rinkeby") {
+      if (network.network != ethereumNetwork) {
         // setCheckNetwork(true);
         console.log("IN IF 1");
         //checkVar = true;
-        props.openSnackbar("Netowrk must be Rinkbey", "error");
+        props.openSnackbar("Netowrk must be Rinkeby", "error");
       } else {
         const checkingAdmin = await checkAdmin(network.address);
         console.log("network admin", checkingAdmin);
@@ -217,34 +220,19 @@ const ProposalModal = (props: any) => {
 
         // console.log("Checking ", props.proposalUserNumioAddress);
         //props.openSnackbar("hello", "success");
-        //  else {
-        console.log("IN ELSE");
-        if (status == "UpVote") {
-          setMyLoading1(true);
-        } else {
-          setMyLoading2(true);
-        }
-        setDisable(true);
-        let temp: any = await ContractInit.init();
-        console.log("temp 2", temp);
+        else {
+          console.log("IN ELSE");
+          if (status == "UpVote") {
+            setMyLoading1(true);
+          } else {
+            setMyLoading2(true);
+          }
+          setDisable(true);
+          let temp: any = await ContractInit.init();
+          console.log("temp 2", temp);
 
-        if (status == "UpVote") {
-          await blockChainFunction(props._id, 1, temp.address);
-          const get = await axios.put(
-            `${URL}${Proposal}${id}`,
-            {
-              status: status,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${props.user.token}`,
-              },
-            }
-          );
-          props.openSnackbar("Proposal successfully accepted !", "success");
-        } else {
-          await blockChainFunction(props._id, 5, temp.address);
-          if (metaMaskRejectError == false) {
+          if (status == "UpVote") {
+            await blockChainFunction(props._id, 1, temp.address);
             const get = await axios.put(
               `${URL}${Proposal}${id}`,
               {
@@ -256,22 +244,37 @@ const ProposalModal = (props: any) => {
                 },
               }
             );
-          }
+            props.openSnackbar("Proposal successfully accepted !", "success");
+          } else {
+            await blockChainFunction(props._id, 5, temp.address);
+            if (metaMaskRejectError == false) {
+              const get = await axios.put(
+                `${URL}${Proposal}${id}`,
+                {
+                  status: status,
+                },
+                {
+                  headers: {
+                    Authorization: `Bearer ${props.user.token}`,
+                  },
+                }
+              );
+            }
 
-          setMyLoading1(false);
-          setMyLoading2(false);
-          props.openSnackbar("Proposal successfully rejected !", "success");
+            setMyLoading1(false);
+            setMyLoading2(false);
+            props.openSnackbar("Proposal successfully rejected !", "success");
+          }
+          resetData();
+          props.close();
         }
-        resetData();
-        props.close();
       }
-      // }
     } catch (err) {
       console.log("IN IF CATCH");
       if (checkNetwork) {
         console.log("Network 2 ///", checkNetwork);
         console.log("error");
-        props.openSnackbar("Network must be Rinkbey", "error");
+        props.openSnackbar("Network must be Rinkeby", "error");
       } else {
         props.openSnackbar("Ops! Something went wrong", "error");
         // props.openSnackbar("Request failed", "error");

@@ -18,6 +18,8 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import Tooltip from "@material-ui/core/Tooltip";
 import { withStyles, Theme } from "@material-ui/core/styles";
 
+import { ethereumNetwork } from "../../const";
+
 import {
   FormControl,
   Card,
@@ -35,6 +37,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import { TransitionProps } from "@material-ui/core/transitions";
 // import ContractInit from "../config/contractsInit"
+
+//var isGitUrl = require("is-git-url");
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
@@ -306,6 +310,10 @@ const EditModal = (props: any) => {
 
   const [openDialogueState, setOpenDialogueState] = useState(false);
 
+  // const [totalMilestonesDays, setTotalMilestonesDays] = useState(0);
+
+  // const [totalMilestoneCost, setTotalMilestoneCost] = useState(0);
+
   const openDialogue = (e: any) => {
     e.preventDefault();
     setOpenDialogueState(true);
@@ -320,6 +328,9 @@ const EditModal = (props: any) => {
   function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="standard" {...props} />;
   }
+
+  let totalMilestonesDays: any = 0;
+  let totalMilestoneCost: any = 0;
 
   const [j, setJ] = useState(0);
 
@@ -354,10 +365,12 @@ const EditModal = (props: any) => {
       return;
     } else {
       let emailValid = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+      // let checkLink: any = githubLink.match(
+      //   /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+      // );
       let checkLink: any = githubLink.match(
-        /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+        /(http(s)?:\/\/)?(www.)?(github.com\/)([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
       );
-      // let checkLink:any = githubLink.match(/(http(s)?:\/\/)?(www.)?(github.com\/)([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)
       if (emailValid == null) {
         setEmailValid(true);
         return;
@@ -442,8 +455,7 @@ const EditModal = (props: any) => {
     } else {
       setValueSmaller(false);
     }
-    let totalMilestonesDays: any = 0;
-    let totalMilestoneCost: any = 0;
+
     let array: any = state.milestone;
     array.push(milestoneDetails);
     console.log("check array nowasdasdasdas", array);
@@ -603,6 +615,7 @@ const EditModal = (props: any) => {
   };
 
   const handleSubmit = async () => {
+    console.log("submit", state);
     try {
       if (state.milestone.length == 0) {
         setFieldRequired(true);
@@ -614,7 +627,7 @@ const EditModal = (props: any) => {
       console.log("123", temp.network);
       // const networkResult: any = props.network;
       // console.log("111111111111111 ", networkResult);
-      if (temp.network != "rinkeby") {
+      if (temp.network != ethereumNetwork) {
         setEthereumNetworkError(true);
         throw "Ethereum Network invalid !";
       }
@@ -780,12 +793,49 @@ const EditModal = (props: any) => {
 
   const deleteMilestone = (index: any) => {
     let array = state.milestone;
+
+    // totalMilestonesDays =
+    //   totalMilestonesDays - state.milestone[i].estimatedDays;
+    // totalMilestoneCost = totalMilestoneCost - state.milestone[i].milestoneCost;
+    // console.log("check state", state);
+
+    totalMilestoneCost = state.budget;
+    totalMilestonesDays = state.duration;
+
+    array.map((item: any, i: number) => {
+      console.log(item.estimatedDays);
+      let tempDays = Number(item.estimatedDays);
+      let tempCost = Number(item.milestoneCost);
+      if (i == index) {
+        totalMilestoneCost = totalMilestoneCost - tempCost;
+        totalMilestonesDays = totalMilestonesDays - tempDays;
+      }
+    });
+
+    // setState({ ...state, ["duration"]: totalMilestonesDays });
+
+    console.log("working");
+    console.log("Check array", totalMilestonesDays);
+    console.log("check array cost", totalMilestoneCost);
+
+    totalMilestonesDays = totalMilestonesDays.toString();
+    totalMilestoneCost = totalMilestoneCost.toString();
+
     array.splice(index, 1);
     console.log("check new array", array);
-    setState({ ...state, ["milestone"]: array });
+
+    setState({
+      ...state,
+      ["budget"]: totalMilestoneCost,
+      ["milestone"]: array,
+      ["duration"]: totalMilestonesDays,
+    });
+
+    // setState({ ...state, ["milestone"]: array });
     if (array.length == 0) {
       setJ(2);
     }
+    console.log("State here", state);
   };
 
   const ProjectName = () => {
@@ -1263,7 +1313,7 @@ const EditModal = (props: any) => {
             className={classes.margin}
             variant="outlined"
           >
-              {/* <LightTooltip
+            {/* <LightTooltip
                 title="Describe your experience and why you are the best candidate to submit this proposal"
                 placement="bottom"
                 arrow

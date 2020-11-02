@@ -105,7 +105,15 @@ export default ({
   showStepper,
 }: Props) => {
   const handleClick = ({ target }: any) => {
-    if (target.className === style.modalWrap) close();
+    console.log("handle click", target.className);
+    if (
+      target.className === style.modalWrap ||
+      target.className ===
+        "MuiGrid-root style_modalWrap__3KYJY MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12 MuiGrid-grid-lg-12"
+    ) {
+      close();
+      console.log("handle click 2");
+    }
   };
 
   const classes = useStyles();
@@ -123,66 +131,65 @@ export default ({
             </div>
           </div>
         </div>
-      ) : styleFlag =="UpvoteModal"?(
+      ) : styleFlag == "UpvoteModal" ? (
         <Grid
-        lg={12}
-        sm={12}
-        xs={12}
-        md={12}
-        className={style.modalWrap}
-        onClick={handleClick}
-      >
-        <div className={cn(style.modal, className)}>
-          <div className={style.closeButton} onClick={close} />
-          {title && <div className={style.title2}>{title}</div>}
-          {showStepper && (
-            <Stepper
-              className={classes.text}
-              activeStep={activeSteps}
-              alternativeLabel
-            >
-              {steps.map((label) => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
-            </Stepper>
-          )}
-          <div>{children}</div>
-          {actions && <div className={style.actions}>{actions}</div>}
-        </div>
-      </Grid>
-      ):styleFlag =="ActiveProjects"?(
+          lg={12}
+          sm={12}
+          xs={12}
+          md={12}
+          className={style.modalWrap}
+          onClick={handleClick}
+        >
+          <div className={cn(style.modal, className)}>
+            <div className={style.closeButton} onClick={close} />
+            {title && <div className={style.title2}>{title}</div>}
+            {showStepper && (
+              <Stepper
+                className={classes.text}
+                activeStep={activeSteps}
+                alternativeLabel
+              >
+                {steps.map((label) => (
+                  <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+            )}
+            <div>{children}</div>
+            {actions && <div className={style.actions}>{actions}</div>}
+          </div>
+        </Grid>
+      ) : styleFlag == "ActiveProjects" ? (
         <Grid
-        lg={12}
-        sm={12}
-        xs={12}
-        md={12}
-        className={style.modalWrap}
-        onClick={handleClick}
-      >
-        <div className={cn(style.modal, className)}>
-          <div className={style.closeButton} onClick={close} />
-          {title && <div className={style.title4}>{title}</div>}
-          {showStepper && (
-            <Stepper
-              className={classes.text}
-              activeStep={activeSteps}
-              alternativeLabel
-            >
-              {steps.map((label) => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
-            </Stepper>
-          )}
-          <div>{children}</div>
-          {actions && <div className={style.actions}>{actions}</div>}
-        </div>
-      </Grid>
-      ):styleFlag=="proposalModal"?
-      (
+          lg={12}
+          sm={12}
+          xs={12}
+          md={12}
+          className={style.modalWrap}
+          onClick={handleClick}
+        >
+          <div className={cn(style.modal, className)}>
+            <div className={style.closeButton} onClick={close} />
+            {title && <div className={style.title4}>{title}</div>}
+            {showStepper && (
+              <Stepper
+                className={classes.text}
+                activeStep={activeSteps}
+                alternativeLabel
+              >
+                {steps.map((label) => (
+                  <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+            )}
+            <div>{children}</div>
+            {actions && <div className={style.actions}>{actions}</div>}
+          </div>
+        </Grid>
+      ) : styleFlag == "proposalModal" ? (
         <Grid
           lg={12}
           sm={12}
@@ -211,8 +218,7 @@ export default ({
             {actions && <div className={style.actions}>{actions}</div>}
           </div>
         </Grid>
-      ):
-      (
+      ) : (
         <Grid
           lg={12}
           sm={12}

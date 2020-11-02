@@ -16,6 +16,7 @@ import { PHNX_PROPOSAL_ADDRESS } from "../Contracts/phnxProposal";
 import { CircularProgress } from "@material-ui/core";
 import { createStyles } from "@material-ui/core/styles";
 import { withStyles, Theme, makeStyles } from "@material-ui/core/styles";
+import { ethereumNetwork } from "../const";
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="standard" {...props} />;
 }
@@ -32,22 +33,18 @@ const useStyles = makeStyles((theme) =>
       },
     },
     submitbutton: {
-      [theme.breakpoints.up('xs')]:
-      {
+      [theme.breakpoints.up("xs")]: {
         marginLeft: "6px",
-        
       },
-      [theme.breakpoints.down('xs')]:
-      {
+      [theme.breakpoints.down("xs")]: {
         marginLeft: "0px",
-      }
+      },
     },
-    approvalButton:{
-      [theme.breakpoints.down('xs')]:
-      {
-        marginBottom:"5px",
-      }
-    }
+    approvalButton: {
+      [theme.breakpoints.down("xs")]: {
+        marginBottom: "5px",
+      },
+    },
   })
 );
 
@@ -976,7 +973,7 @@ const Proposals = (props: any) => {
 
   const checkNetwork = async () => {
     let temp: any = await ContractInit.init();
-    if (temp.network != "rinkeby") {
+    if (temp.network != ethereumNetwork) {
       console.log("Network 11 false");
       //openSnackbar('Network must br Rinkeby',)
       return false;
@@ -989,7 +986,7 @@ const Proposals = (props: any) => {
   const checking = async () => {
     let value = await checkWeb3();
     //  console.log('')
-    if (value == "rinkeby") {
+    if (value == ethereumNetwork) {
       let isApproved = await checkApproval();
       console.log("isApproved", isApproved);
     } else {
@@ -1003,7 +1000,7 @@ const Proposals = (props: any) => {
     let temp: any = await ContractInit.init();
     console.log("123", temp.network);
 
-    if (temp.network != "rinkeby") {
+    if (temp.network != ethereumNetwork) {
       setEthereumNetworkError(true);
       throw "Ethereum Network invalid !";
     } else {
@@ -1063,7 +1060,8 @@ const Proposals = (props: any) => {
         title="Upvote Proposals"
         actions={
           <div className={classes.buttonsdiv}>
-            <Button className={classes.approvalButton}
+            <Button
+              className={classes.approvalButton}
               secondary
               onClick={async () =>
                 checkingLoading

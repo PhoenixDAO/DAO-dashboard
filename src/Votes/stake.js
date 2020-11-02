@@ -33,6 +33,7 @@ import spinner from "../assets/spinner-black.svg";
 import { getBalance } from "redux/dashboardActions";
 import ContractInit from "../config/contractsInit";
 import { PHNX_ABI, PHNX_ADDRESS, DAO_ABI, DAO_ADDRESS } from "./constants";
+import { ethereumNetwork } from '../const'
 import {
   PHNX_STAKING_ABI,
   PHNX_STAKING_ADDRESS,
@@ -289,10 +290,10 @@ const Stake = (props) => {
     //let network = await web3js.eth.net.getNetworkType();
     let temp = await ContractInit.init()
     console.log('Network',props.address)
-    console.log('123',temp.network)
+    console.log('123',temp)
     if(accounts.length == 0){setConnectMetaMask(true)}
       
-    else if(temp.network != 'rinkeby'){setEthereumNetworkError(true); setConnectMetaMask(false)}
+    else if(temp.network != ethereumNetwork){setEthereumNetworkError(true); setConnectMetaMask(false)}
     else if(accounts[0] !== props.address){ setSameAccountError(true); setConnectMetaMask(false)}
     if (typeof window.web3 !== "undefined") {
      
@@ -763,7 +764,7 @@ console.log('onSubmit', onSubmit)
               // onClose={() => handleZeroAmountEntered()}
             >
               <Alert style={{ fontSize: "12px" }} severity="error">
-                Ethereum network must be Rinkeby.
+                Ethereum network must be Rinkeby .
               </Alert>
             </Snackbar>
 

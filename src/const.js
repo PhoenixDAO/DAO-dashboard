@@ -21,5 +21,6 @@ export const UpdateProposal = "proposal/updateProposal/";
 export const DeleteProposal = "proposal/singleProposal/";
 export const updateProposalCompleteDateAndGitHubLink = "proposal/updateProposalCompleteDateAndGitHubLink/";
 export const createTransaction = "transaction/";
+export const ethereumNetwork = 'rinkeby'
 
 //export const
