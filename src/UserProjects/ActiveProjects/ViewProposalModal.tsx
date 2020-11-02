@@ -220,13 +220,13 @@ const EditModal = (props: any) => {
       country,
       email,
       githubLink,
-      fundsUsage,
+      // fundsUsage,
       purpose,
       importance,
-      personalExperience,
+      // personalExperience,
       experiencedYear,
       duration,
-      reward,
+      // reward,
       collateral,
     } = state;
     if (
@@ -257,8 +257,8 @@ const EditModal = (props: any) => {
       j == 1 &&
       (!purpose ||
         !importance ||
-        !fundsUsage ||
-        !personalExperience ||
+        // !fundsUsage ||
+        // !personalExperience ||
         !experiencedYear ||
         !collateral)
     ) {
@@ -508,7 +508,7 @@ const EditModal = (props: any) => {
             />
           </FormControl>
         </div>
-        <div
+        {/* <div
           style={{
             margin: "10px 0px",
             display: "flex",
@@ -538,7 +538,7 @@ const EditModal = (props: any) => {
               variant="outlined"
             />
           </FormControl>
-        </div>
+        </div> */}
         <div
           style={{
             margin: "10px 0px",
@@ -629,7 +629,7 @@ const EditModal = (props: any) => {
                 : "Collateral"
             }
             className={classes.submitText}
-            style={{ width: "200px" }}
+            style={{ width: "100%" }}
             type="number"
             id="outlined-error-helper-text"
             value={state.collateral}
@@ -640,7 +640,7 @@ const EditModal = (props: any) => {
                 : false
             }
           />
-          <TextField
+          {/* <TextField
             error={state.reward.length == 0 && fieldRequired}
             label={fieldRequired && state.reward.length == 0 ? false : "Reward"}
             className={classes.submitText}
@@ -654,7 +654,7 @@ const EditModal = (props: any) => {
                 ? `Reward is required.`
                 : false
             }
-          />
+          /> */}
         </div>
         <div
           style={{
@@ -687,7 +687,7 @@ const EditModal = (props: any) => {
             />
           </FormControl>
         </div>
-        <div
+        {/* <div
           style={{
             margin: "10px 0px",
             display: "flex",
@@ -721,7 +721,7 @@ const EditModal = (props: any) => {
               variant="outlined"
             />
           </FormControl>
-        </div>
+        </div> */}
       </>
     );
   };
@@ -870,6 +870,7 @@ const EditModal = (props: any) => {
   const projectMilestones = () => {
     return (
       <>
+        <div style={{overflowY:"auto", height:"264px" , marginBottom:"5px"}}>
         {state.milestone.length != 0 &&
           state.milestone.map((item: any, index: number) => {
             return (
@@ -892,6 +893,7 @@ const EditModal = (props: any) => {
               </div>
             );
           })}
+          </div>
       </>
     );
   };

@@ -179,8 +179,8 @@ const EditModal = (props: any) => {
     budget: props.proposal.budget,
     purpose: props.proposal.purpose,
     importance: props.proposal.importance,
-    fundsUsage: props.proposal.fundsUsage,
-    personalExperience: props.proposal.personalExperience,
+    // fundsUsage: props.proposal.fundsUsage,
+    // personalExperience: props.proposal.personalExperience,
     experiencedYear: props.proposal.experiencedYear,
     duration: props.proposal.duration,
     collateral: props.proposal.collateral,
@@ -230,15 +230,15 @@ const EditModal = (props: any) => {
       country,
       email,
       githubLink,
-      fundsUsage,
+      // fundsUsage,
       purpose,
       importance,
-      personalExperience,
+      // personalExperience,
       experiencedYear,
       budget,
       description,
-      duration,
-      reward,
+      // duration,
+      // reward,
       collateral,
     } = state;
     if (
@@ -252,6 +252,7 @@ const EditModal = (props: any) => {
       let checkLink: any = githubLink.match(
         /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
       );
+      // let checkLink:any = githubLink.match(/(http(s)?:\/\/)?(www.)?(github.com\/)([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)
       if (emailValid == null) {
         setEmailValid(true);
         return;
@@ -269,9 +270,9 @@ const EditModal = (props: any) => {
       j == 1 &&
       (!purpose ||
         !importance ||
-        !fundsUsage ||
-        !personalExperience ||
-        !budget ||
+        // !fundsUsage ||
+        // !personalExperience ||
+        // !budget ||
         !description ||
         !experiencedYear ||
         !collateral)
@@ -282,9 +283,9 @@ const EditModal = (props: any) => {
     setFieldRequired(false);
     if (
       collateral == "0" ||
-      reward == "0" ||
-      experiencedYear == "0" ||
-      personalExperience == "0"
+      // reward == "0" ||
+      experiencedYear == "0"
+      // || personalExperience == "0"
     ) {
       setValueSmaller(true);
       return;
@@ -765,7 +766,7 @@ const EditModal = (props: any) => {
             </LightTooltip>
           </FormControl>
         </div>
-        <div
+        {/* <div
           style={{
             margin: "10px 0px",
             display: "flex",
@@ -802,7 +803,7 @@ const EditModal = (props: any) => {
               />
             </LightTooltip>
           </FormControl>
-        </div>
+        </div> */}
         <div
           style={{
             margin: "10px 0px",
@@ -883,6 +884,38 @@ const EditModal = (props: any) => {
           </LightTooltip>
 
           <LightTooltip
+            title="The amount of PHEONIX required to submit the proposal"
+            placement="bottom"
+            arrow
+          >
+            <TextField
+              error={
+                (state.collateral.length == 0 && fieldRequired) ||
+                (valueSmaller && state.collateral == "0")
+              }
+              label={
+                (fieldRequired && state.collateral.length == 0) ||
+                (valueSmaller && state.collateral == "0")
+                  ? false
+                  : "Collateral"
+              }
+              style={{ width: "200px" }}
+              onChange={(e) => _onChange(e.target.value, "collateral")}
+              className={classes.submitText}
+              id="outlined-error-helper-text"
+              value={state.collateral}
+              variant="outlined"
+              helperText={
+                state.collateral.length == 0 && fieldRequired
+                  ? `Collateral is required.`
+                  : valueSmaller && state.collateral == "0"
+                  ? "Value must be greater than 0"
+                  : false
+              }
+            />
+          </LightTooltip>
+
+          {/* <LightTooltip
             title="Budget required for your proposal"
             placement="bottom"
             arrow
@@ -912,47 +945,17 @@ const EditModal = (props: any) => {
                   : false
               }
             />
-          </LightTooltip>
+          </LightTooltip> */}
         </div>
-        <div
+        {/* <div
           style={{
             margin: "10px 0px",
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
           }}
-        >
-          <LightTooltip
-            title="The amount of PHEONIX required to submit the proposal"
-            placement="bottom"
-            arrow
-          >
-            <TextField
-              error={
-                (state.collateral.length == 0 && fieldRequired) ||
-                (valueSmaller && state.collateral == "0")
-              }
-              label={
-                (fieldRequired && state.collateral.length == 0) ||
-                (valueSmaller && state.collateral == "0")
-                  ? false
-                  : "Collateral"
-              }
-              style={{ width: "100%" }}
-              onChange={(e) => _onChange(e.target.value, "collateral")}
-              className={classes.submitText}
-              id="outlined-error-helper-text"
-              value={state.collateral}
-              variant="outlined"
-              helperText={
-                state.collateral.length == 0 && fieldRequired
-                  ? `Collateral is required.`
-                  : valueSmaller && state.collateral == "0"
-                  ? "Value must be greater than 0"
-                  : false
-              }
-            />
-          </LightTooltip>
+        > */}
+          
           {/* <LightTooltip title="tooltip" placement="bottom" arrow>
             <TextField
               error={
@@ -981,7 +984,7 @@ const EditModal = (props: any) => {
               }
             />
           </LightTooltip> */}
-        </div>
+        {/* </div> */}
         <div
           style={{
             margin: "10px 0px",
@@ -1020,7 +1023,7 @@ const EditModal = (props: any) => {
             </LightTooltip>
           </FormControl>
         </div>
-        <div
+        {/* <div
           style={{
             margin: "10px 0px",
             display: "flex",
@@ -1063,7 +1066,7 @@ const EditModal = (props: any) => {
               />
             </LightTooltip>
           </FormControl>
-        </div>
+        </div> */}
       </>
     );
   };
@@ -1262,6 +1265,7 @@ const EditModal = (props: any) => {
             <p className={classes.txt}>Add Milestones</p>
           </div>
         )}
+        <div style={{overflowY:"auto", height:"200px" , marginBottom:"5px"}}>
         {state.milestone.length != 0 &&
           state.milestone.map((item: any, index: number) => {
             return (
@@ -1299,6 +1303,7 @@ const EditModal = (props: any) => {
               </div>
             );
           })}
+          </div>
       </>
     );
   };

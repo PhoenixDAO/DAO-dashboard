@@ -263,8 +263,8 @@ const EditModal = (props: any) => {
     budget: "",
     purpose: "",
     importance: "",
-    fundsUsage: "",
-    personalExperience: "",
+    // fundsUsage: "",
+    // personalExperience: "",
     experiencedYear: "",
     duration: "",
     collateral: "",
@@ -346,15 +346,15 @@ const EditModal = (props: any) => {
       country,
       email,
       githubLink,
-      fundsUsage,
+      // fundsUsage,
       purpose,
       importance,
-      personalExperience,
+      // personalExperience,
       experiencedYear,
       budget,
       description,
       duration,
-      reward,
+      // reward,
       collateral,
     } = state;
     if (
@@ -401,9 +401,9 @@ const EditModal = (props: any) => {
     setFieldRequired(false);
     if (
       collateral == "0" ||
-      reward == "0" ||
-      experiencedYear == "0" ||
-      personalExperience == "0"
+      // reward == "0" ||
+      experiencedYear == "0" 
+      // || personalExperience == "0"
     ) {
       setValueSmaller(true);
       return;

@@ -7,6 +7,7 @@ import axios from "axios";
 import { connect } from "react-redux";
 import EditModal from "../Proposals/EditModal/index";
 import AdminModal from "../Proposals/Modal/adminModal";
+import AdminModal2 from "../Proposals/Modal/adminModal2";
 import { URL } from "../const";
 import { Proposal, ByAdmin, ProposalByStatus } from "../const";
 import { CircularProgress } from "@material-ui/core";
@@ -285,6 +286,22 @@ const Admin = (props: any) => {
       }
     | undefined
   >(undefined);
+
+  const [projectModalItem2, setProjectModalItem2] = React.useState<
+  | {
+      title: string;
+      votes: [];
+      reward: any;
+      budget: any;
+      milestoness: any;
+      description: any;
+      votingDate: any;
+      _id: any;
+      // renderAgain: any;
+      // styleFlag: string;
+    }
+  | undefined
+>(undefined);
 
   const openSnackbar = (
     message: string,
@@ -583,6 +600,22 @@ const Admin = (props: any) => {
           proposalUSerNumioAddress={projectModalItem.proposalUserNumioAddress}
         />
       )}
+      {projectModalItem2 && (
+        <AdminModal2
+          // resetData={renderAgain}
+          title={projectModalItem2.title}
+          reward={projectModalItem2.reward}
+          budget={projectModalItem2.budget}
+          milestones={projectModalItem2.milestoness}
+          description={projectModalItem2.description}
+          votingDate={projectModalItem2.votingDate}
+          votes={projectModalItem2.votes}
+          _id={projectModalItem2._id}
+          // styleFlag={projectModalItem2.styleFlag}
+          close={() => setProjectModalItem2(undefined)}
+          // setSnackBar={() => setSnackBar}
+        />
+      )}
       <div id="scrollContainer" className={style.grid}>
         <Snackbar
           className={classes.root2}
@@ -675,7 +708,25 @@ const Admin = (props: any) => {
               </td>
             ) : (
               proposalsOfStatusVoting.map((item: any, i) => (
-                <tr key={i}>
+                <tr
+                key={i}
+                onClick={() =>
+                  setProjectModalItem2({
+                    title: item.name,
+                    reward: item.reward,
+                    budget: item.budget,
+                    milestoness: item.milestone,
+                    description: item.description,
+                    votes: item.votes,
+                    votingDate: item.votingDate,
+                    _id: item._id,
+                    // styleFlag: "UpvoteModal",
+                    // button1: "UpVote",
+                    // button2: "Ok",
+                    // renderAgain: renderAgain,
+                  })
+                }
+              >
                   <td>{item.name}</td>
                   <td>{changeFormat(item.votingDate)}</td>
                 </tr>
