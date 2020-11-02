@@ -24,6 +24,10 @@ import { Redirect } from "react-router-dom";
 import { URL, UpdateProposal } from "../../const";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import HighlightOffSharpIcon from "@material-ui/icons/HighlightOffSharp";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 
 
@@ -106,9 +110,42 @@ const useStyles = makeStyles((theme) =>
       fontWeight: "bold",
       marginLeft: "3px",
     },
+    root1: {
+      width: "100%",
+      border: "1px solid #E0E0E0",
+      boxShadow: "0 0 6px #888888",
+      "& .MuiSvgIcon-root": {
+        fontSize: "20px",
+        padding: "0px",
+      },
+      "& .MuiIconButton-root": {
+        padding: "0px",
+      },
+      "& .MuiAccordionSummary-content": {
+        justifyContent: "space-between",
+        display: "flow-root",
+      },
+      justifyContent: "space-between",
+      marginBottom: "7px",
+    },
     txt1: {
       fontSize: "12px",
       fontWeight: "bold",
+      display: "inline",
+    },
+    txt2: {
+      fontSize: "12px",
+      fontWeight: "bold",
+      display: "inline",
+      padding: "0px 20px",
+    },
+    heading: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      // fontSize: theme.typography.pxToRem(15),
+      fontSize: "10px",
+      fontWeight: theme.typography.fontWeightRegular,
     },
     descriptionTxt: {
       marginTop: "5px",
@@ -874,23 +911,46 @@ const EditModal = (props: any) => {
         {state.milestone.length != 0 &&
           state.milestone.map((item: any, index: number) => {
             return (
-              <div className={classes.cardGap}>
-                <Card className={classes.card}>
-                  <div className={classes.flexRow}>
-                    <Typography className={classes.txt1}>
-                      {item.task}
-                    </Typography>
-                    <Typography className={classes.txt1}>
-                      {item.estimatedDays} (days)
-                    </Typography>
+              <div className={classes.root1}>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <div className={classes.heading}>
+                    <div className={classes.txt1}>{item.task}</div>
+                    <div>
+                      <div className={classes.txt2}>
+                        {item.estimatedDays} (days)
+                      </div>
+                    </div>
                   </div>
-                  <div className={classes.flexRow}>
-                    <Typography className={classes.descriptionTxt}>
-                      {item.description}
-                    </Typography>
-                  </div>
-                </Card>
-              </div>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography className={classes.descriptionTxt}>
+                    {item.description}
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+            </div>
+              // <div className={classes.cardGap}>
+              //   <Card className={classes.card}>
+              //     <div className={classes.flexRow}>
+              //       <Typography className={classes.txt1}>
+              //         {item.task}
+              //       </Typography>
+              //       <Typography className={classes.txt1}>
+              //         {item.estimatedDays} (days)
+              //       </Typography>
+              //     </div>
+              //     <div className={classes.flexRow}>
+              //       <Typography className={classes.descriptionTxt}>
+              //         {item.description}
+              //       </Typography>
+              //     </div>
+              //   </Card>
+              // </div>
             );
           })}
           </div>
