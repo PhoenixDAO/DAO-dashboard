@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) =>
         },
         "& .MuiFormLabel-root": {
           fontSize: "18px",
-          fontWeight:"normal",
+          fontWeight: "normal",
           color: "#EA8604",
           width: "max-content",
         },
@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme) =>
         },
         "& .MuiFormLabel-root": {
           fontSize: "18px",
-          fontWeight:"normal",
+          fontWeight: "normal",
           color: "#EA8604",
         },
         "& .MuiFormHelperText-root": {
@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme) =>
       },
       "& .MuiFormLabel-root": {
         fontSize: "18px",
-        fontWeight:"normal",
+        fontWeight: "normal",
         color: "#EA8604",
         width: "max-content",
       },
@@ -119,8 +119,8 @@ const useStyles = makeStyles((theme) =>
       },
       "& .MuiOutlinedInput-inputMultiline": {
         padding: "0",
-    fontSize: "13px"
-      }
+        fontSize: "13px",
+      },
     },
   })
 );
@@ -148,7 +148,9 @@ const LightTooltip = withStyles((theme: Theme) => ({
 
 const changeFormat = (date: any) => {
   date = new Date(date);
-  return `${new Date(date.getTime()).getDate()}/${new Date(date.getTime()).getMonth() + 1}/${new Date(date.getTime()).getFullYear()}`;
+  return `${new Date(date.getTime()).getDate()}/${
+    new Date(date.getTime()).getMonth() + 1
+  }/${new Date(date.getTime()).getFullYear()}`;
 };
 const ProposalModal = (props: any) => {
   const [myLoading1, setMyLoading1] = useState(false);
@@ -193,7 +195,7 @@ const ProposalModal = (props: any) => {
       let test = await checkBalance(props.proposalUSerNumioAddress);
 
       console.log("Testing", test);
-      if (!test && status=="UpVote") {
+      if (!test && status == "UpVote") {
         props.openSnackbar("Insufficient amount", "error");
         return null;
       }
@@ -215,19 +217,34 @@ const ProposalModal = (props: any) => {
 
         // console.log("Checking ", props.proposalUserNumioAddress);
         //props.openSnackbar("hello", "success");
-        else {
-          console.log("IN ELSE");
-          if (status == "UpVote") {
-            setMyLoading1(true);
-          } else {
-            setMyLoading2(true);
-          }
-          setDisable(true);
-          let temp: any = await ContractInit.init();
-          console.log("temp 2", temp);
+        //  else {
+        console.log("IN ELSE");
+        if (status == "UpVote") {
+          setMyLoading1(true);
+        } else {
+          setMyLoading2(true);
+        }
+        setDisable(true);
+        let temp: any = await ContractInit.init();
+        console.log("temp 2", temp);
 
-          if (status == "UpVote") {
-            await blockChainFunction(props._id, 1, temp.address);
+        if (status == "UpVote") {
+          await blockChainFunction(props._id, 1, temp.address);
+          const get = await axios.put(
+            `${URL}${Proposal}${id}`,
+            {
+              status: status,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${props.user.token}`,
+              },
+            }
+          );
+          props.openSnackbar("Proposal successfully accepted !", "success");
+        } else {
+          await blockChainFunction(props._id, 5, temp.address);
+          if (metaMaskRejectError == false) {
             const get = await axios.put(
               `${URL}${Proposal}${id}`,
               {
@@ -239,31 +256,16 @@ const ProposalModal = (props: any) => {
                 },
               }
             );
-            props.openSnackbar("Proposal successfully accepted !", "success");
-          } else {
-            await blockChainFunction(props._id, 5, temp.address);
-            if (metaMaskRejectError == false) {
-              const get = await axios.put(
-                `${URL}${Proposal}${id}`,
-                {
-                  status: status,
-                },
-                {
-                  headers: {
-                    Authorization: `Bearer ${props.user.token}`,
-                  },
-                }
-              );
-            }
-
-            setMyLoading1(false);
-            setMyLoading2(false);
-            props.openSnackbar("Proposal successfully rejected !", "success");
           }
-          resetData();
-          props.close();
+
+          setMyLoading1(false);
+          setMyLoading2(false);
+          props.openSnackbar("Proposal successfully rejected !", "success");
         }
+        resetData();
+        props.close();
       }
+      // }
     } catch (err) {
       console.log("IN IF CATCH");
       if (checkNetwork) {
@@ -495,9 +497,41 @@ const ProposalModal = (props: any) => {
             {console.log("MetaMask address", props.proposalUserNumioAddress)}
             {console.log("Admin address", props.user.numioAddress)}
             <div className={style.modalBrief}>
-            <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Budget</span></div><div style={{marginTop:"5px"}}><span>{props.budget}</span> <span>PHNX</span></div></div>
-          <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Milestones</span></div><div style={{marginTop:"5px"}}><span>{props.milestones.length}</span></div></div>
-          <div style={{width:"80px",textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Submitted on</span></div><span>(dd/mm/yyyy)</span><div>{changeFormat(props.createdAt)}</div></div>
+              <div style={{ textAlign: "center", alignItems: "center" }}>
+                <div>
+                  <span style={{ fontSize: "16px", color: "#EA8604" }}>
+                    Budget
+                  </span>
+                </div>
+                <div style={{ marginTop: "5px" }}>
+                  <span>{props.budget}</span> <span>PHNX</span>
+                </div>
+              </div>
+              <div style={{ textAlign: "center", alignItems: "center" }}>
+                <div>
+                  <span style={{ fontSize: "16px", color: "#EA8604" }}>
+                    Milestones
+                  </span>
+                </div>
+                <div style={{ marginTop: "5px" }}>
+                  <span>{props.milestones.length}</span>
+                </div>
+              </div>
+              <div
+                style={{
+                  width: "80px",
+                  textAlign: "center",
+                  alignItems: "center",
+                }}
+              >
+                <div>
+                  <span style={{ fontSize: "16px", color: "#EA8604" }}>
+                    Submitted on
+                  </span>
+                </div>
+                <span>(dd/mm/yyyy)</span>
+                <div>{changeFormat(props.createdAt)}</div>
+              </div>
             </div>
             <form className={classes.description} noValidate autoComplete="off">
               <TextField
@@ -513,7 +547,16 @@ const ProposalModal = (props: any) => {
               />
             </form>
             <div className={style.modalSteps}>
-            <h3 style={{ fontSize: "16px", marginBottom: "10px", color: "#ea8604", fontWeight: "normal"}}>Milestones</h3>
+              <h3
+                style={{
+                  fontSize: "16px",
+                  marginBottom: "10px",
+                  color: "#ea8604",
+                  fontWeight: "normal",
+                }}
+              >
+                Milestones
+              </h3>
               <div
                 style={{
                   height: "200px",
