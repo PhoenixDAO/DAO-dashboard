@@ -870,6 +870,7 @@ const EditModal = (props: any) => {
   const projectMilestones = () => {
     return (
       <>
+        <div style={{overflowY:"auto", height:"264px" , marginBottom:"5px"}}>
         {state.milestone.length != 0 &&
           state.milestone.map((item: any, index: number) => {
             return (
@@ -892,6 +893,7 @@ const EditModal = (props: any) => {
               </div>
             );
           })}
+          </div>
       </>
     );
   };

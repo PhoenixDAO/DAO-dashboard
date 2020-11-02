@@ -26,14 +26,14 @@ html {
   font-family: ProximaNova, sans-serif;
 }
 
-@media screen and (max-width: 1979px) {
+@media screen and (max-device-width: 1979px) {
   html {
     font-size: 0.8px;
   }
 }
 
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-device-width: 1400px) {
   html {
     font-size: 0.6px;
   }
