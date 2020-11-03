@@ -1151,9 +1151,11 @@ const Proposals = (props: any) => {
                       <td>{loading1 ? "Loading..." : "No proposals found"}</td>
                     </tr>{" "}
                   </>
-                ) : proposal.expirationDate < date.toISOString() ? (
-                  ""
-                ) : (
+                ) 
+                // : proposal.expirationDate < date.toISOString() ? (
+                //   ""
+                // ) 
+                : (
                   <>
                     <td>{proposal.name}</td>
                     <td>
