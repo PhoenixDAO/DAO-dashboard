@@ -49,6 +49,8 @@ import { CircularProgress } from "@material-ui/core";
 
 
 let web3js, accounts, contractDAO, contractPHNX, hasVoted;
+let account = await window.ethereum.selectedAddress;
+let accounts = await window.ethereum.selectedAddress
 function Alert(props) {
   return <MuiAlert elevation={6} variant="standard" {...props} />;
 }
@@ -137,9 +139,10 @@ const Stake = (props) => {
     // theBalance = parseFloat(result).toFixed(4);
     // theBalance = parseFloat(result)
 
-    let account = await web3js.eth.getAccounts()
+   
+    //let account = await web3js.eth.getAccounts()
     let result = await contractPHNX.methods
-      .balanceOf(account[0])
+      .balanceOf(account)
       .call();
       let obj = await contractPHNX.methods
 
@@ -265,7 +268,8 @@ const Stake = (props) => {
     web3js = new Web3(window.web3.currentProvider);
     let network = await web3js.eth.net.getNetworkType();
     //get selected account on metamask
-    accounts = await web3js.eth.getAccounts();
+    accounts = await window.ethereum.selectedAddress
+   // accounts = await web3js.eth.getAccounts();
     
     window.ethereum.enable();
     // Use Mist/MetaMask's provideronC.
@@ -285,16 +289,17 @@ const Stake = (props) => {
     // Use Mist/MetaMask's provideronC. 
     web3js = new Web3(window.web3.currentProvider);
     //get selected account on metamask
-    accounts = await web3js.eth.getAccounts();
+    accounts = await window.ethereum.selectedAddress
+    //accounts = await web3js.eth.getAccounts();
     //get network which metamask is connected too
     //let network = await web3js.eth.net.getNetworkType();
     let temp = await ContractInit.init()
     console.log('Network',props.address)
     console.log('123',temp)
-    if(accounts.length == 0){setConnectMetaMask(true)}
+    if(accounts == null){setConnectMetaMask(true)}
       
     else if(temp.network != ethereumNetwork){setEthereumNetworkError(true); setConnectMetaMask(false)}
-    else if(accounts[0] !== props.address){ setSameAccountError(true); setConnectMetaMask(false)}
+    else if(accounts !== props.address){ setSameAccountError(true); setConnectMetaMask(false)}
     if (typeof window.web3 !== "undefined") {
      
       window.ethereum.enable();

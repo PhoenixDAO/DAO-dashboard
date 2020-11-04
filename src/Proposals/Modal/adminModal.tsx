@@ -498,7 +498,7 @@ const ProposalModal = (props: any) => {
             {console.log("456", props)}
             {console.log("Proposal ID", props._id)}
             {console.log("MetaMask address", props.proposalUserNumioAddress)}
-            {console.log("Admin address", props.user.numioAddress)}
+            {console.log("Address", props.user.numioAddress)}
             <div className={style.modalBrief}>
               <div style={{ textAlign: "center", alignItems: "center" }}>
                 <div>

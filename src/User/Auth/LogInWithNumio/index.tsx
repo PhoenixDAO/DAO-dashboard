@@ -16,7 +16,6 @@ import Login_with from "assets/images/Login_with.svg";
 
 var QRCode = require("qrcode.react");
 
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -65,14 +64,13 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "auto",
       width: "56%",
     },
-    
+
     img: {
       margin: "auto",
       display: "block",
       maxWidth: "100%",
       maxHeight: "100%",
     },
-
   })
 );
 
@@ -115,54 +113,54 @@ const LogInWithNumio = (props: any) => {
   ) : values.redirect === "admin" ? (
     <Redirect to="/admin" />
   ) : (
-      <Layout className={style.layout}>
+    <Layout className={style.layout}>
       <Grid container>
-          <Grid
-            item
-            sm={6}
-            xs={12}
-            md={6}
-            lg={6}
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            <img src={mobile} className={style.loginImage}/>
-          </Grid>
-          <Grid
-            item
-            sm={6}
-            xs={12}
-            md={6}
-            lg={6}
-            style={{
-              display: " flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems:"center",
-            }}
-          >
-            <div>
+        <Grid
+          item
+          sm={6}
+          xs={12}
+          md={6}
+          lg={6}
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+        >
+          <img src={mobile} className={style.loginImage} />
+        </Grid>
+        <Grid
+          item
+          sm={6}
+          xs={12}
+          md={6}
+          lg={6}
+          style={{
+            display: " flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div>
             <div
               style={{
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "center",
-                alignItems:"center",
+                alignItems: "center",
               }}
             >
               {/* <div className={style.numioLogo}> */}
-                <img
-                style={{marginTop:"10px",marginRight:"3px"}}
-                  className={style.image}
-                  alt="Login_with"
-                  src={Login_with}
-                />
+              <img
+                style={{ marginTop: "10px", marginRight: "3px" }}
+                className={style.image}
+                alt="Login_with"
+                src={Login_with}
+              />
               {/* </div> */}
               {/* <div className={style.numioLogo}> */}
-                <img className={style.image} alt="numio" src={numioLogo} />
+              <img className={style.image} alt="numio" src={numioLogo} />
               {/* </div> */}
             </div>
             <div className={style.QRCode}>
@@ -170,12 +168,16 @@ const LogInWithNumio = (props: any) => {
                 Scan the QR code with your Numio app to login
               </div>
               <div className={style.qr}>
-                <QRCode size={150} className={style.QRimage} value={values.qrURL} />
+                <QRCode
+                  size={150}
+                  className={style.QRimage}
+                  value={values.qrURL}
+                />
               </div>
             </div>
           </div>
-          </Grid>
         </Grid>
+      </Grid>
     </Layout>
   );
 };
