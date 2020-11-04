@@ -33,11 +33,11 @@
     text-decoration: underline;
   }
 }
-.loginImage{
- height: 360px;
- width: 250px;
+.loginImage {
+  height: 360px;
+  width: 250px;
 }
-.welcomeImage{
+.welcomeImage {
   height: 100px;
   width: 250px;
   display: flex;
@@ -45,51 +45,44 @@
   justify-content: center;
 }
 
-@media screen and (max-width:600px )
-{
-  .loginImage{
+@media screen and (max-width: 600px) {
+  .loginImage {
     height: 137px;
   }
-  .layout{
+  .layout {
     height: auto !important ;
     width: 84% !important;
   }
-  .welcomeImage{
-    width:150px !important;
+  .welcomeImage {
+    width: 150px !important;
     height: 50px;
   }
 }
-.layout{
+.layout {
   height: auto;
   width: 56%;
 }
-@media screen and (max-width:1186px ) and (min-width:770px)
-{
-  .loginImage{
-   
+@media screen and (max-width: 1186px) and (min-width: 770px) {
+  .loginImage {
     width: 273px;
     height: 312px;
-  
   }
-  .layout{
+  .layout {
     height: auto !important ;
     width: 80% !important;
   }
 }
-@media screen and  (max-width:769px) and (min-width:600px)
-{
-  .loginImage{
+@media screen and (max-width: 769px) and (min-width: 600px) {
+  .loginImage {
     height: 286px;
     width: 185px;
-
   }
-  .layout{
+  .layout {
     height: auto !important ;
     width: 90% !important;
   }
-  .welcomeImage{
-    width:200px !important;
+  .welcomeImage {
+    width: 200px !important;
     margin-bottom: 14px !important;
   }
-  
 }

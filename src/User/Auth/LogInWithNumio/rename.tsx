@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { Title } from "../Shared";
 import Layout from "../Layout";
@@ -157,7 +156,7 @@ const LogInWithNumio = (props: any) => {
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "center",
-                alignItems:"center",
+                alignItems: "center",
               }}
             >
               <div className={classes.numioLogo}>
@@ -179,7 +178,7 @@ const LogInWithNumio = (props: any) => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                alignItems:"center"
+                alignItems: "center",
               }}
             >
               <div className={style.scanQRText}>

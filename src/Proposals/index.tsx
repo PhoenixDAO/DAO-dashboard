@@ -967,6 +967,7 @@ const Proposals = (props: any) => {
   useEffect(() => {
     getData();
     checking();
+    console.log("Redux address", props.user.numioAddress);
     //checkWeb3();
     // getData();
   }, []);
@@ -1151,11 +1152,10 @@ const Proposals = (props: any) => {
                       <td>{loading1 ? "Loading..." : "No proposals found"}</td>
                     </tr>{" "}
                   </>
-                ) 
-                // : proposal.expirationDate < date.toISOString() ? (
-                //   ""
-                // ) 
-                : (
+                ) : (
+                  // : proposal.expirationDate < date.toISOString() ? (
+                  //   ""
+                  // )
                   <>
                     <td>{proposal.name}</td>
                     <td>
