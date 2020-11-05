@@ -257,7 +257,7 @@ const Proposals = (props: any) => {
                       <div className={style.menuItems}>
                         <div
                           className={cn(style.menuItem, style.edit)}
-                          onClick={() => edit(item)}
+                          // onClick={() => edit(item)}
                         >
                           <img src={iconEdit} className={style.icon} /> Edit
                           proposal

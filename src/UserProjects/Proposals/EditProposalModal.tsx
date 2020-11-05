@@ -120,9 +120,9 @@ const useStyles = makeStyles((theme) =>
     txt1: {
       fontSize: "12px",
       fontWeight: "bold",
-    
+      width:"151px",
       [theme.breakpoints.up("xs")]: {
-      width:"127px",
+      width:"138px",
       },
       [theme.breakpoints.down("xs")]: {
       width:"50px",
@@ -176,13 +176,13 @@ const useStyles = makeStyles((theme) =>
       marginLeft: "5px",
       fontSize: "12px",
       display:"inline",
-      paddingRight:"10px",
+      paddingRight:"7px",
     },
     txt2: {
       fontSize: "12px",
       fontWeight: "bold",
       display: "inline",
-      paddingRight: "10px",
+      paddingRight: "7px",
     },
     heading: {
       display: "flex",
@@ -197,7 +197,7 @@ const useStyles = makeStyles((theme) =>
       border: "1px solid #E0E0E0",
       boxShadow: "0 0 6px #888888",
       "& .MuiSvgIcon-root": {
-        fontSize: "19px",
+        fontSize: "20px",
         padding: "0px",
       },
       "& .MuiIconButton-root": {
@@ -217,46 +217,6 @@ const useStyles = makeStyles((theme) =>
       padding: "0px",
       textAlign: "right",
       display:"inline",
-    },
-    firstfields: {
-      "& .MuiInputBase-root": {
-        fontSize: "12px",
-       width:"auto",
-      },
-      "& .MuiFormLabel-root": {
-        fontSize: "12px",
-      },
-      "& .MuiFormHelperText-root": {
-        fontSize: "10px",
-      },
-
-      [theme.breakpoints.down("xl")]:
-      {
-        width: "188px",
-      },
-      
-      [theme.breakpoints.up("lg")]:
-      {
-        width: "185px",
-      },
-      [theme.breakpoints.down("lg")]:
-      {
-        width: "195px",
-        marginRight:"3px",
-       
-      },
-      [theme.breakpoints.down("md")]:
-      {
-        width: "165px",
-      },
-       [theme.breakpoints.down("xs")]:
-      {
-        width: "161px",
-      },
-      [theme.breakpoints.up("xs")]:
-      {
-        width: "160px",
-      }
     },
   })
 );
@@ -670,7 +630,8 @@ const EditModal = (props: any) => {
               error={state.firstName.length == 0 && fieldRequired}
               label="First Name"
               onChange={(e) => _onChange(e.target.value, "firstName")}
-              className={classes.firstfields}
+              className={classes.submitText}
+              style={{ width: "200px" }}
               id="outlined-error-helper-text"
               value={state.firstName}
               variant="outlined"
@@ -687,7 +648,8 @@ const EditModal = (props: any) => {
               label="Last Name"
               onChange={(e) => _onChange(e.target.value, "lastName")}
               id="outlined-error-helper-text"
-              className={classes.firstfields}
+              style={{ width: "200px" }}
+              className={classes.submitText}
               variant="outlined"
               value={state.lastName}
               helperText={
@@ -712,7 +674,8 @@ const EditModal = (props: any) => {
               label="Title"
               error={state.name.length == 0 && fieldRequired}
               onChange={(e) => _onChange(e.target.value, "name")}
-              className={classes.firstfields}
+              className={classes.submitText}
+              style={{ width: "200px" }}
               value={state.name}
               helperText={
                 state.name.length == 0 && fieldRequired
@@ -727,7 +690,7 @@ const EditModal = (props: any) => {
               error={state.country.length == 0 && fieldRequired}
               label="Country"
               value={state.country}
-              className={classes.firstfields}
+              style={{ width: "200px" }}
               onChange={(e) => _onChange(e.target.value, "country")}
               id="outlined-error-helper-text"
               helperText={
@@ -735,6 +698,7 @@ const EditModal = (props: any) => {
                   ? `Country is required.`
                   : false
               }
+              className={classes.submitText}
               variant="outlined"
             />
           </LightTooltip>
@@ -958,8 +922,9 @@ const EditModal = (props: any) => {
                   : "Experience"
               }
               onChange={(e) => _onChange(e.target.value, "experiencedYear")}
+              className={classes.submitText}
               id="outlined-error-helper-text"
-              className={classes.firstfields}
+              style={{ width: "200px" }}
               value={state.experiencedYear}
               variant="outlined"
               helperText={
@@ -988,10 +953,9 @@ const EditModal = (props: any) => {
                   ? false
                   : "Collateral"
               }
+              style={{ width: "200px" }}
               onChange={(e) => _onChange(e.target.value, "collateral")}
-              className={classes.firstfields}
-              style={{ width: "100%" }}
-
+              className={classes.submitText}
               id="outlined-error-helper-text"
               value={state.collateral}
               variant="outlined"
@@ -1176,14 +1140,15 @@ const EditModal = (props: any) => {
             <TextField
               id="outlined-error-helper-text"
               error={milestoneDetails.task.length == 0 && fieldRequired}
-              className={classes.firstfields}
+              style={{ width: "200px" }}
               onChange={(e) => _onChangeMilestoneValue(e.target.value, "task")}
               helperText={
                 milestoneDetails.task.length == 0 &&
                 fieldRequired &&
                 `Title is required.`
               }
-              label="Title" 
+              label="Title"
+              className={classes.submitText}
               variant="outlined"
             />
           </LightTooltip>
@@ -1195,7 +1160,7 @@ const EditModal = (props: any) => {
           >
             <TextField
               id="outlined-basic"
-              className={classes.firstfields}
+              style={{ width: "200px" }}
               error={
                 (milestoneDetails.estimatedDays.length == 0 && fieldRequired) ||
                 (valueSmaller && milestoneDetails.estimatedDays == "0")
@@ -1209,6 +1174,7 @@ const EditModal = (props: any) => {
               onChange={(e) =>
                 _onChangeMilestoneValue(e.target.value, "estimatedDays")
               }
+              className={classes.submitText}
               value={milestoneDetails.estimatedDays}
               variant="outlined"
               helperText={
@@ -1236,7 +1202,7 @@ const EditModal = (props: any) => {
           >
             <TextField
               id="outlined-basic"
-              className={classes.firstfields}
+              style={{ width: "200px" }}
               error={
                 (milestoneDetails.numberOfDevelopers.length == 0 &&
                   fieldRequired) ||
@@ -1252,6 +1218,7 @@ const EditModal = (props: any) => {
               onChange={(e) =>
                 _onChangeMilestoneValue(e.target.value, "numberOfDevelopers")
               }
+              className={classes.submitText}
               value={milestoneDetails.numberOfDevelopers}
               helperText={
                 milestoneDetails.numberOfDevelopers.length == 0 && fieldRequired
@@ -1280,8 +1247,8 @@ const EditModal = (props: any) => {
               onChange={(e) =>
                 _onChangeMilestoneValue(e.target.value, "milestoneCost")
               }
-            
-              className={classes.firstfields}
+              style={{ width: "200px" }}
+              className={classes.submitText}
               variant="outlined"
               helperText={
                 milestoneDetails.description.length == 0 && fieldRequired
@@ -1359,10 +1326,9 @@ const EditModal = (props: any) => {
                 <div className={classes.root1}>
                   <Accordion>
                     <AccordionSummary
-                      expandIcon={<ExpandMoreIcon/>}
-                      aria-controls="additional-actions3-content"
-                      id="additional-actions3-header"
-                      aria-label="summary"
+                      // expandIcon={<ExpandMoreIcon/>}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
                     >
                       <div className={classes.heading}>
                         <div className={classes.txt1}>{item.task}</div>
@@ -1373,15 +1339,14 @@ const EditModal = (props: any) => {
                           {props.proposal.status == "Pending" && (
                             <>
                               {" "}
-                              <Typography aria-label="update"
-
-                                onClick={(e) => {e.stopPropagation(); onSelectMilestone(index); }}
+                              <Typography
+                                onClick={(e) => onSelectMilestone(index)}
                                 className={classes.updateTxt}
                               >
                                 Update
                               </Typography>
-                              <div aria-label="delete"
-                                onClick={(e) =>{ e.stopPropagation(); deleteMilestone(index);}}
+                              <div
+                                onClick={(e) => deleteMilestone(index)}
                              className={classes.deleteTxt}
                               >
                                 <DeleteOutline className={classes.delete} />
@@ -1419,7 +1384,7 @@ const EditModal = (props: any) => {
           <TextField
             id="outlined-error-helper-text"
             error={milestoneDetails.task.length == 0 && fieldRequired}
-            className={classes.firstfields}
+            style={{ width: "200px" }}
             onChange={(e) => _onChangeMilestoneValue(e.target.value, "task")}
             helperText={
               milestoneDetails.task.length == 0 &&
@@ -1428,11 +1393,12 @@ const EditModal = (props: any) => {
             }
             label="Title"
             value={milestoneDetails.task}
+            className={classes.submitText}
             variant="outlined"
           />
           <TextField
             id="outlined-basic"
-            className={classes.firstfields}
+            style={{ width: "200px" }}
             error={milestoneDetails.estimatedDays.length == 0 && fieldRequired}
             label={
               fieldRequired && milestoneDetails.estimatedDays.length == 0
@@ -1443,6 +1409,7 @@ const EditModal = (props: any) => {
             onChange={(e) =>
               _onChangeMilestoneValue(e.target.value, "estimatedDays")
             }
+            className={classes.submitText}
             variant="outlined"
             helperText={
               milestoneDetails.estimatedDays.length == 0 &&
@@ -1461,7 +1428,7 @@ const EditModal = (props: any) => {
         >
           <TextField
             id="outlined-basic"
-            className={classes.firstfields}
+            style={{ width: "200px" }}
             label={
               fieldRequired && milestoneDetails.numberOfDevelopers.length == 0
                 ? false
@@ -1474,6 +1441,7 @@ const EditModal = (props: any) => {
             error={
               milestoneDetails.numberOfDevelopers.length == 0 && fieldRequired
             }
+            className={classes.submitText}
             helperText={
               milestoneDetails.numberOfDevelopers.length == 0 &&
               fieldRequired &&
@@ -1493,7 +1461,8 @@ const EditModal = (props: any) => {
             onChange={(e) =>
               _onChangeMilestoneValue(e.target.value, "milestoneCost")
             }
-            className={classes.firstfields}
+            style={{ width: "200px" }}
+            className={classes.submitText}
             variant="outlined"
             helperText={
               milestoneDetails.milestoneCost.length == 0 &&

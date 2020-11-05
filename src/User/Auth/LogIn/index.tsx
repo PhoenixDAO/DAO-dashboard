@@ -197,6 +197,7 @@ const Login = (props: any) => {
       }
     } catch (e) {
       setMyLoading(false);
+      setDisable(false);
       throw { message: "An Error Occured" };
     }
   };
@@ -214,11 +215,14 @@ const Login = (props: any) => {
       openSnackbar(e.message, "error");
       // setErrorMessage({message:e.message , severity:"error"});
       // setError(true);
-      if (e.message === "Network Error") {
-        setLoginClicked(false);
-        setDisable(false);
-        setMyLoading(false);
-      }
+      setLoginClicked(false);
+      setDisable(false);
+      setMyLoading(false);
+      // if (e.message === "Network Error") {
+      //   setLoginClicked(false);
+      //   setDisable(false);
+      //   setMyLoading(false);
+      // }
       openSnackbar(e.message, "error");
     }
   };

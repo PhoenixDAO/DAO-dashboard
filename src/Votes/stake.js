@@ -49,8 +49,7 @@ import { CircularProgress } from "@material-ui/core";
 
 
 let web3js, accounts, contractDAO, contractPHNX, hasVoted;
-let account = await window.ethereum.selectedAddress;
-let accounts = await window.ethereum.selectedAddress
+   
 function Alert(props) {
   return <MuiAlert elevation={6} variant="standard" {...props} />;
 }
@@ -142,7 +141,7 @@ const Stake = (props) => {
    
     //let account = await web3js.eth.getAccounts()
     let result = await contractPHNX.methods
-      .balanceOf(account)
+      .balanceOf(accounts)
       .call();
       let obj = await contractPHNX.methods
 
@@ -268,7 +267,10 @@ const Stake = (props) => {
     web3js = new Web3(window.web3.currentProvider);
     let network = await web3js.eth.net.getNetworkType();
     //get selected account on metamask
-    accounts = await window.ethereum.selectedAddress
+    
+    let init = await ContractInit.init()
+   // accounts = init.address
+    //accounts = await window.ethereum.selectedAddress
    // accounts = await web3js.eth.getAccounts();
     
     window.ethereum.enable();
@@ -289,17 +291,20 @@ const Stake = (props) => {
     // Use Mist/MetaMask's provideronC. 
     web3js = new Web3(window.web3.currentProvider);
     //get selected account on metamask
-    accounts = await window.ethereum.selectedAddress
+    // let init = await ContractInit.init()
+    // accounts = init.address
+    //accounts = await window.ethereum.selectedAddress
     //accounts = await web3js.eth.getAccounts();
     //get network which metamask is connected too
     //let network = await web3js.eth.net.getNetworkType();
     let temp = await ContractInit.init()
     console.log('Network',props.address)
+    accounts = temp.address
     console.log('123',temp)
     if(accounts == null){setConnectMetaMask(true)}
       
     else if(temp.network != ethereumNetwork){setEthereumNetworkError(true); setConnectMetaMask(false)}
-    else if(accounts !== props.address){ setSameAccountError(true); setConnectMetaMask(false)}
+    else if(temp.address !== props.address){ setSameAccountError(true); setConnectMetaMask(false)}
     if (typeof window.web3 !== "undefined") {
      
       window.ethereum.enable();
@@ -345,7 +350,7 @@ const Stake = (props) => {
     let balance = await contractPHNX.methods.totalSupply().call();
     let result = await contractPHNX?.methods
       .approve(PHNX_STAKING_ADDRESS, balance)
-      .send({ from: accounts[0] /*** selected account from metamask ***/ }) // contract.methods.methodName(parameters).send({from:selected account})
+      .send({ from: accounts /*** selected account from metamask ***/ }) // contract.methods.methodName(parameters).send({from:selected account})
       .on("transactionHash", (hash) => {
       
       })
@@ -355,6 +360,7 @@ const Stake = (props) => {
           setApprovalLoader(false)
           props.openSnackbar('You have successfully approved.', 'success')
         }
+
       })
       .on('error', function(err){
         props.close()
@@ -364,8 +370,8 @@ const Stake = (props) => {
   };
   const checkApproval = async () => {
     let result = await contractPHNX.methods
-      .allowance(accounts[0], PHNX_STAKING_ADDRESS)
-      .call({ from: accounts[0] });
+      .allowance(accounts, PHNX_STAKING_ADDRESS)
+      .call({ from: accounts });
     if (result == "0") {
       return false;
     }
