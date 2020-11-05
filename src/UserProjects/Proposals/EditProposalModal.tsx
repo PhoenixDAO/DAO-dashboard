@@ -990,7 +990,7 @@ const EditModal = (props: any) => {
               }
               onChange={(e) => _onChange(e.target.value, "collateral")}
               className={classes.firstfields}
-              style={{ width: "100%" }}
+             
 
               id="outlined-error-helper-text"
               value={state.collateral}

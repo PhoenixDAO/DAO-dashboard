@@ -701,6 +701,7 @@ const EditModal = (props: any) => {
                 : "Collateral"
             }
             className={classes.submitText}
+            style={{width:"100%"}}
             type="number"
             id="outlined-error-helper-text"
             value={state.collateral}

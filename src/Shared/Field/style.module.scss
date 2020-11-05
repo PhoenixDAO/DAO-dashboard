@@ -7,8 +7,8 @@
 }
 
 .label {
-  font-size: 16rem;
-  line-height: 19rem;
+  font-size: 14rem;
+ 
   margin-bottom: 11rem;
   color: $dark-gray;
   &.hasError {
@@ -30,7 +30,7 @@
   transition: 0.2s;
   width: 100%;
   padding: 0 15rem;
-
+min-width: 200px;
   &.hasError {
     border-color: red;
   }
@@ -56,14 +56,13 @@
   color: red;
 }
 .wrap .label{
-  @media (max-width: 668px ){
-    min-height: 25px;
+  @media (max-device-width: 700px ){
+    
+    font-size: 14rem;
+    min-width: 178px;
+    max-height: 37px;
   }
 }
 
-.wrap .label{
-  @media (max-width: 600px ){
-    min-height: 12px;
-  }
-}
+
   

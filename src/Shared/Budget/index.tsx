@@ -166,7 +166,7 @@ console.log("id isss",_id)
     <div className={style.budget}>
       <div className={style.inputs}>
         <Grid container spacing={1}>
-          <Grid item xs={12} sm={4} lg={4} md={4} alignItems="flex-end">
+          <Grid item xs={12} sm={4} lg={4} md={4} xl={4} alignItems="flex-end">
             <Field
               label="Minimum Upvotes"
               type="number"
@@ -176,7 +176,7 @@ console.log("id isss",_id)
               tooltipMessage="Minimum upvotes required to pass upvoting stage"
             />
           </Grid>
-          <Grid item xs={12} sm={4} lg={4} md={4} alignItems="flex-end">
+          <Grid item xs={12} sm={4} lg={4} md={4}  xl={4} alignItems="flex-end">
             <Field
               label="Max Upvote Days"
               type="number"
@@ -186,7 +186,7 @@ console.log("id isss",_id)
               tooltipMessage="Maximum days for passing upvote stage"
             />
           </Grid>
-          <Grid item xs={12} sm={4} lg={4} md={4} alignItems="flex-end">
+          <Grid item xs={12} sm={4} lg={4} md={4}  xl={4} alignItems="flex-end">
             <Field
               label={`Set Budget ${
                 monthNames[date.getMonth()]
@@ -200,7 +200,7 @@ console.log("id isss",_id)
           </Grid>
         </Grid>
       </div>
-      <Grid item xs={5} sm={2} lg={2} md={2}>
+      
         <Button
           primary
           className={style.updatebutton}
@@ -212,7 +212,7 @@ console.log("id isss",_id)
             "Update"
           )}
         </Button>
-      </Grid>
+
     </div>
   );
 };
