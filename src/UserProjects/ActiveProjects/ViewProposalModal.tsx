@@ -195,44 +195,6 @@ const useStyles = makeStyles((theme) =>
       marginLeft: "5px",
       fontSize: "12px",
     },
-    firstfields: {
-      "& .MuiInputBase-root": {
-        fontSize: "12px",
-       width:"auto",
-      },
-      "& .MuiFormLabel-root": {
-        fontSize: "12px",
-      },
-      "& .MuiFormHelperText-root": {
-        fontSize: "10px",
-      },
-
-      [theme.breakpoints.down("xl")]:
-      {
-        width: "188px",
-      },
-      
-      [theme.breakpoints.up("lg")]:
-      {
-        width: "185px",
-      },
-      [theme.breakpoints.down("lg")]:
-      {
-        width: "192px",       
-      },
-      [theme.breakpoints.down("md")]:
-      {
-        width: "188px",
-      },
-       [theme.breakpoints.down("xs")]:
-      {
-        width: "190px",
-      },
-      [theme.breakpoints.up("xs")]:
-      {
-        width: "160px",
-      }
-    },
   })
 );
 
@@ -420,8 +382,8 @@ const EditModal = (props: any) => {
             error={state.firstName.length == 0 && fieldRequired}
             label="First Name"
             contentEditable={false}
-            className={classes.firstfields}
-           style={{ marginRight:"5px"}}
+            className={classes.submitText}
+            style={{ width: "200px" }}
             id="outlined-error-helper-text"
             value={state.firstName}
             variant="outlined"
@@ -435,7 +397,8 @@ const EditModal = (props: any) => {
             error={state.lastName.length == 0 && fieldRequired}
             label="Last Name"
             id="outlined-error-helper-text"
-            className={classes.firstfields}
+            style={{ width: "200px" }}
+            className={classes.submitText}
             variant="outlined"
             value={state.lastName}
             helperText={
@@ -457,8 +420,8 @@ const EditModal = (props: any) => {
             id="outlined-error-helper-text"
             label="Title"
             error={state.name.length == 0 && fieldRequired}
-            className={classes.firstfields}
-            style={{ marginRight:"5px"}}
+            className={classes.submitText}
+            style={{ width: "200px" }}
             value={state.name}
             helperText={
               state.name.length == 0 && fieldRequired
@@ -471,13 +434,14 @@ const EditModal = (props: any) => {
             error={state.country.length == 0 && fieldRequired}
             label="Country"
             value={state.country}
+            style={{ width: "200px" }}
             id="outlined-error-helper-text"
             helperText={
               state.country.length == 0 && fieldRequired
                 ? `Country is required.`
                 : false
             }
-            className={classes.firstfields}
+            className={classes.submitText}
             variant="outlined"
           />
         </div>
@@ -658,10 +622,10 @@ const EditModal = (props: any) => {
                 ? false
                 : "Experience"
             }
-            className={classes.firstfields}
+            className={classes.submitText}
             type="number"
             id="outlined-error-helper-text"
-            style={{ marginRight: "5px" }}
+            style={{ width: "200px" }}
             value={state.experiencedYear}
             variant="outlined"
             helperText={
@@ -673,7 +637,8 @@ const EditModal = (props: any) => {
           <TextField
             error={state.budget.length == 0 && fieldRequired}
             label={fieldRequired && state.budget.length == 0 ? false : "Budget"}
-            className={classes.firstfields}
+            className={classes.submitText}
+            style={{ width: "200px" }}
             type="number"
             id="outlined-error-helper-text"
             value={state.budget}
@@ -701,7 +666,7 @@ const EditModal = (props: any) => {
                 : "Collateral"
             }
             className={classes.submitText}
-            style={{width:"100%"}}
+            style={{ width: "100%" }}
             type="number"
             id="outlined-error-helper-text"
             value={state.collateral}
@@ -812,6 +777,7 @@ const EditModal = (props: any) => {
           <TextField
             id="outlined-error-helper-text"
             error={milestoneDetails.task.length == 0 && fieldRequired}
+            style={{ width: "200px" }}
             onChange={(e) => _onChangeMilestoneValue(e.target.value, "task")}
             helperText={
               milestoneDetails.task.length == 0 &&
@@ -819,11 +785,12 @@ const EditModal = (props: any) => {
               `Title is required.`
             }
             label="Title"
-            className={classes.firstfields}
+            className={classes.submitText}
             variant="outlined"
           />
           <TextField
             id="outlined-basic"
+            style={{ width: "200px" }}
             error={milestoneDetails.estimatedDays.length == 0 && fieldRequired}
             label={
               fieldRequired && milestoneDetails.estimatedDays.length == 0
@@ -834,7 +801,7 @@ const EditModal = (props: any) => {
             onChange={(e) =>
               _onChangeMilestoneValue(e.target.value, "estimatedDays")
             }
-            className={classes.firstfields}
+            className={classes.submitText}
             value={milestoneDetails.estimatedDays}
             variant="outlined"
             helperText={
@@ -854,6 +821,7 @@ const EditModal = (props: any) => {
         >
           <TextField
             id="outlined-basic"
+            style={{ width: "200px" }}
             label={
               fieldRequired && milestoneDetails.numberOfDevelopers.length == 0
                 ? false
@@ -866,7 +834,7 @@ const EditModal = (props: any) => {
             error={
               milestoneDetails.numberOfDevelopers.length == 0 && fieldRequired
             }
-            className={classes.firstfields}
+            className={classes.submitText}
             value={milestoneDetails.numberOfDevelopers}
             helperText={
               milestoneDetails.numberOfDevelopers.length == 0 &&
@@ -888,7 +856,8 @@ const EditModal = (props: any) => {
             onChange={(e) =>
               _onChangeMilestoneValue(e.target.value, "milestoneCost")
             }
-            className={classes.firstfields}
+            style={{ width: "200px" }}
+            className={classes.submitText}
             variant="outlined"
             helperText={
               milestoneDetails.milestoneCost.length == 0 &&
@@ -926,7 +895,7 @@ const EditModal = (props: any) => {
                 fieldRequired &&
                 `Description is required.`
               }
-              className={classes.firstfields}
+              className={classes.submitText}
               variant="outlined"
             />
           </FormControl>

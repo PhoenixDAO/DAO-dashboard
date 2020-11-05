@@ -288,20 +288,20 @@ const Admin = (props: any) => {
   >(undefined);
 
   const [projectModalItem2, setProjectModalItem2] = React.useState<
-  | {
-      title: string;
-      votes: [];
-      reward: any;
-      budget: any;
-      milestoness: any;
-      description: any;
-      votingDate: any;
-      _id: any;
-      // renderAgain: any;
-      // styleFlag: string;
-    }
-  | undefined
->(undefined);
+    | {
+        title: string;
+        votes: [];
+        reward: any;
+        budget: any;
+        milestoness: any;
+        description: any;
+        votingDate: any;
+        _id: any;
+        // renderAgain: any;
+        // styleFlag: string;
+      }
+    | undefined
+  >(undefined);
 
   const openSnackbar = (
     message: string,
@@ -709,24 +709,24 @@ const Admin = (props: any) => {
             ) : (
               proposalsOfStatusVoting.map((item: any, i) => (
                 <tr
-                key={i}
-                onClick={() =>
-                  setProjectModalItem2({
-                    title: item.name,
-                    reward: item.reward,
-                    budget: item.budget,
-                    milestoness: item.milestone,
-                    description: item.description,
-                    votes: item.votes,
-                    votingDate: item.votingDate,
-                    _id: item._id,
-                    // styleFlag: "UpvoteModal",
-                    // button1: "UpVote",
-                    // button2: "Ok",
-                    // renderAgain: renderAgain,
-                  })
-                }
-              >
+                  key={i}
+                  onClick={() =>
+                    setProjectModalItem2({
+                      title: item.name,
+                      reward: item.reward,
+                      budget: item.budget,
+                      milestoness: item.milestone,
+                      description: item.description,
+                      votes: item.votes,
+                      votingDate: item.votingDate,
+                      _id: item._id,
+                      // styleFlag: "UpvoteModal",
+                      // button1: "UpVote",
+                      // button2: "Ok",
+                      // renderAgain: renderAgain,
+                    })
+                  }
+                >
                   <td>{item.name}</td>
                   <td>{changeFormat(item.votingDate)}</td>
                 </tr>

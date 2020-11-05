@@ -862,11 +862,14 @@ const Proposals = (props: any) => {
       web3js = new Web3(_window.web3.currentProvider);
 
       //get selected account on metamask
-      accounts = await web3js.eth.getAccounts();
+      //accounts = await web3js.eth.getAccounts();
+      let init = await ContractInit.init();
+      accounts = init.address;
 
       //get network which metamask is connected too
       let network = await web3js.eth.net.getNetworkType();
       console.log("checking network", network);
+      console.log("checking account", accounts);
       await initContract();
       return network;
     } else {
@@ -891,7 +894,7 @@ const Proposals = (props: any) => {
         2,
         "1"
       )
-      .send({ from: accounts[0] })
+      .send({ from: accounts })
       .on("transactionHash", (hash: any) => {
         // hash of tx
       })
@@ -907,7 +910,7 @@ const Proposals = (props: any) => {
     setMyLoader(true);
     let result = await (await ContractInit.initPhnxTokenContract())?.methods
       .approve(PHNX_PROPOSAL_ADDRESS, "100000000000000000000000")
-      .send({ from: accounts[0] })
+      .send({ from: accounts })
       .on("transactionHash", (hash: any) => {
         console.log("approval hash of transaction --> ", hash);
       })
@@ -934,17 +937,17 @@ const Proposals = (props: any) => {
 
   const checkApproval = async () => {
     let result = await (await ContractInit.initPhnxTokenContract())?.methods
-      .allowance(accounts[0], PHNX_PROPOSAL_ADDRESS)
-      .call({ from: accounts[0] });
+      .allowance(accounts, PHNX_PROPOSAL_ADDRESS)
+      .call({ from: accounts });
     console.log("What is returning --->> ??? ", result);
     if (result == "0") {
-      console.log("-----", false, accounts[0]);
+      console.log("-----", false, accounts);
       // await sendApproval();
       setCheckingLoading(false);
       setMetaMaskApproval(false);
       return false;
     } else {
-      console.log("-------", true, accounts[0]);
+      console.log("-------", true, accounts);
       // sendApproval();
       setCheckingLoading(false);
       setMetaMaskApproval(true);
@@ -967,6 +970,7 @@ const Proposals = (props: any) => {
   useEffect(() => {
     getData();
     checking();
+    console.log("Redux address", props.user.numioAddress);
     //checkWeb3();
     // getData();
   }, []);
@@ -1151,11 +1155,10 @@ const Proposals = (props: any) => {
                       <td>{loading1 ? "Loading..." : "No proposals found"}</td>
                     </tr>{" "}
                   </>
-                ) 
-                // : proposal.expirationDate < date.toISOString() ? (
-                //   ""
-                // ) 
-                : (
+                ) : (
+                  // : proposal.expirationDate < date.toISOString() ? (
+                  //   ""
+                  // )
                   <>
                     <td>{proposal.name}</td>
                     <td>

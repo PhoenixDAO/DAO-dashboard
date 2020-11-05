@@ -9,7 +9,12 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { URL } from "../../const";
 import { Snackbar, Grid } from "@material-ui/core";
-import { makeStyles,withStyles, Theme, createStyles } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  withStyles,
+  Theme,
+  createStyles,
+} from "@material-ui/core/styles";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import ViewProposalModal from "../ActiveProjects/ViewProposalModal";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -103,7 +108,7 @@ const Proposals = (props: any) => {
   const [deleteModalItem, setDeleteModalItem] = React.useState<
     Item | undefined
   >(undefined);
-  const [loading1,setLoading1]=useState(true);
+  const [loading1, setLoading1] = useState(true);
 
   const edit = (item: Item) => setEditModalItem(item);
 
@@ -166,8 +171,7 @@ const Proposals = (props: any) => {
 
   return (
     <>
-
-{modalOpen && (
+      {modalOpen && (
         <ViewProposalModal
           proposal={modalData}
           type="Proposal"
@@ -217,7 +221,7 @@ const Proposals = (props: any) => {
         {value.length == 0 ? (
           <>
             <tr>
-            <td>{loading1 ? "Loading..." : "No proposal found"}</td>
+              <td>{loading1 ? "Loading..." : "No proposal found"}</td>
             </tr>
           </>
         ) : (
@@ -233,71 +237,88 @@ const Proposals = (props: any) => {
                 votes,
               } = item;
               let value;
-              if(expirationDate){
+              if (expirationDate) {
                 newExpitationDate = new Date(expirationDate);
                 console.log("Date ", newExpitationDate);
                 value = newExpitationDate.toString();
-              }else{
-                value="Not issued"
+              } else {
+                value = "Not issued";
               }
-              
 
               return (
-                < Grid  lg={4} sm={6} xs={12} justify="space-between" >
-                <div key={i} className={style.item}>
-                     
-                  <label tabIndex={-1} className={style.menu}>
-                    <div className={style.menuButton}>
-                
-                      <div />
-                      <div />
-                      <div />
-                    </div>
-                    <div className={style.menuItems}>
+                <Grid lg={4} sm={6} xs={12} justify="space-between">
+                  <div key={i} className={style.item}>
+                    <label tabIndex={-1} className={style.menu}>
+                      <div className={style.menuButton}>
+                        <div />
+                        <div />
+                        <div />
+                      </div>
+                      <div className={style.menuItems}>
+                        <div
+                          className={cn(style.menuItem, style.edit)}
+                          // onClick={() => edit(item)}
+                        >
+                          <img src={iconEdit} className={style.icon} /> Edit
+                          proposal
+                        </div>
+                        <div
+                          className={cn(style.menuItem, style.delete)}
+                          onClick={() => deleteProposal(item)}
+                        >
+                          <img src={iconDelete} className={style.icon} /> Delete
+                        </div>
+                      </div>
+                    </label>
+                    <LightTooltip title="View proposal" placement="top-start">
                       <div
-                        className={cn(style.menuItem, style.edit)}
-                        onClick={() => edit(item)}
+                        style={{ cursor: "pointer" }}
+                        onClick={(_) => viewModal(item)}
+                        className={style.title}
                       >
-                        <img src={iconEdit} className={style.icon} /> Edit
-                        proposal
+                        {name}
                       </div>
-                      <div
-                        className={cn(style.menuItem, style.delete)}
-                        onClick={() => deleteProposal(item)}
+                    </LightTooltip>
+
+                    <div className={style.keyValues}>
+                      <Grid
+                        lg={6}
+                        sm={6}
+                        md={6}
+                        xs={6}
+                        className={style.statusValues}
                       >
-                        <img src={iconDelete} className={style.icon} /> Delete
-                      </div>
+                        <div>
+                          <div className={style.key}>Current Upvotes</div>
+                          <div className={style.value}>
+                            {" "}
+                            {votes.length} /{minimumUpvotes}
+                          </div>
+                        </div>
+                      </Grid>
+                      <Grid
+                        lg={3}
+                        sm={4}
+                        md={4}
+                        xs={4}
+                        className={style.statusValues}
+                        justify="flex-end"
+                      >
+                        <div>
+                          <div className={style.key}>Status</div>
+                          <div className={style.value}>{status}</div>
+                        </div>
+                      </Grid>
+                      <Grid lg={12} sm={12} md={12} xs={12}>
+                        <div>
+                          <div className={style.key}>Expiration Date</div>
+                          <div className={style.value}>{value}</div>
+                        </div>
+                      </Grid>
                     </div>
-                  </label>
-                  <LightTooltip title="View proposal" placement="top-start"><div style={{ cursor: "pointer" }}
-                      onClick={(_) => viewModal(item)} className={style.title}>{name}</div></LightTooltip>
-                  
-                  <div className={style.keyValues}>
-                  <Grid lg={6} sm={6} md={6} xs={6} className={style.statusValues}>
-                    <div>
-                      <div className={style.key}>Current Upvotes</div>
-                      <div className={style.value}>
-                        {" "}
-                        {votes.length} /{minimumUpvotes}
-                      </div>
-                    </div>
-                    </Grid>
-                    <Grid lg={3} sm={4} md={4} xs={4} className={style.statusValues} justify="flex-end" >
-                    <div>
-                      <div className={style.key}>Status</div>
-                      <div className={style.value}>{status}</div>
-                    </div>
-                    </Grid>
-                    <Grid lg={12} sm={12} md={12} xs={12}>
-                    <div>
-                      <div className={style.key}>Expiration Date</div>
-                      <div className={style.value}>{value}</div>
-                    </div>
-                   </Grid>
+                    {/* <div className={style.text}>{description}</div> */}
                   </div>
-                  {/* <div className={style.text}>{description}</div> */}
-                </div>
-                </ Grid>
+                </Grid>
               );
             })}
           </>

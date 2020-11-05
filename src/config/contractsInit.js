@@ -22,13 +22,22 @@ export default class ContractInit {
 
         this.web3js = new Web3(window.web3.currentProvider);
         console.log("web3", this.web3js);
-        this.accounts = await this.web3js.eth.getAccounts();
+        this.accountsWeb3 = await this.web3js.eth.getAccounts();
+        this.accounts = window.ethereum.selectedAddress.toLowerCase();
+        if(this.accounts.toLowerCase() !== this.accountsWeb3[0].toLowerCase()){
+          console.log('Different');
+
+        }
+        console.log('selected web3', this.accountsWeb3[0])
+        console.log('Selected address', this.accounts)
         this.getNetwork = await this.web3js.eth.net.getNetworkType();
-        console.log("asdasmdkasnkdjasd as", this.accounts);
+        console.log("123 as", this.accounts);
+       
         console.log('987', this.accounts)
         return {
           web3js: this.web3js,
-          address: this.accounts[0],
+          address: this.accounts,
+         // address: this.accounts[0],
           network: this.getNetwork,
         };
       } else {
@@ -53,12 +62,12 @@ export default class ContractInit {
     try {
       if (typeof window.ethereum !== "undefined") {
         this.web3js = new Web3(window.web3.currentProvider);
-        this.accounts = await this.web3js.eth.getAccounts();
+        this.accounts = window.ethereum.selectedAddress.toLowerCase();
         this.getNetwork = await this.web3js.eth.net.getNetworkType();
         console.log("asdasmdkasnkdjasd as", this.getNetwork, this.accounts);
         return {
           web3js: this.web3js,
-          address: this.accounts[0],
+          address: this.accounts,
           network: this.getNetwork,
         };
       } else {
