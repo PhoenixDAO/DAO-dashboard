@@ -23,6 +23,7 @@ export default class ContractInit {
         this.web3js = new Web3(window.web3.currentProvider);
         console.log("web3", this.web3js);
         this.accountsWeb3 = await this.web3js.eth.getAccounts();
+        console.log(this.accountsWeb3)
         this.accounts = window.ethereum.selectedAddress.toLowerCase();
         if(this.accounts.toLowerCase() !== this.accountsWeb3[0].toLowerCase()){
           console.log('Different');
