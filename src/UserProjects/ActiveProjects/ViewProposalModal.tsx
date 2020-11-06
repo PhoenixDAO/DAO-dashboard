@@ -209,12 +209,12 @@ const useStyles = makeStyles((theme) =>
 
       [theme.breakpoints.down("xl")]:
       {
-        width: "188px",
+        width: "191px",
       },
 
       [theme.breakpoints.up("lg")]:
       {
-        width: "185px",
+        width: "190px",
       },
       [theme.breakpoints.down("lg")]:
       {
@@ -222,7 +222,7 @@ const useStyles = makeStyles((theme) =>
       },
       [theme.breakpoints.down("md")]:
       {
-        width: "188px",
+        width: "191px",
       },
        [theme.breakpoints.down("xs")]:
       {
