@@ -250,7 +250,7 @@ const Votes = (props: any) => {
                 value.map((item: any, i) => (
                   <tr
                     onClick={() => {
-                      !allowModalOpen[`${i}`]
+                      allowModalOpen[`${i}`]
                         ? null
                         : !props.address
                         ? alert("please connect to metamask")
