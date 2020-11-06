@@ -7,7 +7,7 @@
 }
 
 .label {
-  font-size: 14rem;
+  font-size: 10px;
  
   margin-bottom: 11rem;
   color: $dark-gray;
@@ -30,7 +30,7 @@
   transition: 0.2s;
   width: 100%;
   padding: 0 15rem;
-min-width: 200px;
+// min-width: 200px;
   &.hasError {
     border-color: red;
   }
@@ -55,11 +55,15 @@ min-width: 200px;
   font-size: 14rem;
   color: red;
 }
+
 .wrap .label{
-  @media (max-device-width: 700px ){
+    @media screen and (max-width:700px)and (min-width:599px){
+ width:166px;
+    }
+  @media (max-device-width: 600px ){
     
     font-size: 14rem;
-    min-width: 178px;
+    // min-width: 178px;
     max-height: 37px;
   }
 }
