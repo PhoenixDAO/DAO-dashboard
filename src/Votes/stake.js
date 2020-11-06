@@ -222,6 +222,13 @@ const Stake = (props) => {
   
   const onChangeDurationDays = (e) => {
     console.log('Amount',e.target.value)
+   
+    if( e.target.value <= 0) {  
+      console.log('if')
+      setZeroAmountEntered(true); 
+      setAllInputFields(false)
+      setAmountEntered(false)
+    }
     if (props.stakeLoading !== true) {
       var reg = new RegExp("^\\d+$");
       if (
@@ -763,7 +770,7 @@ console.log('onSubmit', onSubmit)
               // onClose={() => handleZeroAmountEntered()}
             >
               <Alert style={{ fontSize: "12px" }} severity="error">
-                Value must be greater than zero.
+                Input must be greater than zero.
               </Alert>
             </Snackbar>
 
