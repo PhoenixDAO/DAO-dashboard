@@ -110,12 +110,12 @@ const useStyles = makeStyles((theme) =>
 
       [theme.breakpoints.up("lg")]:
       {
-        width: "185px",
+        width: "198px",
       },
       [theme.breakpoints.down("lg")]:
       {
-        width: "195px",
-        marginRight: "3px",
+        width: "198px",
+
 
       },
       [theme.breakpoints.down("md")]:
@@ -124,7 +124,7 @@ const useStyles = makeStyles((theme) =>
       },
       [theme.breakpoints.down("xs")]:
       {
-        width: "161px",
+        width: "165px",
       },
       [theme.breakpoints.up("xs")]:
       {
@@ -899,6 +899,7 @@ const EditModal = (props: any) => {
             <TextField
               error={state.firstName.length == 0 && fieldRequired}
               label="First Name"
+              style={{marginRight:"5px"}}
               onChange={(e) => _onChange(e.target.value, "firstName")}
               className={classes.firstfields}
               id="outlined-error-helper-text"
@@ -940,6 +941,7 @@ const EditModal = (props: any) => {
             <TextField
               id="outlined-error-helper-text"
               label="Title"
+              style={{marginRight:"5px"}}
               error={state.name.length == 0 && fieldRequired}
               onChange={(e) => _onChange(e.target.value, "name")}
               className={classes.firstfields}
@@ -956,6 +958,7 @@ const EditModal = (props: any) => {
             <TextField
               error={state.country.length == 0 && fieldRequired}
               label="Country"
+              
               value={state.country}
               className={classes.firstfields}
               onChange={(e) => _onChange(e.target.value, "country")}
@@ -1189,6 +1192,7 @@ const EditModal = (props: any) => {
               }
               onChange={(e) => _onChange(e.target.value, "experiencedYear")}
               className={classes.firstfields}
+              style={{marginRight:"5px"}}
               id="outlined-error-helper-text"
               value={state.experiencedYear}
               variant="outlined"
@@ -1404,7 +1408,7 @@ const EditModal = (props: any) => {
               id="outlined-error-helper-text"
               error={milestoneDetails.task.length == 0 && fieldRequired}
           
-              style={{ width: "188px", marginRight: "7px" }}
+              style={{ marginRight: "5px" }}
               onChange={(e) => _onChangeMilestoneValue(e.target.value, "task")}
               helperText={
                 milestoneDetails.task.length == 0 &&
@@ -1412,7 +1416,7 @@ const EditModal = (props: any) => {
                 `Title is required.`
               }
               label="Title"
-              className={classes.submitText}
+              className={classes.firstfields}
               variant="outlined"
             />
           </LightTooltip>
@@ -1481,6 +1485,7 @@ const EditModal = (props: any) => {
                 _onChangeMilestoneValue(e.target.value, "numberOfDevelopers")
               }
               className={classes.firstfields}
+              style={{marginRight:"5px"}}
               value={milestoneDetails.numberOfDevelopers}
               helperText={
                 milestoneDetails.numberOfDevelopers.length == 0 && fieldRequired
