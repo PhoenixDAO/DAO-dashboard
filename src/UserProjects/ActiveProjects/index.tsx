@@ -292,7 +292,11 @@ const ActiveProjects = (props: any) => {
           })}
 
           {value.length == 0 ? (
+             <Grid     lg={12} md={12} sm={12} xs={12} justify="space-between">
+               <form style= {{height: "389px "}} className={style.item}>
             <td> {loading1 ? "Loading..." : "No active projects found"}</td>
+            </form>
+            </Grid>
           ) : (
             value.map((item: any, i) => {
               const { name, description } = item;
