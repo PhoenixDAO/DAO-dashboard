@@ -171,7 +171,7 @@ const VotesModal = (props: any) => {
 
   return (
     <>
-       <Snackbar
+      <Snackbar
         open={ethereumNetworkError}
         autoHideDuration={2000}
         message={props.toastMessage}
@@ -215,7 +215,9 @@ const VotesModal = (props: any) => {
                 close={closeModal}
                 renderAgain={props.resetData}
                 handleStakedSnackBar={props.handleStakedSnackBar}
-                handleTransactionRejectedError={props.handleTransactionRejectedError}
+                handleTransactionRejectedError={
+                  props.handleTransactionRejectedError
+                }
               />
             </div>
           </div>
