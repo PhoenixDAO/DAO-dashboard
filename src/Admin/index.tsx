@@ -400,7 +400,7 @@ const Admin = (props: any) => {
             },
           }
         )
-        .then((value) => {
+        .then((value: any) => {
           setProposalsOfStatusPending(value.data.result);
           setLoading1(false);
         });

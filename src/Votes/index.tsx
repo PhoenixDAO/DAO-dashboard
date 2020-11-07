@@ -18,6 +18,7 @@ import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import { Snackbar, Grid } from "@material-ui/core";
 import ContractInit from "../config/contractsInit";
 import { ethereumNetwork } from "../const";
+import VotesModal from "../Proposals/Modal/votesModal";
 let noDataFound = "No data found";
 
 function Alert(props: any) {
@@ -29,60 +30,37 @@ type Project = {
   title: string;
   date?: string;
 };
-const upcoming: Project[] = [
-  {
-    title: "Amazon dApp build",
-  },
-  {
-    title: "Uber replacement dApp",
-    date: "08/01/2020",
-  },
-  {
-    title: "Facebook dApp build",
-    date: "08/01/2020",
-  },
-  {
-    title: "Youtube dApp build",
-    date: "09/01/2020",
-  },
-  {
-    title: "Whatsapp dApp build",
-    date: "09/01/2020",
-  },
-  {
-    title: "DEX aggregator build",
-    date: "09/01/2020",
-  },
-  {
-    title: "Gamer Marketplace build",
-    date: "09/01/2020",
-  },
-  {
-    title: "Tokenization dApp build",
-    date: "10/01/2020",
-  },
-];
-const past = [
-  ["DEX dApp build", "07/01/2020", <Font color="success">Pass</Font>],
-  ["Other dApp build", "07/01/2020", <Font color="success">Pass</Font>],
-  ["Other dApp build", "07/01/2020", "Fail"],
-  ["Other dApp build", "07/01/2020", "Fail"],
-  ["Other dApp build", "07/01/2020", <Font color="success">Pass</Font>],
-  ["Other dApp build", "07/01/2020", "Fail"],
-  ["Other dApp build", "07/01/2020", <Font color="success">Pass</Font>],
-  ["Other dApp build", "07/01/2020", <Font color="success">Pass</Font>],
-];
+
 const Votes = (props: any) => {
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState([]);
   const [selectedProposal, setSelectedProposal] = useState({});
   const [proposals, setProposals] = useState([]);
-  const [ethereumNetworkError, setEthereumNetworkError] = useState(false);
+  // const [ethereumNetworkError, setEthereumNetworkError] = useState(false);
   const [stakedSnackBar, setStakedSnackBar] = useState(false);
-  const [allowModalOpen, setAllowModalOpen]: any = useState({});
+  // const [allowModalOpen, setAllowModalOpen]: any = useState({});
   const [transactionRejected, setTransactionRejected] = useState(false);
   const [loading1, setLoading1] = useState(true);
   const [loading2, setLoading2] = useState(true);
+
+  const [votesModalItem, setVotesModalItem] = React.useState<
+    | {
+        title: string;
+        votes: [];
+        reward: any;
+        budget: any;
+        milestoness: any;
+        description: any;
+        expirationDate: any;
+        _id: any;
+        votingStatus: any;
+        renderAgain: any;
+        button1: any;
+        button2: any;
+        styleFlag: string;
+      }
+    | undefined
+  >(undefined);
 
   useEffect(() => {
     getData();
@@ -108,11 +86,11 @@ const Votes = (props: any) => {
       .then((value) => {
         setValue(value.data.result);
         setLoading(false);
-        value.data.result.map((item: any, i: number) =>
-          item.votingDate < date.toISOString()
-            ? setAllowModalOpen((val: any) => ({ ...val, [`${i}`]: true }))
-            : null
-        );
+        // value.data.result.map((item: any, i: number) =>
+        //   item.votingStatus
+        //     ? setAllowModalOpen((val: any) => ({ ...val, [`${i}`]: true }))
+        //     : null
+        // );
         setLoading1(false);
       })
       .catch((err) => {
@@ -156,12 +134,12 @@ const Votes = (props: any) => {
       new Date(date.getTime()).getMonth() + 1
     }/${new Date(date.getTime()).getFullYear()} `;
   };
-  const handleNetworkErrorSnackBar = () => {
-    setEthereumNetworkError(false);
-    setInterval(() => {
-      setEthereumNetworkError(false);
-    }, 3000);
-  };
+  // const handleNetworkErrorSnackBar = () => {
+  //   setEthereumNetworkError(false);
+  //   setInterval(() => {
+  //     setEthereumNetworkError(false);
+  //   }, 3000);
+  // };
   const selectProposal = (item: any) => {
     setSelectedProposal(item);
     setModalItem(item);
@@ -170,41 +148,55 @@ const Votes = (props: any) => {
     setStakedSnackBar(state);
   };
 
-  const openModal = async (item: any) => {
-    let temp: any = await ContractInit.init();
-    console.log("123", temp.network);
+  // const openModal = async (item: any) => {
+  //   let temp: any = await ContractInit.init();
+  //   console.log("123", temp.network);
 
-    //  const networkResult: any = props.network;
-    if (temp.network != ethereumNetwork) {
-      setEthereumNetworkError(true);
-      throw "Ethereum Network invalid !";
-    } else {
-      selectProposal(item);
-    }
-  };
-  const handleTransactionRejectedError = (input: boolean) => {
+  //   //  const networkResult: any = props.network;
+  //   if (temp.network != ethereumNetwork) {
+  //     setEthereumNetworkError(true);
+  //     throw "Ethereum Network invalid !";
+  //   } else {
+  //     selectProposal(item);
+  //   }
+  // };
+  const handleTransactionRejectedError = (input: boolean = true) => {
     setTransactionRejected(input);
   };
   let styleFlagPassVotes = "passVotes";
   let styleFlagUpcomingVotes = "upcomingVotes";
   return (
     <>
-      {!loading && modalItem && (
+      {" "}
+      {votesModalItem && (
+        <VotesModal
+          resetData={renderAgain}
+          // openSnackbar={openSnackbar}
+          // title={votesModalItem.title}
+          // reward={votesModalItem.reward}
+          // budget={votesModalItem.budget}
+          selectedProposal={votesModalItem}
+          handleStakedSnackBar={handleStakedSnackBar}
+          handleTransactionRejectedError={handleTransactionRejectedError}
+          // milestones={votesModalItem.milestoness}
+          // description={votesModalItem.description}
+          // expirationDate={votesModalItem.expirationDate}
+          // renderAgain={renderAgain}
+          votes={votesModalItem.votes}
+          _id={votesModalItem._id}
+          styleFlag={votesModalItem.styleFlag}
+          votingStatus={votesModalItem.votingStatus}
+          button1="Vote Now !"
+          button2="Back"
+          close={() => setVotesModalItem(undefined)}
+          // setSnackBar={() => setSnackBar}
+        />
+      )}
+      {/* {!loading && modalItem && (
         <Modal
           close={closeModal}
           title={modalItem.title}
           styleFlag={"stakeModal"}
-          //showSnackBar={true}
-          // actions={
-          // <>
-          // <Button primary onClick={closeModal}>
-          // Yes
-          // </Button>
-          // <Button primary outline onClick={closeModal}>
-          // No
-          // </Button>
-          // </>
-          // }
         >
           <div className={style.modalContent}>
             <div className={style.modalInfo}>
@@ -218,7 +210,7 @@ const Votes = (props: any) => {
             </div>
           </div>
         </Modal>
-      )}
+      )} */}
       <Columns>
         <Grid
           item
@@ -249,14 +241,18 @@ const Votes = (props: any) => {
               ) : (
                 value.map((item: any, i) => (
                   <tr
+                    // onClick={() => {
+                    //   // !allowModalOpen[`${i}`]
+                    //   !item.votingStatus
+                    //     ? null
+                    //     : !props.address
+                    //     ? alert("please connect to metamask")
+                    //     : !loading
+                    //     ? openModal(item)
+                    //     : null;
+                    // }}
                     onClick={() => {
-                      !allowModalOpen[`${i}`]
-                        ? null
-                        : !props.address
-                        ? alert("please connect to metamask")
-                        : !loading
-                        ? openModal(item)
-                        : null;
+                      setVotesModalItem(item);
                     }}
                     key={i}
                   >
@@ -327,7 +323,7 @@ const Votes = (props: any) => {
                     </>
                   ))
                 )}
-                <Snackbar
+                {/* <Snackbar
                   open={ethereumNetworkError}
                   autoHideDuration={2000}
                   message={props.toastMessage}
@@ -336,7 +332,7 @@ const Votes = (props: any) => {
                   <Alert style={{ fontSize: "12px" }} severity="error">
                     Ethereum network must be Rinkeby !
                   </Alert>
-                </Snackbar>
+                </Snackbar> */}
                 <Snackbar
                   open={stakedSnackBar}
                   autoHideDuration={2000}

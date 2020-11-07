@@ -106,10 +106,12 @@ export default ({
 }: Props) => {
   const handleClick = ({ target }: any) => {
     console.log("handle click", target.className);
+    let checkClassName = target.className;
     if (
       target.className === style.modalWrap ||
+      //target.className === checkClassName
       target.className ===
-        "MuiGrid-root style_modalWrap__3KYJY MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12 MuiGrid-grid-lg-12"
+        "MuiGrid-root style_modalWrap__fAu8M MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12 MuiGrid-grid-lg-12"
     ) {
       close();
       console.log("handle click 2");

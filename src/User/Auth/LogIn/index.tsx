@@ -118,7 +118,7 @@ const Login = (props: any) => {
     openSnackbar("MetaMask connected successfully", "success");
     setTimeout(async () => {
       const result = await LoginAPI();
-    }, 4000);
+    }, 1000);
   };
   useEffect(() => {
     if (props.address && loginClicked) {
