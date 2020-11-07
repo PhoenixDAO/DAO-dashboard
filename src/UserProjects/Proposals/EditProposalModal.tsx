@@ -909,7 +909,7 @@ const EditModal = (props: any) => {
             variant="outlined"
           >
             <LightTooltip
-              title="Why is your proposal important for the PhoenixDAO ecosystem?"
+              title="Why is your proposal important for the PhoenixDAO ecosystem and what problem does your proposal solve?"
               placement="bottom"
               arrow
             >
