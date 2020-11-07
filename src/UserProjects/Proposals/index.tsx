@@ -221,7 +221,7 @@ const Proposals = (props: any) => {
         {value.length == 0 ? (
           <>
             <tr>
-              <td>{loading1 ? "Loading..." : "No proposal found"}</td>
+              <td>{loading1 ? "Loading..." : "No proposals found"}</td>
             </tr>
           </>
         ) : (
