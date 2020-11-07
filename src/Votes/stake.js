@@ -229,6 +229,11 @@ const Stake = (props) => {
       setAllInputFields(false)
       setAmountEntered(false)
     }
+    if(e.target.value > 0) {
+      setZeroAmountEntered(false); 
+      setAllInputFields(false)
+      setAmountEntered(false)
+    }
     if (props.stakeLoading !== true) {
       var reg = new RegExp("^\\d+$");
       if (

@@ -105,7 +105,7 @@ export default ({
   showStepper,
 }: Props) => {
   const handleClick = ({ target }: any) => {
-    console.log("handle click", target.className);
+    console.log("handle click", target);
     let checkClassName = target.className;
     if (
       target.className === style.modalWrap ||
@@ -198,7 +198,7 @@ export default ({
           xs={12}
           md={12}
           className={style.modalWrap}
-          onClick={handleClick}
+          // onClick={handleClick}
         >
           <div className={cn(style.modal, className)}>
             <div className={style.closeButton} onClick={close} />

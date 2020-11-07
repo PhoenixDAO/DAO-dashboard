@@ -103,33 +103,25 @@ const useStyles = makeStyles((theme) =>
         fontSize: "10px",
       },
 
-      [theme.breakpoints.down("xl")]:
-      {
+      [theme.breakpoints.down("xl")]: {
         width: "188px",
       },
 
-      [theme.breakpoints.up("lg")]:
-      {
+      [theme.breakpoints.up("lg")]: {
         width: "198px",
       },
-      [theme.breakpoints.down("lg")]:
-      {
+      [theme.breakpoints.down("lg")]: {
         width: "198px",
-
-
       },
-      [theme.breakpoints.down("md")]:
-      {
+      [theme.breakpoints.down("md")]: {
         width: "165px",
       },
-      [theme.breakpoints.down("xs")]:
-      {
+      [theme.breakpoints.down("xs")]: {
         width: "165px",
       },
-      [theme.breakpoints.up("xs")]:
-      {
+      [theme.breakpoints.up("xs")]: {
         width: "160px",
-      }
+      },
     },
     countryPicker: {
       "& .MuiInputBase-input": {
@@ -313,7 +305,7 @@ const EditModal = (props: any) => {
     // personalExperience: "",
     experiencedYear: "",
     duration: "",
-    collateral: "",
+    collateral: "10",
     reward: "1",
     numioAddress: props.user.numioAddress,
     txHash:
@@ -382,7 +374,7 @@ const EditModal = (props: any) => {
 
   const classes = useStyles();
 
-  useEffect(() => { }, []);
+  useEffect(() => {}, []);
 
   const handleClickNext = (e: any) => {
     let {
@@ -731,7 +723,7 @@ const EditModal = (props: any) => {
 
             props.openSnackbar(err.response.data.result.message, "error");
           } else {
-            props.openSnackbar("Oops! Something went wrong 2", "error");
+            props.openSnackbar("Oops! Something went wrong ", "error");
           }
           console.log(err.status);
           console.log(err.message);
@@ -766,7 +758,7 @@ const EditModal = (props: any) => {
         );
         setDeleteProposalId("");
         setShowLoader(false);
-        props.openSnackbar("Oops! Something went wrong 3", "error");
+        props.openSnackbar("Oops! Something went wrong ", "error");
       }
       console.log("======e", e);
     }
@@ -899,7 +891,7 @@ const EditModal = (props: any) => {
             <TextField
               error={state.firstName.length == 0 && fieldRequired}
               label="First Name"
-              style={{marginRight:"5px"}}
+              style={{ marginRight: "5px" }}
               onChange={(e) => _onChange(e.target.value, "firstName")}
               className={classes.firstfields}
               id="outlined-error-helper-text"
@@ -941,7 +933,7 @@ const EditModal = (props: any) => {
             <TextField
               id="outlined-error-helper-text"
               label="Title"
-              style={{marginRight:"5px"}}
+              style={{ marginRight: "5px" }}
               error={state.name.length == 0 && fieldRequired}
               onChange={(e) => _onChange(e.target.value, "name")}
               className={classes.firstfields}
@@ -958,7 +950,6 @@ const EditModal = (props: any) => {
             <TextField
               error={state.country.length == 0 && fieldRequired}
               label="Country"
-              
               value={state.country}
               className={classes.firstfields}
               onChange={(e) => _onChange(e.target.value, "country")}
@@ -996,8 +987,8 @@ const EditModal = (props: any) => {
                   state.email.length == 0 && fieldRequired
                     ? `Email is required.`
                     : emailValid
-                      ? "Email is not valid"
-                      : false
+                    ? "Email is not valid"
+                    : false
                 }
                 className={classes.submitText}
                 variant="outlined"
@@ -1037,8 +1028,8 @@ const EditModal = (props: any) => {
                   state.githubLink.length == 0 && fieldRequired
                     ? `Github Link is required.`
                     : linkValidation
-                      ? "Github Link is not valid"
-                      : false
+                    ? "Github Link is not valid"
+                    : false
                 }
                 className={classes.submitText}
                 variant="outlined"
@@ -1186,13 +1177,13 @@ const EditModal = (props: any) => {
               inputProps={{ inputmode: "numeric", pattern: "[0-9]*" }}
               label={
                 (fieldRequired && state.experiencedYear.length == 0) ||
-                  (valueSmaller && state.experiencedYear == "0")
+                (valueSmaller && state.experiencedYear == "0")
                   ? false
                   : "Experience"
               }
               onChange={(e) => _onChange(e.target.value, "experiencedYear")}
               className={classes.firstfields}
-              style={{marginRight:"5px"}}
+              style={{ marginRight: "5px" }}
               id="outlined-error-helper-text"
               value={state.experiencedYear}
               variant="outlined"
@@ -1200,8 +1191,8 @@ const EditModal = (props: any) => {
                 state.experiencedYear.length == 0 && fieldRequired
                   ? `Experienced is required.`
                   : valueSmaller && state.experiencedYear == "0"
-                    ? "Value must be greater than 0"
-                    : false
+                  ? "Value must be greater than 0"
+                  : false
               }
             />
           </LightTooltip>
@@ -1217,12 +1208,11 @@ const EditModal = (props: any) => {
               }
               label={
                 (fieldRequired && state.collateral.length == 0) ||
-                  (valueSmaller && state.collateral == "0")
+                (valueSmaller && state.collateral == "0")
                   ? false
                   : "Collateral"
               }
-              
-              onChange={(e) => _onChange(e.target.value, "collateral")}
+              //  onChange={(e) => _onChange(e.target.value, "collateral")}
               className={classes.firstfields}
               id="outlined-error-helper-text"
               value={state.collateral}
@@ -1231,8 +1221,8 @@ const EditModal = (props: any) => {
                 state.collateral.length == 0 && fieldRequired
                   ? `Collateral is required.`
                   : valueSmaller && state.collateral == "0"
-                    ? "Value must be greater than 0"
-                    : false
+                  ? "Value must be greater than 0"
+                  : false
               }
             />
           </LightTooltip>
@@ -1407,7 +1397,6 @@ const EditModal = (props: any) => {
             <TextField
               id="outlined-error-helper-text"
               error={milestoneDetails.task.length == 0 && fieldRequired}
-          
               style={{ marginRight: "5px" }}
               onChange={(e) => _onChangeMilestoneValue(e.target.value, "task")}
               helperText={
@@ -1434,7 +1423,7 @@ const EditModal = (props: any) => {
               }
               label={
                 (fieldRequired && milestoneDetails.estimatedDays.length == 0) ||
-                  (valueSmaller && milestoneDetails.estimatedDays == "0")
+                (valueSmaller && milestoneDetails.estimatedDays == "0")
                   ? false
                   : "Estimated Days"
               }
@@ -1448,8 +1437,8 @@ const EditModal = (props: any) => {
                 milestoneDetails.estimatedDays.length == 0 && fieldRequired
                   ? `EstimatedDays are required.`
                   : valueSmaller && milestoneDetails.estimatedDays == "0"
-                    ? "Value must be greater than 0"
-                    : false
+                  ? "Value must be greater than 0"
+                  : false
               }
             />
           </LightTooltip>
@@ -1477,7 +1466,7 @@ const EditModal = (props: any) => {
               label={
                 (fieldRequired &&
                   milestoneDetails.numberOfDevelopers.length == 0) ||
-                  (valueSmaller && milestoneDetails.numberOfDevelopers == "0")
+                (valueSmaller && milestoneDetails.numberOfDevelopers == "0")
                   ? false
                   : "Developers Working"
               }
@@ -1485,14 +1474,14 @@ const EditModal = (props: any) => {
                 _onChangeMilestoneValue(e.target.value, "numberOfDevelopers")
               }
               className={classes.firstfields}
-              style={{marginRight:"5px"}}
+              style={{ marginRight: "5px" }}
               value={milestoneDetails.numberOfDevelopers}
               helperText={
                 milestoneDetails.numberOfDevelopers.length == 0 && fieldRequired
                   ? `Developers working are required.`
                   : valueSmaller && milestoneDetails.numberOfDevelopers == "0"
-                    ? "Value must be greater than 0"
-                    : false
+                  ? "Value must be greater than 0"
+                  : false
               }
               variant="outlined"
             />
@@ -1506,7 +1495,7 @@ const EditModal = (props: any) => {
               }
               label={
                 (fieldRequired && milestoneDetails.milestoneCost.length == 0) ||
-                  (valueSmaller && milestoneDetails.milestoneCost == "0")
+                (valueSmaller && milestoneDetails.milestoneCost == "0")
                   ? false
                   : "Milestone Cost"
               }
@@ -1691,40 +1680,40 @@ const EditModal = (props: any) => {
                       </Button>
                     </>
                   ) : (
-                      <>
-                        {j < 2 ? (
-                          <Button
-                            disabled={disableInputs}
-                            primary
-                            onClick={(e: any) => handleClickNext(e)}
-                          >
-                            Next
-                          </Button>
-                        ) : (
-                            <Button
-                              primary
-                              // disabled={showLoader}
-                              onClick={
-                                (e: any) => (!showLoader ? openDialogue(e) : null)
-                                // handleSubmit()
-                              }
-                            >
-                              {showLoader ? (
-                                <CircularProgress size={12} />
-                              ) : (
-                                  <p>Submit</p>
-                                )}
-                            </Button>
-                          )}
+                    <>
+                      {j < 2 ? (
                         <Button
                           disabled={disableInputs}
-                          style={{ marginTop: "10px" }}
-                          onClick={(e: any) => handleClickBack(e)}
+                          primary
+                          onClick={(e: any) => handleClickNext(e)}
                         >
-                          Back
+                          Next
+                        </Button>
+                      ) : (
+                        <Button
+                          primary
+                          // disabled={showLoader}
+                          onClick={
+                            (e: any) => (!showLoader ? openDialogue(e) : null)
+                            // handleSubmit()
+                          }
+                        >
+                          {showLoader ? (
+                            <CircularProgress size={12} />
+                          ) : (
+                            <p>Submit</p>
+                          )}
+                        </Button>
+                      )}
+                      <Button
+                        disabled={disableInputs}
+                        style={{ marginTop: "10px" }}
+                        onClick={(e: any) => handleClickBack(e)}
+                      >
+                        Back
                       </Button>
-                      </>
-                    )}
+                    </>
+                  )}
                 </div>
               </div>
             }
@@ -1733,13 +1722,13 @@ const EditModal = (props: any) => {
             {addMilestones ? (
               MilestonesDescription()
             ) : (
-                <>
-                  {j == 0 && ProjectName()}
-                  {j == 1 && ProjectDetails()}
-                  {j == 2 && MilestonesDescription()}
-                  {j == 3 && projectMilestones()}
-                </>
-              )}
+              <>
+                {j == 0 && ProjectName()}
+                {j == 1 && ProjectDetails()}
+                {j == 2 && MilestonesDescription()}
+                {j == 3 && projectMilestones()}
+              </>
+            )}
           </Modal>
         </div>
       </div>
