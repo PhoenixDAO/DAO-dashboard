@@ -1321,7 +1321,7 @@ const EditModal = (props: any) => {
             variant="outlined"
           >
             <LightTooltip
-              title="Briefly describe your proposal"
+              title="Briefly describe your proposal."
               placement="bottom"
               arrow
             >
@@ -1539,7 +1539,7 @@ const EditModal = (props: any) => {
             variant="outlined"
           >
             <LightTooltip
-              title="Briefly describe the milestone"
+              title="Briefly describe the milestone."
               placement="bottom"
               arrow
             >
