@@ -292,7 +292,7 @@ const ActiveProjects = (props: any) => {
           })}
 
           {value.length == 0 ? (
-            <td> {loading1 ? "Loading..." : "No active proposal found"}</td>
+            <td> {loading1 ? "Loading..." : "No active projects found"}</td>
           ) : (
             value.map((item: any, i) => {
               const { name, description } = item;

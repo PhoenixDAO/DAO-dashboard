@@ -763,7 +763,7 @@ const EditModal = (props: any) => {
                   state.email.length == 0 && fieldRequired
                     ? `Email is required.`
                     : emailValid
-                      ? "Email is not valid"
+                      ? "Email is not valid."
                       : false
                 }
                 className={classes.submitText}
@@ -796,15 +796,15 @@ const EditModal = (props: any) => {
                   (state.githubLink.length == 0 && fieldRequired) ||
                   linkValidation
                 }
-                label="Github Link"
+                label="Github link"
                 value={state.githubLink}
                 onChange={(e) => _onChange(e.target.value, "githubLink")}
                 id="outlined-error-helper-text"
                 helperText={
                   state.githubLink.length == 0 && fieldRequired
-                    ? `Github Link is required.`
+                    ? `Github link is required.`
                     : linkValidation
-                      ? "Github Link is not valid"
+                      ? "Github link is not valid."
                       : false
                 }
                 className={classes.submitText}
@@ -973,7 +973,7 @@ const EditModal = (props: any) => {
           </LightTooltip>
 
           <LightTooltip
-            title="The amount of PHEONIX required to submit the proposal"
+            title="The amount of PHNX required to submit the proposal."
             placement="bottom"
             arrow
           >
@@ -1088,7 +1088,7 @@ const EditModal = (props: any) => {
             variant="outlined"
           >
             <LightTooltip
-              title="Briefly describe your proposal"
+              title="Briefly describe your proposal."
               placement="bottom"
               arrow
             >
@@ -1103,7 +1103,7 @@ const EditModal = (props: any) => {
                 helperText={
                   state.description.length == 0 && fieldRequired
                     ? `Description is required.`
-                    : "maximum upto 300 characters"
+                    : "Maximum up to 300 characters."
                 }
                 className={classes.submitText}
                 variant="outlined"
@@ -1283,7 +1283,7 @@ const EditModal = (props: any) => {
               helperText={
                 milestoneDetails.description.length == 0 && fieldRequired
                   ? `Description is required.`
-                  : "maximum upto 300 characters"
+                  : "Maximum up to 300 characters."
               }
             />
           </LightTooltip>
@@ -1303,7 +1303,7 @@ const EditModal = (props: any) => {
             variant="outlined"
           >
             <LightTooltip
-              title="Briefly describe the milestone"
+              title="Briefly describe the milestone."
               placement="bottom"
               arrow
             >

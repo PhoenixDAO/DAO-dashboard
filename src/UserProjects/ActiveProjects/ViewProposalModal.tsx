@@ -531,14 +531,14 @@ const EditModal = (props: any) => {
                 (state.githubLink.length == 0 && fieldRequired) ||
                 linkValidation
               }
-              label="Github Link"
+              label="Github link"
               value={state.githubLink}
               id="outlined-error-helper-text"
               helperText={
                 state.githubLink.length == 0 && fieldRequired
-                  ? `Github Link is required.`
+                  ? `Github link is required.`
                   : linkValidation
-                  ? "Github Link is not valid"
+                  ? "Github link is not valid."
                   : false
               }
               className={classes.submitText}

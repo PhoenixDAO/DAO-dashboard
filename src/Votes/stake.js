@@ -229,6 +229,11 @@ const Stake = (props) => {
       setAllInputFields(false)
       setAmountEntered(false)
     }
+    if(e.target.value > 0) {
+      setZeroAmountEntered(false); 
+      setAllInputFields(false)
+      setAmountEntered(false)
+    }
     if (props.stakeLoading !== true) {
       var reg = new RegExp("^\\d+$");
       if (
@@ -623,7 +628,7 @@ console.log('onSubmit', onSubmit)
           <Grid style={{ position: "relative" }} xs={12} sm={3} item>
 
             <span style={{ color: "#828282", marginLeft: "16px" }}>
-              Quantity
+              Quantity in PHNX
             </span>
             <br />
             <input
