@@ -648,7 +648,7 @@ const Admin = (props: any) => {
         >
           <Table compact columns={["Proposal", "Submission Date (dd/mm/yyyy)"]}>
             {proposalsOfStatusPending.length == 0 ? (
-              <td>{loading1 ? "Loading..." : "No proposal found"}</td>
+              <td>{loading1 ? "Loading..." : "No proposals found"}</td>
             ) : (
               proposalsOfStatusPending.map((item: any, i) => (
                 <>

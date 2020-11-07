@@ -628,7 +628,7 @@ console.log('onSubmit', onSubmit)
           <Grid style={{ position: "relative" }} xs={12} sm={3} item>
 
             <span style={{ color: "#828282", marginLeft: "16px" }}>
-              Quantity
+              Quantity in PHNX
             </span>
             <br />
             <input
