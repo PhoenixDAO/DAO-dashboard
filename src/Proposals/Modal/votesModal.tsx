@@ -100,6 +100,7 @@ const VotesModal = (props: any) => {
   const [ethereumNetworkError, setEthereumNetworkError] = useState(false);
   const [stakedSnackBar, setStakedSnackBar] = useState(false);
   const [transactionRejected, setTransactionRejected] = useState(false);
+  const [cannotVote,setCannotVote]=useState(false);
 
   const [modalItem, setModalItem] = React.useState<Project | undefined>(
     undefined
@@ -169,6 +170,13 @@ const VotesModal = (props: any) => {
     }
   };
 
+  const cannotVoteError = () =>{
+    setCannotVote(true);
+    setTimeout(()=>{
+      setCannotVote(false)
+    },3000)
+  }
+
   return (
     <>
        <Snackbar
@@ -228,7 +236,14 @@ const VotesModal = (props: any) => {
           styleFlag={props.styleFlag}
           actions={
             <>
-              <Button
+            {cannotVote && (
+            <div style={{marginBottom: "10px"}}>
+              <Alert severity="error" style={{ fontSize: "14px" }}>
+              <p> Voting on this proposal is not started ! </p>
+            </Alert>
+              </div>
+          )}
+              {!cannotVote && <Button
                 className={style.button}
                 primary
                 outline
@@ -237,7 +252,7 @@ const VotesModal = (props: any) => {
                 onClick={() =>
                   props.selectedProposal.votingStatus
                     ? openModal(props.selectedProposal)
-                    : null
+                    : cannotVoteError()
                 }
               >
                 {props.selectedProposal.votingStatus
@@ -245,7 +260,7 @@ const VotesModal = (props: any) => {
                   : `Vote on ${changeFormat(
                       props.selectedProposal.votingDate
                     )}`}
-              </Button>
+              </Button>}
               <Button primary onClick={props.close}>
                 {props.button2}
               </Button>

@@ -716,6 +716,7 @@ const EditModal = (props: any) => {
           setErrorFlag(false);
           console.log("CLose --->");
           props.close();
+          props.openDialogue();
           props.openSnackbar(
             "Your Proposal was submittted successfully !",
             "success"
