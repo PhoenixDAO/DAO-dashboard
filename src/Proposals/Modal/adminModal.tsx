@@ -502,7 +502,7 @@ const ProposalModal = (props: any) => {
             <div className={style.modalBrief}>
               <div style={{ textAlign: "center", alignItems: "center" }}>
                 <div>
-                  <span style={{ fontSize: "16px", color: "#EA8604" }}>
+                  <span style={{ fontSize: "14px", color: "#EA8604" }}>
                     Budget
                   </span>
                 </div>
@@ -512,7 +512,7 @@ const ProposalModal = (props: any) => {
               </div>
               <div style={{ textAlign: "center", alignItems: "center" }}>
                 <div>
-                  <span style={{ fontSize: "16px", color: "#EA8604" }}>
+                  <span style={{ fontSize: "14px", color: "#EA8604" }}>
                     Milestones
                   </span>
                 </div>
@@ -528,8 +528,8 @@ const ProposalModal = (props: any) => {
                 }}
               >
                 <div>
-                  <span style={{ fontSize: "16px", color: "#EA8604" }}>
-                    Submitted on
+                  <span style={{ fontSize: "14px", color: "#EA8604" }}>
+                    Submitted
                   </span>
                 </div>
                 <span>(dd/mm/yyyy)</span>

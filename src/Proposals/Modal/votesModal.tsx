@@ -274,7 +274,7 @@ const VotesModal = (props: any) => {
               {console.log(props.selectedProposal.milestone)}
               <div style={{ textAlign: "center", alignItems: "center" }}>
                 <div>
-                  <span style={{ fontSize: "16px", color: "#EA8604" }}>
+                  <span style={{ fontSize: "14px", color: "#EA8604" }}>
                     Budget
                   </span>
                 </div>
@@ -284,7 +284,7 @@ const VotesModal = (props: any) => {
               </div>
               <div style={{ textAlign: "center", alignItems: "center" }}>
                 <div>
-                  <span style={{ fontSize: "16px", color: "#EA8604" }}>
+                  <span style={{ fontSize: "14px", color: "#EA8604" }}>
                     Milestones
                   </span>
                 </div>
@@ -300,7 +300,7 @@ const VotesModal = (props: any) => {
                 }}
               >
                 <div>
-                  <span style={{ fontSize: "16px", color: "#EA8604" }}>
+                  <span style={{ fontSize: "14px", color: "#EA8604" }}>
                     Voting Date
                   </span>
                 </div>
@@ -336,7 +336,7 @@ const VotesModal = (props: any) => {
               </h3>
               <div
                 style={{
-                  height: "200px",
+                  height: "115px",
                   overflowY: "auto",
                   overflowX: "hidden",
                   scrollbarColor: "#EA8604 white",
