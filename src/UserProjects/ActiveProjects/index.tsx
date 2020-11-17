@@ -290,9 +290,16 @@ const ActiveProjects = (props: any) => {
               estimatedDays = estimatedDays + newItem.days;
             });
           })}
-
+{/* (
+           
+           loading1 ? (<td>Loading...</td>) :   (<Grid     lg={12} md={12} sm={12} xs={12} justify="space-between">
+           <form style= {{height: "389px "}} className={style.item}>No active projects found
+           </form>
+           </Grid>)
+         )  */}
+         
           {value.length == 0 ? (
-             <Grid     lg={12} md={12} sm={12} xs={12} justify="space-between">
+               <Grid     lg={12} md={12} sm={12} xs={12} justify="space-between">
                <form style= {{height: "389px "}} className={style.item}>
             <td> {loading1 ? "Loading..." : "No active projects found"}</td>
             </form>
