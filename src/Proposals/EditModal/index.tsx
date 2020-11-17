@@ -291,11 +291,11 @@ const useStyles = makeStyles((theme) =>
 
 const EditModal = (props: any) => {
   const [state, setState] = useState({
-    firstName: "",
-    lastName: "",
+    firstName: props.user.first_name,
+    lastName: props.user.last_name,
     name: "",
     country: "",
-    email: "",
+    email: props.user.email,
     description: "",
     githubLink: "",
     budget: "",
@@ -709,10 +709,10 @@ const EditModal = (props: any) => {
           console.log("CLose --->");
           props.close();
           props.openDialogue();
-          props.openSnackbar(
-            "Your Proposal was submittted successfully !",
-            "success"
-          );
+          // props.openSnackbar(
+          //   "Your Proposal was submittted successfully !",
+          //   "success"
+          // );
         } catch (err) {
           let temp: any = await ContractInit.init();
           console.log("network", temp);
@@ -893,7 +893,7 @@ const EditModal = (props: any) => {
               error={state.firstName.length == 0 && fieldRequired}
               label="First Name"
               style={{ marginRight: "5px" }}
-              onChange={(e) => _onChange(e.target.value, "firstName")}
+              // onChange={(e) => _onChange(e.target.value, "firstName")}
               className={classes.firstfields}
               id="outlined-error-helper-text"
               value={state.firstName}
@@ -903,13 +903,16 @@ const EditModal = (props: any) => {
                   ? `First Name is required.`
                   : false
               }
+              InputProps={{
+                readOnly: true,
+              }}
             />
           </LightTooltip>
           <LightTooltip title="Last name" placement="bottom" arrow>
             <TextField
               error={state.lastName.length == 0 && fieldRequired}
               label="Last Name"
-              onChange={(e) => _onChange(e.target.value, "lastName")}
+              // onChange={(e) => _onChange(e.target.value, "lastName")}
               id="outlined-error-helper-text"
               className={classes.firstfields}
               variant="outlined"
@@ -919,8 +922,47 @@ const EditModal = (props: any) => {
                   ? `Last Name is required.`
                   : false
               }
+              InputProps={{
+                readOnly: true,
+              }}
             />
           </LightTooltip>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+        >
+          <FormControl
+            error
+            fullWidth
+            className={classes.margin}
+            variant="outlined"
+          >
+            <LightTooltip title="Email address" placement="bottom" arrow>
+              <TextField
+                error={(state.email.length == 0 && fieldRequired) || emailValid}
+                label="Email"
+                value={state.email}
+                // onChange={(e) => _onChange(e.target.value, "email")}
+                id="outlined-error-helper-text"
+                helperText={
+                  state.email.length == 0 && fieldRequired
+                    ? `Email is required.`
+                    : emailValid
+                    ? "Email is not valid."
+                    : false
+                }
+                className={classes.submitText}
+                variant="outlined"
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+            </LightTooltip>
+          </FormControl>
         </div>
         <div
           style={{
@@ -964,42 +1006,7 @@ const EditModal = (props: any) => {
             />
           </LightTooltip>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-          }}
-        >
-          <FormControl
-            error
-            fullWidth
-            className={classes.margin}
-            variant="outlined"
-          >
-            <LightTooltip title="Email address" placement="bottom" arrow>
-              <TextField
-                error={(state.email.length == 0 && fieldRequired) || emailValid}
-                label="Email"
-                value={state.email}
-                onChange={(e) => _onChange(e.target.value, "email")}
-                id="outlined-error-helper-text"
-                helperText={
-                  state.email.length == 0 && fieldRequired
-                    ? `Email is required.`
-                    : emailValid
 
-
-                      ? "Email is not valid."
-                      : false
-
-                }
-                className={classes.submitText}
-                variant="outlined"
-              />
-            </LightTooltip>
-          </FormControl>
-        </div>
         <div
           style={{
             display: "flex",
@@ -1032,11 +1039,8 @@ const EditModal = (props: any) => {
                   state.githubLink.length == 0 && fieldRequired
                     ? `Github link is required.`
                     : linkValidation
-
-
-                      ? "Github link is not valid."
-                      : false
-
+                    ? "Github link is not valid."
+                    : false
                 }
                 className={classes.submitText}
                 variant="outlined"
@@ -1231,6 +1235,9 @@ const EditModal = (props: any) => {
                   ? "Value must be greater than 0"
                   : false
               }
+              InputProps={{
+                readOnly: true,
+              }}
             />
           </LightTooltip>
           {/* <LightTooltip
@@ -1504,7 +1511,7 @@ const EditModal = (props: any) => {
                 (fieldRequired && milestoneDetails.milestoneCost.length == 0) ||
                 (valueSmaller && milestoneDetails.milestoneCost == "0")
                   ? false
-                  : "Milestone Cost"
+                  : "Milestone cost in PHNX"
               }
               value={milestoneDetails.milestoneCost}
               onChange={(e) =>

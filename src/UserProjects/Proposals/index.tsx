@@ -251,9 +251,11 @@ const Proposals = (props: any) => {
 
                 return (
                   <Grid lg={4} sm={6} xs={12} justify="space-between">
-                    <div key={i} className={style.item}>
+                    <div key={i} className={style.item}
+                    onClick={(_) => viewModal(item)}
+                    >
                       <label tabIndex={-1} className={style.menu}>
-                        <div className={style.menuButton}>
+                        <div aria-label="menu" onClick={(e)=>{e.stopPropagation()}} className={style.menuButton}>
                           <div />
                           <div />
                           <div />
@@ -268,7 +270,7 @@ const Proposals = (props: any) => {
                         </div>
                           <div
                             className={cn(style.menuItem, style.delete)}
-                            onClick={() => deleteProposal(item)}
+                            onClick={(e)=>{e.stopPropagation(); deleteProposal(item)}}
                           >
                             <img src={iconDelete} className={style.icon} /> Delete
                         </div>
@@ -276,8 +278,8 @@ const Proposals = (props: any) => {
                       </label>
                       <LightTooltip title="View proposal" placement="top-start">
                         <div
-                          style={{ cursor: "pointer" }}
-                          onClick={(_) => viewModal(item)}
+                          
+                          
                           className={style.title}
                         >
                           {name}
