@@ -18,7 +18,7 @@ import { createStyles } from "@material-ui/core/styles";
 import { withStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import { ethereumNetwork } from "../const";
 
-import Dialog,{ DialogProps } from "@material-ui/core/Dialog";
+import Dialog, { DialogProps } from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) =>
       },
       "& .MuiDialogContentText-root": {
         fontSize: "12px",
-        color:"black"
+        color: "black",
       },
       "& .MuiDialogTitle-root": {
         flex: "0 0 auto",
@@ -829,7 +829,7 @@ const Proposals = (props: any) => {
   const [ethereumNetworkError, setEthereumNetworkError] = useState(false);
   const [metaMaskApproval, setMetaMaskApproval] = useState(false);
   const [checkingLoading, setCheckingLoading] = useState(true);
-  const [openDialogueState,setOpenDialogueState]=useState(false)
+  const [openDialogueState, setOpenDialogueState] = useState(false);
 
   const [projectModalItem, setProjectModalItem] = React.useState<
     | {
@@ -1015,7 +1015,6 @@ const Proposals = (props: any) => {
     }
   }, [openDialogueState]);
 
-
   const checkNetwork = async () => {
     let temp: any = await ContractInit.init();
     if (temp.network != ethereumNetwork) {
@@ -1072,9 +1071,9 @@ const Proposals = (props: any) => {
     setShowSnackBar(false);
   };
 
-  const openDialogue = () =>{
+  const openDialogue = () => {
     setOpenDialogueState(true);
-  }
+  };
   const descriptionElementRef = React.useRef<HTMLElement>(null);
 
   const openSnackbar = (
@@ -1088,32 +1087,41 @@ const Proposals = (props: any) => {
   let test = true;
   return (
     <>
-    <Dialog
+      <Dialog
         open={openDialogueState}
-        onClose={()=> setOpenDialogueState(false)}
+        onClose={() => setOpenDialogueState(false)}
         className={classes.dialogueText}
-        scroll={'paper'}
+        scroll={"paper"}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
-        <DialogTitle className={classes.dialogueText} id="scroll-dialog-title">Proposal successfully submitted</DialogTitle>
+        <DialogTitle className={classes.dialogueText} id="scroll-dialog-title">
+          Proposal successfully submitted
+        </DialogTitle>
         <DialogContent className={classes.dialogueText} dividers={true}>
           <DialogContentText
-          className={classes.dialogueText}
+            className={classes.dialogueText}
             id="scroll-dialog-description"
             ref={descriptionElementRef}
             tabIndex={-1}
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </DialogContentText>
+          >
+            Your proposal is successfully submitted. The proposal will not be
+            visible until approved by admin. The collateral amount of 10 PHNX
+            will be deducted when the Admin approves the proposal.
+          </DialogContentText>
         </DialogContent>
-        <DialogActions >
-          <Button  onClick={()=> setOpenDialogueState(false)} color="primary">
+        <DialogActions>
+          <Button onClick={() => setOpenDialogueState(false)} color="primary">
             Understood
           </Button>
         </DialogActions>
       </Dialog>
       {modalOpen && (
-        <EditModal close={closeModal} openDialogue={openDialogue} openSnackbar={openSnackbar} />
+        <EditModal
+          close={closeModal}
+          openDialogue={openDialogue}
+          openSnackbar={openSnackbar}
+        />
       )}
       {projectModalItem && (
         <ProposalModal
@@ -1134,7 +1142,7 @@ const Proposals = (props: any) => {
           // setSnackBar={() => setSnackBar}
         />
       )}
-      
+
       <Card
         styleFlag="UpvoteProposals"
         title="Upvote Proposals"
@@ -1163,7 +1171,7 @@ const Proposals = (props: any) => {
                 " Send Approval"
               )}
             </Button>
-                {/* <Button className={classes.submitbutton}
+            {/* <Button className={classes.submitbutton}
               secondary onClick={openDialogue}>im button</Button> */}
             <Button
               //style={{marginRight:"8px"}}
@@ -1177,7 +1185,10 @@ const Proposals = (props: any) => {
                   ? openSnackbar("Network must be Rinkbey", "error")
                   : metaMaskApproval
                   ? openModal()
-                  : openSnackbar("Metamask not approved", "error")
+                  : openSnackbar(
+                      `Metamask not approved. Please click on the "Send Approval" button to grant the approval. `,
+                      "error"
+                    )
               }
             >
               {checkingLoading ? (

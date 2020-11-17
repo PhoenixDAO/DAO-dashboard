@@ -988,11 +988,8 @@ const EditModal = (props: any) => {
                   state.email.length == 0 && fieldRequired
                     ? `Email is required.`
                     : emailValid
-
-
-                      ? "Email is not valid."
-                      : false
-
+                    ? "Email is not valid."
+                    : false
                 }
                 className={classes.submitText}
                 variant="outlined"
@@ -1032,11 +1029,8 @@ const EditModal = (props: any) => {
                   state.githubLink.length == 0 && fieldRequired
                     ? `Github link is required.`
                     : linkValidation
-
-
-                      ? "Github link is not valid."
-                      : false
-
+                    ? "Github link is not valid."
+                    : false
                 }
                 className={classes.submitText}
                 variant="outlined"

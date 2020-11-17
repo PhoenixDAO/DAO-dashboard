@@ -105,10 +105,12 @@ export default ({
   showStepper,
 }: Props) => {
   const handleClick = ({ target }: any) => {
-    console.log("handle click", target);
+    console.log("handle click", target.className);
     let checkClassName = target.className;
     if (
       target.className === style.modalWrap ||
+      target.className ==
+        "MuiGrid-root style_modalWrap__3tgAx MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12 MuiGrid-grid-lg-12" ||
       //target.className === checkClassName
       target.className ===
         "MuiGrid-root style_modalWrap__fAu8M MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12 MuiGrid-grid-lg-12"
@@ -198,7 +200,7 @@ export default ({
           xs={12}
           md={12}
           className={style.modalWrap}
-          // onClick={handleClick}
+          //  onClick={handleClick}
         >
           <div className={cn(style.modal, className)}>
             <div className={style.closeButton} onClick={close} />
