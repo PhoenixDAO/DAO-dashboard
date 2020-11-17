@@ -562,7 +562,7 @@ const ProposalModal = (props: any) => {
               </h3>
               <div
                 style={{
-                  height: "200px",
+                  height: "115px",
                   overflowY: "auto",
                   overflowX: "hidden",
                 }}
