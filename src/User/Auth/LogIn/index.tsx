@@ -118,7 +118,7 @@ const Login = (props: any) => {
     openSnackbar("MetaMask connected successfully", "success");
     setTimeout(async () => {
       const result = await LoginAPI();
-    }, 1000);
+    }, 5000);
   };
   useEffect(() => {
     if (props.address && loginClicked) {
@@ -246,18 +246,18 @@ const Login = (props: any) => {
           horizontal: "center",
         }}
         open={error}
-        autoHideDuration={6000}
+        autoHideDuration={2000}
         onClose={() => {
           setError(false);
-          setErrorMessage({ message: undefined, severity: undefined });
+          // setErrorMessage({ message: undefined, severity: undefined });
         }}
       >
         <Alert
           className={classes.alert}
-          onClose={() => {
-            setError(false);
-            setErrorMessage({ message: undefined, severity: undefined });
-          }}
+          // onClose={() => {
+          //   setError(false);
+          //   setErrorMessage({ message: undefined, severity: undefined });
+          // }}
           severity={errorMessage.severity}
         >
           {errorMessage.message}

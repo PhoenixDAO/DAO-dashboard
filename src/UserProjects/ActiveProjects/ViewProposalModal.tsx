@@ -430,6 +430,9 @@ const EditModal = (props: any) => {
                 ? `First Name is required.`
                 : false
             }
+            InputProps={{
+              readOnly: true,
+            }}
           />
           <TextField
             error={state.lastName.length == 0 && fieldRequired}
@@ -443,6 +446,9 @@ const EditModal = (props: any) => {
                 ? `Last Name is required.`
                 : false
             }
+            InputProps={{
+              readOnly: true,
+            }}
           />
         </div>
         <div
@@ -466,6 +472,9 @@ const EditModal = (props: any) => {
                 : false
             }
             variant="outlined"
+            InputProps={{
+              readOnly: true,
+            }}
           />
           <TextField
             error={state.country.length == 0 && fieldRequired}
@@ -480,6 +489,9 @@ const EditModal = (props: any) => {
             }
             className={classes.firstfields}
             variant="outlined"
+            InputProps={{
+              readOnly: true,
+            }}
           />
         </div>
         <div
@@ -509,6 +521,9 @@ const EditModal = (props: any) => {
               }
               className={classes.submitText}
               variant="outlined"
+              InputProps={{
+                readOnly: true,
+              }}
             />
           </FormControl>
         </div>
@@ -543,6 +558,9 @@ const EditModal = (props: any) => {
               }
               className={classes.submitText}
               variant="outlined"
+              InputProps={{
+                readOnly: true,
+              }}
             />
           </FormControl>
         </div>
@@ -579,6 +597,9 @@ const EditModal = (props: any) => {
               }
               className={classes.submitText}
               variant="outlined"
+              InputProps={{
+                readOnly: true,
+              }}
             />
           </FormControl>
         </div>
@@ -641,6 +662,9 @@ const EditModal = (props: any) => {
               }
               className={classes.submitText}
               variant="outlined"
+              InputProps={{
+                readOnly: true,
+              }}
             />
           </FormControl>
         </div>
@@ -670,6 +694,9 @@ const EditModal = (props: any) => {
                 ? `Experienced is required.`
                 : false
             }
+            InputProps={{
+              readOnly: true,
+            }}
           />
           <TextField
             error={state.budget.length == 0 && fieldRequired}
@@ -685,6 +712,9 @@ const EditModal = (props: any) => {
                 ? `Budget is required.`
                 : false
             }
+            InputProps={{
+              readOnly: true,
+            }}
           />
         </div>
         <div
@@ -713,6 +743,9 @@ const EditModal = (props: any) => {
                 ? `Collateral is required.`
                 : false
             }
+            InputProps={{
+              readOnly: true,
+            }}
           />
           {/* <TextField
             error={state.reward.length == 0 && fieldRequired}
@@ -758,6 +791,9 @@ const EditModal = (props: any) => {
               }
               className={classes.submitText}
               variant="outlined"
+              InputProps={{
+                readOnly: true,
+              }}
             />
           </FormControl>
         </div>
@@ -823,6 +859,9 @@ const EditModal = (props: any) => {
             }
             label="Title"
             variant="outlined"
+            InputProps={{
+              readOnly: true,
+            }}
           />
           <TextField
             id="outlined-basic"
@@ -844,6 +883,9 @@ const EditModal = (props: any) => {
               fieldRequired &&
               `Estimated days are required.`
             }
+            InputProps={{
+              readOnly: true,
+            }}
           />
         </div>
         <div
@@ -876,6 +918,9 @@ const EditModal = (props: any) => {
               `Number of developers are required.`
             }
             variant="outlined"
+            InputProps={{
+              readOnly: true,
+            }}
           />
           <TextField
             id="outlined-basic"
@@ -897,6 +942,9 @@ const EditModal = (props: any) => {
               fieldRequired &&
               `Cost is required.`
             }
+            InputProps={{
+              readOnly: true,
+            }}
           />
         </div>
         <div
@@ -930,6 +978,9 @@ const EditModal = (props: any) => {
               }
               className={classes.submitText}
               variant="outlined"
+              InputProps={{
+                readOnly: true,
+              }}
             />
           </FormControl>
         </div>
