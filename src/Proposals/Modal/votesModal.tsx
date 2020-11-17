@@ -211,6 +211,7 @@ const VotesModal = (props: any) => {
         </Alert>
       </Snackbar> */}
       {modalItem && (
+        
         <Modal
           close={closeModal}
           title={modalItem.title}
@@ -233,7 +234,7 @@ const VotesModal = (props: any) => {
       )}
       {openVotesModal && (
         <Modal
-          title={props.selectedProposal.title}
+          title={props.selectedProposal.name}
           close={props.close}
           styleFlag={props.styleFlag}
           actions={
