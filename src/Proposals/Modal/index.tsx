@@ -183,9 +183,9 @@ const ProposalModal = (props: any) => {
         </div> */}
         <div className={style.modalBrief}>
           {console.log(props.milestones)}
-          <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Budget</span></div><div style={{marginTop:"5px"}}><span>{props.budget}</span> <span>PHNX</span></div></div>
-          <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Milestones</span></div><div style={{marginTop:"5px"}}><span>{props.milestones.length}</span></div></div>
-          <div style={{width:"80px",textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Exp. Date</span></div><span>(dd/mm/yyyy)</span><div><span>{changeFormat(props.expirationDate)}</span></div></div>
+          <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"14px",color:"#EA8604"}}>Budget</span></div><div style={{marginTop:"5px"}}><span>{props.budget}</span> <span>PHNX</span></div></div>
+          <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"14px",color:"#EA8604"}}>Milestones</span></div><div style={{marginTop:"5px"}}><span>{props.milestones.length}</span></div></div>
+          <div style={{width:"80px",textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"14px",color:"#EA8604"}}>Exp. Date</span></div><span>(dd/mm/yyyy)</span><div><span>{changeFormat(props.expirationDate)}</span></div></div>
           {/* <div><span>{props.milestones.length}</span></div>
           <div><span>{changeFormat(props.expirationDate)}</span></div> */}
           
@@ -209,7 +209,7 @@ const ProposalModal = (props: any) => {
           <h3 style={{ fontSize: "16px", marginBottom: "10px", color: "#ea8604", fontWeight: "normal"}}>Milestones</h3>
           <div
             style={{
-              height: "200px",
+              height: "115px",
               overflowY: "auto",
               overflowX: "hidden",
               scrollbarColor: "#EA8604 white",

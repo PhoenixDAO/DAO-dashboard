@@ -263,7 +263,7 @@ const Proposals = (props: any) => {
                         <div className={style.menuItems}>
                           <div
                             className={cn(style.menuItem, style.edit)}
-                          onClick={(e)=>{e.stopPropagation();edit(item)}}
+                         // onClick={() => edit(item)}
                           >
                             <img src={iconEdit} className={style.icon} /> Edit
                           proposal

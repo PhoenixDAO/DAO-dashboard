@@ -139,6 +139,7 @@ export default ({
           sm={12}
           xs={12}
           md={12}
+          xl={12}
           className={style.modalWrap}
           onClick={handleClick}
         >
@@ -168,6 +169,7 @@ export default ({
           sm={12}
           xs={12}
           md={12}
+          xl={12}
           className={style.modalWrap}
           onClick={handleClick}
         >
@@ -197,6 +199,7 @@ export default ({
           sm={12}
           xs={12}
           md={12}
+          xl={12}
           className={style.modalWrap}
           // onClick={handleClick}
         >
@@ -226,6 +229,7 @@ export default ({
           sm={12}
           xs={12}
           md={12}
+          xl={12}
           className={style.modalWrap}
           onClick={handleClick}
         >
