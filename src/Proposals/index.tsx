@@ -17,6 +17,13 @@ import { CircularProgress } from "@material-ui/core";
 import { createStyles } from "@material-ui/core/styles";
 import { withStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import { ethereumNetwork } from "../const";
+
+import Dialog,{ DialogProps } from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="standard" {...props} />;
 }
@@ -44,6 +51,29 @@ const useStyles = makeStyles((theme) =>
       [theme.breakpoints.down("xs")]: {
         marginBottom: "5px",
       },
+    },
+    dialogueText: {
+      "& .MuiTypography-h6": {
+        fontSize: "16px",
+      },
+      "& .MuiDialogContentText-root": {
+        fontSize: "12px",
+        color:"black"
+      },
+      "& .MuiDialogTitle-root": {
+        flex: "0 0 auto",
+        // margin: "0 0 5px 0",
+        padding: "12px 24px 8px 24px",
+        backgroundColor: "forestgreen",
+        color: "#FFFFFF",
+      },
+      // "& .MuiDialogActions-root": {
+      //   flex: "0 0 auto",
+      //   display: "flex",
+      //   padding: "8px 0 14px 0",
+      //   alignItems: "center",
+      //   justifyContent: "space-around",
+      // },
     },
   })
 );
@@ -799,6 +829,7 @@ const Proposals = (props: any) => {
   const [ethereumNetworkError, setEthereumNetworkError] = useState(false);
   const [metaMaskApproval, setMetaMaskApproval] = useState(false);
   const [checkingLoading, setCheckingLoading] = useState(true);
+  const [openDialogueState,setOpenDialogueState]=useState(false)
 
   const [projectModalItem, setProjectModalItem] = React.useState<
     | {
@@ -975,6 +1006,16 @@ const Proposals = (props: any) => {
     // getData();
   }, []);
 
+  useEffect(() => {
+    if (openDialogueState) {
+      const { current: descriptionElement } = descriptionElementRef;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [openDialogueState]);
+
+
   const checkNetwork = async () => {
     let temp: any = await ContractInit.init();
     if (temp.network != ethereumNetwork) {
@@ -986,6 +1027,11 @@ const Proposals = (props: any) => {
       return true;
     }
   };
+
+  // const handleOpenDialogue = (scrollType: DialogProps['scroll']) => () => {
+  //   setOpen(true);
+  //   setScroll(scrollType);
+  // };
 
   const checking = async () => {
     let value = await checkWeb3();
@@ -1025,6 +1071,12 @@ const Proposals = (props: any) => {
   const handleSnackBar = () => {
     setShowSnackBar(false);
   };
+
+  const openDialogue = () =>{
+    setOpenDialogueState(true);
+  }
+  const descriptionElementRef = React.useRef<HTMLElement>(null);
+
   const openSnackbar = (
     message: string,
     severity: "error" | "success" | "warning" | "info" | undefined
@@ -1036,8 +1088,32 @@ const Proposals = (props: any) => {
   let test = true;
   return (
     <>
+    <Dialog
+        open={openDialogueState}
+        onClose={()=> setOpenDialogueState(false)}
+        className={classes.dialogueText}
+        scroll={'paper'}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+      >
+        <DialogTitle className={classes.dialogueText} id="scroll-dialog-title">Proposal successfully submitted</DialogTitle>
+        <DialogContent className={classes.dialogueText} dividers={true}>
+          <DialogContentText
+          className={classes.dialogueText}
+            id="scroll-dialog-description"
+            ref={descriptionElementRef}
+            tabIndex={-1}
+          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </DialogContentText>
+        </DialogContent>
+        <DialogActions >
+          <Button  onClick={()=> setOpenDialogueState(false)} color="primary">
+            Understood
+          </Button>
+        </DialogActions>
+      </Dialog>
       {modalOpen && (
-        <EditModal close={closeModal} openSnackbar={openSnackbar} />
+        <EditModal close={closeModal} openDialogue={openDialogue} openSnackbar={openSnackbar} />
       )}
       {projectModalItem && (
         <ProposalModal
@@ -1058,7 +1134,7 @@ const Proposals = (props: any) => {
           // setSnackBar={() => setSnackBar}
         />
       )}
-
+      
       <Card
         styleFlag="UpvoteProposals"
         title="Upvote Proposals"
@@ -1087,7 +1163,8 @@ const Proposals = (props: any) => {
                 " Send Approval"
               )}
             </Button>
-
+                {/* <Button className={classes.submitbutton}
+              secondary onClick={openDialogue}>im button</Button> */}
             <Button
               //style={{marginRight:"8px"}}
               className={classes.submitbutton}
