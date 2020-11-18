@@ -1006,7 +1006,6 @@ const EditModal = (props: any) => {
             />
           </LightTooltip>
         </div>
-
         <div
           style={{
             display: "flex",

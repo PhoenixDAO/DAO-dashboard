@@ -221,7 +221,7 @@ const Proposals = (props: any) => {
         {value.length == 0 ? (
           <>
             <Grid lg={12} sm={12} xs={12} justify="space-between">
-              <div style= {{height: "389px "}} className={style.item}>
+              <div style={{ height: "389px " }} className={style.item}>
                 <tr>
                   <td>{loading1 ? "Loading..." : "No proposals found"}</td>
                 </tr>
@@ -229,106 +229,111 @@ const Proposals = (props: any) => {
             </Grid>
           </>
         ) : (
-            <>
-              {value.map((item: any, i) => {
-                //  const { title, upvotes, expirationDate, text } = item;
-                const {
-                  name,
-                  expirationDate,
-                  description,
-                  minimumUpvotes,
-                  status,
-                  votes,
-                } = item;
-                let value;
-                if (expirationDate) {
-                  newExpitationDate = new Date(expirationDate);
-                  console.log("Date ", newExpitationDate);
-                  value = newExpitationDate.toString();
-                } else {
-                  value = "Not issued";
-                }
+          <>
+            {value.map((item: any, i) => {
+              //  const { title, upvotes, expirationDate, text } = item;
+              const {
+                name,
+                expirationDate,
+                description,
+                minimumUpvotes,
+                status,
+                votes,
+              } = item;
+              let value;
+              if (expirationDate) {
+                newExpitationDate = new Date(expirationDate);
+                console.log("Date ", newExpitationDate);
+                value = newExpitationDate.toString();
+              } else {
+                value = "Not issued";
+              }
 
-                return (
-                  <Grid lg={4} sm={6} xs={12} justify="space-between">
-                    <div key={i} className={style.item}
+              return (
+                <Grid lg={4} sm={6} xs={12} justify="space-between">
+                  <div
+                    key={i}
+                    className={style.item}
                     onClick={(_) => viewModal(item)}
-                    >
-                      <label tabIndex={-1} className={style.menu}>
-                        <div aria-label="menu" onClick={(e)=>{e.stopPropagation()}} className={style.menuButton}>
-                          <div />
-                          <div />
-                          <div />
-                        </div>
-                        <div className={style.menuItems}>
-                          <div
-                            className={cn(style.menuItem, style.edit)}
-                         // onClick={() => edit(item)}
-                          >
-                            <img src={iconEdit} className={style.icon} /> Edit
+                  >
+                    <label tabIndex={-1} className={style.menu}>
+                      <div
+                        aria-label="menu"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                        className={style.menuButton}
+                      >
+                        <div />
+                        <div />
+                        <div />
+                      </div>
+                      <div className={style.menuItems}>
+                        <div
+                          className={cn(style.menuItem, style.edit)}
+                          // onClick={() => edit(item)}
+                        >
+                          <img src={iconEdit} className={style.icon} /> Edit
                           proposal
                         </div>
-                          <div
-                            className={cn(style.menuItem, style.delete)}
-                            onClick={(e)=>{e.stopPropagation(); deleteProposal(item)}}
-                          >
-                            <img src={iconDelete} className={style.icon} /> Delete
-                        </div>
-                        </div>
-                      </label>
-                      <LightTooltip title="View proposal" placement="top-start">
                         <div
-                          
-                          
-                          className={style.title}
+                          className={cn(style.menuItem, style.delete)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            deleteProposal(item);
+                          }}
                         >
-                          {name}
+                          <img src={iconDelete} className={style.icon} /> Delete
                         </div>
-                      </LightTooltip>
-
-                      <div className={style.keyValues}>
-                        <Grid
-                          lg={6}
-                          sm={6}
-                          md={6}
-                          xs={6}
-                          className={style.statusValues}
-                        >
-                          <div>
-                            <div className={style.key}>Current Upvotes</div>
-                            <div className={style.value}>
-                              {" "}
-                              {votes.length} /{minimumUpvotes}
-                            </div>
-                          </div>
-                        </Grid>
-                        <Grid
-                          lg={3}
-                          sm={4}
-                          md={4}
-                          xs={4}
-                          className={style.statusValues}
-                          justify="flex-end"
-                        >
-                          <div>
-                            <div className={style.key}>Status</div>
-                            <div className={style.value}>{status}</div>
-                          </div>
-                        </Grid>
-                        <Grid lg={12} sm={12} md={12} xs={12}>
-                          <div>
-                            <div className={style.key}>Expiration Date</div>
-                            <div className={style.value}>{value}</div>
-                          </div>
-                        </Grid>
                       </div>
-                      {/* <div className={style.text}>{description}</div> */}
+                    </label>
+                    <LightTooltip title="View proposal" placement="top-start">
+                      <div className={style.title}>{name}</div>
+                    </LightTooltip>
+
+                    <div className={style.keyValues}>
+                      <Grid
+                        lg={6}
+                        sm={6}
+                        md={6}
+                        xs={6}
+                        className={style.statusValues}
+                      >
+                        <div>
+                          <div className={style.key}>Current Upvotes</div>
+                          <div className={style.value}>
+                            {" "}
+                            {votes.length} /{minimumUpvotes}
+                          </div>
+                        </div>
+                      </Grid>
+                      <Grid
+                        lg={3}
+                        sm={4}
+                        md={4}
+                        xs={4}
+                        className={style.statusValues}
+                        justify="flex-end"
+                      >
+                        <div>
+                          <div className={style.key}>Status</div>
+                          <div className={style.value}>{status}</div>
+                        </div>
+                      </Grid>
+                      <Grid lg={12} sm={12} md={12} xs={12}>
+                        <div>
+                          <div className={style.key}>Expiration Date</div>
+                          <div className={style.value}>{value}</div>
+                        </div>
+                      </Grid>
                     </div>
-                  </Grid>
-                );
-              })}
-            </>
-          )}
+                    {/* <div className={style.text}>{description}</div> */}
+                  </div>
+                </Grid>
+              );
+            })}
+          </>
+        )}
       </div>
     </>
   );
