@@ -173,9 +173,9 @@ const ProposalModal = (props: any) => {
             {console.log("MetaMask address", props.proposalUserNumioAddress)}
             {console.log("Admin address", props.user.numioAddress)}
             <div className={style.modalBrief}>
-            <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Budget</span></div><div style={{marginTop:"5px"}}><span>{props.budget}</span> <span>PHNX</span></div></div>
-          <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Milestones</span></div><div style={{marginTop:"5px"}}><span>{props.milestones.length}</span></div></div>
-          <div style={{width:"80px",textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"16px",color:"#EA8604"}}>Voting Date</span></div><span>(dd/mm/yyyy)</span><div>{changeFormat(props.votingDate)}</div></div>
+            <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"14px",color:"#EA8604"}}>Budget</span></div><div style={{marginTop:"5px"}}><span>{props.budget}</span> <span>PHNX</span></div></div>
+          <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"14px",color:"#EA8604"}}>Milestones</span></div><div style={{marginTop:"5px"}}><span>{props.milestones.length}</span></div></div>
+          <div style={{width:"80px",textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"14px",color:"#EA8604"}}>Voting Date</span></div><span>(dd/mm/yyyy)</span><div>{changeFormat(props.votingDate)}</div></div>
             </div>
             <form className={classes.description} noValidate autoComplete="off">
               <TextField
@@ -194,7 +194,7 @@ const ProposalModal = (props: any) => {
             <h3 style={{ fontSize: "16px", marginBottom: "10px", color: "#ea8604", fontWeight: "normal"}}>Milestones</h3>
               <div
                 style={{
-                  height: "200px",
+                  height: "115px",
                   overflowY: "auto",
                   overflowX: "hidden",
                 }}
