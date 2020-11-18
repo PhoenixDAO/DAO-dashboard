@@ -28,12 +28,13 @@
 .listItem {
   display: flex;
   align-items: center;
-  margin-bottom: 40rem;
+
 
   .num {
-    height: 32rem;
-    width: 32rem;
-    line-height: 20rem;
+    height: 34rem;
+    width: 34rem;
+    line-height: 19rem;
+    margin-right: 10px;
     color: white;
     background: #434343;
     border: 7rem solid #E0E0E0;

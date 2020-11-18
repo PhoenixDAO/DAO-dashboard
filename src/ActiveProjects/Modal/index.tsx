@@ -2,6 +2,38 @@ import React, { useEffect } from "react";
 import Modal from "Shared/Modal";
 import cn from "classnames";
 import style from "./style.module.scss";
+import Collapse from "../../Proposals/Modal/collapse";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Typography from "@material-ui/core/Typography";
+import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
+
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: "100%",
+      border: "1px solid #E0E0E0",
+      "& .MuiAccordionSummary-content": {
+        alignItems: "center"
+      }
+    },
+    heading: {
+      // fontSize: theme.typography.pxToRem(15),
+      fontSize: "13px",
+      fontWeight: theme.typography.fontWeightRegular,
+    },
+    text: {
+      fontSize: "12px",
+
+    },
+
+
+  })
+);
+
 
 // type Props = {
 //   close: () => any;
@@ -23,12 +55,14 @@ type Proposal = {
   status: any;
   votes: [];
   votingDate: any;
-  styleFlag:string;
+  styleFlag: string;
   __v: any;
   _id: any;
 };
 
 export default ({ close, proposal, estDate }: any) => {
+  const classes = useStyles();
+
   const [currentSliderPage, setCurrentSliderPage] = React.useState(1);
   const [completionDate, setCompletionDate]: any = React.useState();
   // const [list, setList] = React.useState([]);
@@ -63,7 +97,6 @@ export default ({ close, proposal, estDate }: any) => {
   };
 
   let count = 0;
-
   return (
     <>
       {/* {setList(proposal.milestone)} */}
@@ -96,16 +129,31 @@ export default ({ close, proposal, estDate }: any) => {
                 milestone.status == "Completed" && style.checked
               )}
             >
-              <div className={style.num}>
-                {milestone.status == "Completed" ? "✓" : j + 1}
-              </div>
-              <div className={style.name}>{milestone.task}</div>
-              {/* <div className={style.toggleButton} onClick={() => check(j)}>
-              {checked ? "Complete" : "Incomplete"}
-            </div> */}
-            </div>
+              <div className={classes.root}>
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon style={{ fontSize: "16px" }} />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                    style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: 'center' }}
+                  >
+                    <div className={style.num}>
+                      {milestone.status == "Completed" ? "✓" : j + 1}
+                    </div>
+                    <Typography className={classes.heading}>
+                      {milestone.task}
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography className={classes.text}>
+                      {milestone.description}
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+                </div>
+                </div>
           ))}
-          {/* <div className={style.sliderTop}>
+              {/* <div className={style.sliderTop}>
           <div className={style.title}>Latest Update</div>
           <div className={style.controls}>
             <div
@@ -145,7 +193,7 @@ export default ({ close, proposal, estDate }: any) => {
             ))}
           </div>
         </div> */}
-        </div>
+            </div>
       </Modal>
     </>
   );
