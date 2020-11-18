@@ -298,7 +298,7 @@ const EditModal = (props: any) => {
     country: "",
     email: props.user.email,
     description: "",
-    githubLink: "https://",
+    githubLink: "",
     budget: "",
     purpose: "",
     importance: "",
@@ -407,7 +407,8 @@ const EditModal = (props: any) => {
       // let checkLink: any = githubLink.match(
       //   /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
       // );
-      let checkLink=githubLink.split("github.com/").length>1 && githubLink.split("github.com/")[0]=="";
+      let checkLink=githubLink.split("github.com/").length>1 && githubLink.split("github.com/")[0]==="";
+      // console.log("githubLink.split(github.com/)",githubLink.split("github.com/"),checkLink)
       // let checkLink = temp.length>1 && temp[0]=="";  
       // let checkLink: any = githubLink.match(
       //   /github.com\/([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
@@ -418,7 +419,7 @@ const EditModal = (props: any) => {
       } else {
         setEmailValid(false);
       }
-      if (checkLink == null) {
+      if (!checkLink) {
         setLinkValidation(true);
         return;
       } else {
