@@ -366,15 +366,15 @@ export default ({
   activeSteps,
   showStepper,
 }: Props) => {
-  const handleClick = ({ target }: any) => {
-    console.log("handle click", target.className);
-    let checkClassName = target.className;
+  const handleClick = (e: any) => {
+    console.log("eee", e.target.id);
+    console.log("handle click", e.target.className);
+    let checkClassName = e.target.className;
     if (
-      target.className === style.modalWrap ||
-      target.className ==
-        "MuiGrid-root style_modalWrap__3tgAx MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12 MuiGrid-grid-lg-12" ||
-      //target.className === checkClassName
-      target.className ===
+      e.target.id == "adminModal" ||
+      e.target.id == "activeProjectsModal" ||
+      e.target.className === style.modalWrap ||
+      e.target.className ===
         "MuiGrid-root style_modalWrap__fAu8M MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12 MuiGrid-grid-lg-12"
     ) {
       close();
@@ -404,7 +404,7 @@ export default ({
           xs={12}
           md={12}
           className={style.modalWrap}
-          onClick={handleClick}
+          onClick={(e) => handleClick(e)}
         >
           <div className={cn(style.modal, className)}>
             <div className={style.closeButton} onClick={close} />
@@ -433,6 +433,7 @@ export default ({
           xs={12}
           md={12}
           className={style.modalWrap}
+          id={"activeProjectsModal"}
           onClick={handleClick}
         >
           <div className={cn(style.modal, className)}>
@@ -491,6 +492,7 @@ export default ({
           xs={12}
           md={12}
           className={style.modalWrap}
+          id={"adminModal"}
           onClick={handleClick}
         >
           <div className={cn(style.modal, className)}>
