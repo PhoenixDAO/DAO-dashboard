@@ -104,17 +104,17 @@ const useStyles = makeStyles((theme) =>
       },
 
       [theme.breakpoints.down("xl")]: {
-        width: "188px",
+        width: "274px",
       },
 
       [theme.breakpoints.up("lg")]: {
-        width: "198px",
+        width: "274px",
       },
       [theme.breakpoints.down("lg")]: {
-        width: "198px",
+        width: "223px",
       },
       [theme.breakpoints.down("md")]: {
-        width: "165px",
+        width: "167px",
       },
       [theme.breakpoints.down("xs")]: {
         width: "165px",
