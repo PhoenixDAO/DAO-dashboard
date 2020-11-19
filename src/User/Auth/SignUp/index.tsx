@@ -2,36 +2,36 @@ import React, { useState } from "react";
 import Layout from "../Layout";
 import { Title } from "../Shared";
 import Field from "Shared/Field";
-import Button from "Shared/Button";
+// import Button from "Shared/Button";
 import { Link, Redirect } from "react-router-dom";
 import routes from "routes";
 import style from "./style.module.scss";
 import Alert from "@material-ui/lab/Alert";
 import axios from "axios";
 import { connect } from "react-redux";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, Button, FormControl } from "@material-ui/core";
 import { loginWithMetaMask } from "redux/authActions";
 
 
-const ThanksPage = () => (
-  <Layout className={style.thanksPage}>
-    <Title>Thank you for creating an account and joining the DAO!</Title>
-    <div className={style.verifyText}>
-      Please verify your email to complete registration to login.
-    </div>
-    <div className={style.buttons}>
-      <Button
-        component={Link}
-        to={routes.root()}
-        className={style.button}
-        primary
-        shadow
-      >
-        Log in
-      </Button>
-    </div>
-  </Layout>
-);
+// const ThanksPage = () => (
+//   <Layout className={style.thanksPage}>
+//     <Title>Thank you for creating an account and joining the DAO!</Title>
+//     <div className={style.verifyText}>
+//       Please verify your email to complete registration to login.
+//     </div>
+//     <div className={style.buttons}>
+//       <Button
+//         component={Link}
+//         to={routes.root()}
+//         className={style.button}
+//         primary
+//         shadow
+//       >
+//         Log in
+//       </Button>
+//     </div>
+//   </Layout>
+// );
 
 const SignUp = (props: any) => {
   const [logIn, setLogIn] = useState("");
@@ -49,6 +49,10 @@ const SignUp = (props: any) => {
     last_name: "",
   });
 
+  const handleForm = (e: any) => {
+    e.preventDefault();
+    handleSubmit();
+  }
   const handleChange = (e: any) => {
     setEmailErrorMessage(undefined);
     setState({ ...state, [e.target.name]: e.target.value });
@@ -82,7 +86,9 @@ const SignUp = (props: any) => {
   };
 
   const handleSubmit = async () => {
+
     try {
+
       setAlreadyExistError(false);
 
       if (!state.email || !state.first_name || !state.last_name) {
@@ -103,7 +109,7 @@ const SignUp = (props: any) => {
         await loginWithMetaMask();
         setShowLoader(false);
       }
-    } catch (err) {}
+    } catch (err) { }
   };
 
   return logIn === "user" ? (
@@ -113,76 +119,87 @@ const SignUp = (props: any) => {
   ) : props.address ? (
     <>
       <Layout>
-        <Title>Register</Title>
-        <Field
-          label="First Name"
-          type="text"
-          name="first_name"
-          fieldValue={state.first_name}
-          onChange={(e: any) => {
-            handleChange(e);
-          }}
-        />
-        <Field
-          label="Last Name"
-          type="text"
-          name="last_name"
-          fieldValue={state.last_name}
-          onChange={(e: any) => {
-            handleChange(e);
-          }}
-        />
-        <Field
-          label="Email"
-          type="email"
-          name="email"
-          fieldValue={state.email}
-          error={emailErrorMessage}
-          onChange={(e: any) => {
-            handleChange(e);
-          }}
-        />
-        {errorFlag ? (
-          <Alert
-            severity="error"
-            className={style.Button}
-            style={{ fontSize: "10px" }}
-          >
-            <p> Warning! All fields must be filled. </p>
-          </Alert>
-        ) : alreadyExistError ? (
-          <Alert
-            severity="error"
-            className={style.Button}
-            style={{ fontSize: "10px" }}
-          >
-            <p> {errorMessage} </p>
-          </Alert>
-        ) : null}
-
-        <div className={style.buttons}>
-          <Button
-            onClick={() => {
-              handleSubmit();
+        <form onSubmit={handleForm}>
+          <Title>Register</Title>
+          <Field
+            label="First Name"
+            type="text"
+            name="first_name"
+            tooltipMessage="First Name"
+            fieldValue={state.first_name}
+            onChange={(e: any) => {
+              handleChange(e);
             }}
-            className={style.button}
-            primary
-            shadow
-          >
-            {" "}
-            {showLoader ? <CircularProgress size={12} /> : <p>Register</p>}
-          </Button>
-        </div>
+          />
+          <Field
+            label="Last Name"
+            tooltipMessage="Last Name"
+            type="text"
+            name="last_name"
+            fieldValue={state.last_name}
+            onChange={(e: any) => {
+              handleChange(e);
+            }}
+          />
+          <Field
+            label="Email"
+            type="email"
+            name="email"
+            tooltipMessage="Email Address"
+            fieldValue={state.email}
+            error={emailErrorMessage}
+            onChange={(e: any) => {
+              handleChange(e);
+            }}
+          />
+          {errorFlag ? (
+            <Alert
+              severity="error"
+              className={style.Button}
+              style={{ fontSize: "10px" }}
+            >
+              <p> Warning! All fields must be filled. </p>
+            </Alert>
+          ) : alreadyExistError ? (
+            <Alert
+              severity="error"
+              className={style.Button}
+              style={{ fontSize: "10px" }}
+            >
+              <p> {errorMessage} </p>
+            </Alert>
+          ) : null}
+
+          <div className={style.buttons}>
+            <Button type="submit"
+              style={{
+                backgroundColor: "#ea8604",
+                borderColor: "#ea8604",
+                color: " #fff",
+                textTransform: "none",
+                justifyContent: "center",
+              }}
+              fullWidth
+              className={style.primary}
+              variant="contained"
+            >
+              {" "}
+              {showLoader ? <CircularProgress size={18} /> : < p style={{ fontWeight: "bold" }}>Register</p>}
+            </Button>
+          </div>
+
+        </form>
+
       </Layout>
     </>
   ) : (
-    <Redirect
-      to={{
-        pathname: "/auth/log_in",
-        state: { from: props.location },
-      }}
-    />
-  );
+          <Redirect
+            to={{
+              pathname: "/auth/log_in",
+              state: { from: props.location },
+            }}
+          />
+        );
 };
 const mapStateToProps = (state: any) => ({
   address: state.layoutReducer.address,
