@@ -13,6 +13,7 @@
   width: 178.19px;
   margin-right: auto;
   margin-left: auto;
+border-color: none;
 }
 
 .button {
@@ -44,6 +45,32 @@
     margin: 0 auto;
   }
 }
+button:focus{
+outline: none;
+  }
+.primary
+ {
+  width: 296rem;
+  margin: 0 auto;
+
+  background-color: #ea8604;
+  border-color: #ea8604;
+  color: #fff;
+   transition: .2s;
+
+
+  &.shadow {
+    box-shadow: 0 4px 6px rgba(234, 134, 4, 0.25);
+  }
+
+  &.outline {
+    
+    &.shadow {
+      box-shadow: 0 4px 6px rgba(234, 134, 4, 0.1);
+    }
+  }
+}
+
 
 .verifyText {
   color: #434343;
