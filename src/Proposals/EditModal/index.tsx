@@ -343,7 +343,8 @@ const EditModal = (props: any) => {
   const [valueSmaller, setValueSmaller] = useState(false);
   const [ethereumNetworkError, setEthereumNetworkError] = useState(false);
   const [milestoneDaysTotal, setMilestoneDaysTotal] = useState(0);
-
+  const [phoenixPrice, setPhoenixPrice] = useState(0);
+  const [amountInDollars, setAmountInDollars] = useState(0);
   const [deleteProposalId, setDeleteProposalId] = useState("");
 
   const [openDialogueState, setOpenDialogueState] = useState(false);
@@ -374,7 +375,34 @@ const EditModal = (props: any) => {
 
   const classes = useStyles();
 
-  useEffect(() => {}, []);
+  // Get PHNX pries and push into balances result
+  const phnx = {};
+  const getPHNXPrice = async () => {
+    console.log("hello");
+    const phnxResponse = await axios.get(
+      "https://min-api.cryptocompare.com/data/price?fsym=PHNX&tsyms=USD",
+      {
+        headers: {
+          authorization:
+            "fa0d2d3f3cf441a5b5b2fa9f31e6638a996d72ad938c7c5f978cf9b1dba8a656",
+        },
+      }
+    );
+    const phnxPrice: any = phnxResponse.data.USD;
+
+    setPhoenixPrice(phnxPrice);
+    console.log("----->>", phnxPrice);
+    console.log("----->>", phnxResponse);
+    console.log("qwe", Number(milestoneDetails.milestoneCost));
+  };
+  // console.log('PHNX :', phnxPrice);
+  // phnx.name = 'Phnx';
+  // phnx.usd = phnxPrice;
+  // conversionRates.push(phnx);
+
+  useEffect(() => {
+    getPHNXPrice();
+  }, []);
 
   const handleClickNext = (e: any) => {
     let {
@@ -464,6 +492,7 @@ const EditModal = (props: any) => {
   };
 
   const AddMilestone = () => {
+    setAmountInDollars(0);
     let {
       task,
       numberOfDevelopers,
@@ -802,7 +831,6 @@ const EditModal = (props: any) => {
   };
 
   const _onChangeMilestoneValue = (value: any, name: any) => {
-    console.log("check value now", value);
     if (
       name == "milestoneCost" ||
       name == "estimatedDays" ||
@@ -824,6 +852,11 @@ const EditModal = (props: any) => {
     }
     console.log("setting value");
     setMilestoneDetails({ ...milestoneDetails, [name]: value });
+    if (name == "milestoneCost") {
+      let tempValue: any = (value * phoenixPrice).toFixed(4);
+      console.log(tempValue);
+      setAmountInDollars(tempValue);
+    }
   };
 
   const OnAddMilestone = () => {
@@ -1510,7 +1543,7 @@ const EditModal = (props: any) => {
                 (fieldRequired && milestoneDetails.milestoneCost.length == 0) ||
                 (valueSmaller && milestoneDetails.milestoneCost == "0")
                   ? false
-                  : "Milestone cost in PHNX"
+                  : `Cost in PHNX ${amountInDollars}$`
               }
               value={milestoneDetails.milestoneCost}
               onChange={(e) =>
@@ -1575,10 +1608,10 @@ const EditModal = (props: any) => {
   const projectMilestones = () => {
     return (
       <>
-        <div onClick={OnAddMilestone} className={classes.milestone}>
-          <AddIcon className={classes.icon} />
-          <p className={classes.txt}>Add Milestones</p>
-        </div>
+        {/* <div onClick={OnAddMilestone} className={classes.milestone}>
+            <AddIcon className={classes.icon} />
+            <p className={classes.txt}>Add Milestones</p>
+          </div> */}
         {state.milestone.length != 0 &&
           state.milestone.map((item: any, index) => {
             return (
@@ -1703,20 +1736,27 @@ const EditModal = (props: any) => {
                           Next
                         </Button>
                       ) : (
-                        <Button
-                          primary
-                          // disabled={showLoader}
-                          onClick={
-                            (e: any) => (!showLoader ? openDialogue(e) : null)
-                            // handleSubmit()
-                          }
-                        >
-                          {showLoader ? (
-                            <CircularProgress size={12} />
-                          ) : (
-                            <p>Submit</p>
-                          )}
-                        </Button>
+                        <div>
+                          <Button onClick={OnAddMilestone} secondary>
+                            Add Milestone
+                          </Button>
+
+                          <Button
+                            primary
+                            style={{ marginTop: "10px" }}
+                            // disabled={showLoader}
+                            onClick={
+                              (e: any) => (!showLoader ? openDialogue(e) : null)
+                              // handleSubmit()
+                            }
+                          >
+                            {showLoader ? (
+                              <CircularProgress size={12} color="inherit" />
+                            ) : (
+                              <p>Submit</p>
+                            )}
+                          </Button>
+                        </div>
                       )}
                       <Button
                         disabled={disableInputs}

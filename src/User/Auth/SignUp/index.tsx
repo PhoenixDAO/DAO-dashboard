@@ -12,7 +12,6 @@ import { connect } from "react-redux";
 import { CircularProgress } from "@material-ui/core";
 import { loginWithMetaMask } from "redux/authActions";
 
-
 const ThanksPage = () => (
   <Layout className={style.thanksPage}>
     <Title>Thank you for creating an account and joining the DAO!</Title>

@@ -229,7 +229,7 @@ const Votes = (props: any) => {
           >
             <Table
               styleFlag={styleFlagUpcomingVotes}
-              columns={["Proposal", "Voting Day (dd/mm/yyyy)"]}
+              columns={["Proposal", "Voting Day"]}
             >
               {value.length === 0 ? (
                 <>
@@ -292,7 +292,7 @@ const Votes = (props: any) => {
             >
               <Table
                 styleFlag={styleFlagPassVotes}
-                columns={["Proposal", "Voting Day (dd/mm/yyyy)", "Pass/Fail"]}
+                columns={["Proposal", "Voting Day", "Pass/Fail"]}
               >
                 {proposals.length === 0 ? (
                   <>

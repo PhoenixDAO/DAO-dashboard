@@ -830,6 +830,7 @@ const Proposals = (props: any) => {
   const [metaMaskApproval, setMetaMaskApproval] = useState(false);
   const [checkingLoading, setCheckingLoading] = useState(true);
   const [openDialogueState, setOpenDialogueState] = useState(false);
+  const [approvalDialogue, setApprovalDialogue] = useState(false);
 
   const [projectModalItem, setProjectModalItem] = React.useState<
     | {
@@ -950,19 +951,27 @@ const Proposals = (props: any) => {
           // tx confirmed
           // checkApproval();
           console.log("Approval transaction sent");
-          openSnackbar("Approval granted", "success");
+          console.log(1);
+          setApprovalDialogue(false);
+          console.log(2);
+          // openSnackbar("Approval granted", "success");
+          console.log(3);
+          openModal();
+          console.log(4);
           setMetaMaskApproval(true);
+          console.log(5);
         }
-        setMetaMaskApproval(true);
+        // setMetaMaskApproval(true);
       })
       .on("error", function (error: any) {
         if (error.code == "4001") {
+          console.log("Transaction rejected ");
           setMyLoader(false);
         }
       });
 
     // setApprovalGranted(true);
-    setMyLoader(false);
+    // setMyLoader(false);
     // return result;
   };
 
@@ -1083,6 +1092,11 @@ const Proposals = (props: any) => {
     setMessage({ message, severity });
     setShowSnackBar(true);
   };
+
+  const grantApproval = () => {
+    setApprovalDialogue(true);
+  };
+
   const classes = useStyles();
   let test = true;
   return (
@@ -1113,6 +1127,33 @@ const Proposals = (props: any) => {
         <DialogActions>
           <Button onClick={() => setOpenDialogueState(false)} color="primary">
             Understood
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={approvalDialogue}
+        onClose={() => setApprovalDialogue(false)}
+        className={classes.dialogueText}
+        scroll={"paper"}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+      >
+        <DialogTitle className={classes.dialogueText} id="scroll-dialog-title">
+          Proposal successfully submitted
+        </DialogTitle>
+        <DialogContent className={classes.dialogueText} dividers={true}>
+          <DialogContentText
+            className={classes.dialogueText}
+            id="scroll-dialog-description"
+            ref={descriptionElementRef}
+            tabIndex={-1}
+          >
+            To submit a proposal you need to get give the contract approval
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => sendApproval()} color="primary">
+            {myLoader ? <CircularProgress size={10} /> : "Grant Approval"}
           </Button>
         </DialogActions>
       </Dialog>
@@ -1148,7 +1189,7 @@ const Proposals = (props: any) => {
         title="Upvote Proposals"
         actions={
           <div className={classes.buttonsdiv}>
-            <Button
+            {/* <Button
               className={classes.approvalButton}
               secondary
               onClick={async () =>
@@ -1170,7 +1211,7 @@ const Proposals = (props: any) => {
               ) : (
                 " Send Approval"
               )}
-            </Button>
+            </Button> */}
             {/* <Button className={classes.submitbutton}
               secondary onClick={openDialogue}>im button</Button> */}
             <Button
@@ -1178,17 +1219,19 @@ const Proposals = (props: any) => {
               className={classes.submitbutton}
               secondary
               //onClick={() => (metaMaskApproval ? openModal() : checkApproval())}
-              onClick={async () =>
-                checkingLoading
-                  ? null
-                  : !(await checkNetwork())
-                  ? openSnackbar("Network must be Rinkbey", "error")
-                  : metaMaskApproval
-                  ? openModal()
-                  : openSnackbar(
-                      `Metamask not approved. Please click on the "Send Approval" button to grant the approval. `,
-                      "error"
-                    )
+              onClick={
+                async () =>
+                  checkingLoading
+                    ? null
+                    : !(await checkNetwork())
+                    ? openSnackbar("Network must be Rinkbey", "error")
+                    : metaMaskApproval
+                    ? openModal()
+                    : grantApproval()
+                // openSnackbar(
+                //   `Metamask not approved. Please click on the "Send Approval" button to grant the approval. `,
+                //   "error"
+                // )
               }
             >
               {checkingLoading ? (
@@ -1206,7 +1249,7 @@ const Proposals = (props: any) => {
             "Proposal",
             "Current Upvotes",
             "Cost (PHNX)",
-            "Expiration Date (dd/mm/yyyy)",
+            "Expiration Date ",
           ]}
         >
           {value.length == 0 ? (

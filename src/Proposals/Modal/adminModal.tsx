@@ -69,6 +69,39 @@ const useStyles = makeStyles((theme) =>
       justifyContent: "center",
       minWidth: "100px",
     },
+    firstfields: {
+      "& .MuiInputBase-root": {
+        fontSize: "12px",
+        // width: "100%",
+        //  marginLeft: "24px",
+      },
+      "& .MuiFormLabel-root": {
+        fontSize: "12px",
+      },
+      "& .MuiFormHelperText-root": {
+        fontSize: "10px",
+      },
+
+      [theme.breakpoints.down("xl")]: {
+        width: "188px",
+      },
+
+      [theme.breakpoints.up("lg")]: {
+        width: "198px",
+      },
+      [theme.breakpoints.down("lg")]: {
+        width: "198px",
+      },
+      [theme.breakpoints.down("md")]: {
+        width: "165px",
+      },
+      [theme.breakpoints.down("xs")]: {
+        width: "165px",
+      },
+      [theme.breakpoints.up("xs")]: {
+        width: "160px",
+      },
+    },
     description: {
       [theme.breakpoints.down("sm")]: {
         width: "220px",
@@ -252,6 +285,8 @@ const ProposalModal = (props: any) => {
                 `${URL}${Proposal}${id}`,
                 {
                   status: status,
+                  reasonForRejecting: proposalRejectionReason,
+                  email: props.email,
                 },
                 {
                   headers: {
@@ -355,6 +390,7 @@ const ProposalModal = (props: any) => {
   };
 
   const [openDialogueState, setOpenDialogueState] = useState(false);
+  const [proposalRejectionReason, setProposalRejectionReason] = useState("");
   const [approvalState, setApprovalState] = useState<approvalState>({
     id: undefined,
     index: undefined,
@@ -398,10 +434,16 @@ const ProposalModal = (props: any) => {
     }
   };
 
+  const handleProposalRejection = (e: any) => {
+    console.log("abcdefg", e.target.value);
+    setProposalRejectionReason(e.target.value);
+  };
+
   useEffect(() => {
     console.log("123 Address", props);
     checkAccounts();
     checkBalance(props.proposalUSerNumioAddress);
+    // setProposalRejectionReason("");
   });
   return (
     <>
@@ -429,6 +471,18 @@ const ProposalModal = (props: any) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions className={classes.dialogueText}>
+          {console.log("[[[]]]]", approvalState)}
+          {approvalState.status == "Rejected" ? (
+            <TextField
+              multiline
+              variant="outlined"
+              label="Reason"
+              value={proposalRejectionReason}
+              onChange={(e: any) => handleProposalRejection(e)}
+              className={classes.firstfields}
+            />
+          ) : // <input onChange={(e: any) => handleProposalRejection(e)} />
+          null}
           <Button
             className={classes.dialogueButton}
             onClick={() => handleDialogue(false)}

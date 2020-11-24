@@ -100,7 +100,7 @@ const VotesModal = (props: any) => {
   const [ethereumNetworkError, setEthereumNetworkError] = useState(false);
   const [stakedSnackBar, setStakedSnackBar] = useState(false);
   const [transactionRejected, setTransactionRejected] = useState(false);
-  const [cannotVote,setCannotVote]=useState(false);
+  const [cannotVote, setCannotVote] = useState(false);
 
   const [modalItem, setModalItem] = React.useState<Project | undefined>(
     undefined
@@ -170,12 +170,12 @@ const VotesModal = (props: any) => {
     }
   };
 
-  const cannotVoteError = () =>{
+  const cannotVoteError = () => {
     setCannotVote(true);
-    setTimeout(()=>{
-      setCannotVote(false)
-    },3000)
-  }
+    setTimeout(() => {
+      setCannotVote(false);
+    }, 3000);
+  };
 
   return (
     <>
@@ -211,7 +211,6 @@ const VotesModal = (props: any) => {
         </Alert>
       </Snackbar> */}
       {modalItem && (
-        
         <Modal
           close={closeModal}
           title={modalItem.title}
@@ -239,31 +238,33 @@ const VotesModal = (props: any) => {
           styleFlag={props.styleFlag}
           actions={
             <>
-            {cannotVote && (
-            <div style={{marginBottom: "10px"}}>
-              <Alert severity="error" style={{ fontSize: "14px" }}>
-              <p> Voting on this proposal is not started ! </p>
-            </Alert>
-              </div>
-          )}
-              {!cannotVote && <Button
-                className={style.button}
-                primary
-                outline
-                icon={iconLike}
-                disabled={myLoading ? true : false}
-                onClick={() =>
-                  props.selectedProposal.votingStatus
-                    ? openModal(props.selectedProposal)
-                    : cannotVoteError()
-                }
-              >
-                {props.selectedProposal.votingStatus
-                  ? props.button1
-                  : `Vote on ${changeFormat(
-                      props.selectedProposal.votingDate
-                    )}`}
-              </Button>}
+              {cannotVote && (
+                <div style={{ marginBottom: "10px" }}>
+                  <Alert severity="error" style={{ fontSize: "14px" }}>
+                    <p> The voting on this proposal has not started! ! </p>
+                  </Alert>
+                </div>
+              )}
+              {!cannotVote && (
+                <Button
+                  className={style.button}
+                  primary
+                  outline
+                  icon={iconLike}
+                  disabled={myLoading ? true : false}
+                  onClick={() =>
+                    props.selectedProposal.votingStatus
+                      ? openModal(props.selectedProposal)
+                      : cannotVoteError()
+                  }
+                >
+                  {props.selectedProposal.votingStatus
+                    ? props.button1
+                    : `Vote on ${changeFormat(
+                        props.selectedProposal.votingDate
+                      )}`}
+                </Button>
+              )}
               <Button primary onClick={props.close}>
                 {props.button2}
               </Button>
@@ -305,7 +306,7 @@ const VotesModal = (props: any) => {
                     Voting Date
                   </span>
                 </div>
-                <span>(dd/mm/yyyy)</span>
+                {/* <span>(dd/mm/yyyy)</span> */}
                 <div>
                   <span>{changeFormat(props.selectedProposal.votingDate)}</span>
                 </div>

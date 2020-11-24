@@ -10,12 +10,17 @@ import { CircularProgress } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { URL, VoteOnProposal } from "../../const";
 import Tooltip from "@material-ui/core/Tooltip";
-import { withStyles,createStyles, Theme, makeStyles } from "@material-ui/core/styles";
+import {
+  withStyles,
+  createStyles,
+  Theme,
+  makeStyles,
+} from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 type Props = {
   close: () => any;
   title: string;
-  styleFlag:string;
+  styleFlag: string;
 };
 const LightTooltip = withStyles((theme: Theme) => ({
   tooltip: {
@@ -35,7 +40,7 @@ const useStyles = makeStyles((theme) =>
         },
         "& .MuiFormLabel-root": {
           fontSize: "18px",
-          fontWeight:"normal",
+          fontWeight: "normal",
           color: "#EA8604",
           width: "max-content",
         },
@@ -53,7 +58,7 @@ const useStyles = makeStyles((theme) =>
         },
         "& .MuiFormLabel-root": {
           fontSize: "18px",
-          fontWeight:"normal",
+          fontWeight: "normal",
           color: "#EA8604",
         },
         "& .MuiFormHelperText-root": {
@@ -67,7 +72,7 @@ const useStyles = makeStyles((theme) =>
       },
       "& .MuiFormLabel-root": {
         fontSize: "18px",
-        fontWeight:"normal",
+        fontWeight: "normal",
         color: "#EA8604",
         width: "max-content",
       },
@@ -76,15 +81,15 @@ const useStyles = makeStyles((theme) =>
       },
       "& .MuiOutlinedInput-inputMultiline": {
         padding: "0",
-    fontSize: "13px"
-      }
+        fontSize: "13px",
+      },
     },
   })
 );
 
 const changeFormat = (date: any) => {
   date = new Date(date);
-  
+
   return (
     <td>
       {new Date(date.getTime()).getDate()}/
@@ -165,17 +170,20 @@ const ProposalModal = (props: any) => {
               </Button>
             </LightTooltip>
           )}
-<LightTooltip title={`${props.tooltipMessage2}`}  placement="bottom" arrow>
-<Button primary onClick={props.close}>
-            {props.button2}
-          </Button>
-</LightTooltip>
-          
+          <LightTooltip
+            title={`${props.tooltipMessage2}`}
+            placement="bottom"
+            arrow
+          >
+            <Button primary onClick={props.close}>
+              {props.button2}
+            </Button>
+          </LightTooltip>
         </>
       }
     >
       <div className={style.modalContent}>
-      {/* <div className={style.modalBrief}>
+        {/* <div className={style.modalBrief}>
           {console.log(props.milestones)}
           <span>Budget</span>
           <span>Milestones</span>
@@ -183,30 +191,66 @@ const ProposalModal = (props: any) => {
         </div> */}
         <div className={style.modalBrief}>
           {console.log(props.milestones)}
-          <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"14px",color:"#EA8604"}}>Budget</span></div><div style={{marginTop:"5px"}}><span>{props.budget}</span> <span>PHNX</span></div></div>
-          <div style={{textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"14px",color:"#EA8604"}}>Milestones</span></div><div style={{marginTop:"5px"}}><span>{props.milestones.length}</span></div></div>
-          <div style={{width:"80px",textAlign:"center",alignItems:"center"}}><div><span style={{fontSize:"14px",color:"#EA8604"}}>Exp. Date</span></div><span>(dd/mm/yyyy)</span><div><span>{changeFormat(props.expirationDate)}</span></div></div>
+          <div style={{ textAlign: "center", alignItems: "center" }}>
+            <div>
+              <span style={{ fontSize: "14px", color: "#EA8604" }}>Budget</span>
+            </div>
+            <div style={{ marginTop: "5px" }}>
+              <span>{props.budget}</span> <span>PHNX</span>
+            </div>
+          </div>
+          <div style={{ textAlign: "center", alignItems: "center" }}>
+            <div>
+              <span style={{ fontSize: "14px", color: "#EA8604" }}>
+                Milestones
+              </span>
+            </div>
+            <div style={{ marginTop: "5px" }}>
+              <span>{props.milestones.length}</span>
+            </div>
+          </div>
+          <div
+            style={{ width: "80px", textAlign: "center", alignItems: "center" }}
+          >
+            <div>
+              <span style={{ fontSize: "14px", color: "#EA8604" }}>
+                Exp. Date
+              </span>
+            </div>
+            {/* <span>(dd/mm/yyyy)</span> */}
+            <div>
+              <span>{changeFormat(props.expirationDate)}</span>
+            </div>
+          </div>
           {/* <div><span>{props.milestones.length}</span></div>
           <div><span>{changeFormat(props.expirationDate)}</span></div> */}
-          
         </div>
         {/* <div className={style.modalText}>{props.description}</div> */}
-        
+
         <form className={classes.description} noValidate autoComplete="off">
-              <TextField
-                id="outlined-multiline-static"
-                label="Project Description"
-                multiline
-                rows={3}
-                defaultValue={props.description}
-                InputProps={{
-                  readOnly: true,
-                }}
-                variant="outlined"
-              />
-            </form>
+          <TextField
+            id="outlined-multiline-static"
+            label="Project Description"
+            multiline
+            rows={3}
+            defaultValue={props.description}
+            InputProps={{
+              readOnly: true,
+            }}
+            variant="outlined"
+          />
+        </form>
         <div className={style.modalSteps}>
-          <h3 style={{ fontSize: "16px", marginBottom: "10px", color: "#ea8604", fontWeight: "normal"}}>Milestones</h3>
+          <h3
+            style={{
+              fontSize: "16px",
+              marginBottom: "10px",
+              color: "#ea8604",
+              fontWeight: "normal",
+            }}
+          >
+            Milestones
+          </h3>
           <div
             style={{
               height: "115px",

@@ -373,6 +373,7 @@ export default ({
     if (
       e.target.id == "adminModal" ||
       e.target.id == "activeProjectsModal" ||
+      //  e.target.id == "upvoteModal" ||
       e.target.className === style.modalWrap ||
       e.target.className ===
         "MuiGrid-root style_modalWrap__fAu8M MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12 MuiGrid-grid-lg-12"
@@ -404,6 +405,7 @@ export default ({
           xs={12}
           md={12}
           className={style.modalWrap}
+          id={"upvoteModal"}
           onClick={(e) => handleClick(e)}
         >
           <div className={cn(style.modal, className)}>

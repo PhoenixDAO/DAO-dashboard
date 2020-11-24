@@ -91,7 +91,6 @@
       box-shadow: 0 4rem 15rem rgba(8, 15, 22, 0.1);
     }
   }
-  
 }
 
 .item {
@@ -109,7 +108,7 @@
   justify-content: space-between;
   box-shadow: 0 4rem 6rem rgba(8, 15, 22, 0.05);
   height: 363px;
- // width: 380px;
+  // width: 380px;
 
   // &:nth-child(even) {
   //   margin-left: 30rem;
@@ -133,7 +132,7 @@
     line-height: 21rem;
     color: #838383;
     margin-bottom: 7rem;
-    margin-top:7rem;
+    margin-top: 7rem;
   }
 
   .input {
@@ -163,7 +162,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 10rem;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   // word-wrap:break-word;
 
   .num {
@@ -187,7 +186,7 @@
     margin-left: 10rem;
     width: 10px;
     word-wrap: break-word;
-    margin-right:10rem;
+    margin-right: 10rem;
     margin-bottom: 10rem;
   }
 
@@ -204,6 +203,14 @@
     cursor: pointer;
     user-select: none;
     transition: 0.3s;
+  }
+  .toggleButton:hover {
+    // width: 250rem;
+    height: 40rem;
+    text-align: center;
+    padding-top: 3rem;
+    color: white;
+    background: orange;
   }
 
   &.checked {
@@ -244,7 +251,7 @@
   }
 }
 @media (max-width: 999px) {
-  .wrap{
+  .wrap {
     margin-right: 15px;
   }
-  }
+}
