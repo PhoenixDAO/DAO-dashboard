@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import EditModal from "../Proposals/EditModal/index";
 import AdminModal from "../Proposals/Modal/adminModal";
 import AdminModal2 from "../Proposals/Modal/adminModal2";
+import AdminModal3 from "../Proposals/Modal/adminModal3";
 import { URL } from "../const";
 import { Proposal, ByAdmin, ProposalByStatus } from "../const";
 import { CircularProgress } from "@material-ui/core";
@@ -345,6 +346,20 @@ const Admin = (props: any) => {
     | undefined
   >(undefined);
 
+  const [projectModalItem3, setProjectModalItem3] = React.useState<
+  | {
+      title: string;
+      budget: any;
+      milestoness: any;
+      description: any;
+      votingDate: any;
+      githubLink:any;
+    }
+  | undefined
+>(undefined);
+
+
+
   const openSnackbar = (
     message: string,
     severity: "error" | "success" | "warning" | "info" | undefined
@@ -527,6 +542,10 @@ const Admin = (props: any) => {
           value.data.result.map((_value: any, i: number) => {
             result[_value._id] = {
               name: _value.name,
+              description:_value.description,
+              budget:_value.budget,
+              githubLink:_value.githubLink,
+              votingDate:_value.votingDate,
               milestone: _value.milestone
                 .map((milestonee: any, index: any) => {
                   return { ...milestonee, index };
@@ -681,6 +700,17 @@ const Admin = (props: any) => {
           // styleFlag={projectModalItem2.styleFlag}
           close={() => setProjectModalItem2(undefined)}
           // setSnackBar={() => setSnackBar}
+        />
+      )}
+      {projectModalItem3 && (
+        <AdminModal3
+          title={projectModalItem3.title}
+          budget={projectModalItem3.budget}
+          milestones={projectModalItem3.milestoness}
+          description={projectModalItem3.description}
+          votingDate={projectModalItem3.votingDate}
+          githubLink={"https://github.com/"}
+          close={() => setProjectModalItem3(undefined)}
         />
       )}
       <div id="scrollContainer" className={style.grid}>
@@ -884,7 +914,15 @@ const Admin = (props: any) => {
             ) : (
               Object.keys(milestones).map((id: any, i: any) =>
                 milestones[id].milestone.map((item: any, j: any) => (
-                  <tr key={i}>
+                  <tr onClick={()=> {setProjectModalItem3(
+                    {title: milestones[id].name,
+                    budget: milestones[id].budget,
+                    milestoness: milestones[id].milestone,
+                    description: milestones[id].description,
+                    votingDate: milestones[id].votingDate,
+                    githubLink:milestones[id].githubLink
+                  }
+                  )}} key={i}>
                     <td>{milestones[id].name}</td>
                     <td> {`M${item.index + 1}`} </td>
 

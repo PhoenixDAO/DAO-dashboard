@@ -17,6 +17,7 @@ import DeleteOutline from "@material-ui/icons/DeleteOutline";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import Tooltip from "@material-ui/core/Tooltip";
 import { withStyles, Theme } from "@material-ui/core/styles";
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 import { ethereumNetwork } from "../../const";
 
@@ -104,17 +105,17 @@ const useStyles = makeStyles((theme) =>
       },
 
       [theme.breakpoints.down("xl")]: {
-        width: "188px",
+        width: "275px",
       },
 
       [theme.breakpoints.up("lg")]: {
-        width: "198px",
+        width: "274px",
       },
       [theme.breakpoints.down("lg")]: {
-        width: "198px",
+        width: "223px",
       },
       [theme.breakpoints.down("md")]: {
-        width: "165px",
+        width: "167px",
       },
       [theme.breakpoints.down("xs")]: {
         width: "165px",
@@ -434,16 +435,19 @@ const EditModal = (props: any) => {
       // let checkLink: any = githubLink.match(
       //   /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
       // );
-      let checkLink: any = githubLink.match(
-        /(http(s)?:\/\/)?(www.)?(github.com\/)([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
-      );
+      let checkLink=githubLink.split("github.com/").length>1 && githubLink.split("github.com/")[0]==="";
+      // console.log("githubLink.split(github.com/)",githubLink.split("github.com/"),checkLink)
+      // let checkLink = temp.length>1 && temp[0]=="";  
+      // let checkLink: any = githubLink.match(
+      //   /github.com\/([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+      // );
       if (emailValid == null) {
         setEmailValid(true);
         return;
       } else {
         setEmailValid(false);
       }
-      if (checkLink == null) {
+      if (!checkLink) {
         setLinkValidation(true);
         return;
       } else {
@@ -1076,7 +1080,7 @@ const EditModal = (props: any) => {
             variant="outlined"
           >
             <LightTooltip
-              title="Github repository link for the project"
+              title="github.com/"
               placement="bottom"
               arrow
             >
@@ -1096,6 +1100,10 @@ const EditModal = (props: any) => {
                     ? "Github link is not valid."
                     : false
                 }
+                // InputProps={{
+                //   startAdornment: <InputAdornment position="start"></InputAdornment>,
+                // }}
+                // style={{fontSize:"16px"}}
                 className={classes.submitText}
                 variant="outlined"
               />
