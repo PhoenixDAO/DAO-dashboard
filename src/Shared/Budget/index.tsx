@@ -3,7 +3,10 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { CircularProgress, Grid } from "@material-ui/core";
 import { URL, Admin } from "../../const";
-import {getDAOAttributes,updateDAOAttributes} from "../../redux/DAOAttributesActions"
+import {
+  getDAOAttributes,
+  updateDAOAttributes,
+} from "../../redux/DAOAttributesActions";
 
 /** Components */
 import Button from "Shared/Button";
@@ -53,13 +56,13 @@ const Budget = (props: any) => {
 
   const getDAOAttributes = async () => {
     try {
-      console.log("props.token is",props.token)
-      await props.getDAOAttributes(props.token)
-        
-          console.log("DAO ATTRIBUTES in budget---> ", props.DAOAttributes);
-          setDAOAttributes(props.DAOAttributes);
+      console.log("props.token is", props.token);
+      await props.getDAOAttributes(props.token);
+
+      console.log("DAO ATTRIBUTES in budget---> ", props.DAOAttributes);
+      setDAOAttributes(props.DAOAttributes);
     } catch (err) {
-      console.log("error",err);
+      console.log("error", err);
     }
   };
 
@@ -69,35 +72,36 @@ const Budget = (props: any) => {
         return;
       }
       setShowLoader(true);
-      let _id =props.user && props.user._id? props.user._id: "5f32adb31fa04b0e0f4e3298";
-console.log("id isss",_id)
-          await props.updateDAOAttributes(props.token,_id,DAOAttributes)
-          
+      let _id =
+        props.user && props.user._id
+          ? props.user._id
+          : "5f32adb31fa04b0e0f4e3298";
+      console.log("id isss", _id);
+      await props.updateDAOAttributes(props.token, _id, DAOAttributes);
+
       // const get = await axios
       //   .put(`${URL}${Admin}${_id}`, DAOAttributes, {
       //     headers: {
       //       Authorization: `Bearer ${props.user.token}`,
       //     },
       //   })
-       
-          console.log("UPDATED DAO ATTRIBUTES ---> ", props.DAOAttributes);
-          // setDAOAttributes(props.DAOAttributes);
-          props.openSnackbar("Successfully updated !", "success");
-          setShowLoader(false);
+
+      console.log("UPDATED DAO ATTRIBUTES ---> ", props.DAOAttributes);
+      // setDAOAttributes(props.DAOAttributes);
+      props.openSnackbar("Successfully updated !", "success");
+      setShowLoader(false);
     } catch (err) {
-      props.openSnackbar("Ops! something went wrong.", "error");
+      props.openSnackbar("Oops! something went wrong.", "error");
       console.log(err);
     }
   };
 
   useEffect(() => {
-   
-      getDAOAttributes();
- 
+    getDAOAttributes();
   }, [props.token]);
 
   useEffect(() => {
-    setDAOAttributes(props.DAOAttributes)
+    setDAOAttributes(props.DAOAttributes);
   }, [props.DAOAttributes]);
 
   const verifyValue = () => {
@@ -176,7 +180,7 @@ console.log("id isss",_id)
               tooltipMessage="Minimum upvotes required to pass upvoting stage"
             />
           </Grid>
-          <Grid item xs={12} sm={4} lg={4} md={4}  xl={4} alignItems="flex-end">
+          <Grid item xs={12} sm={4} lg={4} md={4} xl={4} alignItems="flex-end">
             <Field
               label="Max Upvote Days"
               type="number"
@@ -186,7 +190,7 @@ console.log("id isss",_id)
               tooltipMessage="Maximum days for passing upvote stage"
             />
           </Grid>
-          <Grid item xs={12} sm={4} lg={4} md={4}  xl={4} alignItems="flex-end">
+          <Grid item xs={12} sm={4} lg={4} md={4} xl={4} alignItems="flex-end">
             <Field
               label={`Set Budget ${
                 monthNames[date.getMonth()]
@@ -200,19 +204,18 @@ console.log("id isss",_id)
           </Grid>
         </Grid>
       </div>
-      
-        <Button
-          primary
-          className={style.updatebutton}
-          onClick={updateDAOAttributes}
-        >
-          {showLoader ? (
-            <CircularProgress size="30rem" color="inherit" />
-          ) : (
-            "Update"
-          )}
-        </Button>
 
+      <Button
+        primary
+        className={style.updatebutton}
+        onClick={updateDAOAttributes}
+      >
+        {showLoader ? (
+          <CircularProgress size="30rem" color="inherit" />
+        ) : (
+          "Update"
+        )}
+      </Button>
     </div>
   );
 };
@@ -220,14 +223,15 @@ console.log("id isss",_id)
 const mapStateToProps = (state: any) => ({
   token: state.userDetails.token,
   user: state.userDetails.user,
-  DAOAttributes:state.DAOAttributesReducer.DAOAttributes
+  DAOAttributes: state.DAOAttributesReducer.DAOAttributes,
 });
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getDAOAttributes: (body:any) => dispatch(getDAOAttributes(body)),
-    updateDAOAttributes: (body:any,_id:any,DAOAttributes:any) => dispatch(updateDAOAttributes(body,_id,DAOAttributes))
-  }
+    getDAOAttributes: (body: any) => dispatch(getDAOAttributes(body)),
+    updateDAOAttributes: (body: any, _id: any, DAOAttributes: any) =>
+      dispatch(updateDAOAttributes(body, _id, DAOAttributes)),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Budget);

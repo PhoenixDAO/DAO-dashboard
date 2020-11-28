@@ -17,7 +17,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Button from "Shared/Button";
-
+import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -98,6 +98,9 @@ const useStyles = makeStyles((theme: Theme) =>
         backgroundColor: "#EA8604",
         color: "#FFFFFF",
       },
+      "& .MuiInputBase-input": {
+        fontSize: "10px",
+      },
       "& .MuiDialogActions-root": {
         flex: "0 0 auto",
         display: "flex",
@@ -121,6 +124,39 @@ const useStyles = makeStyles((theme: Theme) =>
       borderRadius: "5rem",
       justifyContent: "center",
       minWidth: "100px",
+    },
+    firstfields: {
+      "& .MuiInputBase-root": {
+        fontSize: "12px",
+        // width: "100%",
+        // marginLeft: "24px",
+      },
+      "& .MuiFormLabel-root": {
+        fontSize: "12px",
+      },
+      "& .MuiFormHelperText-root": {
+        fontSize: "10px",
+      },
+
+      [theme.breakpoints.down("xl")]: {
+        width: "188px",
+      },
+
+      [theme.breakpoints.up("lg")]: {
+        width: "198px",
+      },
+      [theme.breakpoints.down("lg")]: {
+        width: "198px",
+      },
+      [theme.breakpoints.down("md")]: {
+        width: "165px",
+      },
+      [theme.breakpoints.down("xs")]: {
+        width: "165px",
+      },
+      [theme.breakpoints.up("xs")]: {
+        width: "160px",
+      },
     },
   })
 );
@@ -169,18 +205,20 @@ const Admin = (props: any) => {
   const [modalOpen, setModalOpen] = React.useState(false);
 
   const [openDialogueState, setOpenDialogueState] = useState(false);
-  const [approvalStateForDraw, setApprovalStateForDraw] = useState<
-    approvalStateForDraw
-  >({
+  const [
+    approvalStateForDraw,
+    setApprovalStateForDraw,
+  ] = useState<approvalStateForDraw>({
     i: undefined,
     j: undefined,
     status: undefined,
     id: undefined,
     str: undefined,
   });
-  const [approvalStateForMilestone, setApprovalStateForMilestone] = useState<
-    approvalStateForMilestone
-  >({
+  const [
+    approvalStateForMilestone,
+    setApprovalStateForMilestone,
+  ] = useState<approvalStateForMilestone>({
     id: undefined,
     k: undefined,
     i: undefined,
@@ -193,6 +231,8 @@ const Admin = (props: any) => {
   const [dialogueNumber, setDialogueNumber] = useState<number | undefined>(
     undefined
   );
+
+  const [reasonForRejecting, setReasonForRejecting] = useState("");
 
   const openDialogueForDraw = (
     i: number,
@@ -216,6 +256,7 @@ const Admin = (props: any) => {
     setOpenDialogueState(true);
   };
   const handleDialogue = async (i: any, result: boolean) => {
+    console.log("Props", props);
     setOpenDialogueState(false);
     setDialogueNumber(undefined);
     setDialogueMessage("");
@@ -284,6 +325,7 @@ const Admin = (props: any) => {
         createdAt?: any;
         collateral: any;
         proposalUserNumioAddress: any;
+        email: any;
       }
     | undefined
   >(undefined);
@@ -338,7 +380,9 @@ const Admin = (props: any) => {
     index: any,
     milestoneStatus: any,
     str: string
+    //reasonForRejecting: any
   ) => {
+    console.log("Reason ......", reasonForRejecting);
     try {
       setTestValue((val: any) => ({
         ...val,
@@ -351,6 +395,8 @@ const Admin = (props: any) => {
             status: milestoneStatus,
             index: index,
             numioAddress: props.user.numioAddress,
+            reasonForRejecting: reasonForRejecting,
+            email: props.user.email,
           },
           {
             headers: {
@@ -398,6 +444,7 @@ const Admin = (props: any) => {
     getProposalsOfStatusVoting();
     getProposalOfStatusAccepted();
     getProposalsOfStatusDraw();
+    setReasonForRejecting("");
   }, []);
 
   const getProposalsOfStatusPending = async () => {
@@ -554,6 +601,11 @@ const Admin = (props: any) => {
     }
   };
 
+  const handleEmail = (e: any) => {
+    setReasonForRejecting(e.target.value);
+    console.log(e.target.value);
+  };
+
   return (
     <>
       <Dialog
@@ -579,6 +631,20 @@ const Admin = (props: any) => {
             {dialogueMessage}
           </DialogContentText>
         </DialogContent>
+        {approvalStateForMilestone.milestoneStatus == "Incomplete" ? (
+          <TextField
+            multiline
+            // rows={3}
+            //  defaultValue="hello"
+            // error={!email}
+            // helperText={"ojasok"}
+            label="Reason"
+            value={reasonForRejecting}
+            variant="outlined"
+            onChange={(e: any) => handleEmail(e)}
+            className={classes.firstfields}
+          />
+        ) : null}
         <DialogActions className={classes.dialogueText}>
           <Button
             className={classes.dialogueButton}
@@ -617,6 +683,7 @@ const Admin = (props: any) => {
           openSnackbar={openSnackbar}
           collateral={projectModalItem.collateral}
           proposalUSerNumioAddress={projectModalItem.proposalUserNumioAddress}
+          email={projectModalItem.email}
         />
       )}
       {projectModalItem2 && (
@@ -676,7 +743,7 @@ const Admin = (props: any) => {
           title="Proposal Requests"
           tooltipMessage="This shows all the proposals pending for approval"
         >
-          <Table compact columns={["Proposal", "Submission Date (dd/mm/yyyy)"]}>
+          <Table compact columns={["Proposal", "Submission Date "]}>
             {proposalsOfStatusPending.length == 0 ? (
               <td>{loading1 ? "Loading..." : "No proposals found"}</td>
             ) : (
@@ -702,6 +769,7 @@ const Admin = (props: any) => {
                         button2: "",
                         collateral: item.collateral,
                         proposalUserNumioAddress: item.numioAddress,
+                        email: item.email,
                       })
                     }
                     key={i}
@@ -731,7 +799,7 @@ const Admin = (props: any) => {
           title="Proposals Ready for Vote"
           tooltipMessage="All the proposals ready for voting"
         >
-          <Table compact columns={["Proposal", "Voting Day (dd/mm/yyyy)"]}>
+          <Table compact columns={["Proposal", "Voting Day"]}>
             {proposalsOfStatusVoting.length == 0 ? (
               <td>
                 {loading2 ? "Loading..." : "No proposal ready for voting"}
@@ -803,7 +871,7 @@ const Admin = (props: any) => {
                       }}
                     >
                       {testValue[`0${j}Yes`] ? (
-                        <CircularProgress size={12} />
+                        <CircularProgress size={12} color="inherit" />
                       ) : (
                         "Yes"
                       )}
@@ -822,7 +890,7 @@ const Admin = (props: any) => {
                       }}
                     >
                       {testValue[`0${j}No`] ? (
-                        <CircularProgress size={12} />
+                        <CircularProgress size={12} color="inherit" />
                       ) : (
                         "No"
                       )}
@@ -890,7 +958,7 @@ const Admin = (props: any) => {
                         }
                       >
                         {testValue[`1${id}${item.index}Yes`] ? (
-                          <CircularProgress size={12} />
+                          <CircularProgress size={12} color="inherit" />
                         ) : (
                           "Yes"
                         )}
@@ -920,7 +988,7 @@ const Admin = (props: any) => {
                         }
                       >
                         {testValue[`1${id}${item.index}No`] ? (
-                          <CircularProgress size={12} />
+                          <CircularProgress size={12} color="inherit" />
                         ) : (
                           "No"
                         )}

@@ -79,7 +79,7 @@ const ActiveProjects = (props: any) => {
           proposal={modalItem}
         />
       )}
-      <Table columns={["Active Project", "Status", "Est. Completion Date (dd/mm/yyyy)"]}>
+      <Table columns={["Active Project", "Status", "Est. Completion Date"]}>
         {value.length === 0 ? (
           <>
             {" "}

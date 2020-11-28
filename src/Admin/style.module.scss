@@ -6,7 +6,7 @@
   grid-template-columns: 5fr 5fr;
   grid-template-rows: 1fr 1fr;
   grid-gap: 30rem;
-  scrollbar-color:  #EA8604 white;
+  scrollbar-color: #ea8604 white;
   scrollbar-width: thin;
   /* width */
   ::-webkit-scrollbar {
@@ -75,6 +75,11 @@
       user-select: none;
       transition: 0.3s;
       margin-right: 10px;
+    }
+    .toggleButton:hover {
+      // width: 250rem;
+      color: white;
+      background: orange;
     }
 
     &.checked {

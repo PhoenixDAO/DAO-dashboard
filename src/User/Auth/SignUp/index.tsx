@@ -12,27 +12,6 @@ import { connect } from "react-redux";
 import { CircularProgress, Button, FormControl } from "@material-ui/core";
 import { loginWithMetaMask } from "redux/authActions";
 
-
-// const ThanksPage = () => (
-//   <Layout className={style.thanksPage}>
-//     <Title>Thank you for creating an account and joining the DAO!</Title>
-//     <div className={style.verifyText}>
-//       Please verify your email to complete registration to login.
-//     </div>
-//     <div className={style.buttons}>
-//       <Button
-//         component={Link}
-//         to={routes.root()}
-//         className={style.button}
-//         primary
-//         shadow
-//       >
-//         Log in
-//       </Button>
-//     </div>
-//   </Layout>
-// );
-
 const SignUp = (props: any) => {
   const [logIn, setLogIn] = useState("");
   const [errorMessage, setErrorMessage] = useState("");

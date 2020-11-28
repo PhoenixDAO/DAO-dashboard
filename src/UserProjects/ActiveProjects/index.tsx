@@ -6,7 +6,12 @@ import useForceUpdate from "use-force-update";
 import ViewProposalModal from "./ViewProposalModal";
 import { connect } from "react-redux";
 import Alert from "@material-ui/lab/Alert";
-import { makeStyles,withStyles, Theme, createStyles } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  withStyles,
+  Theme,
+  createStyles,
+} from "@material-ui/core/styles";
 import spinner from "../../assets/spinner-black.svg";
 import { Snackbar, Grid } from "@material-ui/core";
 import { CircularProgress } from "@material-ui/core";
@@ -29,7 +34,6 @@ type message = {
   message: undefined | string;
   severity: "error" | "success" | "warning" | "info" | undefined;
 };
-
 
 const LightTooltip = withStyles((theme: Theme) => ({
   tooltip: {
@@ -290,19 +294,19 @@ const ActiveProjects = (props: any) => {
               estimatedDays = estimatedDays + newItem.days;
             });
           })}
-{/* (
+          {/* (
            
            loading1 ? (<td>Loading...</td>) :   (<Grid     lg={12} md={12} sm={12} xs={12} justify="space-between">
            <form style= {{height: "389px "}} className={style.item}>No active projects found
            </form>
            </Grid>)
          )  */}
-         
+
           {value.length == 0 ? (
-               <Grid     lg={12} md={12} sm={12} xs={12} justify="space-between">
-               <form style= {{height: "389px "}} className={style.item}>
-            <td> {loading1 ? "Loading..." : "No active projects found"}</td>
-            </form>
+            <Grid lg={12} md={12} sm={12} xs={12} justify="space-between">
+              <form style={{ height: "389px " }} className={style.item}>
+                <td> {loading1 ? "Loading..." : "No active projects found"}</td>
+              </form>
             </Grid>
           ) : (
             value.map((item: any, i) => {
@@ -310,15 +314,16 @@ const ActiveProjects = (props: any) => {
               return (
                 <Grid lg={6} md={6} sm={12} xs={12} justify="space-between">
                   <form key={i} className={style.item}>
-                  <LightTooltip title="View proposal" placement="top-start">
-                  <div
-                      style={{ cursor: "pointer" }}
-                      onClick={(_) => viewModal(item)}
-                      className={style.title}
-                    >
-                      {name}
-                    </div></LightTooltip> 
-                    
+                    <LightTooltip title="View proposal" placement="top-start">
+                      <div
+                        style={{ cursor: "pointer" }}
+                        onClick={(_) => viewModal(item)}
+                        className={style.title}
+                      >
+                        {name}
+                      </div>
+                    </LightTooltip>
+
                     <label className={style.formControl}>
                       <div className={style.label}>Medium Update</div>
                       <input
@@ -330,40 +335,46 @@ const ActiveProjects = (props: any) => {
                         value={githubLink[i]}
                       />
                     </label>
-                    <div style={{overflowY:"scroll", height:"98px" , padding:"10px 10px 10px 0px"}}>
-
-                    {item.milestone.map((ite: any, j: any) => (
-                      <div
-                        key={j}
-                        className={cn(
-                          style.listItem,
-                          ite.status == "Completed" && style.checked
-                        )}
-                      >
-                        <div className={style.num}>
-                          {ite.status == "Completed" ? "✓" : j + 1}
-                        </div>
-                        <div className={style.name}>{ite.task}</div>
+                    <div
+                      style={{
+                        overflowY: "scroll",
+                        height: "98px",
+                        padding: "10px 10px 10px 0px",
+                      }}
+                    >
+                      {item.milestone.map((ite: any, j: any) => (
                         <div
-                          className={style.toggleButton}
-                          onClick={() =>
-                            checkStatus(ite.status, item._id, i, j)
-                          }
-                        >
-                          {testValue[`${i}${j}`] ? (
-                            <img src={spinner} />
-                          ) : ite.status == "Completed" ? (
-                            "Completed"
-                          ) : ite.status == "Pending" ? (
-                            "Pending"
-                          ) : (
-                            "Incomplete"
+                          key={j}
+                          className={cn(
+                            style.listItem,
+                            ite.status == "Completed" && style.checked
                           )}
+                        >
+                          <div className={style.num}>
+                            {ite.status == "Completed" ? "✓" : j + 1}
+                          </div>
+                          <div className={style.name}>{ite.task}</div>
+                          <div
+                            className={style.toggleButton}
+                            onClick={() =>
+                              checkStatus(ite.status, item._id, i, j)
+                            }
+                          >
+                            {testValue[`${i}${j}`] ? (
+                              // <img src={spinner} />
+                              <CircularProgress size={10} color="inherit" />
+                            ) : ite.status == "Completed" ? (
+                              "Completed"
+                            ) : ite.status == "Pending" ? (
+                              "Pending"
+                            ) : (
+                              "Incomplete"
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
                     </div>
-                    
+
                     <label className={style.formControl}>
                       <div className={style.label}>Est. Completion Date</div>
                       <input
@@ -381,8 +392,9 @@ const ActiveProjects = (props: any) => {
                         onClick={(e) => submitUpdateAPI(e, item._id, i)}
                       >
                         {submitUpdateLoader[i] ? (
-                          <img src={spinner} />
+                          <CircularProgress size={10} color="inherit" />
                         ) : (
+                          // <img src={spinner} />
                           "Submit Updates"
                         )}
                       </button>

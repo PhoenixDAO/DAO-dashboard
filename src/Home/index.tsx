@@ -114,7 +114,11 @@ const Home = (props: any) => {
   return (
     <>
       <div className={style.grid}>
-        <Card styleFlag={styleFlag} title="Latest Proposals" tooltipMessage="This shows all the proposals submitted">
+        <Card
+          styleFlag={styleFlag}
+          title="Latest Proposals"
+          tooltipMessage="This shows all the proposals submitted"
+        >
           <Table compact styleFlag="LatestProposals">
             {value.length === 0 ? (
               <>
@@ -177,7 +181,7 @@ const Home = (props: any) => {
           title="Transaction History"
           tooltipMessage="This shows all your transactions"
         >
-          <Table compact columns={["Type", "Use", "Amount", "Date (dd/mm/yyyy)"]}>
+          <Table compact columns={["Type", "Use", "Amount", "Date "]}>
             {transactions.length === 0 ? (
               <>
                 <tr>

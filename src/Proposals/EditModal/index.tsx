@@ -344,9 +344,10 @@ const EditModal = (props: any) => {
   const [valueSmaller, setValueSmaller] = useState(false);
   const [ethereumNetworkError, setEthereumNetworkError] = useState(false);
   const [milestoneDaysTotal, setMilestoneDaysTotal] = useState(0);
-
+  const [phoenixPrice, setPhoenixPrice] = useState(0);
+  const [amountInDollars, setAmountInDollars] = useState(0);
   const [deleteProposalId, setDeleteProposalId] = useState("");
-
+  const [txHashFromMetaMask, setTxHashFromMetaMask] = useState(0);
   const [openDialogueState, setOpenDialogueState] = useState(false);
 
   // const [totalMilestonesDays, setTotalMilestonesDays] = useState(0);
@@ -375,7 +376,34 @@ const EditModal = (props: any) => {
 
   const classes = useStyles();
 
-  useEffect(() => {}, []);
+  // Get PHNX pries and push into balances result
+  const phnx = {};
+  const getPHNXPrice = async () => {
+    console.log("hello");
+    const phnxResponse = await axios.get(
+      "https://min-api.cryptocompare.com/data/price?fsym=PHNX&tsyms=USD",
+      {
+        headers: {
+          authorization:
+            "fa0d2d3f3cf441a5b5b2fa9f31e6638a996d72ad938c7c5f978cf9b1dba8a656",
+        },
+      }
+    );
+    const phnxPrice: any = phnxResponse.data.USD;
+
+    setPhoenixPrice(phnxPrice);
+    console.log("----->>", phnxPrice);
+    console.log("----->>", phnxResponse);
+    console.log("qwe", Number(milestoneDetails.milestoneCost));
+  };
+  // console.log('PHNX :', phnxPrice);
+  // phnx.name = 'Phnx';
+  // phnx.usd = phnxPrice;
+  // conversionRates.push(phnx);
+
+  useEffect(() => {
+    getPHNXPrice();
+  }, []);
 
   const handleClickNext = (e: any) => {
     let {
@@ -468,6 +496,7 @@ const EditModal = (props: any) => {
   };
 
   const AddMilestone = () => {
+    setAmountInDollars(0);
     let {
       task,
       numberOfDevelopers,
@@ -544,10 +573,13 @@ const EditModal = (props: any) => {
   console.log("check state", state);
 
   const handleMilestoneBack = () => {
+    console.log("Back Button Click", state.milestone);
     if (state.milestone.length != 0) {
+      console.log("if");
       setJ(3);
     } else {
-      setJ(2);
+      console.log("else", j);
+      setJ(1);
     }
   };
 
@@ -589,6 +621,9 @@ const EditModal = (props: any) => {
       })
       .then(async (receipt: any) => {
         console.log("recepet", receipt);
+        console.log("recept hash", receipt.transactionHash);
+        setTxHashFromMetaMask(receipt.transactionHash);
+        props.getTxHashFromMetaMask(receipt);
         let body = {
           TxHash: receipt.transactionHash,
           type: "Proposal",
@@ -770,7 +805,23 @@ const EditModal = (props: any) => {
   };
 
   const _onChange = (value: any, name: any) => {
-    console.log("check now", value);
+    // console.log("check now", value);
+    // const checkHttp = value.substring(7);
+    // console.log("Check Http", checkHttp);
+    const slicedHttp = value.slice(0, 4);
+    console.log("check Http", slicedHttp);
+    if (slicedHttp == "http") {
+      console.log("Slice the value");
+      const checkHttp = value.substring(6);
+      console.log("Http", checkHttp);
+      setState({ ...state, ["githubLink"]: checkHttp });
+    }
+    if (slicedHttp == "https") {
+      console.log("Slice the value");
+      const checkHttp = value.substring(7);
+      console.log("Http", checkHttp);
+      setState({ ...state, ["githubLink"]: checkHttp });
+    }
     if (
       name == "experiencedYear" ||
       name == "duration" ||
@@ -806,7 +857,6 @@ const EditModal = (props: any) => {
   };
 
   const _onChangeMilestoneValue = (value: any, name: any) => {
-    console.log("check value now", value);
     if (
       name == "milestoneCost" ||
       name == "estimatedDays" ||
@@ -828,6 +878,11 @@ const EditModal = (props: any) => {
     }
     console.log("setting value");
     setMilestoneDetails({ ...milestoneDetails, [name]: value });
+    if (name == "milestoneCost") {
+      let tempValue: any = (value * phoenixPrice).toFixed(4);
+      console.log(tempValue);
+      setAmountInDollars(tempValue);
+    }
   };
 
   const OnAddMilestone = () => {
@@ -1518,7 +1573,7 @@ const EditModal = (props: any) => {
                 (fieldRequired && milestoneDetails.milestoneCost.length == 0) ||
                 (valueSmaller && milestoneDetails.milestoneCost == "0")
                   ? false
-                  : "Milestone cost in PHNX"
+                  : `Cost in PHNX ${amountInDollars}$`
               }
               value={milestoneDetails.milestoneCost}
               onChange={(e) =>
@@ -1529,7 +1584,7 @@ const EditModal = (props: any) => {
               helperText={
                 milestoneDetails.description.length == 0 && fieldRequired
                   ? `Description is required.`
-                  : "Maximum up to 300 characters."
+                  : null
               }
             />
           </LightTooltip>
@@ -1565,10 +1620,15 @@ const EditModal = (props: any) => {
                   _onChangeMilestoneValue(e.target.value, "description")
                 }
                 id="outlined-error-helper-text"
+                // helperText={
+                //   milestoneDetails.description.length == 0 &&
+                //   fieldRequired &&
+                //   `Description is required.`
+                // }
                 helperText={
-                  milestoneDetails.description.length == 0 &&
-                  fieldRequired &&
-                  `Description is required.`
+                  milestoneDetails.description.length == 0 && fieldRequired
+                    ? `Description is required.`
+                    : "Maximum up to 300 characters."
                 }
                 className={classes.submitText}
                 variant="outlined"
@@ -1583,10 +1643,10 @@ const EditModal = (props: any) => {
   const projectMilestones = () => {
     return (
       <>
-        <div onClick={OnAddMilestone} className={classes.milestone}>
-          <AddIcon className={classes.icon} />
-          <p className={classes.txt}>Add Milestones</p>
-        </div>
+        {/* <div onClick={OnAddMilestone} className={classes.milestone}>
+            <AddIcon className={classes.icon} />
+            <p className={classes.txt}>Add Milestones</p>
+          </div> */}
         {state.milestone.length != 0 &&
           state.milestone.map((item: any, index) => {
             return (
@@ -1711,20 +1771,27 @@ const EditModal = (props: any) => {
                           Next
                         </Button>
                       ) : (
-                        <Button
-                          primary
-                          // disabled={showLoader}
-                          onClick={
-                            (e: any) => (!showLoader ? openDialogue(e) : null)
-                            // handleSubmit()
-                          }
-                        >
-                          {showLoader ? (
-                            <CircularProgress size={12} />
-                          ) : (
-                            <p>Submit</p>
-                          )}
-                        </Button>
+                        <div>
+                          <Button onClick={OnAddMilestone} secondary>
+                            Add Milestone
+                          </Button>
+
+                          <Button
+                            primary
+                            style={{ marginTop: "10px" }}
+                            // disabled={showLoader}
+                            onClick={
+                              (e: any) => (!showLoader ? openDialogue(e) : null)
+                              // handleSubmit()
+                            }
+                          >
+                            {showLoader ? (
+                              <CircularProgress size={12} color="inherit" />
+                            ) : (
+                              <p>Submit</p>
+                            )}
+                          </Button>
+                        </div>
                       )}
                       <Button
                         disabled={disableInputs}
