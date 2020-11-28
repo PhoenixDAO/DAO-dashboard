@@ -346,7 +346,7 @@ const EditModal = (props: any) => {
   const [phoenixPrice, setPhoenixPrice] = useState(0);
   const [amountInDollars, setAmountInDollars] = useState(0);
   const [deleteProposalId, setDeleteProposalId] = useState("");
-
+  const [txHashFromMetaMask, setTxHashFromMetaMask] = useState(0);
   const [openDialogueState, setOpenDialogueState] = useState(false);
 
   // const [totalMilestonesDays, setTotalMilestonesDays] = useState(0);
@@ -569,10 +569,13 @@ const EditModal = (props: any) => {
   console.log("check state", state);
 
   const handleMilestoneBack = () => {
+    console.log("Back Button Click", state.milestone);
     if (state.milestone.length != 0) {
+      console.log("if");
       setJ(3);
     } else {
-      setJ(2);
+      console.log("else", j);
+      setJ(1);
     }
   };
 
@@ -614,6 +617,9 @@ const EditModal = (props: any) => {
       })
       .then(async (receipt: any) => {
         console.log("recepet", receipt);
+        console.log("recept hash", receipt.transactionHash);
+        setTxHashFromMetaMask(receipt.transactionHash);
+        props.getTxHashFromMetaMask(receipt);
         let body = {
           TxHash: receipt.transactionHash,
           type: "Proposal",
@@ -795,7 +801,23 @@ const EditModal = (props: any) => {
   };
 
   const _onChange = (value: any, name: any) => {
-    console.log("check now", value);
+    // console.log("check now", value);
+    // const checkHttp = value.substring(7);
+    // console.log("Check Http", checkHttp);
+    const slicedHttp = value.slice(0, 4);
+    console.log("check Http", slicedHttp);
+    if (slicedHttp == "http") {
+      console.log("Slice the value");
+      const checkHttp = value.substring(6);
+      console.log("Http", checkHttp);
+      setState({ ...state, ["githubLink"]: checkHttp });
+    }
+    if (slicedHttp == "https") {
+      console.log("Slice the value");
+      const checkHttp = value.substring(7);
+      console.log("Http", checkHttp);
+      setState({ ...state, ["githubLink"]: checkHttp });
+    }
     if (
       name == "experiencedYear" ||
       name == "duration" ||
@@ -1554,7 +1576,7 @@ const EditModal = (props: any) => {
               helperText={
                 milestoneDetails.description.length == 0 && fieldRequired
                   ? `Description is required.`
-                  : "Maximum up to 300 characters."
+                  : null
               }
             />
           </LightTooltip>
@@ -1590,10 +1612,15 @@ const EditModal = (props: any) => {
                   _onChangeMilestoneValue(e.target.value, "description")
                 }
                 id="outlined-error-helper-text"
+                // helperText={
+                //   milestoneDetails.description.length == 0 &&
+                //   fieldRequired &&
+                //   `Description is required.`
+                // }
                 helperText={
-                  milestoneDetails.description.length == 0 &&
-                  fieldRequired &&
-                  `Description is required.`
+                  milestoneDetails.description.length == 0 && fieldRequired
+                    ? `Description is required.`
+                    : "Maximum up to 300 characters."
                 }
                 className={classes.submitText}
                 variant="outlined"

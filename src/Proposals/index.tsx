@@ -831,6 +831,7 @@ const Proposals = (props: any) => {
   const [checkingLoading, setCheckingLoading] = useState(true);
   const [openDialogueState, setOpenDialogueState] = useState(false);
   const [approvalDialogue, setApprovalDialogue] = useState(false);
+  const [metaMaskTxHash, setMetaMaskTxHash] = useState("");
 
   const [projectModalItem, setProjectModalItem] = React.useState<
     | {
@@ -1097,6 +1098,11 @@ const Proposals = (props: any) => {
     setApprovalDialogue(true);
   };
 
+  const getTxHashFromMetaMask = (txHashMM: any) => {
+    console.log("MetaMask Hash --->", txHashMM);
+    setMetaMaskTxHash(txHashMM.transactionHash);
+  };
+
   const classes = useStyles();
   let test = true;
   return (
@@ -1122,6 +1128,28 @@ const Proposals = (props: any) => {
             Your proposal is successfully submitted. The proposal will not be
             visible until approved by admin. The collateral amount of 10 PHNX
             will be deducted when the Admin approves the proposal.
+            {/* <h4>Transaction Hash</h4>
+            {metaMaskTxHash} */}
+            <br /> <br />
+            <p
+              style={{
+                fontWeight: "bold",
+                fontSize: "15px",
+              }}
+            >
+              Transaction Hash
+            </p>
+            {metaMaskTxHash}
+            <br /> <br />
+            <a
+              href={`https://rinkeby.etherscan.io/tx/${metaMaskTxHash}`}
+              target="_blank"
+              // type="link"
+              style={{ textDecoration: "underline", color: "#0056b3" }}
+            >
+              View transaction on Etherscan
+            </a>
+            {/* https://rinkeby.etherscan.io/tx/{metaMaskTxHash} */}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -1162,6 +1190,7 @@ const Proposals = (props: any) => {
           close={closeModal}
           openDialogue={openDialogue}
           openSnackbar={openSnackbar}
+          getTxHashFromMetaMask={getTxHashFromMetaMask}
         />
       )}
       {projectModalItem && (

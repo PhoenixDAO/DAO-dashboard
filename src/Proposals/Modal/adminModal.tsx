@@ -279,6 +279,7 @@ const ProposalModal = (props: any) => {
             );
             props.openSnackbar("Proposal successfully accepted !", "success");
           } else {
+            console.log("Testing", props);
             await blockChainFunction(props._id, 5, temp.address);
             if (metaMaskRejectError == false) {
               const get = await axios.put(
@@ -287,6 +288,8 @@ const ProposalModal = (props: any) => {
                   status: status,
                   reasonForRejecting: proposalRejectionReason,
                   email: props.email,
+                  proposalName: props.title,
+                  createdAt: props.createdAt,
                 },
                 {
                   headers: {
@@ -311,7 +314,7 @@ const ProposalModal = (props: any) => {
         console.log("error");
         props.openSnackbar("Network must be Rinkeby", "error");
       } else {
-        props.openSnackbar("Ops! Something went wrong", "error");
+        props.openSnackbar("Oops! Something went wrong", "error");
         // props.openSnackbar("Request failed", "error");
         console.log("Error", err);
         setMyLoading1(false);
