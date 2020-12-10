@@ -172,9 +172,20 @@ const ProposalModal = (props: any) => {
             {console.log("MetaMask address", props.proposalUserNumioAddress)}
             {console.log("Admin address", props.user.numioAddress)}
             <div className={style.modalBrief}>
-              <div style={{ textAlign: "center", alignItems: "center" }}>
+              <div
+                style={{
+                  textAlign: "center",
+                  alignItems: "center",
+                  // marginLeft: props.votingDate == undefined ? "20%" : "",
+                }}
+              >
                 <div>
-                  <span style={{ fontSize: "14px", color: "#EA8604" }}>
+                  <span
+                    style={{
+                      fontSize: "14px",
+                      color: "#EA8604",
+                    }}
+                  >
                     Budget
                   </span>
                 </div>
@@ -192,21 +203,24 @@ const ProposalModal = (props: any) => {
                   <span>{props.milestones.length}</span>
                 </div>
               </div>
-              <div
-                style={{
-                  width: "80px",
-                  textAlign: "center",
-                  alignItems: "center",
-                }}
-              >
-                <div>
-                  <span style={{ fontSize: "14px", color: "#EA8604" }}>
-                    Voting Date
-                  </span>
+
+              {props.votingDate == undefined ? null : (
+                <div
+                  style={{
+                    width: "80px",
+                    textAlign: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <div>
+                    <span style={{ fontSize: "14px", color: "#EA8604" }}>
+                      Voting Date
+                    </span>
+                  </div>
+                  <span>(dd/mm/yyyy)</span>
+                  <div>{changeFormat(props.votingDate)}</div>
                 </div>
-                {/* <span>(dd/mm/yyyy)</span> */}
-                <div>{changeFormat(props.votingDate)}</div>
-              </div>
+              )}
             </div>
             <form className={classes.description} noValidate autoComplete="off">
               <TextField

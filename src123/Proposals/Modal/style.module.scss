@@ -1,0 +1,128 @@
+@import "variables.scss";
+.modal {
+ min-width: 700rem;
+ width: 400px;
+
+}
+.modalContent {
+ margin: 48rem 0 25rem;
+ width:420px;
+}
+
+.modalBrief {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  line-height: 26rem;
+  // font-weight: bold;
+  color: #434343;
+  margin-bottom: 18rem;
+  font-weight: 500;
+}
+
+.modalText {
+  color: $dark-gray;
+  font-size: 18rem;
+  line-height: 27rem;
+  max-width: 410px;
+  max-height: 38px;
+  padding:3px;
+  margin-bottom: 5px;
+  overflow-y: auto;
+}
+.modalStep {
+  display: flex;
+  align-items: center;
+
+  & + .modalStep {
+    margin-top: 29rem;
+  }
+}
+
+.modalStepNumber {
+  width: 30px;
+  height: 30px;
+  border: 7px solid #d9ddf7;
+  border-radius: 50%;
+  background: #172dce;
+  font-size:  10px;
+  color: white;
+  line-height: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 9px;
+  vertical-align: middle;
+}
+// .heading{
+//   font-size: 15px;
+// }
+.modalStepText {
+  color: #434343;
+  font-size: 18rem;
+  line-height: 22rem;
+}
+.milestoneHead{
+  font-size: 19px;
+  margin-left: 7px;
+  color: black;
+  margin-bottom: 11px;
+}
+.button {
+  margin-bottom: 15px;
+}
+
+@media screen and (max-width:600px)
+{ .modalContent{
+    max-width: 220px;
+ 
+  }
+  .modalBrief{
+    font-size: 13px;
+ 
+  }
+}
+@media screen and (max-width:598px)
+{
+.modal{
+  max-width: 288px;
+}
+.modalContent{
+  font-size: 10px;
+}
+
+}
+
+.stakeModalContent {
+  margin: 86rem 0 77rem;
+}
+
+.stakeModalInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 83rem;
+}
+
+
+// .description { 
+//      & .MuiTextField-root {
+//       margin: 10px;
+//       width: 220px;
+//     }
+//    &.MuiInputBase-root{
+// width:420px;
+//     }
+//     .MuiInputBase-input {
+//       padding: 0px;
+//       color:blue;
+//     }
+//     .MuiOutlinedInput-inputMultiline{
+//       padding:0px;
+//     }
+// }
+// .descriptionDiv{
+//   @media screen and (max-width:320px){
+//     width: 220px;
+
+//   }
+// }

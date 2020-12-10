@@ -15,13 +15,11 @@ html,
 body,
 #root {
   height: 100%;
-  scrollbar-color:  #EA8604 white;
+  scrollbar-color: #ea8604 white;
   scrollbar-width: thin;
-
 }
 
 html {
-   
   font-size: 1px;
   font-family: ProximaNova, sans-serif;
 }
@@ -31,7 +29,6 @@ html {
     font-size: 0.8px;
   }
 }
-
 
 @media screen and (max-device-width: 1400px) {
   html {
@@ -51,7 +48,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: #f8f8fb;
   color: #838383;
-  font-size: 16rem;
+  font-size: 18rem;
 }
 
 * {

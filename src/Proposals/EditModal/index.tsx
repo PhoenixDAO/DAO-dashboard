@@ -17,7 +17,7 @@ import DeleteOutline from "@material-ui/icons/DeleteOutline";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import Tooltip from "@material-ui/core/Tooltip";
 import { withStyles, Theme } from "@material-ui/core/styles";
-import InputAdornment from '@material-ui/core/InputAdornment';
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 import { ethereumNetwork } from "../../const";
 
@@ -406,6 +406,27 @@ const EditModal = (props: any) => {
   }, []);
 
   const handleClickNext = (e: any) => {
+    let http: any = state.githubLink.split("http://");
+    let https: any = state.githubLink.split("https://");
+    console.log("http", http, http.length);
+    console.log("https", https, https.length);
+    let link = "";
+    if (http.length == 2) {
+      link = http[1];
+      console.log("match1", http[1], link);
+    } else {
+      link = https[1];
+      console.log("match2", https[1], link);
+    }
+    console.log("check slack now", link);
+    // setState({ ...state, ["githubLink"]: stat });
+    // if (slicedHttps == "https://") {
+    //   console.log("Slice the githubLink hhtps");
+    //   const checkHttp = githubLink.substring(9);
+    //   console.log("Http", checkHttp);
+    //   setState({ ...state, ["githubLink"]: checkHttp });
+    // }
+
     let {
       firstName,
       lastName,
@@ -435,9 +456,15 @@ const EditModal = (props: any) => {
       // let checkLink: any = githubLink.match(
       //   /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
       // );
-      let checkLink=githubLink.split("github.com/").length>1 && githubLink.split("github.com/")[0]==="";
+      if (link == undefined) {
+        link = state.githubLink;
+      }
+      let checkLink =
+        link.split("github.com/").length > 1 &&
+        link.split("github.com/")[0] === "";
+      console.log("Link check", checkLink);
       // console.log("githubLink.split(github.com/)",githubLink.split("github.com/"),checkLink)
-      // let checkLink = temp.length>1 && temp[0]=="";  
+      // let checkLink = temp.length>1 && temp[0]=="";
       // let checkLink: any = githubLink.match(
       //   /github.com\/([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
       // );
@@ -557,7 +584,7 @@ const EditModal = (props: any) => {
       ["duration"]: totalMilestonesDays,
     });
 
-    console.log("check state", state);
+    //console.log("check state", state);
 
     setMilestoneDaysTotal(totalMilestonesDays);
     setMilestoneDetails({
@@ -808,20 +835,21 @@ const EditModal = (props: any) => {
     // console.log("check now", value);
     // const checkHttp = value.substring(7);
     // console.log("Check Http", checkHttp);
-    const slicedHttp = value.slice(0, 4);
-    console.log("check Http", slicedHttp);
-    if (slicedHttp == "http") {
-      console.log("Slice the value");
-      const checkHttp = value.substring(6);
-      console.log("Http", checkHttp);
-      setState({ ...state, ["githubLink"]: checkHttp });
-    }
-    if (slicedHttp == "https") {
-      console.log("Slice the value");
-      const checkHttp = value.substring(7);
-      console.log("Http", checkHttp);
-      setState({ ...state, ["githubLink"]: checkHttp });
-    }
+    // console.log("name", name);
+    // const slicedHttp = value.slice(0, 4);
+    // // console.log("check Http", slicedHttp);
+    // if (slicedHttp == "http") {
+    //   console.log("Slice the value http");
+    //   const checkHttp = value.substring(7);
+    //   console.log("Http", checkHttp);
+    //   setState({ ...state, ["githubLink"]: checkHttp });
+    // }
+    // if (slicedHttp == "https") {
+    //   console.log("Slice the value hhtps");
+    //   const checkHttp = value.substring(9);
+    //   console.log("Http", checkHttp);
+    //   setState({ ...state, ["githubLink"]: checkHttp });
+    // }
     if (
       name == "experiencedYear" ||
       name == "duration" ||
@@ -1079,11 +1107,7 @@ const EditModal = (props: any) => {
             className={classes.margin}
             variant="outlined"
           >
-            <LightTooltip
-              title="github.com/"
-              placement="bottom"
-              arrow
-            >
+            <LightTooltip title="github.com/" placement="bottom" arrow>
               <TextField
                 error={
                   (state.githubLink.length == 0 && fieldRequired) ||
@@ -1252,7 +1276,7 @@ const EditModal = (props: any) => {
                 (fieldRequired && state.experiencedYear.length == 0) ||
                 (valueSmaller && state.experiencedYear == "0")
                   ? false
-                  : "Experience"
+                  : "Experience in years"
               }
               onChange={(e) => _onChange(e.target.value, "experiencedYear")}
               className={classes.firstfields}

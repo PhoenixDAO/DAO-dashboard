@@ -29,8 +29,6 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-
-
 const useStyles = makeStyles((theme) =>
   createStyles({
     text: {
@@ -198,7 +196,7 @@ const useStyles = makeStyles((theme) =>
     firstfields: {
       "& .MuiInputBase-root": {
         fontSize: "12px",
-       width:"auto",
+        width: "auto",
       },
       "& .MuiFormLabel-root": {
         fontSize: "12px",
@@ -207,31 +205,25 @@ const useStyles = makeStyles((theme) =>
         fontSize: "10px",
       },
 
-      [theme.breakpoints.down("xl")]:
-      {
+      [theme.breakpoints.down("xl")]: {
         width: "191px",
       },
 
-      [theme.breakpoints.up("lg")]:
-      {
+      [theme.breakpoints.up("lg")]: {
         width: "190px",
       },
-      [theme.breakpoints.down("lg")]:
-      {
-        width: "192px",       
+      [theme.breakpoints.down("lg")]: {
+        width: "192px",
       },
-      [theme.breakpoints.down("md")]:
-      {
+      [theme.breakpoints.down("md")]: {
         width: "191px",
       },
-       [theme.breakpoints.down("xs")]:
-      {
+      [theme.breakpoints.down("xs")]: {
         width: "190px",
       },
-      [theme.breakpoints.up("xs")]:
-      {
+      [theme.breakpoints.up("xs")]: {
         width: "160px",
-      }
+      },
     },
   })
 );
@@ -421,7 +413,7 @@ const EditModal = (props: any) => {
             label="First Name"
             contentEditable={false}
             className={classes.firstfields}
-            style={{ marginRight:"5px"}}
+            style={{ marginRight: "5px" }}
             id="outlined-error-helper-text"
             value={state.firstName}
             variant="outlined"
@@ -464,7 +456,7 @@ const EditModal = (props: any) => {
             label="Title"
             error={state.name.length == 0 && fieldRequired}
             className={classes.firstfields}
-            style={{ marginRight:"5px"}}
+            style={{ marginRight: "5px" }}
             value={state.name}
             helperText={
               state.name.length == 0 && fieldRequired
@@ -480,7 +472,6 @@ const EditModal = (props: any) => {
             error={state.country.length == 0 && fieldRequired}
             label="Country"
             value={state.country}
-          
             id="outlined-error-helper-text"
             helperText={
               state.country.length == 0 && fieldRequired
@@ -681,12 +672,14 @@ const EditModal = (props: any) => {
             label={
               fieldRequired && state.experiencedYear.length == 0
                 ? false
-                : "Experience"
+                : "Experience in years"
             }
             type="number"
             id="outlined-error-helper-text"
-            className={classes.firstfields}
-            style={{ marginRight:"5px"}}
+            //  className={classes.firstfields}
+            className={classes.submitText}
+            // style={{ marginRight: "5px" }}
+            style={{ width: "100%" }}
             value={state.experiencedYear}
             variant="outlined"
             helperText={
@@ -698,11 +691,11 @@ const EditModal = (props: any) => {
               readOnly: true,
             }}
           />
-          <TextField
+          {/* <TextField
             error={state.budget.length == 0 && fieldRequired}
             label={fieldRequired && state.budget.length == 0 ? false : "Budget"}
             className={classes.firstfields}
-            style={{ marginRight:"5px"}}
+            style={{ marginRight: "5px" }}
             type="number"
             id="outlined-error-helper-text"
             value={state.budget}
@@ -715,7 +708,7 @@ const EditModal = (props: any) => {
             InputProps={{
               readOnly: true,
             }}
-          />
+          /> */}
         </div>
         <div
           style={{
@@ -991,53 +984,55 @@ const EditModal = (props: any) => {
   const projectMilestones = () => {
     return (
       <>
-        <div style={{overflowY:"auto", height:"264px" , marginBottom:"5px"}}>
-        {state.milestone.length != 0 &&
-          state.milestone.map((item: any, index: number) => {
-            return (
-              <div className={classes.root1}>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <div className={classes.heading}>
-                    <div className={classes.txt1}>{item.task}</div>
-                    <div>
-                      <div className={classes.txt2}>
-                        {item.estimatedDays} (days)
+        <div
+          style={{ overflowY: "auto", height: "264px", marginBottom: "5px" }}
+        >
+          {state.milestone.length != 0 &&
+            state.milestone.map((item: any, index: number) => {
+              return (
+                <div className={classes.root1}>
+                  <Accordion>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                    >
+                      <div className={classes.heading}>
+                        <div className={classes.txt1}>{item.task}</div>
+                        <div>
+                          <div className={classes.txt2}>
+                            {item.estimatedDays} (days)
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography className={classes.descriptionTxt}>
-                    {item.description}
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-            </div>
-              // <div className={classes.cardGap}>
-              //   <Card className={classes.card}>
-              //     <div className={classes.flexRow}>
-              //       <Typography className={classes.txt1}>
-              //         {item.task}
-              //       </Typography>
-              //       <Typography className={classes.txt1}>
-              //         {item.estimatedDays} (days)
-              //       </Typography>
-              //     </div>
-              //     <div className={classes.flexRow}>
-              //       <Typography className={classes.descriptionTxt}>
-              //         {item.description}
-              //       </Typography>
-              //     </div>
-              //   </Card>
-              // </div>
-            );
-          })}
-          </div>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography className={classes.descriptionTxt}>
+                        {item.description}
+                      </Typography>
+                    </AccordionDetails>
+                  </Accordion>
+                </div>
+                // <div className={classes.cardGap}>
+                //   <Card className={classes.card}>
+                //     <div className={classes.flexRow}>
+                //       <Typography className={classes.txt1}>
+                //         {item.task}
+                //       </Typography>
+                //       <Typography className={classes.txt1}>
+                //         {item.estimatedDays} (days)
+                //       </Typography>
+                //     </div>
+                //     <div className={classes.flexRow}>
+                //       <Typography className={classes.descriptionTxt}>
+                //         {item.description}
+                //       </Typography>
+                //     </div>
+                //   </Card>
+                // </div>
+              );
+            })}
+        </div>
       </>
     );
   };

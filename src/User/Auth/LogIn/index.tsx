@@ -23,6 +23,9 @@ import Login_with from "assets/images/Login_with.svg";
 import LoginImage from "assets/images/Group 230.svg";
 import welcomeBackImage from "assets/images/Welcome Back.svg";
 import { checkWeb3BeforeLogin } from "redux/layoutActions";
+import TextField from "@material-ui/core/TextField";
+import Checkbox from "@material-ui/core/Checkbox";
+import Logo from "../../../assets/images/logo.png";
 
 type message = {
   message: undefined | string;
@@ -72,6 +75,62 @@ const useStyles = makeStyles((theme: Theme) =>
         alignItem: "center",
       },
     },
+    dialogueButton: {
+      border: "1px solid",
+      cursor: "pointer",
+      height: "42px",
+      display: "flex",
+      padding: "0 20rem",
+      position: "relative",
+      fontSize: "12px",
+      transition: "0.2s",
+      alignItems: "center",
+      // fontWeight: "bold",
+      // fontFamily: "Product Sans",
+      // fontStyle: "normal",
+      // fontWeight: "bold",
+      userWelect: "none",
+      borderRadius: "14rem",
+      justifyContent: "center",
+      minWidth: "100px",
+      backgroundColor: "#4C42FF",
+      color: "white",
+      width: "100%",
+      marginTop: "20px",
+      marginBottom: "30px",
+    },
+    firstfields: {
+      "& .MuiInputBase-root": {
+        fontSize: "12px",
+        width: "auto",
+      },
+      "& .MuiFormLabel-root": {
+        fontSize: "12px",
+      },
+      "& .MuiFormHelperText-root": {
+        fontSize: "10px",
+      },
+
+      [theme.breakpoints.down("xl")]: {
+        width: "275px",
+      },
+
+      [theme.breakpoints.up("lg")]: {
+        width: "274px",
+      },
+      [theme.breakpoints.down("lg")]: {
+        width: "223px",
+      },
+      [theme.breakpoints.down("md")]: {
+        width: "167px",
+      },
+      [theme.breakpoints.down("xs")]: {
+        width: "165px",
+      },
+      [theme.breakpoints.up("xs")]: {
+        width: "160px",
+      },
+    },
     image: {
       width: "100%",
       height: "100%",
@@ -81,6 +140,18 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "block",
       maxWidth: "100%",
       maxHeight: "100%",
+    },
+    testing: {
+      height: "100%",
+      width: "100%",
+    },
+    main: {
+      height: "100%",
+      backgroundColor: "white",
+      display: "flex",
+      flexDirection: "column",
+      // justifyContent: "center",
+      alignItems: "center",
     },
     // numioLogo: {
     //   width: "127px",
@@ -226,6 +297,7 @@ const Login = (props: any) => {
       openSnackbar(e.message, "error");
     }
   };
+
   return logIn === "user" ? (
     <Redirect to="/" />
   ) : logIn === "admin" ? (
@@ -263,9 +335,25 @@ const Login = (props: any) => {
           {errorMessage.message}
         </Alert>
       </Snackbar>
-      <Layout className={style.layout}>
-        {/* <Title>Welcome Back</Title>
+
+      {/* <Layout
+        className={style.layout}
+        //  className={classes.testing}
+      > */}
+      {/* <Title>Welcome Back</Title>
         <h2 style={{ fontSize: "25px", color: "black" }}>Welcome Back</h2> */}
+      <div
+        // style={style.main}
+        //className={style.main}
+        style={{
+          height: "100%",
+          backgroundColor: "white",
+          display: "flex",
+          flexDirection: "column",
+          // justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Grid container>
           <Grid
             item
@@ -275,11 +363,123 @@ const Login = (props: any) => {
             lg={6}
             style={{
               display: "flex",
-              flexDirection: "row",
+              flexDirection: "column",
               justifyContent: "center",
+              background: "white",
+              //height: "100%",
+              //  textAlign: "center",
             }}
           >
-            <img src={LoginImage} className={style.loginImage} />
+            <div style={{ marginLeft: "10%", marginRight: "10%" }}>
+              <div style={{ flexDirection: "column" }}>
+                <div style={{ marginBottom: "30px" }}>
+                  <img
+                    src={Logo}
+                    style={{ height: "35px", marginTop: "30px" }}
+                  />
+                </div>
+                <div style={{ marginBottom: "20px" }}>
+                  <p
+                    style={{
+                      fontSize: "30px",
+                      color: "black",
+                    }}
+                  >
+                    Sign up.
+                  </p>
+                </div>
+              </div>
+              <p
+                style={{
+                  fontSize: "15px",
+                  width: "auto",
+                }}
+              >
+                Register an account with Phoenix Dao and join
+              </p>
+              <h3
+                style={{
+                  fontSize: "15px",
+                  width: "auto",
+                  marginBottom: "40px",
+                }}
+              >
+                thousands of voters in the ecosystem.
+              </h3>
+              <TextField
+                label="First Name"
+                variant="outlined"
+                id="outlined-error-helper-text"
+                className={classes.firstfields}
+                style={{ marginBottom: "30px", width: "100%" }}
+              />
+              <br />
+              <TextField
+                label="Last Name"
+                variant="outlined"
+                id="outlined-error-helper-text"
+                className={classes.firstfields}
+                style={{ marginBottom: "30px", width: "100%" }}
+              />
+              <br />
+
+              <TextField
+                label="Email"
+                variant="outlined"
+                id="outlined-error-helper-text"
+                className={classes.firstfields}
+                style={{ marginBottom: "20px", width: "100%" }}
+              />
+
+              <div style={{ display: "flex" }}>
+                <div style={{ flexDirection: "column", marginTop: "2px" }}>
+                  <input type="checkbox" name="checkbox" />
+                </div>
+                <div style={{ flexDirection: "column", marginLeft: "8px" }}>
+                  <label>
+                    By creating an account, you agree to the{" "}
+                    <span
+                      style={{ color: "#4C42FF", textDecoration: "underline" }}
+                    >
+                      {" "}
+                      privacy policy{" "}
+                    </span>{" "}
+                    and our{" "}
+                    <span
+                      style={{ color: "#4C42FF", textDecoration: "underline" }}
+                    >
+                      terms of use{" "}
+                    </span>
+                  </label>{" "}
+                </div>
+              </div>
+              {/* <Checkbox
+              // name="Hello"
+              // value="checkedA"
+              color="secondary"
+              checked={true}
+              size="medium"
+              // inputProps={{
+              //   "aria-label":
+              //     "Checkbox A and this asojs askndoas sjlksmd oajdom",
+              // }}
+              // style={{
+              //   fontSize: "20px",
+              //   color: "blue",
+              //   width: "10px",
+              //   borderRadius: "red",
+              // }}
+            /> */}
+              <Button className={classes.dialogueButton}>Create account</Button>
+              <div style={{ marginBottom: "50px", textAlign: "center" }}>
+                <p style={{ fontSize: "12px" }}>
+                  Already have an account?{" "}
+                  <span style={{ fontWeight: "bold", color: "#4C42FF" }}>
+                    Log in
+                  </span>
+                </p>
+              </div>
+            </div>
           </Grid>
           <Grid
             item
@@ -290,8 +490,10 @@ const Login = (props: any) => {
             style={{
               display: " flex",
               flexDirection: "column",
-              justifyContent: "center",
+              //justifyContent: "center",
               alignItems: "center",
+              backgroundColor: "#4C42FF",
+              borderRadius: "15px 0px 0px 15px",
             }}
           >
             <div
@@ -302,21 +504,39 @@ const Login = (props: any) => {
                 alignItems: "center",
               }}
             >
-              <img src={welcomeBackImage} className={style.welcomeImage} />
-              <h4
+              {/* <img src={welcomeBackImage} className={style.welcomeImage} /> */}
+
+              <img
+                src={Logo}
+                style={{ height: "120px", width: "300px", marginTop: "160px" }}
+              />
+              <p
                 style={{
-                  fontSize: "16px",
-                  color: " black",
+                  fontSize: "12px",
+                  color: " white",
+                  marginTop: "50px",
+                  //  fontWeight: 100,
                   // marginTop: "6%",
                   // display: "flex",
                   // flexDirection: "row",
                   // justifyContent: "center",
                 }}
               >
-                Login with
-              </h4>
+                Community owns the vote!
+              </p>
+              <p
+                style={{
+                  color: "white",
+                  textAlign: "center",
+                  marginTop: "25px",
+                  fontSize: "15px",
+                }}
+              >
+                Be a part of the PhoenixDAO projects by voting with <br />{" "}
+                thousands of passionate communities
+              </p>
               <div className={style.buttons}>
-                <MuiButton
+                {/* <MuiButton
                   className={classes.root}
                   onClick={(e) => {
                     loginWithMetaMask(e);
@@ -335,8 +555,8 @@ const Login = (props: any) => {
                   ) : (
                     "MetaMask"
                   )}
-                </MuiButton>
-                <Button
+                </MuiButton> */}
+                {/* <Button
                   component={Link}
                   disable={disable}
                   to={routes.auth.logInWithNumio()}
@@ -354,7 +574,7 @@ const Login = (props: any) => {
                   }}
                 >
                   Numio
-                </Button>
+                </Button> */}
               </div>
             </div>
           </Grid>
@@ -366,7 +586,8 @@ const Login = (props: any) => {
           <QRCode value={values.qrURL} />
         </div> */}
         </Grid>
-      </Layout>
+      </div>
+      {/* </Layout> */}
     </>
   );
 };

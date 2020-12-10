@@ -1,0 +1,114 @@
+@import "variables.scss";
+
+.grid {
+  display: grid;
+  min-height: 100%;
+  grid-template-columns: 5fr 5fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 30rem;
+  scrollbar-color: #ea8604 white;
+  scrollbar-width: thin;
+  /* width */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-track {
+    //box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+    background: white;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #999999;
+    border-radius: 8px;
+    background: #ea8604;
+  }
+
+  /* Handle on hover */
+  // ::-webkit-scrollbar-thumb:hover {
+  //   background: #555;
+  // }
+
+  .listItem {
+    display: flex;
+    align-items: center;
+
+    .num {
+      height: 32rem;
+      width: 32rem;
+      line-height: 20rem;
+      color: white;
+      background: #434343;
+      border: 7rem solid #e0e0e0;
+      font-size: 12rem;
+      font-weight: bold;
+      border-radius: 50%;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .name {
+      font-size: 16rem;
+      color: #434343;
+      flex-grow: 1;
+      margin-left: 24rem;
+    }
+
+    .toggleButton {
+      width: 150rem;
+      height: 32rem;
+      line-height: 34rem;
+      text-align: center;
+      font-weight: bold;
+      font-size: 16rem;
+      border-radius: 5rem;
+      color: #bdc4d0;
+      background: #f4f6f7;
+      cursor: pointer;
+      user-select: none;
+      transition: 0.3s;
+      margin-right: 10px;
+    }
+    .toggleButton:hover {
+      // width: 250rem;
+      color: white;
+      background: orange;
+    }
+
+    &.checked {
+      .num {
+        background: #172dce;
+        border-color: #d9ddf7;
+      }
+
+      .toggleButton {
+        color: #172dce;
+        background: #dbdff7;
+      }
+    }
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1000px) {
+  .grid {
+    margin-left: -33px;
+    margin-right: 26px;
+  }
+
+  @media (min-width: 1000px) {
+    .grid {
+      margin-right: 333px;
+    }
+  }
+}

@@ -291,6 +291,7 @@ const Admin = (props: any) => {
     milestoneStatus: any,
     str: string
   ) => {
+    console.log("Opening");
     // e.preventDefault();
     setDialogueNumber(1);
     if (milestoneStatus == "Completed") {
@@ -347,18 +348,16 @@ const Admin = (props: any) => {
   >(undefined);
 
   const [projectModalItem3, setProjectModalItem3] = React.useState<
-  | {
-      title: string;
-      budget: any;
-      milestoness: any;
-      description: any;
-      votingDate: any;
-      githubLink:any;
-    }
-  | undefined
->(undefined);
-
-
+    | {
+        title: string;
+        budget: any;
+        milestoness: any;
+        description: any;
+        votingDate: any;
+        githubLink: any;
+      }
+    | undefined
+  >(undefined);
 
   const openSnackbar = (
     message: string,
@@ -542,10 +541,10 @@ const Admin = (props: any) => {
           value.data.result.map((_value: any, i: number) => {
             result[_value._id] = {
               name: _value.name,
-              description:_value.description,
-              budget:_value.budget,
-              githubLink:_value.githubLink,
-              votingDate:_value.votingDate,
+              description: _value.description,
+              budget: _value.budget,
+              githubLink: _value.githubLink,
+              votingDate: _value.votingDate,
               milestone: _value.milestone
                 .map((milestonee: any, index: any) => {
                   return { ...milestonee, index };
@@ -914,15 +913,19 @@ const Admin = (props: any) => {
             ) : (
               Object.keys(milestones).map((id: any, i: any) =>
                 milestones[id].milestone.map((item: any, j: any) => (
-                  <tr onClick={()=> {setProjectModalItem3(
-                    {title: milestones[id].name,
-                    budget: milestones[id].budget,
-                    milestoness: milestones[id].milestone,
-                    description: milestones[id].description,
-                    votingDate: milestones[id].votingDate,
-                    githubLink:milestones[id].githubLink
-                  }
-                  )}} key={i}>
+                  <tr
+                    onClick={() => {
+                      setProjectModalItem3({
+                        title: milestones[id].name,
+                        budget: milestones[id].budget,
+                        milestoness: milestones[id].milestone,
+                        description: milestones[id].description,
+                        votingDate: milestones[id].votingDate,
+                        githubLink: milestones[id].githubLink,
+                      });
+                    }}
+                    key={i}
+                  >
                     <td>{milestones[id].name}</td>
                     <td> {`M${item.index + 1}`} </td>
 
@@ -935,7 +938,8 @@ const Admin = (props: any) => {
                       <div
                         className={style.toggleButton}
                         onClick={
-                          () =>
+                          (e) => {
+                            e.stopPropagation();
                             openDialogueForMilestone(
                               id,
                               1,
@@ -944,7 +948,8 @@ const Admin = (props: any) => {
                               item.index,
                               (milestoneStatus = "Completed"),
                               "Yes"
-                            )
+                            );
+                          }
 
                           // changeMilestoneByAdmin(
                           // id,
@@ -966,7 +971,8 @@ const Admin = (props: any) => {
                       <div
                         className={style.toggleButton}
                         onClick={
-                          () =>
+                          (e) => {
+                            e.stopPropagation();
                             openDialogueForMilestone(
                               id,
                               1,
@@ -975,7 +981,8 @@ const Admin = (props: any) => {
                               item.index,
                               (milestoneStatus = "Incomplete"),
                               "No"
-                            )
+                            );
+                          }
                           // changeMilestoneByAdmin(
                           //   id,
                           //   1,

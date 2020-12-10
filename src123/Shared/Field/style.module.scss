@@ -1,0 +1,72 @@
+@import "variables.scss";
+
+.wrap {
+  display: block;
+  margin-bottom: 23rem;
+  margin-right: auto;
+}
+
+.label {
+  font-size: 10px;
+ 
+  margin-bottom: 11rem;
+  color: $dark-gray;
+  &.hasError {
+    color: red;
+  
+  }
+}
+
+.inputWrap {
+  position: relative;
+}
+
+.input {
+  background: #f9f9f9;
+  border: 1px solid #f9f9f9;
+  height: 42rem;
+  line-height: 42rem;
+  border-radius: 5rem;
+  transition: 0.2s;
+  width: 100%;
+  padding: 0 15rem;
+// min-width: 200px;
+  &.hasError {
+    border-color: red;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.icon {
+  position: absolute;
+  top: 10rem;
+  right: 11rem;
+  width: 27.54rem;
+  height: 22.03rem;
+  cursor: pointer;
+}
+
+.error {
+  margin: 10rem 0 0;
+  height: 19rem;
+  font-size: 14rem;
+  color: red;
+}
+
+.wrap .label{
+    @media screen and (max-width:700px)and (min-width:599px){
+ width:166px;
+    }
+  @media (max-device-width: 600px ){
+    
+    font-size: 14rem;
+    // min-width: 178px;
+    max-height: 37px;
+  }
+}
+
+
+  

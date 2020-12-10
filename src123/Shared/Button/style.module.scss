@@ -1,0 +1,98 @@
+@import "variables.scss";
+
+.button {
+  position: relative;
+  height: 56rem;
+  padding: 0 20rem;
+  border-radius: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 20rem;
+  transition: 0.2s;
+  min-width: 200rem;
+  border: 1px solid;
+  user-select: none;
+}
+
+.primary {
+  background: $font-accent;
+  border-color: $font-accent;
+  color: white;
+  transition: 0.2s;
+
+  &:hover {
+    box-shadow: 0 4rem 6rem rgba(234, 134, 4, 0.25);
+  }
+
+  &.shadow {
+    box-shadow: 0 4px 6px rgba(234, 134, 4, 0.25);
+  }
+
+  &.outline {
+    color: $font-accent;
+
+    &.shadow {
+      box-shadow: 0 4px 6px rgba(234, 134, 4, 0.1);
+    }
+  }
+}
+
+.secondary {
+  border: 1px solid #e3e5f9;
+  color: #172dce;
+
+  &:hover {
+    border-color: #172dce;
+  }
+}
+
+.outline {
+  background: transparent;
+  margin-bottom: 8px;
+}
+
+.light {
+  border-radius: 10rem;
+  box-shadow: 0 3px 6px $shadow-color;
+  transition: 0.2s;
+  border: 1px solid rgba(189, 196, 208, 0.4);
+
+  &:hover {
+    box-shadow: 0 5px 15px rgba(8, 15, 22, 0.16);
+  }
+}
+
+.icon {
+  position: absolute;
+  right: 12rem;
+  height: 25rem;
+}
+  .secondary{
+     @media screen and (max-width:510px){
+      min-width:107px;
+
+     text-align: center;
+     max-width:130rem;
+     padding: 0 5rem;
+      }
+ }
+ .secondary{
+  @media screen and (max-width:380px){
+   min-width:106px;
+
+  text-align: center;
+  padding: 0 5rem;
+   }
+}
+ .secondary{
+  @media screen and (max-width:550px){
+   min-width:102px;
+
+  text-align: center;
+  max-width:130rem;
+  padding: 0 5rem;
+   }
+}

@@ -31,7 +31,7 @@ const SignUp = (props: any) => {
   const handleForm = (e: any) => {
     e.preventDefault();
     handleSubmit();
-  }
+  };
   const handleChange = (e: any) => {
     setEmailErrorMessage(undefined);
     setState({ ...state, [e.target.name]: e.target.value });
@@ -65,9 +65,7 @@ const SignUp = (props: any) => {
   };
 
   const handleSubmit = async () => {
-
     try {
-
       setAlreadyExistError(false);
 
       if (!state.email || !state.first_name || !state.last_name) {
@@ -88,7 +86,7 @@ const SignUp = (props: any) => {
         await loginWithMetaMask();
         setShowLoader(false);
       }
-    } catch (err) { }
+    } catch (err) {}
   };
 
   return logIn === "user" ? (
@@ -150,7 +148,8 @@ const SignUp = (props: any) => {
           ) : null}
 
           <div className={style.buttons}>
-            <Button type="submit"
+            <Button
+              type="submit"
               style={{
                 backgroundColor: "#ea8604",
                 borderColor: "#ea8604",
@@ -163,22 +162,24 @@ const SignUp = (props: any) => {
               variant="contained"
             >
               {" "}
-              {showLoader ? <CircularProgress size={18} /> : < p style={{ fontWeight: "bold" }}>Register</p>}
+              {showLoader ? (
+                <CircularProgress size={18} />
+              ) : (
+                <p style={{ fontWeight: "bold", fontSize: "12px" }}>Register</p>
+              )}
             </Button>
           </div>
-
         </form>
-
       </Layout>
     </>
   ) : (
-          <Redirect
-            to={{
-              pathname: "/auth/log_in",
-              state: { from: props.location },
-            }}
-          />
-        );
+    <Redirect
+      to={{
+        pathname: "/auth/log_in",
+        state: { from: props.location },
+      }}
+    />
+  );
 };
 const mapStateToProps = (state: any) => ({
   address: state.layoutReducer.address,

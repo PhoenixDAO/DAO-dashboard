@@ -577,7 +577,11 @@ const Stake = (props) => {
       >
         <Grid container item justify="space-between">
           <Grid item>
-            <span style={{ fontSize: "24px" }}> Staking</span> <br />
+            <span style={{ fontSize: "24px" }}>
+              {" "}
+              Lock your tokens to vote in the PhoenixDAO
+            </span>{" "}
+            <br />
             <span style={{ color: "#828282", fontSize: "12px" }}>
               Add the amount of PHNX you will like to stake
             </span>

@@ -9,6 +9,7 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { URL, Proposal, transaction } from "../const";
 import { Input } from "@material-ui/core";
+import AdminModal from "../Proposals/Modal/adminModal2";
 
 const chartData = [
   {
@@ -111,6 +112,23 @@ const Home = (props: any) => {
     }/${new Date(date.getTime()).getFullYear()} `;
   };
   let styleFlag = true;
+
+  const [projectModalItem2, setProjectModalItem2] = React.useState<
+    | {
+        title: string;
+        // votes: [];
+        reward: any;
+        budget: any;
+        milestoness: any;
+        description: any;
+        votingDate: any;
+        _id: any;
+        // renderAgain: any;
+        // styleFlag: string;
+      }
+    | undefined
+  >(undefined);
+
   return (
     <>
       <div className={style.grid}>
@@ -129,7 +147,23 @@ const Home = (props: any) => {
               </>
             ) : (
               value.map((valu: any, i) => (
-                <tr key={i}>
+                <tr
+                  key={i}
+                  onClick={() => {
+                    console.log("Hello here is console", valu);
+                    setProjectModalItem2({
+                      title: valu.name,
+                      reward: valu.reward,
+                      budget: 100,
+                      milestoness: valu.milestone,
+                      description: valu.description,
+                      //   votes: 'votesArray',
+                      votingDate: valu.votingDate,
+                      //votingDate: '',
+                      _id: valu._id,
+                    });
+                  }}
+                >
                   <td>{valu.name}</td>
 
                   <td> {changeFormat(valu.createdAt)} </td>
@@ -157,7 +191,22 @@ const Home = (props: any) => {
                 <>
                   {proposal.status == "Accepted" ||
                   proposal.status == "Fail" ? (
-                    <tr key={i}>
+                    <tr
+                      key={i}
+                      onClick={() => {
+                        console.log("Hello", proposal);
+                        setProjectModalItem2({
+                          title: proposal.name,
+                          reward: proposal.reward,
+                          budget: 100,
+                          milestoness: proposal.milestone,
+                          description: proposal.description,
+                          //   votes: 'votesArray',
+                          votingDate: proposal.votingDate,
+                          _id: proposal._id,
+                        });
+                      }}
+                    >
                       <td key={j}> {changeFormat(proposal.votingDate)} </td>
 
                       <td key={j}> {proposal.name} </td>
@@ -191,7 +240,23 @@ const Home = (props: any) => {
             ) : (
               transactions.map((transaction: any, i: any, j: any) => (
                 <>
-                  <tr>
+                  <tr
+                    key={i}
+                    //   transaction.proposalId.milestone
+                    onClick={() => {
+                      console.log("Hello", transaction);
+                      setProjectModalItem2({
+                        title: transaction.proposalId.name,
+                        reward: transaction.proposalId.reward,
+                        budget: transaction.proposalId.budget,
+                        milestoness: transaction.proposalId.milestone,
+                        description: transaction.proposalId.description,
+                        //   votes: 'votesArray',
+                        votingDate: transaction.proposalId.votingDate,
+                        _id: transaction.proposalId._id,
+                      });
+                    }}
+                  >
                     <td>
                       {" "}
                       {transaction.Type == "Stake" ? "reward" : "proposal"}{" "}
@@ -215,6 +280,22 @@ const Home = (props: any) => {
             )}
           </Table>
         </Card>
+        {projectModalItem2 && (
+          <AdminModal
+            // resetData={renderAgain}
+            title={projectModalItem2.title}
+            reward={projectModalItem2.reward}
+            budget={projectModalItem2.budget}
+            milestones={projectModalItem2.milestoness}
+            description={projectModalItem2.description}
+            votingDate={projectModalItem2.votingDate}
+            //  votes={projectModalItem2.votes}
+            _id={projectModalItem2._id}
+            // styleFlag={projectModalItem2.styleFlag}
+            close={() => setProjectModalItem2(undefined)}
+            // setSnackBar={() => setSnackBar}
+          />
+        )}
       </div>
     </>
   );

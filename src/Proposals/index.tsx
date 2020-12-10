@@ -847,6 +847,7 @@ const Proposals = (props: any) => {
         button1: any;
         button2: any;
         styleFlag: string;
+        status: any;
       }
     | undefined
   >(undefined);
@@ -1209,6 +1210,7 @@ const Proposals = (props: any) => {
           button1="Upvote"
           button2="Back"
           close={() => setProjectModalItem(undefined)}
+          status={projectModalItem.status}
           // setSnackBar={() => setSnackBar}
         />
       )}
@@ -1305,6 +1307,7 @@ const Proposals = (props: any) => {
                     button1: "UpVote",
                     button2: "Ok",
                     renderAgain: renderAgain,
+                    status: proposal.status,
                   })
                 }
               >

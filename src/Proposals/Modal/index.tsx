@@ -106,11 +106,13 @@ const ProposalModal = (props: any) => {
   const handleClick = async (_id: any, resetData: any, props: any) => {
     try {
       console.log("Click", _id);
+      console.log("props", props);
       setMyLoading(true);
       const get = await axios.post(
         `${URL}${VoteOnProposal}${_id}`,
         {
           email: props.user.email,
+          status: props.status,
         },
         {
           headers: {
@@ -125,8 +127,13 @@ const ProposalModal = (props: any) => {
       props.close();
     } catch (err) {
       setMyLoading(false);
+      console.log("Message1 here", err);
+      console.log("Message2", err.response);
+      console.log("Message3", err.response.data);
+      // console.log("Message", err.response.data.message);
       if (err.response && err.response.data && err.response.data.message) {
         props.openSnackbar(err.response.data.message, "error");
+        // props.openSnackbar("An error occured", "error");
       } else {
         props.openSnackbar("Network Error", "error");
       }

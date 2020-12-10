@@ -90,26 +90,26 @@ const LogInWithNumio = (props: any) => {
   });
 
   const temp = async () => {
-    const numioCDN = new numio({ app_id: "8464920" });
-    const res = await numioCDN.getURL();
-
-    setValues({ ...values, qrURL: res.toString() });
-
-    const callRes = await numioCDN.call(async (token: any) => {
-      let body = {
-        token: token,
-        app_secret: "providers Secert",
-        userDetails: ["fullname", "email"],
-      };
-
-      const user = await props.loginWithNumio(body);
-
-      if (user && user.token && !user.isAdmin) {
-        setValues({ ...values, redirect: "user" });
-      } else if (user && user.token && user.isAdmin) {
-        setValues({ ...values, redirect: "admin" });
-      }
-    });
+  //  const numioCDN = new numio({ app_id: "8464920" });
+  //  const res = await numioCDN.getURL();
+//
+  //  setValues({ ...values, qrURL: res.toString() });
+//
+  //  const callRes = await numioCDN.call(async (token: any) => {
+  //    let body = {
+  //      token: token,
+  //      app_secret: "providers Secert",
+  //      userDetails: ["fullname", "email"],
+  //    };
+//
+  //    const user = await props.loginWithNumio(body);
+//
+  //    if (user && user.token && !user.isAdmin) {
+  //      setValues({ ...values, redirect: "user" });
+  //    } else if (user && user.token && user.isAdmin) {
+  //      setValues({ ...values, redirect: "admin" });
+  //    }
+  //  });
   };
 
   useEffect(() => {
