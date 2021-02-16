@@ -1,16 +1,22 @@
 @font-face {
   font-family: ProximaNova;
-  src: local('Proxima Nova Regular'), local('ProximaNova-Regular'), url('assets/fonts/ProximaNova-Regular.otf');
+  src: local("Proxima Nova Regular"), local("ProximaNova-Regular"),
+    url("assets/fonts/ProximaNova-Regular.otf");
 }
 
 @font-face {
   font-family: ProximaNova;
-  src: local('Proxima Nova Bold'), local('ProximaNova-Bold'), url('assets/fonts/Proxima Nova Bold.otf');
+  src: local("Proxima Nova Bold"), local("ProximaNova-Bold"),
+    url("assets/fonts/Proxima Nova Bold.otf");
   font-weight: bold;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
+  scrollbar-color: #4c42ff white;
+  scrollbar-width: thin;
 }
 
 html {
@@ -18,25 +24,31 @@ html {
   font-family: ProximaNova, sans-serif;
 }
 
-@media (max-width: 1979px) {
+@media screen and (max-device-width: 1979px) {
   html {
-    font-size: .8px;
+    font-size: 0.8px;
   }
 }
 
-@media (max-width: 1400px) {
+@media screen and (max-device-width: 1400px) {
   html {
-    font-size: .6px;
+    font-size: 0.6px;
   }
 }
+/* 
+@media (max-width: 1450px) {
+  html {
+    font-size: 0.5px;
+  }
+} */
 
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #F8F8FB;
+  background: #f8f8fb;
   color: #838383;
-  font-size: 16rem;
+  font-size: 18rem;
 }
 
 * {

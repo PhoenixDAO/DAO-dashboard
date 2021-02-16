@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@import "variables.scss";
 
 .forgot {
   color: $font-gray;
@@ -10,6 +10,10 @@
 
 .buttons {
   margin-top: 40rem;
+  width: 178.19px;
+  margin-right: auto;
+  margin-left: auto;
+  border-color: none;
 }
 
 .button {
@@ -41,8 +45,260 @@
     margin: 0 auto;
   }
 }
+button:focus {
+  outline: none;
+}
+.primary {
+  width: 296rem;
+  margin: 0 auto;
+
+  background-color: #ea8604;
+  border-color: #ea8604;
+  color: #fff;
+  transition: 0.2s;
+
+  &.shadow {
+    box-shadow: 0 4px 6px rgba(234, 134, 4, 0.25);
+  }
+
+  &.outline {
+    &.shadow {
+      box-shadow: 0 4px 6px rgba(234, 134, 4, 0.1);
+    }
+  }
+}
 
 .verifyText {
   color: #434343;
   margin-bottom: 121rem;
+}
+
+@import "variables.scss";
+
+.forgot {
+  color: $font-gray;
+  font-size: 16rem;
+  line-height: 19rem;
+  text-align: right;
+  cursor: pointer;
+}
+
+.buttons {
+  margin-top: 40rem;
+}
+
+.button {
+  & + .button {
+    margin-top: 30rem;
+  }
+  margin-top: 8px;
+  // height:70rem
+}
+
+.center {
+  text-align: center;
+}
+
+.textButton {
+  font-size: 18rem;
+  margin-top: 36rem;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+.loginImage {
+  height: 360px;
+  width: 250px;
+}
+.welcomeImage {
+  height: 100px;
+  width: 250px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.gridOne {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: white;
+  height: 101%;
+  overflow: hidden;
+
+  // width: 0px;
+}
+
+.scroll {
+  height: "100%";
+}
+
+// .gridOne::-webkit-scrollbar {
+//   display: none;
+//   background: red;
+//   color: red;
+//   background-color: red;
+// }
+/* Hide scrollbar for IE, Edge and Firefox */
+.gridOne {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scroll {
+  height: 100%;
+}
+.textStyling {
+  color: white;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 15px;
+}
+
+.gridTwo {
+  display: flex;
+  flex-direction: column;
+  //justifyContent: "center",
+  align-items: center;
+  //  height: "101%",
+
+  // backgroundColor: "#4C42FF",
+  background: linear-gradient(
+    108.07deg,
+    rgba(5, 0, 255, 0.72) -2.2%,
+    #7000ff 94.84%
+  );
+  // background: "lightGreen",
+  border-radius: 20px 0px 0px 20px;
+}
+
+.carousel {
+  background: linear-gradient(
+    108.07deg,
+    rgba(5, 0, 255, 0.72) -2.2%,
+    #7000ff 94.84%
+  );
+  // background: "white";
+  padding-top: 2%;
+  border-radius: 20px 0px 0px 20px;
+}
+.carousel:active {
+  color: white;
+}
+.testing {
+  // background: linear-gradient(
+  //   108.07deg,
+  //   rgba(5, 0, 255, 0.72) -2.2%,
+  //   #7000ff 94.84%
+  // );
+}
+@media screen and (max-width: 600px) {
+  .rootGrid {
+    display: revert !important;
+  }
+}
+.rootGrid {
+  display: flex;
+  height: 100%;
+}
+.carouselImage {
+  height: 60%;
+  width: 67%;
+  border-radius: 4px;
+  box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 50px;
+}
+
+@media screen and (max-width: 600px) {
+  .carouselImage {
+    height: 80%;
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .gridTwo {
+    border-radius: 0px;
+  }
+}
+
+.loginText {
+  font-weight: bold;
+  color: #4c42ff;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.imageStyling {
+  height: 35%;
+  width: 65%;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 600px) {
+  .imageStyling {
+    margin-top: 130px;
+  }
+}
+
+@media screena and (max-width: 600px) {
+  .textStyling {
+    margin-bottom: 40px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .loginImage {
+    height: 137px;
+  }
+  .layout {
+    height: auto !important ;
+    width: 84% !important;
+  }
+  .welcomeImage {
+    width: 150px !important;
+    height: 50px;
+  }
+}
+
+.layout {
+  height: auto;
+  width: 56%;
+}
+@media screen and (max-width: 1186px) and (min-width: 770px) {
+  .loginImage {
+    width: 273px;
+    height: 312px;
+  }
+  .layout {
+    height: auto !important ;
+    width: 80% !important;
+  }
+}
+@media screen and (max-width: 769px) and (min-width: 600px) {
+  .loginImage {
+    height: 286px;
+    width: 185px;
+  }
+  .layout {
+    height: auto !important ;
+    width: 90% !important;
+  }
+  .welcomeImage {
+    width: 200px !important;
+    margin-bottom: 14px !important;
+  }
+}
+.carouselDiv {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+@media screen and (max-width: 600px) {
+  .carouselDiv {
+    padding: 30px;
+  }
 }

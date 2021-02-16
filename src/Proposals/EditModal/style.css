@@ -1,0 +1,10 @@
+.MuiStepIcon-text {
+  font-size: 30px;
+}
+
+.MuiTypography-body2 {
+  font-size: 20px !important;
+}
+.MuiStepIcon-root.MuiStepIcon-completed {
+  font-size: 20px;
+}

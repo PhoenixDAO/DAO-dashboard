@@ -7,13 +7,116 @@
   width: 100%;
   padding: 59rem 0 35rem;
   overflow: hidden;
+  height: 370px;
+  //overflow-y: scroll;
   display: flex;
   flex-direction: column;
+
+  ::-webkit-scrollbar-thumb {
+    background: #999999;
+    border-radius: 8px;
+    background: #ea8604;
+  }
 }
 
+.card2 {
+  background: white;
+  box-shadow: 0 4rem 6rem $shadow-color;
+  border-radius: 10rem;
+  width: 100%;
+  padding: 59rem 0 35rem;
+  overflow: hidden;
+  height: 780px;
+  //overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+
+  ::-webkit-scrollbar-thumb {
+    background: #999999;
+    border-radius: 8px;
+    background: #ea8604;
+  }
+}
+.card3 {
+  background: white;
+  box-shadow: 0 4rem 6rem $shadow-color;
+  border-radius: 10rem;
+  width: 100%;
+  padding: 59rem 0 35rem;
+  overflow: hidden;
+  height: 780px;
+  //overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+
+  ::-webkit-scrollbar-thumb {
+    background: #999999;
+    border-radius: 8px;
+    background: #ea8604;
+  }
+}
+.card4 {
+  background: white;
+  box-shadow: 0 4rem 6rem $shadow-color;
+  border-radius: 10rem;
+  width: 100%;
+  padding: 59rem 0 35rem;
+  overflow: hidden;
+  height: 780px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+margin-left:12px;
+  ::-webkit-scrollbar-thumb {
+    background: #999999;
+    border-radius: 8px;
+    width:8px;
+    background: #ea8604;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .card3 {
+    background: white;
+    box-shadow: 0 4rem 6rem $shadow-color;
+    border-radius: 10rem;
+    width: 100%;
+    padding: 59rem 0 35rem;
+    overflow: hidden;
+    height: 780px;
+    //overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+
+    ::-webkit-scrollbar-thumb {
+      background: #999999;
+      border-radius: 8px;
+      background: #ea8604;
+    }
+  }
+  .card4 {
+    background: white;
+    box-shadow: 0 4rem 6rem $shadow-color;
+    border-radius: 10rem;
+    width: 100%;
+    padding: 59rem 0 35rem;
+    overflow: hidden;
+    height: 780px;
+    //overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+
+    ::-webkit-scrollbar-thumb {
+      background: #999999;
+      border-radius: 8px;
+      background: #ea8604;
+    }
+  }
+}
 .header {
   padding: 0 50rem;
-  margin-bottom: 3rem;
+  margin-bottom: 10rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -23,7 +126,22 @@
   font-size: 32rem;
   line-height: 1;
 }
-
+.header3 {
+  padding: 0 50rem;
+  margin-bottom: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@media screen and (max-width:400px){
+  .header3{
+    padding: 0 25rem;
+  }
+}
+.title3 {
+  font-size: 32rem;
+  line-height: 1;
+}
 .word {
   color: $font-accent;
 
@@ -32,7 +150,7 @@
   }
 
   & + .word:before {
-    content: ' ';
+    content: " ";
     display: inline;
   }
 }
@@ -40,7 +158,8 @@
 .content {
   overflow: auto;
   flex-grow: 1;
-  padding: 20rem 50rem;
+  padding-top: 0rem !important;
+  padding: 20rem 30rem;
 }
 
 @media (max-height: 700px), (min-aspect-ratio: 15/9) {
@@ -49,10 +168,18 @@
   }
 
   .content {
-    padding: 15rem 50rem 15rem;
+    padding-top: 0rem;
+    padding:15rem 30rem 15rem;
   }
 
-  .title {
+  .title,.title3 {
     font-size: 26rem;
   }
+}
+
+.card4{
+@media screen and (max-width:800px)
+{
+  margin-left: 0px !important;
+}
 }

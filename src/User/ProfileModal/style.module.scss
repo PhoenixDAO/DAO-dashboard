@@ -25,11 +25,12 @@
 .modalAvatar {
   width: 103rem;
   height: 103rem;
-  border: 1px solid $font-accent;
+  border: 1px solid #555ea5;
   border-radius: 50%;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+background-image: url("../../assets/images/profile.png");
 }
 
 .modalUserInfo {

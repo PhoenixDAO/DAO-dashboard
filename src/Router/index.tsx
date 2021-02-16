@@ -1,38 +1,88 @@
-import React from 'react'
-import {Router, Switch, Route} from 'react-router-dom'
-import history from './history'
-import routes from 'routes'
-import LogIn from 'User/Auth/LogIn'
-import LogInWithNumio from 'User/Auth/LogInWithNumio'
-import SignUp from 'User/Auth/SignUp'
-import Layout from 'Layout'
-import Home from 'Pages/Home'
-import Proposals from 'Pages/Proposals'
-import Votes from 'Pages/Votes'
-import ActiveProjects from 'Pages/ActiveProjects'
-import Rewards from 'Pages/Rewards'
+import React from "react";
+import { Router, Switch, Route } from "react-router-dom";
+import history from "./history";
+import routes from "routes";
+//import LogIn from "User/Auth/LogIn";
+//import Login from "User/Auth/LogIn";
+//import LogIn from "../User/Auth/Login2";
+import LogIn from "../User/Auth/LogIn2";
+import LogInWithNumio from "User/Auth/LogInWithNumio";
+import SignUp from "User/Auth/SignUp";
+import Layout from "Layout";
+import Home from "Home";
+import Admin from "Admin";
+import Proposals from "Proposals";
+import Votes from "Votes";
+import ActiveProjects from "ActiveProjects";
+import Rewards from "Rewards";
+import MyProjects from "UserProjects";
+import { Provider } from "react-redux";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import { Height } from "@material-ui/icons";
 
-export default () =>
-  <Router history={history}>
-    <Switch>
-      <Route path={routes.auth.root()} render={() =>
+const inh = ({ store }: any) => {
+  return (
+    <Provider store={store}>
+      <Router history={history}>
         <Switch>
-          <Route path={routes.auth.logIn()} component={LogIn} />
-          <Route path={routes.auth.logInWithNumio()} component={LogInWithNumio} />
-          <Route path={routes.auth.signUp()} component={SignUp} />
+          <Route
+            path={routes.auth.root()}
+            render={() => (
+              <Switch>
+                <Route path={routes.auth.logIn()} component={LogIn} />
+                <Route
+                  path={routes.auth.logInWithNumio()}
+                  component={LogInWithNumio}
+                />
+                <Route path={routes.auth.signUp()} component={SignUp} />
+              </Switch>
+            )}
+          />
+          <Route
+            render={() => (
+              <Layout>
+                <Switch>
+                  <PrivateRoute path={routes.root()} exact component={Home} />
+                  <AdminRoute path={routes.admin()} exact component={Admin} />
+                  <PrivateRoute
+                    path={routes.proposals()}
+                    exact
+                    component={Proposals}
+                  />
+                  <PrivateRoute path={routes.votes()} exact component={Votes} />
+                  <PrivateRoute
+                    path={routes.activeProjects()}
+                    exact
+                    component={ActiveProjects}
+                  />
+                  <PrivateRoute
+                    path={routes.rewards()}
+                    exact
+                    component={Rewards}
+                  />
+                  <PrivateRoute
+                    path={routes.myProjects.root()}
+                    exact
+                    // link={routes.myProjects.active()}
+                    component={MyProjects}
+                  />
+                  <PrivateRoute
+                    path={routes.myProjects.active()}
+                    component={MyProjects}
+                  />
+                  <PrivateRoute
+                    path={routes.myProjects.proposals()}
+                    component={MyProjects}
+                  />
+                </Switch>
+              </Layout>
+            )}
+          />
         </Switch>
-      }/>
-      <Route render={() =>
-        <Layout>
-          <Switch>
-            <Route path={routes.root()} exact component={Home}/>
-            <Route path={routes.proposals()} exact component={Proposals}/>
-            <Route path={routes.votes()} exact component={Votes}/>
-            <Route path={routes.activeProjects()} exact component={ActiveProjects}/>
-            <Route path={routes.rewards()} exact component={Rewards}/>
-          </Switch>
-        </Layout>
-      }/>
-    </Switch>
-  </Router>
+      </Router>
+    </Provider>
+  );
+};
 
+export default inh;

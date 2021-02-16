@@ -1,0 +1,241 @@
+@import "variables.scss";
+
+.modal {
+  //  width: 670rem;
+  width: 1000rem;
+}
+
+.style_title__3o3cx {
+  // text-align: "center";
+  justify-content: center;
+}
+
+.modalContent {
+  margin: 50rem 0 40rem;
+}
+
+.backText {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+
+.testing {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.modalContentTitle {
+  font-size: 18rem;
+  line-height: 1.4;
+  margin-bottom: 26rem;
+}
+
+.modalText {
+  padding: 25rem;
+  border-radius: 5rem;
+  font-size: 18rem;
+  line-height: 27rem;
+  color: $dark-gray;
+  background: #f9f9f9;
+  min-height: 261rem;
+}
+
+// .MuiStepIcon-text {
+//   font-size: 30px;
+// }
+
+// .MuiTypography-body2 {
+//   font-size: 30rem !important;
+// }
+
+.input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.input2 {
+  width: 160px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.input3 {
+  width: 260px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input:hover {
+  background-color: #ffffe0;
+}
+.backText {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+@media screen and (max-width: 422px) and (min-width: 360px) {
+  .backText {
+    margin-top: 5px;
+  }
+}
+.testing {
+  &:hover {
+    cursor: pointer;
+  }
+}
+.testing {
+  font-size: 20px;
+  color: #4c42ff;
+  padding-left: 9px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.inputDiv {
+  height: 294px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  padding-right: 10px;
+}
+@media screen and (max-height: 650px) {
+  .inputDiv {
+    // height:150px;
+    overflow: auto;
+    max-height: 32vh;
+    height: 100% !important;
+  }
+}
+@media screen and (max-height: 580px) {
+  .inputDiv {
+    max-height: 28vh;
+  }
+}
+@media screen and (max-height: 526px) and (min-height: 430px) {
+  .inputDiv {
+    // height:150px;
+    overflow: auto;
+    max-height: 22vh;
+    height: 100% !important;
+  }
+}
+@media screen and (max-height: 465px) {
+  .inputDiv {
+    // height:150px;
+    overflow: auto;
+    max-height: 19vh;
+    height: 100% !important;
+  }
+}
+// input[type="number"]::-webkit-inner-spin-button {
+//   -webkit-appearance: none;
+//   cursor: pointer;
+//   display: block;
+//   width: 8px;
+//   color: white;
+//   text-align: center;
+//   position: relative;
+// }
+// input[type="number"]:hover::-webkit-inner-spin-button {
+//   background: transparent url("../../assets/arrow.svg") no-repeat 50% 50%;
+//   width: 10px;
+//   height: 18px;
+//   padding: 4px;
+//   position: relative;
+//   right: 4px;
+//   fill: black;
+//   border-radius: 28px;
+// }
+// milestone div
+.inputMilestoneDiv {
+  height: 266px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  padding-right: 10px;
+}
+@media screen and (max-height: 650px) {
+  .inputMilestoneDiv {
+    // height:150px;
+    overflow: auto;
+    max-height: 26vh;
+    height: 100% !important;
+  }
+  .backText {
+    margin-top: 10px;
+  }
+}
+@media screen and (max-height: 1000px) {
+  .inputMilestoneDiv {
+    height: 229px;
+  }
+}
+@media screen and (max-height: 526px) and (min-height: 430px) {
+  .inputMilestoneDiv {
+    // height:150px;
+    overflow: auto;
+    max-height: 17vh;
+    height: 100% !important;
+  }
+}
+@media screen and (max-height: 430px) {
+  .inputMilestoneDiv {
+    // height:150px;
+    overflow: auto;
+    max-height: 10vh;
+    height: 100% !important;
+  }
+}
+@media screen and (max-width: 600px) {
+  .daysDiv {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+}
+@media screen and (max-height: 300px) {
+  .inputDiv {
+    max-height: 33vh;
+  }
+  .nextButton,
+  .testing {
+    max-height: 28px;
+  }
+  .backText {
+    margin-top: 3px;
+  }
+}
+@media screen and (max-height: 300px) {
+  .inputDiv {
+    max-height: 33vh;
+  }
+}
+@media screen and (max-width: 601px) {
+  .rowDiv {
+    display: block !important;
+    justify-content: center !important;
+    margin: 0px !important;
+  }
+  .columnDiv {
+    margin: 0px !important;
+  }
+}
+
+.columnDiv {
+  margin: 10px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

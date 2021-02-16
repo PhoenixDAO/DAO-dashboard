@@ -1,15 +1,20 @@
-@import 'variables.scss';
+@import "variables.scss";
 
 .wrap {
   display: block;
   margin-bottom: 23rem;
+  margin-right: auto;
 }
 
 .label {
-  font-size: 16rem;
-  line-height: 19rem;
+  font-size: 10px;
+ 
   margin-bottom: 11rem;
   color: $dark-gray;
+  &.hasError {
+    color: red;
+  
+  }
 }
 
 .inputWrap {
@@ -22,10 +27,10 @@
   height: 42rem;
   line-height: 42rem;
   border-radius: 5rem;
-  transition: .2s;
+  transition: 0.2s;
   width: 100%;
   padding: 0 15rem;
-
+// min-width: 200px;
   &.hasError {
     border-color: red;
   }
@@ -50,3 +55,18 @@
   font-size: 14rem;
   color: red;
 }
+
+.wrap .label{
+    @media screen and (max-width:700px)and (min-width:599px){
+ width:166px;
+    }
+  @media (max-device-width: 600px ){
+    
+    font-size: 14rem;
+    // min-width: 178px;
+    max-height: 37px;
+  }
+}
+
+
+  
