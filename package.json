@@ -17,7 +17,7 @@
     "react-dom": "^16.13.1",
     "react-minimal-pie-chart": "^8.0.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "sass": "^1.26.6",
     "typescript": "~3.8.3"
   },
